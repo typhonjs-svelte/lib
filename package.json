@@ -1,0 +1,70 @@
+{
+  "name": "@typhonjs-svelte/lib",
+  "version": "0.0.0",
+  "description": "Provides a common library for TyphonJS Svelte applications.",
+  "type": "module",
+  "author": "Michael Leahy <support@typhonjs.io> (https://github.com/typhonrt)",
+  "contributors": [
+    "Michael Leahy <support@typhonjs.io> (https://github.com/typhonrt)"
+  ],
+  "svelte": "src/modules/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/modules/index.js"
+    },
+    "./handlers": {
+      "import": "./dist/modules/handlers.js"
+    },
+    "./helpers": {
+      "import": "./dist/modules/helpers.js"
+    },
+    "./store": {
+      "import": "./dist/modules/store.js"
+    },
+    "./plugins/data": {
+      "import": "./dist/plugins/data.js"
+    },
+    "./plugins/system": {
+      "import": "./dist/plugins/system.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@rollup/plugin-babel": "^5",
+    "@rollup/plugin-node-resolve": "^13",
+    "@typhonjs-config/eslint-config": "^0.3.0",
+    "@typhonjs-fvtt/eslint-config-foundry.js": "^0.8.0",
+    "eslint": "^8",
+    "rollup": "^2",
+    "rollup-plugin-sourcemaps": "^0.6.0",
+    "rollup-plugin-svelte": "^7",
+    "rollup-plugin-terser": "^7",
+    "svelte": "^3",
+    "svelte-persistent-store": "github:typhonjs-svelte/svelte-persistent-store"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "homepage": "https://github.com/typhonjs-svelte/lib#readme",
+  "keywords": [
+    "TyphonJS",
+    "Svelte",
+    "library"
+  ],
+  "scripts": {
+    "build": "rollup --config",
+    "eslint": "eslint ."
+  },
+  "files": [
+    "/dist",
+    "/src"
+  ],
+  "directories": {},
+  "license": "MPL-2.0",
+  "repository": "github:typhonjs-svelte/lib",
+  "bugs": "https://github.com/typhonjs-svelte/lib/issues"
+}
