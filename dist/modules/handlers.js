@@ -24,14 +24,14 @@ function createMultiClick({ single, double, delay = 400, _clicks = 0,
       {
          _timer = setTimeout(() =>
          {
-            if (typeof single === 'function') { singleCallback(); }
+            if (typeof single === 'function') { single(); }
             _clicks = 0;
          }, delay);
       }
       else
       {
          clearTimeout(_timer);
-         if (typeof double === 'function') { doubleCallback(); }
+         if (typeof double === 'function') { double(); }
          _clicks = 0;
       }
    };
