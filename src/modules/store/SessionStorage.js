@@ -8,23 +8,18 @@ export default class SessionStorage
     */
    #stores = new Map();
 
-   getItem(itemId, defaultValue)
+   getItem(itemId)
    {
-      // let value = defaultValue;
-      //
-      // try
-      // {
-      //    if (sessionStorage.getItem(itemId))
-      //    {
-      //       value = JSON.parse(sessionStorage.getItem(itemId));
-      //    }
-      // }
-      // catch (err) { /**/ }
-      //
-      // return value;
+      let value;
 
-      const store = s_GET_STORE(this.#stores, itemId, defaultValue);
-      return store.get();
+      const storageValue = sessionStorage.getItem(itemId);
+
+      if (storageValue !== void 0)
+      {
+         value = JSON.parse(storageValue);
+      }
+
+      return value;
    }
 
    getStore(itemId, defaultValue)

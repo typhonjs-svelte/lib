@@ -261,8 +261,14 @@ class LocalStorage {
   }
 
   getItem(itemId, defaultValue) {
-    const store = s_GET_STORE$1(_classPrivateFieldGet(this, _stores$1), itemId, defaultValue);
-    return store.get();
+    let value;
+    const storageValue = localStorage.getItem(itemId);
+
+    if (storageValue !== void 0) {
+      value = JSON.parse(storageValue);
+    }
+
+    return value;
   }
 
   getStore(itemId, defaultValue) {
@@ -325,21 +331,15 @@ class SessionStorage {
     });
   }
 
-  getItem(itemId, defaultValue) {
-    // let value = defaultValue;
-    //
-    // try
-    // {
-    //    if (sessionStorage.getItem(itemId))
-    //    {
-    //       value = JSON.parse(sessionStorage.getItem(itemId));
-    //    }
-    // }
-    // catch (err) { /**/ }
-    //
-    // return value;
-    const store = s_GET_STORE(_classPrivateFieldGet(this, _stores), itemId, defaultValue);
-    return store.get();
+  getItem(itemId) {
+    let value;
+    const storageValue = sessionStorage.getItem(itemId);
+
+    if (storageValue !== void 0) {
+      value = JSON.parse(storageValue);
+    }
+
+    return value;
   }
 
   getStore(itemId, defaultValue) {

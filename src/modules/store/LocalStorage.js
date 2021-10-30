@@ -10,8 +10,16 @@ export default class LocalStorage
 
    getItem(itemId, defaultValue)
    {
-      const store = s_GET_STORE(this.#stores, itemId, defaultValue);
-      return store.get();
+      let value;
+
+      const storageValue = localStorage.getItem(itemId);
+
+      if (storageValue !== void 0)
+      {
+         value = JSON.parse(storageValue);
+      }
+
+      return value;
    }
 
    getStore(itemId, defaultValue)
