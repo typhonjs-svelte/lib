@@ -1,9 +1,9 @@
 /**
  * @param {object}   [opts] - Optional parameters.
  *
- * @param {Function} [opts.singleCallback] - Single click callback.
+ * @param {Function} [opts.single] - Single click callback.
  *
- * @param {Function} [opts.doubleCallback] - Double click callback.
+ * @param {Function} [opts.double] - Double click callback.
  *
  * @param {number}   [opts.delay=400] - Double click delay.
  *
@@ -13,7 +13,7 @@
  *
  * @returns {(function(): void)|*} The gated multi-click handler.
  */
-export default function createMultiClick({ singleCallback, doubleCallback, delay = 400, _clicks = 0,
+export default function createMultiClick({ single, double, delay = 400, _clicks = 0,
  _timer = void 0 } = {})
 {
    return () =>
@@ -24,14 +24,14 @@ export default function createMultiClick({ singleCallback, doubleCallback, delay
       {
          _timer = setTimeout(() =>
          {
-            if (typeof singleCallback === 'function') { singleCallback(); }
+            if (typeof single === 'function') { singleCallback(); }
             _clicks = 0;
          }, delay);
       }
       else
       {
          clearTimeout(_timer);
-         if (typeof doubleCallback === 'function') { doubleCallback(); }
+         if (typeof double === 'function') { doubleCallback(); }
          _clicks = 0;
       }
    };
