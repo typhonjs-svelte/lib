@@ -12,11 +12,11 @@
     ".": {
       "import": "./dist/modules/index.js"
     },
-    "./handlers": {
-      "import": "./dist/modules/handlers.js"
+    "./handler": {
+      "import": "./dist/modules/handler.js"
     },
-    "./helpers": {
-      "import": "./dist/modules/helpers.js"
+    "./helper": {
+      "import": "./dist/modules/helper.js"
     },
     "./store": {
       "import": "./dist/modules/store.js"

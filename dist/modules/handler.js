@@ -38,4 +38,4 @@ function createMultiClick({ single, double, delay = 400, _clicks = 0,
 }
 
 export { createMultiClick };
-//# sourceMappingURL=handlers.js.map
+//# sourceMappingURL=handler.js.map
