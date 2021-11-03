@@ -24,6 +24,10 @@ export default () =>
 
    return [{
       input: 'src/modules/index.js',
+      external: [
+         'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
+          'svelte/types'
+      ],
       output: {
          file: 'dist/modules/index.js',
          format: 'es',
@@ -32,16 +36,6 @@ export default () =>
          // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
       },
       plugins: [
-         svelte({
-            onwarn: (warning, handler) =>
-            {
-               // Suppress `a11y-missing-attribute` for missing href in <a> links.
-               if (warning.message.includes(`<a> element should have an href attribute`)) { return; }
-
-               // Let Rollup handle all other warnings normally.
-               handler(warning);
-            }
-         }),
          resolve(),
          sourcemaps(),
          babel({
@@ -58,6 +52,10 @@ export default () =>
    },
    {
       input: 'src/modules/handler/index.js',
+      external: [
+         'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
+          'svelte/types'
+      ],
       output: {
          file: 'dist/modules/handler.js',
          format: 'es',
@@ -68,6 +66,10 @@ export default () =>
    },
    {
       input: 'src/modules/helper/index.js',
+      external: [
+         'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
+          'svelte/types'
+      ],
       output: {
          file: 'dist/modules/helper.js',
          format: 'es',
@@ -78,6 +80,10 @@ export default () =>
    },
    {
       input: 'src/modules/store/index.js',
+      external: [
+       'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
+         'svelte/types'
+      ],
       output: {
          file: 'dist/modules/store.js',
          format: 'es',
@@ -102,6 +108,10 @@ export default () =>
    },
    {
       input: 'src/modules/transition/index.js',
+      external: [
+         'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
+          'svelte/types'
+      ],
       output: {
          file: 'dist/modules/transition.js',
          format: 'es',
@@ -116,7 +126,30 @@ export default () =>
       ]
    },
    {
+      input: 'src/modules/util/index.js',
+      external: [
+         'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
+          'svelte/types'
+      ],
+      output: {
+         file: 'dist/modules/util.js',
+         format: 'es',
+         plugins: outputPlugins,
+         preferConst: true,
+         sourcemap,
+         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
+      },
+      plugins: [
+         resolve(),
+         sourcemaps()
+      ]
+   },
+   {
       input: 'src/plugins/data/index.js',
+      external: [
+         'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
+          'svelte/types'
+      ],
       output: {
          file: 'dist/plugins/data.js',
          format: 'es',
@@ -127,6 +160,10 @@ export default () =>
    },
    {
       input: 'src/plugins/system/index.js',
+      external: [
+         'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
+          'svelte/types'
+      ],
       output: {
          file: 'dist/plugins/system.js',
          format: 'es',
