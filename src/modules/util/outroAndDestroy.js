@@ -7,19 +7,24 @@ import { check_outros, group_outros, transition_out } from 'svelte/internal';
  *
  * @param {SvelteComponent}   instance - A Svelte component.
  */
-export default function outroAndDestroy(instance)
+export default async function outroAndDestroy(instance)
 {
-   if (instance.$$.fragment && instance.$$.fragment.o)
+   return new Promise((resolve) =>
    {
-      group_outros();
-      transition_out(instance.$$.fragment, 0, 0, () =>
+      if (instance.$$.fragment && instance.$$.fragment.o)
+      {
+         group_outros();
+         transition_out(instance.$$.fragment, 0, 0, () =>
+         {
+            instance.$destroy();
+            resolve();
+         });
+         check_outros();
+      }
+      else
       {
          instance.$destroy();
-      });
-      check_outros();
-   }
-   else
-   {
-      instance.$destroy();
-   }
+         resolve();
+      }
+   });
 }
