@@ -1,7 +1,7 @@
 import { writable }  from 'svelte-persistent-store/session';
 import { get }       from 'svelte/store';
 
-export default class SessionStorage
+export class SessionStorage
 {
    /**
     * @type {*}

@@ -22,7 +22,7 @@ import { linear }       from 'svelte/easing';
  * @returns {{duration: number, css: (function(*=): string), delay: number, easing: (x: number) => number}}
  *  Transition object.
  */
-export default function slideFade(node, options)
+export function slideFade(node, options)
 {
    const fadeEasing = options.easingFade || options.easing || linear;
    const slideEasing = options.easingSlide || options.easing || linear;

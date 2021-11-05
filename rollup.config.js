@@ -9,6 +9,16 @@ import terserConfig  from './terser.config.js';
 const s_COMPRESS = false;
 const s_SOURCEMAPS = true;
 
+// Defines Svelte and all local exports as external.
+const s_LOCAL_EXTERNAL = [
+   'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
+   'svelte/types',
+
+   '@typhonjs-svelte/lib/handler', '@typhonjs-svelte/lib/helper', '@typhonjs-svelte/lib/store',
+   '@typhonjs-svelte/lib/transition', '@typhonjs-svelte/lib/util', '@typhonjs-svelte/lib/plugin/data',
+   '@typhonjs-svelte/lib/plugin/system',
+]
+
 export default () =>
 {
    // Defines potential output plugins to use conditionally if the .env file indicates the bundles should be
@@ -24,10 +34,7 @@ export default () =>
 
    return [{
       input: 'src/modules/index.js',
-      external: [
-         'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
-          'svelte/types'
-      ],
+      external: s_LOCAL_EXTERNAL,
       output: {
          file: 'dist/modules/index.js',
          format: 'es',
@@ -52,10 +59,7 @@ export default () =>
    },
    {
       input: 'src/modules/handler/index.js',
-      external: [
-         'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
-          'svelte/types'
-      ],
+      external: s_LOCAL_EXTERNAL,
       output: {
          file: 'dist/modules/handler.js',
          format: 'es',
@@ -66,10 +70,7 @@ export default () =>
    },
    {
       input: 'src/modules/helper/index.js',
-      external: [
-         'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
-          'svelte/types'
-      ],
+      external: s_LOCAL_EXTERNAL,
       output: {
          file: 'dist/modules/helper.js',
          format: 'es',
@@ -80,10 +81,7 @@ export default () =>
    },
    {
       input: 'src/modules/store/index.js',
-      external: [
-       'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
-         'svelte/types'
-      ],
+      external: s_LOCAL_EXTERNAL,
       output: {
          file: 'dist/modules/store.js',
          format: 'es',
@@ -108,10 +106,7 @@ export default () =>
    },
    {
       input: 'src/modules/transition/index.js',
-      external: [
-         'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
-          'svelte/types'
-      ],
+      external: s_LOCAL_EXTERNAL,
       output: {
          file: 'dist/modules/transition.js',
          format: 'es',
@@ -127,10 +122,7 @@ export default () =>
    },
    {
       input: 'src/modules/util/index.js',
-      external: [
-         'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
-          'svelte/types'
-      ],
+      external: s_LOCAL_EXTERNAL,
       output: {
          file: 'dist/modules/util.js',
          format: 'es',
@@ -145,13 +137,10 @@ export default () =>
       ]
    },
    {
-      input: 'src/plugins/data/index.js',
-      external: [
-         'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
-          'svelte/types'
-      ],
+      input: 'src/plugin/data/index.js',
+      external: s_LOCAL_EXTERNAL,
       output: {
-         file: 'dist/plugins/data.js',
+         file: 'dist/plugin/data.js',
          format: 'es',
          plugins: outputPlugins,
          sourcemap,
@@ -159,13 +148,10 @@ export default () =>
       }
    },
    {
-      input: 'src/plugins/system/index.js',
-      external: [
-         'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
-          'svelte/types'
-      ],
+      input: 'src/plugin/system/index.js',
+      external: s_LOCAL_EXTERNAL,
       output: {
-         file: 'dist/plugins/system.js',
+         file: 'dist/plugin/system.js',
          format: 'es',
          plugins: outputPlugins,
          sourcemap,

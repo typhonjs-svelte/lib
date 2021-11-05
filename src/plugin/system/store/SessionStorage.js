@@ -1,8 +1,8 @@
-import SessionStorage from '../../../modules/store/SessionStorage.js';
+import { SessionStorage as SS }  from '@typhonjs-svelte/lib/store';
 
-const storage = new SessionStorage();
+const storage = new SS();
 
-export default class SessionStoragePlugin
+export class SessionStorage
 {
    static onPluginLoad(ev)
    {

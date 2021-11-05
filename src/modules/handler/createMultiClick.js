@@ -13,7 +13,7 @@
  *
  * @returns {(function(): void)|*} The gated multi-click handler.
  */
-export default function createMultiClick({ single, double, delay = 400, _clicks = 0,
+export function createMultiClick({ single, double, delay = 400, _clicks = 0,
  _timer = void 0 } = {})
 {
    return () =>

@@ -1,8 +1,8 @@
-import LocalStorage from '../../../modules/store/LocalStorage.js';
+import { LocalStorage as LS } from '@typhonjs-svelte/lib/store';
 
-const storage = new LocalStorage();
+const storage = new LS();
 
-export default class LocalStoragePlugin
+export class LocalStorage
 {
    static onPluginLoad(ev)
    {

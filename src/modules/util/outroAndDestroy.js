@@ -7,7 +7,7 @@ import { check_outros, group_outros, transition_out } from 'svelte/internal';
  *
  * @param {SvelteComponent}   instance - A Svelte component.
  */
-export default async function outroAndDestroy(instance)
+export async function outroAndDestroy(instance)
 {
    return new Promise((resolve) =>
    {

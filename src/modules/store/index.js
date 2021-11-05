@@ -1,2 +1,2 @@
-export { default as LocalStorage }     from './LocalStorage.js';
-export { default as SessionStorage }   from './SessionStorage.js';
+export * from './LocalStorage';
+export * from './SessionStorage';

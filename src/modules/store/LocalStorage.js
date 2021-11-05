@@ -1,7 +1,7 @@
 import { writable }  from 'svelte-persistent-store/local';
 import { get }       from 'svelte/store';
 
-export default class LocalStorage
+export class LocalStorage
 {
    /**
     * @type {*}
