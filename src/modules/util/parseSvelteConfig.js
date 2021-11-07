@@ -1,50 +1,4 @@
-import { group_outros, transition_out, check_outros } from 'svelte/internal';
-import { isSvelteComponent as isSvelteComponent$1 } from '@typhonjs-svelte/lib/util';
-
-/**
- * Provides basic duck typing to determine if the provided function is a constructor function for a Svelte component.
- *
- * @param {*}  comp - Data to check as a Svelte component.
- *
- * @returns {boolean} Whether basic duck typing succeeds.
- */
-function isSvelteComponent(comp)
-{
-   if (comp === null || comp === void 0 || typeof comp !== 'function') { return false; }
-
-   return typeof window !== void 0 ?
-    typeof comp.prototype.$destroy === 'function' && typeof comp.prototype.$on === 'function' : // client-side
-     typeof comp.render === 'function'; // server-side
-}
-
-/**
- * Runs outro transition then destroys Svelte component.
- *
- * Workaround for https://github.com/sveltejs/svelte/issues/4056
- *
- * @param {SvelteComponent}   instance - A Svelte component.
- */
-async function outroAndDestroy(instance)
-{
-   return new Promise((resolve) =>
-   {
-      if (instance.$$.fragment && instance.$$.fragment.o)
-      {
-         group_outros();
-         transition_out(instance.$$.fragment, 0, 0, () =>
-         {
-            instance.$destroy();
-            resolve();
-         });
-         check_outros();
-      }
-      else
-      {
-         instance.$destroy();
-         resolve();
-      }
-   });
-}
+import { isSvelteComponent } from '@typhonjs-svelte/lib/util';
 
 /**
  * Parses a TyphonJS Svelte config object ensuring that classes specified are Svelte components and props are set
@@ -56,14 +10,14 @@ async function outroAndDestroy(instance)
  *
  * @returns {object} The processed Svelte config object.
  */
-function parseSvelteConfig(config, thisArg = void 0)
+export function parseSvelteConfig(config, thisArg = void 0)
 {
    if (typeof config !== 'object')
    {
       throw new TypeError(`parseSvelteConfig - 'config' is not an object:\n${JSON.stringify(config)}.`);
    }
 
-   if (!isSvelteComponent$1(config.class))
+   if (!isSvelteComponent(config.class))
    {
       throw new TypeError(
        `parseSvelteConfig - 'class' is not a Svelte component constructor for config:\n${JSON.stringify(config)}.`);
@@ -192,7 +146,7 @@ function parseSvelteConfig(config, thisArg = void 0)
       {
          const child = svelteConfig.children[cntr];
 
-         if (!isSvelteComponent$1(child.class))
+         if (!isSvelteComponent(child.class))
          {
             throw new Error(`parseSvelteConfig - 'class' is not a Svelte component for child[${cntr}] for config:\n${
              JSON.stringify(config)}`);
@@ -212,7 +166,7 @@ function parseSvelteConfig(config, thisArg = void 0)
    }
    else if (typeof svelteConfig.children === 'object')
    {
-      if (!isSvelteComponent$1(svelteConfig.children.class))
+      if (!isSvelteComponent(svelteConfig.children.class))
       {
          throw new Error(`parseSvelteConfig - 'class' is not a Svelte component for children object for config:\n${
           JSON.stringify(config)}`);
@@ -274,6 +228,3 @@ function s_PROCESS_PROPS(props, thisArg, config)
 
    return {};
 }
-
-export { isSvelteComponent, outroAndDestroy, parseSvelteConfig };
-//# sourceMappingURL=util.js.map
