@@ -1,4 +1,4 @@
-import { isSvelteComponent } from '@typhonjs-svelte/lib/util';
+import { isSvelteComponent } from './isSvelteComponent.js';
 
 /**
  * Parses a TyphonJS Svelte config object ensuring that classes specified are Svelte components and props are set

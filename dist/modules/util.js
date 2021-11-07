@@ -1,5 +1,4 @@
 import { group_outros, transition_out, check_outros } from 'svelte/internal';
-import { isSvelteComponent as isSvelteComponent$1 } from '@typhonjs-svelte/lib/util';
 
 /**
  * Provides basic duck typing to determine if the provided function is a constructor function for a Svelte component.
@@ -63,7 +62,7 @@ function parseSvelteConfig(config, thisArg = void 0)
       throw new TypeError(`parseSvelteConfig - 'config' is not an object:\n${JSON.stringify(config)}.`);
    }
 
-   if (!isSvelteComponent$1(config.class))
+   if (!isSvelteComponent(config.class))
    {
       throw new TypeError(
        `parseSvelteConfig - 'class' is not a Svelte component constructor for config:\n${JSON.stringify(config)}.`);
@@ -192,7 +191,7 @@ function parseSvelteConfig(config, thisArg = void 0)
       {
          const child = svelteConfig.children[cntr];
 
-         if (!isSvelteComponent$1(child.class))
+         if (!isSvelteComponent(child.class))
          {
             throw new Error(`parseSvelteConfig - 'class' is not a Svelte component for child[${cntr}] for config:\n${
              JSON.stringify(config)}`);
@@ -212,7 +211,7 @@ function parseSvelteConfig(config, thisArg = void 0)
    }
    else if (typeof svelteConfig.children === 'object')
    {
-      if (!isSvelteComponent$1(svelteConfig.children.class))
+      if (!isSvelteComponent(svelteConfig.children.class))
       {
          throw new Error(`parseSvelteConfig - 'class' is not a Svelte component for children object for config:\n${
           JSON.stringify(config)}`);
