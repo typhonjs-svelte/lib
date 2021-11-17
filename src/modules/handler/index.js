@@ -1,1 +1,1 @@
-export * from './createMultiClick';
+export * from './createMultiClick.js';

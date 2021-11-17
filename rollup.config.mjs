@@ -1,10 +1,9 @@
 import { babel }     from '@rollup/plugin-babel';        // Babel is used for private class fields for browser usage.
-// import svelte        from 'rollup-plugin-svelte';
 import resolve       from '@rollup/plugin-node-resolve';
 import sourcemaps    from 'rollup-plugin-sourcemaps';
 import { terser }    from 'rollup-plugin-terser';
 
-import terserConfig  from './terser.config.js';
+import terserConfig  from './terser.config.mjs';
 
 const s_COMPRESS = false;
 const s_SOURCEMAPS = true;
