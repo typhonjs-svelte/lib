@@ -67,7 +67,7 @@
     "library"
   ],
   "scripts": {
-    "build": "node rollupAll.mjs",
+    "build": "node rollupAll.js",
     "eslint": "eslint ."
   },
   "files": [

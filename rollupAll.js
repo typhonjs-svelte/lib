@@ -1,6 +1,9 @@
+import path                from 'path';
+
 import { babel }           from '@rollup/plugin-babel';        // Babel is used for private class fields for browser usage.
 import resolve             from '@rollup/plugin-node-resolve';
 import { generateTSDef }   from '@typhonjs-build-test/esm-d-ts';
+import fs                  from 'fs-extra';
 import { rollup }          from 'rollup';
 import sourcemaps          from 'rollup-plugin-sourcemaps';
 import { terser }          from 'rollup-plugin-terser';
@@ -175,5 +178,11 @@ for (const config of rollupConfigs)
    await generateTSDef({
       main: config.output.output.file,
       output: upath.changeExt(config.output.output.file, '.d.ts')
+   });
+
+   fs.writeJSONSync(`${path.dirname(config.output.output.file)}/package.json`, {
+      "main": "./index.mjs",
+      "module": "./index.mjs",
+      "types": "./index.d.ts"
    });
 }
