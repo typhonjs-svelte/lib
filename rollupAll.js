@@ -181,8 +181,8 @@ for (const config of rollupConfigs)
    });
 
    fs.writeJSONSync(`${path.dirname(config.output.output.file)}/package.json`, {
-      "main": "./index.mjs",
-      "module": "./index.mjs",
-      "types": "./index.d.ts"
+      main: './index.js',
+      module: './index.js',
+      types: './index.d.ts'
    });
 }
