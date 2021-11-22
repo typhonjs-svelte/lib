@@ -81,7 +81,7 @@ function isSvelteComponent(comp)
  *
  * Workaround for https://github.com/sveltejs/svelte/issues/4056
  *
- * @param {SvelteComponent}   instance - A Svelte component.
+ * @param {*}  instance - A Svelte component.
  */
 async function outroAndDestroy(instance)
 {
@@ -335,4 +335,4 @@ function s_PROCESS_PROPS(props, thisArg, config)
 }
 
 export { hasAccessor, hasGetter, hasSetter, isSvelteComponent, outroAndDestroy, parseSvelteConfig };
-//# sourceMappingURL=util.js.map
+//# sourceMappingURL=index.js.map

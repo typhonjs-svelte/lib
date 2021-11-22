@@ -5,7 +5,7 @@ import { check_outros, group_outros, transition_out } from 'svelte/internal';
  *
  * Workaround for https://github.com/sveltejs/svelte/issues/4056
  *
- * @param {SvelteComponent}   instance - A Svelte component.
+ * @param {*}  instance - A Svelte component.
  */
 export async function outroAndDestroy(instance)
 {

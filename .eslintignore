@@ -1,9 +1,5 @@
 .github/
+.dts/
 dist/
 docs/
-external/
-lang/
-scripts/
-styles/
-templates/
 src/**/*.svelte
