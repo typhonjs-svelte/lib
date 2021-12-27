@@ -1,6 +1,9 @@
 export * from './LocalStorage.js';
 export * from './SessionStorage.js';
 
+export * from 'svelte-writable-derived';
+export { default as writableDerived } from 'svelte-writable-derived';
+
 /**
  * Subscribes to the given store with the update function provided and ignores the first automatic
  * update. All future updates are dispatched to the update function.

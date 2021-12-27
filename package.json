@@ -55,6 +55,7 @@
     "rollup-plugin-terser": "^7",
     "svelte": "^3",
     "svelte-persistent-store": "github:typhonjs-svelte/svelte-persistent-store",
+    "svelte-writable-derived": "^2.1.2",
     "upath": "^2.0.1"
   },
   "engines": {
