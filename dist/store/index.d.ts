@@ -100,5 +100,17 @@ declare class SessionStorage {
      */
     swapItemBoolean(key: string, defaultValue?: boolean): boolean;
 }
+/**
+ * Subscribes to the given store with the update function provided and ignores the first automatic
+ * update. All future updates are dispatched to the update function.
+ *
+ * @param {import('svelte/store').Readable | import('svelte/store').Writable} store -
+ *  Store to subscribe to...
+ *
+ * @param {function} update - function to receive future updates.
+ *
+ * @returns {function} Store unsubscribe function.
+ */
+declare function subscribeIgnoreFirst(store: svelte_store.Readable<any> | svelte_store.Writable<any>, update: Function): Function;
 
-export { LSStore, LocalStorage, SSStore, SessionStorage };
+export { LSStore, LocalStorage, SSStore, SessionStorage, subscribeIgnoreFirst };
