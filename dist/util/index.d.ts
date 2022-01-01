@@ -41,6 +41,18 @@ declare function hasGetter(component: any, accessor: string): boolean;
  */
 declare function hasSetter(component: any, accessor: string): boolean;
 /**
+ * Provides a solid string hashing algorithm.
+ *
+ * Sourced from: https://stackoverflow.com/a/52171480
+ *
+ * @param {string}   str - String to hash.
+ *
+ * @param {number}   seed - A seed value altering the hash.
+ *
+ * @returns {number} Hash code.
+ */
+declare function hashCode(str: string, seed?: number): number;
+/**
  * Provides basic duck typing to determine if the provided function is a constructor function for a Svelte component.
  *
  * @param {*}  comp - Data to check as a Svelte component.
@@ -67,5 +79,17 @@ declare function outroAndDestroy(instance: any): Promise<any>;
  * @returns {object} The processed Svelte config object.
  */
 declare function parseSvelteConfig(config: object, thisArg?: any): object;
+/**
+ * Generates a UUID v4 compliant ID. Please use a complete UUID generation package for guaranteed compliance.
+ *
+ * This code is an evolution of the following Gist.
+ * https://gist.github.com/jed/982883
+ *
+ * There is a public domain / free copy license attached to it that is not a standard OSS license...
+ * https://gist.github.com/jed/982883#file-license-txt
+ *
+ * @returns {string} UUIDv4
+ */
+declare function uuidv4(): string;
 
-export { debounce, hasAccessor, hasGetter, hasSetter, isSvelteComponent, outroAndDestroy, parseSvelteConfig };
+export { debounce, hasAccessor, hasGetter, hasSetter, hashCode, isSvelteComponent, outroAndDestroy, parseSvelteConfig, uuidv4 };
