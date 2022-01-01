@@ -41,41 +41,41 @@
         display: flex;
         position: relative;
         align-items: center;
-        background: var(--summary-background, none);
-        border: var(--summary-border, none);
-        font-size: var(--summary-font-size, inherit);
-        font-weight: var(--summary-font-weight, bold);
+        background: var(--tjs-summary-background, none);
+        border: var(--tjs-summary-border, none);
+        font-size: var(--tjs-summary-font-size, inherit);
+        font-weight: var(--tjs-summary-font-weight, bold);
         list-style: none;
         margin: 0 0 0 -5px;
-        padding: var(--summary-padding, 4px) 0;
+        padding: var(--tjs-summary-padding, 4px) 0;
         user-select: none;
-        width: var(--summary-width, fit-content);
+        width: var(--tjs-summary-width, fit-content);
     }
 
     summary svg {
-        width: var(--summary-chevron-size, var(--summary-font-size, 15px));
-        height: var(--summary-chevron-size, var(--summary-font-size, 15px));
-        color: var(--summary-chevron-color, currentColor);
-        opacity: var(--summary-chevron-opacity, 0.2);
+        width: var(--tjs-summary-chevron-size, var(--tjs-summary-font-size, 15px));
+        height: var(--tjs-summary-chevron-size, var(--tjs-summary-font-size, 15px));
+        color: var(--tjs-summary-chevron-color, currentColor);
+        opacity: var(--tjs-summary-chevron-opacity, 0.2);
         margin: 0 5px 0 0;
         transition: opacity 0.2s, transform 0.1s;
-        transform: rotate(var(--summary-chevron-rotate-closed, -90deg));
+        transform: rotate(var(--tjs-summary-chevron-rotate-closed, -90deg));
     }
 
     summary:hover svg {
-        opacity: var(--summary-chevron-opacity-hover, 1);
+        opacity: var(--tjs-summary-chevron-opacity-hover, 1);
     }
 
     [open] > summary svg {
-        transform: rotate(var(--summary-chevron-rotate-open, 0));
+        transform: rotate(var(--tjs-summary-chevron-rotate-open, 0));
     }
 
     .contents {
         position: relative;
-        background: var(--contents-background, none);
-        border: var(--contents-border, none);
-        margin: var(--contents-margin, 0 5px 0 -5px);
-        padding: var(--contents-padding, 0 0 0 calc(var(--summary-font-size, 13px) * 0.8));
+        background: var(--tjs-contents-background, none);
+        border: var(--tjs-contents-border, none);
+        margin: var(--tjs-contents-margin, 0 5px 0 -5px);
+        padding: var(--tjs-contents-padding, 0 0 0 calc(var(--tjs-summary-font-size, 13px) * 0.8));
     }
 
     .contents::before {
