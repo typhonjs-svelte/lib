@@ -2,6 +2,7 @@ import path                from 'path';
 
 import { babel }           from '@rollup/plugin-babel';        // Babel is used for private class fields for browser usage.
 import resolve             from '@rollup/plugin-node-resolve';
+import svelte              from 'rollup-plugin-svelte';
 import { generateTSDef }   from '@typhonjs-build-test/esm-d-ts';
 import fs                  from 'fs-extra';
 import { rollup }          from 'rollup';
@@ -19,9 +20,9 @@ const s_LOCAL_EXTERNAL = [
    'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
    'svelte/types',
 
-   '@typhonjs-svelte/lib/handler', '@typhonjs-svelte/lib/helper', '@typhonjs-svelte/lib/store',
-   '@typhonjs-svelte/lib/transition', '@typhonjs-svelte/lib/util', '@typhonjs-svelte/lib/plugin/data',
-   '@typhonjs-svelte/lib/plugin/system',
+   '@typhonjs-svelte/lib/action', '@typhonjs-svelte/lib/component/core', '@typhonjs-svelte/lib/handler',
+   '@typhonjs-svelte/lib/helper', '@typhonjs-svelte/lib/store', '@typhonjs-svelte/lib/transition',
+   '@typhonjs-svelte/lib/util', '@typhonjs-svelte/lib/plugin/data', '@typhonjs-svelte/lib/plugin/system'
 ]
 
 // Defines potential output plugins to use conditionally if the .env file indicates the bundles should be
@@ -41,6 +42,36 @@ const rollupConfigs = [{
             file: 'dist/action/index.js',
             format: 'es',
             plugins: outputPlugins,
+            sourcemap,
+            // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
+         }
+      }
+   },
+   {
+      input: {
+         input: 'src/component/core/index.js',
+         external: s_LOCAL_EXTERNAL,
+         plugins: [
+            svelte({
+               emitCss: false,
+               // onwarn: (warning, handler) =>
+               // {
+               //    // Suppress `a11y-missing-attribute` for missing href in <a> links.
+               //    if (warning.message.includes(`<a> element should have an href attribute`)) { return; }
+               //
+               //    // Let Rollup handle all other warnings normally.
+               //    handler(warning);
+               // }
+            }),
+            resolve()
+         ]
+      },
+      output: {
+         output: {
+            file: 'dist/component/core/index.js',
+            format: 'es',
+            plugins: outputPlugins,
+            preferConst: true,
             sourcemap,
             // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
          }

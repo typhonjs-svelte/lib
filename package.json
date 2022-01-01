@@ -7,10 +7,15 @@
   "contributors": [
     "Michael Leahy <support@typhonjs.io> (https://github.com/typhonrt)"
   ],
+  "svelte": "src/index-svelte.js",
   "exports": {
     "./action": {
       "types": "./dist/action/index.d.ts",
       "import": "./dist/action/index.js"
+    },
+    "./component/core": {
+      "types": "./dist/component/core/index.d.ts",
+      "import": "./dist/component/core/index.js"
     },
     "./handler": {
       "types": "./dist/handler/index.d.ts",
