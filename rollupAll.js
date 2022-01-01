@@ -53,22 +53,42 @@ const rollupConfigs = [{
          external: s_LOCAL_EXTERNAL,
          plugins: [
             svelte({
-               emitCss: false,
-               // onwarn: (warning, handler) =>
-               // {
-               //    // Suppress `a11y-missing-attribute` for missing href in <a> links.
-               //    if (warning.message.includes(`<a> element should have an href attribute`)) { return; }
-               //
-               //    // Let Rollup handle all other warnings normally.
-               //    handler(warning);
-               // }
+               emitCss: false
             }),
-            resolve()
+            resolve({
+               browser: true,
+               dedupe: ['svelte']
+            })
          ]
       },
       output: {
          output: {
             file: 'dist/component/core/index.js',
+            format: 'es',
+            plugins: outputPlugins,
+            preferConst: true,
+            sourcemap,
+            // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
+         }
+      }
+   },
+   {
+      input: {
+         input: 'src/component/standard/index.js',
+         external: s_LOCAL_EXTERNAL,
+         plugins: [
+            svelte({
+               emitCss: false
+            }),
+            resolve({
+               browser: true,
+               dedupe: ['svelte']
+            })
+         ]
+      },
+      output: {
+         output: {
+            file: 'dist/component/standard/index.js',
             format: 'es',
             plugins: outputPlugins,
             preferConst: true,
