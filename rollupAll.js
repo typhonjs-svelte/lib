@@ -49,31 +49,6 @@ const rollupConfigs = [{
    },
    {
       input: {
-         input: 'src/component/core/index.js',
-         external: s_LOCAL_EXTERNAL,
-         plugins: [
-            svelte({
-               emitCss: false
-            }),
-            resolve({
-               browser: true,
-               dedupe: ['svelte']
-            })
-         ]
-      },
-      output: {
-         output: {
-            file: 'dist/component/core/index.js',
-            format: 'es',
-            plugins: outputPlugins,
-            preferConst: true,
-            sourcemap,
-            // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
-         }
-      }
-   },
-   {
-      input: {
          input: 'src/component/standard/index.js',
          external: s_LOCAL_EXTERNAL,
          plugins: [

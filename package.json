@@ -13,10 +13,6 @@
       "types": "./dist/action/index.d.ts",
       "import": "./dist/action/index.js"
     },
-    "./component/core": {
-      "types": "./dist/component/core/index.d.ts",
-      "import": "./dist/component/core/index.js"
-    },
     "./component/standard": {
       "types": "./dist/component/standard/index.d.ts",
       "import": "./dist/component/standard/index.js"
