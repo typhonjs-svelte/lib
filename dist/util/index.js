@@ -1,6 +1,28 @@
 import { group_outros, transition_out, check_outros } from 'svelte/internal';
 
 /**
+ * Wraps a callback in a debounced timeout.
+ *
+ * Delay execution of the callback function until the function has not been called for delay milliseconds
+ *
+ * @param {Function} callback - A function to execute once the debounced threshold has been passed.
+ *
+ * @param {number}   delay - An amount of time in milliseconds to delay.
+ *
+ * @return {Function} A wrapped function which can be called to debounce execution
+ */
+function debounce(callback, delay)
+{
+   let timeoutId;
+
+   return function(...args)
+   {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => { callback.apply(this, args); }, delay);
+   }
+}
+
+/**
  * Provides a method to determine if the passed in Svelte component has a getter accessor.
  *
  * @param {*}        component - Svelte component.
@@ -334,5 +356,5 @@ function s_PROCESS_PROPS(props, thisArg, config)
    return {};
 }
 
-export { hasAccessor, hasGetter, hasSetter, isSvelteComponent, outroAndDestroy, parseSvelteConfig };
+export { debounce, hasAccessor, hasGetter, hasSetter, isSvelteComponent, outroAndDestroy, parseSvelteConfig };
 //# sourceMappingURL=index.js.map

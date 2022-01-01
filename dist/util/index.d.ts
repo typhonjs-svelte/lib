@@ -1,4 +1,16 @@
 /**
+ * Wraps a callback in a debounced timeout.
+ *
+ * Delay execution of the callback function until the function has not been called for delay milliseconds
+ *
+ * @param {Function} callback - A function to execute once the debounced threshold has been passed.
+ *
+ * @param {number}   delay - An amount of time in milliseconds to delay.
+ *
+ * @return {Function} A wrapped function which can be called to debounce execution
+ */
+declare function debounce(callback: Function, delay: number): Function;
+/**
  * Provides a method to determine if the passed in Svelte component has a getter & setter accessor.
  *
  * @param {*}        component - Svelte component.
@@ -56,4 +68,4 @@ declare function outroAndDestroy(instance: any): Promise<any>;
  */
 declare function parseSvelteConfig(config: object, thisArg?: any): object;
 
-export { hasAccessor, hasGetter, hasSetter, isSvelteComponent, outroAndDestroy, parseSvelteConfig };
+export { debounce, hasAccessor, hasGetter, hasSetter, isSvelteComponent, outroAndDestroy, parseSvelteConfig };

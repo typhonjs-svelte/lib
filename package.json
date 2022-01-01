@@ -8,6 +8,10 @@
     "Michael Leahy <support@typhonjs.io> (https://github.com/typhonrt)"
   ],
   "exports": {
+    "./action": {
+      "types": "./dist/action/index.d.ts",
+      "import": "./dist/action/index.js"
+    },
     "./handler": {
       "types": "./dist/handler/index.d.ts",
       "import": "./dist/handler/index.js"

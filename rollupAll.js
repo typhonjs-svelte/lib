@@ -33,6 +33,21 @@ const sourcemap = s_SOURCEMAPS;
 
 const rollupConfigs = [{
       input: {
+         input: 'src/action/index.js',
+         external: s_LOCAL_EXTERNAL,
+      },
+      output: {
+         output: {
+            file: 'dist/action/index.js',
+            format: 'es',
+            plugins: outputPlugins,
+            sourcemap,
+            // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
+         }
+      }
+   },
+   {
+      input: {
          input: 'src/handler/index.js',
          external: s_LOCAL_EXTERNAL,
       },
