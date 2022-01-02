@@ -76,32 +76,49 @@
     * If neither `--tjs-contents-padding` or `--tjs-summary-font-size` is defined the default is `13px * 0.8`.
     */
 
-   import {
-      createEventDispatcher,
-      onDestroy }               from 'svelte';
+   import { onDestroy } from 'svelte';
 
-   import { writable }          from 'svelte/store';
+   import { writable }  from 'svelte/store';
 
    import {
       applyStyles,
-      toggleDetails }           from '@typhonjs-svelte/lib/action';
+      toggleDetails }   from '@typhonjs-svelte/lib/action';
 
    export let styles;
 
    export let folder;
+   export let id = folder ? folder.id : void 0;
    export let name = folder ? folder.name : '';
    export let store = folder ? folder.store : writable(false);
-   export let id = folder ? folder.id : void 0;
 
    let detailsEl;
 
-   const dispatch = createEventDispatcher();
+   /**
+    * Create a CustomEvent with details object containing relevant element and props.
+    *
+    * @param {string}   type - Event name / type.
+    *
+    * @param {boolean}  [bubbles=false] - Does the event bubble.
+    *
+    * @returns {CustomEvent<object>}
+    */
+   function createEvent(type, bubbles = false)
+   {
+      return new CustomEvent(type, {
+         detail: { element: detailsEl, folder, id, name, store },
+         bubbles
+      });
+   }
 
    // Manually subscribe to store in order to trigger only on changes; avoids initial dispatch on mount.
+   // Directly dispatch custom events as Svelte 3 does not support bubbling of custom events by `createEventDispatcher`.
    const unsubscribe = store.subscribe((value) =>
    {
-      dispatch(value ? 'open' : 'close', { element: detailsEl, id, name, store });
-      dispatch(value ? 'openAny' : 'closeAny', { element: detailsEl, id, name, store });
+      if (detailsEl)
+      {
+         detailsEl.dispatchEvent(createEvent(value ? 'open' : 'close'));
+         detailsEl.dispatchEvent(createEvent(value ? 'openAny' : 'closeAny', true));
+      }
    });
 
    onDestroy(unsubscribe);
@@ -111,6 +128,8 @@
          bind:this={detailsEl}
          bind:open={$store}
          on:click
+         on:open
+         on:close
          on:openAny
          on:closeAny
          use:toggleDetails={store}
@@ -136,7 +155,7 @@
 <style>
     details {
         margin-left: -5px;
-        padding-left: var(--tjs-details-padding-left, 5px);   /* Set for children folders to increase indent */
+        padding-left: var(--tjs-details-padding-left, 5px); /* Set for children folders to increase indent */
     }
 
     summary {
