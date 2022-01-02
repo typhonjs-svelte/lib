@@ -1,9 +1,11 @@
 /**
- * Provides a toggle action for `details` HTML elements.
+ * Provides a toggle action for `details` HTML elements. The boolean store provided controls animation.
+ *
+ * It is not necessary to bind the store to the `open` attribute of the associated details element.
  *
  * @param {HTMLDetailsElement} details - The details element.
  *
- * @param {import('svelte/store').writable<boolean>} booleanStore - A boolean store.
+ * @param {import('svelte/store').Writable<boolean>} booleanStore - A boolean store.
  *
  * @returns {object} Destroy callback.
  */
@@ -16,6 +18,13 @@ export function toggleDetails(details, booleanStore)
    let animation;
 
    let open = details.open;
+
+   // The booleanStore sets initial open state and handles animation on changes.
+   const unsubscribe = booleanStore.subscribe((value) =>
+   {
+      open = value;
+      handleAnimation();
+   });
 
    /**
     * @param {number} a -
@@ -41,13 +50,34 @@ export function toggleDetails(details, booleanStore)
        }
       );
 
-      booleanStore.set((open = value));
-
       animation.onfinish = () =>
       {
          details.open = value;
          details.style.overflow = '';
       };
+   }
+
+   /**
+    * Handles animation coordination based on current state.
+    */
+   function handleAnimation()
+   {
+      if (open)
+      {
+         const a = details.offsetHeight;
+         if (animation) { animation.cancel(); }
+         details.open = true;
+         const b = details.offsetHeight;
+
+         animate(a, b, true);
+      }
+      else
+      {
+         const a = details.offsetHeight;
+         const b = summary.offsetHeight;
+
+         animate(a, b, false);
+      }
    }
 
    /**
@@ -57,22 +87,8 @@ export function toggleDetails(details, booleanStore)
    {
       e.preventDefault();
 
-      if (open)
-      {
-         const a = details.offsetHeight;
-         const b = summary.offsetHeight;
-
-         animate(a, b, false);
-      }
-      else
-      {
-         const a = details.offsetHeight;
-         if (animation) { animation.cancel(); }
-         details.open = true;
-         const b = details.offsetHeight;
-
-         animate(a, b, true);
-      }
+      // Simply set the store to the opposite of current open state and the callback above handles animation.
+      booleanStore.set(!open);
    }
 
    summary.addEventListener('click', handleClick);
@@ -80,6 +96,7 @@ export function toggleDetails(details, booleanStore)
    return {
       destroy()
       {
+         unsubscribe();
          summary.removeEventListener('click', handleClick);
       }
    };

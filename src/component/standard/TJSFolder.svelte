@@ -2,15 +2,18 @@
    /**
     * TJSFolder provides a collapsible folder using the details and summary HTMLElements.
     *
-    * This is a slotted component.
+    * This is a slotted component. The default slot is the collapsible contents. There are also two additional optional
+    * named slots available for the summary element. `label` allows setting custom content with the fallback being the
+    * `label` string. Additionally, `summary-end` allows a component or text to be slotted after the label. This can be
+    * useful for say an "expand all" button.
     *
     * ----------------------------------------------------------------------------------------------------------------
     * Exported props include:
-    * `folder`: An object containing id (any), name (string), store (writable boolean)
+    * `folder`: An object containing id (any), label (string), store (writable boolean)
     *
     * Or in lieu of passing the folder object you can assign these props directly:
     * `id`: Anything used for an ID.
-    * `name`: The name of the folder; string.
+    * `label`: The label name of the folder; string.
     * `store`: The store tracking the open / close state: writable<boolean>
     *
     * The final prop is `styles` which follows the `applyStyles` action; see `applyStyles` or `StylesProperties`
@@ -18,7 +21,7 @@
     *
     * ----------------------------------------------------------------------------------------------------------------
     * Events: There are several events that are fired and / or bubbled up through parents. There are four
-    * custom events that pass a details object including: `the details element, id, name, and store`.
+    * custom events that pass a details object including: `the details element, id, label, and store`.
     *
     * The following events are bubbled up such that assigning a listener in any parent component receives them
     * from all children folders:
@@ -31,7 +34,8 @@
     * `open` - Triggered when direct descendent folder is opened w/ details object.
     *
     * ----------------------------------------------------------------------------------------------------------------
-    * Styling: To style this component use `details.tjs-folder` as a selector.
+    * Styling: To style this component use `details.tjs-folder` as a selector. Each element also contains data
+    * attributes for `id` and `label`.
     *
     * There are several local CSS variables that you can use to change the appearance dynamically. Either use
     * CSS props or pass in a `styles` object w/ key / value props to set to the details. Another alternative is using
@@ -88,7 +92,7 @@
 
    export let folder;
    export let id = folder ? folder.id : void 0;
-   export let name = folder ? folder.name : '';
+   export let label = folder ? folder.label : '';
    export let store = folder ? folder.store : writable(false);
 
    let detailsEl;
@@ -105,13 +109,14 @@
    function createEvent(type, bubbles = false)
    {
       return new CustomEvent(type, {
-         detail: { element: detailsEl, folder, id, name, store },
+         detail: {element: detailsEl, folder, id, label, store},
          bubbles
       });
    }
 
-   // Manually subscribe to store in order to trigger only on changes; avoids initial dispatch on mount.
-   // Directly dispatch custom events as Svelte 3 does not support bubbling of custom events by `createEventDispatcher`.
+   // Manually subscribe to store in order to trigger only on changes; avoids initial dispatch on mount as `detailsEl`
+   // is not set yet. Directly dispatch custom events as Svelte 3 does not support bubbling of custom events by
+   // `createEventDispatcher`.
    const unsubscribe = store.subscribe((value) =>
    {
       if (detailsEl)
@@ -126,14 +131,15 @@
 
 <details class=tjs-folder
          bind:this={detailsEl}
-         bind:open={$store}
          on:click
          on:open
          on:close
          on:openAny
          on:closeAny
          use:toggleDetails={store}
-         use:applyStyles={styles}>
+         use:applyStyles={styles}
+         data-id={id}
+         data-label={label}>
     <summary>
         <svg viewBox="0 0 24 24">
             <path
@@ -144,7 +150,9 @@
             />
         </svg>
 
-        {name}
+        <slot name=label>{label}</slot>
+
+        <slot name="summary-end"></slot>
     </summary>
 
     <div class=contents>

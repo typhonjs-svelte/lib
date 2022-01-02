@@ -1,4 +1,4 @@
-import { SvelteComponent, init, safe_not_equal, append_styles, create_slot, element, svg_element, space, text, attr, set_style, insert, append, listen, action_destroyer, set_data, update_slot_base, get_all_dirty_from_scope, get_slot_changes, is_function, transition_in, transition_out, detach, run_all, subscribe, noop, bubble, binding_callbacks } from 'svelte/internal';
+import { SvelteComponent, init, safe_not_equal, append_styles, create_slot, element, svg_element, space, attr, set_style, insert, append, listen, action_destroyer, update_slot_base, get_all_dirty_from_scope, get_slot_changes, is_function, transition_in, transition_out, detach, run_all, text, set_data, bubble, binding_callbacks } from 'svelte/internal';
 import { onDestroy } from 'svelte';
 import { writable } from 'svelte/store';
 import { toggleDetails, applyStyles } from '@typhonjs-svelte/lib/action';
@@ -7,6 +7,31 @@ import { toggleDetails, applyStyles } from '@typhonjs-svelte/lib/action';
 
 function add_css(target) {
 	append_styles(target, "svelte-1c70idv", "details.svelte-1c70idv.svelte-1c70idv{margin-left:-5px;padding-left:var(--tjs-details-padding-left, 5px)}summary.svelte-1c70idv.svelte-1c70idv{display:flex;position:relative;align-items:center;background-blend-mode:var(--tjs-summary-background-blend-mode, initial);background:var(--tjs-summary-background, none);border:var(--tjs-summary-border, none);cursor:var(--tjs-summary-cursor, pointer);font-size:var(--tjs-summary-font-size, inherit);font-weight:var(--tjs-summary-font-weight, bold);list-style:none;margin:0 0 0 -5px;padding:var(--tjs-summary-padding, 4px) 0;user-select:none;width:var(--tjs-summary-width, fit-content)}summary.svelte-1c70idv svg.svelte-1c70idv{width:var(--tjs-summary-chevron-size, var(--tjs-summary-font-size, 15px));height:var(--tjs-summary-chevron-size, var(--tjs-summary-font-size, 15px));color:var(--tjs-summary-chevron-color, currentColor);opacity:var(--tjs-summary-chevron-opacity, 0.2);margin:0 5px 0 0;transition:opacity 0.2s, transform 0.1s;transform:rotate(var(--tjs-summary-chevron-rotate-closed, -90deg))}summary.svelte-1c70idv:hover svg.svelte-1c70idv{opacity:var(--tjs-summary-chevron-opacity-hover, 1)}[open].svelte-1c70idv>summary svg.svelte-1c70idv{transform:rotate(var(--tjs-summary-chevron-rotate-open, 0))}.contents.svelte-1c70idv.svelte-1c70idv{position:relative;background-blend-mode:var(--tjs-contents-background-blend-mode, initial);background:var(--tjs-contents-background, none);border:var(--tjs-contents-border, none);margin:var(--tjs-contents-margin, 0 0 0 -5px);padding:var(--tjs-contents-padding, 0 0 0 calc(var(--tjs-summary-font-size, 13px) * 0.8))}.contents.svelte-1c70idv.svelte-1c70idv::before{content:'';position:absolute;width:0;height:calc(100% + 8px);left:0;top:-8px}summary.svelte-1c70idv:focus-visible+.contents.svelte-1c70idv::before{height:100%;top:0}");
+}
+
+const get_summary_end_slot_changes = dirty => ({});
+const get_summary_end_slot_context = ctx => ({});
+const get_label_slot_changes = dirty => ({});
+const get_label_slot_context = ctx => ({});
+
+// (153:25) {label}
+function fallback_block(ctx) {
+	let t;
+
+	return {
+		c() {
+			t = text(/*label*/ ctx[2]);
+		},
+		m(target, anchor) {
+			insert(target, t, anchor);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*label*/ 4) set_data(t, /*label*/ ctx[2]);
+		},
+		d(detaching) {
+			if (detaching) detach(t);
+		}
+	};
 }
 
 function create_fragment$1(ctx) {
@@ -23,8 +48,13 @@ function create_fragment$1(ctx) {
 	let current;
 	let mounted;
 	let dispose;
-	const default_slot_template = /*#slots*/ ctx[8].default;
-	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[7], null);
+	const label_slot_template = /*#slots*/ ctx[7].label;
+	const label_slot = create_slot(label_slot_template, ctx, /*$$scope*/ ctx[6], get_label_slot_context);
+	const label_slot_or_fallback = label_slot || fallback_block(ctx);
+	const summary_end_slot_template = /*#slots*/ ctx[7]["summary-end"];
+	const summary_end_slot = create_slot(summary_end_slot_template, ctx, /*$$scope*/ ctx[6], get_summary_end_slot_context);
+	const default_slot_template = /*#slots*/ ctx[7].default;
+	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[6], null);
 
 	return {
 		c() {
@@ -33,7 +63,9 @@ function create_fragment$1(ctx) {
 			svg = svg_element("svg");
 			path = svg_element("path");
 			t0 = space();
-			t1 = text(/*name*/ ctx[1]);
+			if (label_slot_or_fallback) label_slot_or_fallback.c();
+			t1 = space();
+			if (summary_end_slot) summary_end_slot.c();
 			t2 = space();
 			div = element("div");
 			if (default_slot) default_slot.c();
@@ -47,6 +79,8 @@ function create_fragment$1(ctx) {
 			attr(summary, "class", "svelte-1c70idv");
 			attr(div, "class", "contents svelte-1c70idv");
 			attr(details, "class", "tjs-folder svelte-1c70idv");
+			attr(details, "data-id", /*id*/ ctx[1]);
+			attr(details, "data-label", /*label*/ ctx[2]);
 		},
 		m(target, anchor) {
 			insert(target, details, anchor);
@@ -54,7 +88,17 @@ function create_fragment$1(ctx) {
 			append(summary, svg);
 			append(svg, path);
 			append(summary, t0);
+
+			if (label_slot_or_fallback) {
+				label_slot_or_fallback.m(summary, null);
+			}
+
 			append(summary, t1);
+
+			if (summary_end_slot) {
+				summary_end_slot.m(summary, null);
+			}
+
 			append(details, t2);
 			append(details, div);
 
@@ -62,19 +106,17 @@ function create_fragment$1(ctx) {
 				default_slot.m(div, null);
 			}
 
-			/*details_binding*/ ctx[14](details);
-			details.open = /*$store*/ ctx[4];
+			/*details_binding*/ ctx[13](details);
 			current = true;
 
 			if (!mounted) {
 				dispose = [
-					listen(details, "toggle", /*details_toggle_handler*/ ctx[15]),
-					listen(details, "click", /*click_handler*/ ctx[9]),
-					listen(details, "open", /*open_handler*/ ctx[10]),
-					listen(details, "close", /*close_handler*/ ctx[11]),
-					listen(details, "openAny", /*openAny_handler*/ ctx[12]),
-					listen(details, "closeAny", /*closeAny_handler*/ ctx[13]),
-					action_destroyer(toggleDetails_action = toggleDetails.call(null, details, /*store*/ ctx[2])),
+					listen(details, "click", /*click_handler*/ ctx[8]),
+					listen(details, "open", /*open_handler*/ ctx[9]),
+					listen(details, "close", /*close_handler*/ ctx[10]),
+					listen(details, "openAny", /*openAny_handler*/ ctx[11]),
+					listen(details, "closeAny", /*closeAny_handler*/ ctx[12]),
+					action_destroyer(toggleDetails_action = toggleDetails.call(null, details, /*store*/ ctx[3])),
 					action_destroyer(applyStyles_action = applyStyles.call(null, details, /*styles*/ ctx[0]))
 				];
 
@@ -82,43 +124,85 @@ function create_fragment$1(ctx) {
 			}
 		},
 		p(ctx, [dirty]) {
-			if (!current || dirty & /*name*/ 2) set_data(t1, /*name*/ ctx[1]);
+			if (label_slot) {
+				if (label_slot.p && (!current || dirty & /*$$scope*/ 64)) {
+					update_slot_base(
+						label_slot,
+						label_slot_template,
+						ctx,
+						/*$$scope*/ ctx[6],
+						!current
+						? get_all_dirty_from_scope(/*$$scope*/ ctx[6])
+						: get_slot_changes(label_slot_template, /*$$scope*/ ctx[6], dirty, get_label_slot_changes),
+						get_label_slot_context
+					);
+				}
+			} else {
+				if (label_slot_or_fallback && label_slot_or_fallback.p && (!current || dirty & /*label*/ 4)) {
+					label_slot_or_fallback.p(ctx, !current ? -1 : dirty);
+				}
+			}
+
+			if (summary_end_slot) {
+				if (summary_end_slot.p && (!current || dirty & /*$$scope*/ 64)) {
+					update_slot_base(
+						summary_end_slot,
+						summary_end_slot_template,
+						ctx,
+						/*$$scope*/ ctx[6],
+						!current
+						? get_all_dirty_from_scope(/*$$scope*/ ctx[6])
+						: get_slot_changes(summary_end_slot_template, /*$$scope*/ ctx[6], dirty, get_summary_end_slot_changes),
+						get_summary_end_slot_context
+					);
+				}
+			}
 
 			if (default_slot) {
-				if (default_slot.p && (!current || dirty & /*$$scope*/ 128)) {
+				if (default_slot.p && (!current || dirty & /*$$scope*/ 64)) {
 					update_slot_base(
 						default_slot,
 						default_slot_template,
 						ctx,
-						/*$$scope*/ ctx[7],
+						/*$$scope*/ ctx[6],
 						!current
-						? get_all_dirty_from_scope(/*$$scope*/ ctx[7])
-						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[7], dirty, null),
+						? get_all_dirty_from_scope(/*$$scope*/ ctx[6])
+						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[6], dirty, null),
 						null
 					);
 				}
 			}
 
-			if (dirty & /*$store*/ 16) {
-				details.open = /*$store*/ ctx[4];
+			if (!current || dirty & /*id*/ 2) {
+				attr(details, "data-id", /*id*/ ctx[1]);
 			}
 
-			if (toggleDetails_action && is_function(toggleDetails_action.update) && dirty & /*store*/ 4) toggleDetails_action.update.call(null, /*store*/ ctx[2]);
+			if (!current || dirty & /*label*/ 4) {
+				attr(details, "data-label", /*label*/ ctx[2]);
+			}
+
+			if (toggleDetails_action && is_function(toggleDetails_action.update) && dirty & /*store*/ 8) toggleDetails_action.update.call(null, /*store*/ ctx[3]);
 			if (applyStyles_action && is_function(applyStyles_action.update) && dirty & /*styles*/ 1) applyStyles_action.update.call(null, /*styles*/ ctx[0]);
 		},
 		i(local) {
 			if (current) return;
+			transition_in(label_slot_or_fallback, local);
+			transition_in(summary_end_slot, local);
 			transition_in(default_slot, local);
 			current = true;
 		},
 		o(local) {
+			transition_out(label_slot_or_fallback, local);
+			transition_out(summary_end_slot, local);
 			transition_out(default_slot, local);
 			current = false;
 		},
 		d(detaching) {
 			if (detaching) detach(details);
+			if (label_slot_or_fallback) label_slot_or_fallback.d(detaching);
+			if (summary_end_slot) summary_end_slot.d(detaching);
 			if (default_slot) default_slot.d(detaching);
-			/*details_binding*/ ctx[14](null);
+			/*details_binding*/ ctx[13](null);
 			mounted = false;
 			run_all(dispose);
 		}
@@ -126,18 +210,12 @@ function create_fragment$1(ctx) {
 }
 
 function instance$1($$self, $$props, $$invalidate) {
-	let $store,
-		$$unsubscribe_store = noop,
-		$$subscribe_store = () => ($$unsubscribe_store(), $$unsubscribe_store = subscribe(store, $$value => $$invalidate(4, $store = $$value)), store);
-
-	$$self.$$.on_destroy.push(() => $$unsubscribe_store());
 	let { $$slots: slots = {}, $$scope } = $$props;
 	let { styles } = $$props;
 	let { folder } = $$props;
 	let { id = folder ? folder.id : void 0 } = $$props;
-	let { name = folder ? folder.name : '' } = $$props;
+	let { label = folder ? folder.label : '' } = $$props;
 	let { store = folder ? folder.store : writable(false) } = $$props;
-	$$subscribe_store();
 	let detailsEl;
 
 	/**
@@ -156,15 +234,16 @@ function instance$1($$self, $$props, $$invalidate) {
 					element: detailsEl,
 					folder,
 					id,
-					name,
+					label,
 					store
 				},
 				bubbles
 			});
 	}
 
-	// Manually subscribe to store in order to trigger only on changes; avoids initial dispatch on mount.
-	// Directly dispatch custom events as Svelte 3 does not support bubbling of custom events by `createEventDispatcher`.
+	// Manually subscribe to store in order to trigger only on changes; avoids initial dispatch on mount as `detailsEl`
+	// is not set yet. Directly dispatch custom events as Svelte 3 does not support bubbling of custom events by
+	// `createEventDispatcher`.
 	const unsubscribe = store.subscribe(value => {
 		if (detailsEl) {
 			detailsEl.dispatchEvent(createEvent(value ? 'open' : 'close'));
@@ -197,32 +276,26 @@ function instance$1($$self, $$props, $$invalidate) {
 	function details_binding($$value) {
 		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
 			detailsEl = $$value;
-			$$invalidate(3, detailsEl);
+			$$invalidate(4, detailsEl);
 		});
-	}
-
-	function details_toggle_handler() {
-		$store = this.open;
-		store.set($store);
 	}
 
 	$$self.$$set = $$props => {
 		if ('styles' in $$props) $$invalidate(0, styles = $$props.styles);
 		if ('folder' in $$props) $$invalidate(5, folder = $$props.folder);
-		if ('id' in $$props) $$invalidate(6, id = $$props.id);
-		if ('name' in $$props) $$invalidate(1, name = $$props.name);
-		if ('store' in $$props) $$subscribe_store($$invalidate(2, store = $$props.store));
-		if ('$$scope' in $$props) $$invalidate(7, $$scope = $$props.$$scope);
+		if ('id' in $$props) $$invalidate(1, id = $$props.id);
+		if ('label' in $$props) $$invalidate(2, label = $$props.label);
+		if ('store' in $$props) $$invalidate(3, store = $$props.store);
+		if ('$$scope' in $$props) $$invalidate(6, $$scope = $$props.$$scope);
 	};
 
 	return [
 		styles,
-		name,
+		id,
+		label,
 		store,
 		detailsEl,
-		$store,
 		folder,
-		id,
 		$$scope,
 		slots,
 		click_handler,
@@ -230,8 +303,7 @@ function instance$1($$self, $$props, $$invalidate) {
 		close_handler,
 		openAny_handler,
 		closeAny_handler,
-		details_binding,
-		details_toggle_handler
+		details_binding
 	];
 }
 
@@ -248,9 +320,9 @@ class TJSFolder extends SvelteComponent {
 			{
 				styles: 0,
 				folder: 5,
-				id: 6,
-				name: 1,
-				store: 2
+				id: 1,
+				label: 2,
+				store: 3
 			},
 			add_css
 		);
