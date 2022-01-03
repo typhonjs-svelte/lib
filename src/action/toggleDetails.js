@@ -5,6 +5,9 @@ import { subscribeFirstRest } from '@typhonjs-svelte/lib/store';
  *
  * It is not necessary to bind the store to the `open` attribute of the associated details element.
  *
+ * When the action is triggered to close the details element a data attribute `closing` is set to `true`. This allows
+ * any associated closing transitions to start immediately.
+ *
  * @param {HTMLDetailsElement} details - The details element.
  *
  * @param {import('svelte/store').Writable<boolean>} booleanStore - A boolean store.
@@ -56,6 +59,7 @@ export function toggleDetails(details, booleanStore)
       animation.onfinish = () =>
       {
          details.open = value;
+         details.dataset.closing = 'false';
          details.style.overflow = '';
       };
    }
@@ -78,6 +82,8 @@ export function toggleDetails(details, booleanStore)
       {
          const a = details.offsetHeight;
          const b = summary.offsetHeight;
+
+         details.dataset.closing = 'true';
 
          animate(a, b, false);
       }

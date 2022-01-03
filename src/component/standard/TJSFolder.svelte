@@ -139,7 +139,8 @@
          use:toggleDetails={store}
          use:applyStyles={styles}
          data-id={id}
-         data-label={label}>
+         data-label={label}
+         data-closing='false'>
     <summary>
         <svg viewBox="0 0 24 24">
             <path
@@ -197,7 +198,7 @@
         opacity: var(--tjs-summary-chevron-opacity-hover, 1);
     }
 
-    [open] > summary svg {
+    [open]:not(details[data-closing='true']) > summary svg {
         transform: rotate(var(--tjs-summary-chevron-rotate-open, 0));
     }
 
