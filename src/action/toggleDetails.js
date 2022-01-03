@@ -1,3 +1,5 @@
+import { subscribeFirstRest } from '@typhonjs-svelte/lib/store';
+
 /**
  * Provides a toggle action for `details` HTML elements. The boolean store provided controls animation.
  *
@@ -17,10 +19,11 @@ export function toggleDetails(details, booleanStore)
    /** @type {Animation} */
    let animation;
 
+   /** @type {boolean} */
    let open = details.open;
 
-   // The booleanStore sets initial open state and handles animation on changes.
-   const unsubscribe = booleanStore.subscribe((value) =>
+   // The booleanStore sets initial open state and handles animation on further changes.
+   const unsubscribe = subscribeFirstRest(booleanStore, (value) => { open = value; details.open = open }, (value) =>
    {
       open = value;
       handleAnimation();

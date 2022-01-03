@@ -112,6 +112,20 @@ declare class SessionStorage {
  */
 declare function propertyStore(origin: any, propName: string | number | symbol | Array<string | number | symbol>): any;
 /**
+ * Subscribes to the given store with two update functions provided. The first function is invoked on the initial
+ * subscription. All future updates are dispatched to the update function.
+ *
+ * @param {import('svelte/store').Readable | import('svelte/store').Writable} store -
+ *  Store to subscribe to...
+ *
+ * @param {function} first - Function to receive first update.
+ *
+ * @param {function} update - Function to receive future updates.
+ *
+ * @returns {function} Store unsubscribe function.
+ */
+declare function subscribeFirstRest(store: svelte_store.Readable<any> | svelte_store.Writable<any>, first: Function, update: Function): Function;
+/**
  * Subscribes to the given store with the update function provided and ignores the first automatic
  * update. All future updates are dispatched to the update function.
  *
@@ -148,4 +162,4 @@ declare function writableDerived(origins: any | any[], derive: Function, reflect
     withOld: Function;
 }, initial?: any): any;
 
-export { LSStore, LocalStorage, SSStore, SessionStorage, propertyStore, subscribeIgnoreFirst, writableDerived };
+export { LSStore, LocalStorage, SSStore, SessionStorage, propertyStore, subscribeFirstRest, subscribeIgnoreFirst, writableDerived };
