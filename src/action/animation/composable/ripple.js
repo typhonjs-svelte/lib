@@ -30,15 +30,18 @@ export function ripple({ duration = 600, color = 'rgba(255, 255, 255, 0.7)', eve
 
          const span = document.createElement('span');
 
+         span.style.position = 'absolute';
          span.style.width = `${diameter}px`;
          span.style.height = `${diameter}px`;
          span.style.left = left;
          span.style.top = top;
-         span.style.position = 'absolute';
-         span.style.borderRadius = '50%';
-         span.style.backgroundColor = `var(--color-effect-ripple, ${color})`;
 
-         element.append(span);
+         span.style.backgroundColor = `var(--color-effect-ripple, ${color})`;
+         span.style.borderRadius = '50%';
+         span.style.pointerEvents = 'none';
+         span.style.transform = 'translateZ(-1px)';
+
+         element.prepend(span);
 
          const animation = span.animate([
             {  // from
@@ -51,7 +54,8 @@ export function ripple({ duration = 600, color = 'rgba(255, 255, 255, 0.7)', eve
                opacity: 0,
                filter: 'blur(5px)'
             }
-         ], duration);
+         ],
+         duration);
 
          animation.onfinish = () => span.remove();
       }
