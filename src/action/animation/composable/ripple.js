@@ -1,14 +1,19 @@
-import { debounce as debounceFn } from '@typhonjs-svelte/lib/util';
+import { debounce as debounceFn } from '@typhonjs-fvtt/svelte/util';
 
 /**
  * Defines the classic Material Design ripple effect as an action. `ripple` is a wrapper around the returned action.
  * This allows it to be easily used as a prop.
  *
+ * Note: A negative one translateZ transform is applied to the added spans allowing other content to be layered on top
+ * with a positive translateZ.
+ *
+ * Styling: There is a single CSS variable `--tjs-effect-ripple-background` that can be set to control the background.
+ *
  * @param {object}   [opts] - Optional parameters.
  *
  * @param {number}   [opts.duration=600] - Duration in milliseconds.
  *
- * @param {string}   [opts.color='rgba(255, 255, 255, 0.7)'] - A valid CSS color.
+ * @param {string}   [opts.background='rgba(255, 255, 255, 0.7)'] - A valid CSS background attribute.
  *
  * @param {string}   [opts.event='click'] - DOM event to bind element to respond with the ripple effect.
  *
@@ -16,7 +21,7 @@ import { debounce as debounceFn } from '@typhonjs-svelte/lib/util';
  *
  * @returns Function - Actual action.
  */
-export function ripple({ duration = 600, color = 'rgba(255, 255, 255, 0.7)', event = 'click', debounce } = {})
+export function ripple({ duration = 600, background = 'rgba(255, 255, 255, 0.7)', event = 'click', debounce } = {})
 {
    return (element) =>
    {
@@ -36,7 +41,7 @@ export function ripple({ duration = 600, color = 'rgba(255, 255, 255, 0.7)', eve
          span.style.left = left;
          span.style.top = top;
 
-         span.style.backgroundColor = `var(--color-effect-ripple, ${color})`;
+         span.style.background = `var(--tjs-effect-ripple-background, ${background})`;
          span.style.borderRadius = '50%';
          span.style.pointerEvents = 'none';
          span.style.transform = 'translateZ(-1px)';

@@ -97,6 +97,10 @@
 
    let detailsEl;
 
+   $: id = typeof folder === 'object' ? folder.icon : typeof id === 'string' ? id : void 0;
+   $: label = typeof folder === 'object' ? folder.label : typeof label === 'string' ? label : '';
+   $: store = typeof folder === 'object' ? folder.store : typeof store === 'object' ? store : writable(false);
+
    /**
     * Create a CustomEvent with details object containing relevant element and props.
     *
