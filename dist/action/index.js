@@ -1,5 +1,4 @@
 import { debounce } from '@typhonjs-svelte/lib/util';
-import { debounce as debounce$1 } from '@typhonjs-fvtt/svelte/util';
 import { subscribeFirstRest } from '@typhonjs-svelte/lib/store';
 
 /**
@@ -133,7 +132,7 @@ function composable(...actions)
  *
  * @returns Function - Actual action.
  */
-function ripple({ duration = 600, background = 'rgba(255, 255, 255, 0.7)', event = 'click', debounce } = {})
+function ripple({ duration = 600, background = 'rgba(255, 255, 255, 0.7)', event = 'click', debounce: debounce$1 } = {})
 {
    return (element) =>
    {
@@ -177,7 +176,7 @@ function ripple({ duration = 600, background = 'rgba(255, 255, 255, 0.7)', event
          animation.onfinish = () => span.remove();
       }
 
-      const eventFn = Number.isInteger(debounce) && debounce > 0 ? debounce$1(createRipple, debounce) : createRipple;
+      const eventFn = Number.isInteger(debounce$1) && debounce$1 > 0 ? debounce(createRipple, debounce$1) : createRipple;
 
       element.addEventListener(event, eventFn);
 

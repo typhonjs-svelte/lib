@@ -72,7 +72,7 @@ declare function composable(...actions: Function[]): Function;
  *
  * @returns Function - Actual action.
  */
-declare function ripple({ duration, background, event, debounce }?: {
+declare function ripple({ duration, background, event, debounce: debounce$1 }?: {
     duration?: number;
     background?: string;
     event?: string;
