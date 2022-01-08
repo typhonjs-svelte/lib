@@ -7,7 +7,7 @@ import { debounce as debounceFn } from '@typhonjs-svelte/lib/util';
  * Note: A negative one translateZ transform is applied to the added spans allowing other content to be layered on top
  * with a positive translateZ.
  *
- * Styling: There is a single CSS variable `--tjs-effect-ripple-background` that can be set to control the background.
+ * Styling: There is a single CSS variable `--tjs-action-ripple-background` that can be set to control the background.
  *
  * @param {object}   [opts] - Optional parameters.
  *
