@@ -7,7 +7,7 @@
  *
  * @returns {Function} Update function.
  */
-function applyStyles(node, properties)
+export function applyStyles(node, properties)
 {
    /** Sets properties on node. */
    function setProperties()
@@ -30,6 +30,3 @@ function applyStyles(node, properties)
       }
    };
 }
-
-export { applyStyles };
-//# sourceMappingURL=index.js.map
