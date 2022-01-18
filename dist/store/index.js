@@ -2,6 +2,27 @@ import { writable as writable$2, get, derived } from 'svelte/store';
 import { noop, run_all, is_function } from 'svelte/internal';
 
 /**
+ * Provides a basic test for a given variable to test if it has the shape of a store by having a `subscribe` function.
+ * Note: functions are also objects, so test that the variable might be a function w/ a `subscribe` function.
+ *
+ * @param {*}  store - variable to test that might be a store.
+ *
+ * @returns {boolean} Whether the variable tested has the shape of a store.
+ */
+function isStore(store) {
+  if (store === null || store === void 0) {
+    return false;
+  }
+
+  switch (typeof store) {
+    case 'function':
+    case 'object':
+      return typeof store.subscribe === 'function';
+  }
+
+  return false;
+}
+/**
  * Subscribes to the given store with the update function provided and ignores the first automatic
  * update. All future updates are dispatched to the update function.
  *
@@ -12,6 +33,7 @@ import { noop, run_all, is_function } from 'svelte/internal';
  *
  * @returns {function} Store unsubscribe function.
  */
+
 function subscribeIgnoreFirst(store, update) {
   let firedFirst = false;
   return store.subscribe(value => {
@@ -645,5 +667,5 @@ function propertyStore(origin, propName) {
   }
 }
 
-export { LocalStorage, SessionStorage, propertyStore, subscribeFirstRest, subscribeIgnoreFirst, writableDerived };
+export { LocalStorage, SessionStorage, isStore, propertyStore, subscribeFirstRest, subscribeIgnoreFirst, writableDerived };
 //# sourceMappingURL=index.js.map
