@@ -2,7 +2,7 @@ import { writable }  from 'svelte-persistent-store/local';
 import { get }       from 'svelte/store';
 
 /**
- * @typedef {writable & get} LSStore - The backing Svelte store; a writable w/ get method attached.
+ * @typedef {import('svelte/store').Writable & import('svelte/store').get_store_value} LSStore - The backing Svelte store; a writable w/ get method attached.
  */
 
 export class LocalStorage

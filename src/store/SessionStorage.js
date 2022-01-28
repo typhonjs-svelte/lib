@@ -2,7 +2,7 @@ import { writable }  from 'svelte-persistent-store/session';
 import { get }       from 'svelte/store';
 
 /**
- * @typedef {writable & get} SSStore - The backing Svelte store; a writable w/ get method attached.
+ * @typedef {import('svelte/store').Writable & import('svelte/store').get_store_value} SSStore - The backing Svelte store; a writable w/ get method attached.
  */
 
 export class SessionStorage

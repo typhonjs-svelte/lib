@@ -29,9 +29,9 @@ function isStore(store) {
  * @param {import('svelte/store').Readable | import('svelte/store').Writable} store -
  *  Store to subscribe to...
  *
- * @param {function} update - function to receive future updates.
+ * @param {import('svelte/store').Updater} update - function to receive future updates.
  *
- * @returns {function} Store unsubscribe function.
+ * @returns {import('svelte/store').Unsubscriber} Store unsubscribe function.
  */
 
 function subscribeIgnoreFirst(store, update) {
@@ -51,11 +51,11 @@ function subscribeIgnoreFirst(store, update) {
  * @param {import('svelte/store').Readable | import('svelte/store').Writable} store -
  *  Store to subscribe to...
  *
- * @param {function} first - Function to receive first update.
+ * @param {import('svelte/store').Updater} first - Function to receive first update.
  *
- * @param {function} update - Function to receive future updates.
+ * @param {import('svelte/store').Updater} update - Function to receive future updates.
  *
- * @returns {function} Store unsubscribe function.
+ * @returns {import('svelte/store').Unsubscriber} Store unsubscribe function.
  */
 
 function subscribeFirstRest(store, first, update) {
@@ -223,7 +223,7 @@ var g$1 = generator(storage$1);
 var writable$1 = g$1.writable;
 
 /**
- * @typedef {writable & get} LSStore - The backing Svelte store; a writable w/ get method attached.
+ * @typedef {import('svelte/store').Writable & import('svelte/store').get_store_value} LSStore - The backing Svelte store; a writable w/ get method attached.
  */
 
 var _stores$1 = /*#__PURE__*/new WeakMap();
@@ -357,7 +357,7 @@ var g = generator(storage);
 var writable = g.writable;
 
 /**
- * @typedef {writable & get} SSStore - The backing Svelte store; a writable w/ get method attached.
+ * @typedef {import('svelte/store').Writable & import('svelte/store').get_store_value} SSStore - The backing Svelte store; a writable w/ get method attached.
  */
 
 var _stores = /*#__PURE__*/new WeakMap();

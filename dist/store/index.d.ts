@@ -1,23 +1,13 @@
 import * as svelte_store from 'svelte/store';
-import { noop } from 'svelte/types/runtime/internal/utils';
-import { get } from 'svelte/types/runtime/store';
 
 /**
  * - The backing Svelte store; a writable w/ get method attached.
  */
-type LSStore = ((key: any, value: any, start?: typeof noop) => {
-    set: (new_value: any) => void;
-    update: (fn: any) => void;
-    subscribe: (run: any, invalidate?: typeof noop) => svelte_store.Unsubscriber;
-}) & typeof get;
+type LSStore = svelte_store.Writable<any> & svelte_store.get_store_value;
 /**
  * - The backing Svelte store; a writable w/ get method attached.
  */
-type SSStore = ((key: any, value: any, start?: typeof noop) => {
-    set: (new_value: any) => void;
-    update: (fn: any) => void;
-    subscribe: (run: any, invalidate?: typeof noop) => svelte_store.Unsubscriber;
-}) & typeof get;
+type SSStore = svelte_store.Writable<any> & svelte_store.get_store_value;
 declare class LocalStorage {
     /**
      * Get value from the localstorage.
@@ -127,13 +117,13 @@ declare function propertyStore(origin: any, propName: string | number | symbol |
  * @param {import('svelte/store').Readable | import('svelte/store').Writable} store -
  *  Store to subscribe to...
  *
- * @param {function} first - Function to receive first update.
+ * @param {import('svelte/store').Updater} first - Function to receive first update.
  *
- * @param {function} update - Function to receive future updates.
+ * @param {import('svelte/store').Updater} update - Function to receive future updates.
  *
- * @returns {function} Store unsubscribe function.
+ * @returns {import('svelte/store').Unsubscriber} Store unsubscribe function.
  */
-declare function subscribeFirstRest(store: svelte_store.Readable<any> | svelte_store.Writable<any>, first: Function, update: Function): Function;
+declare function subscribeFirstRest(store: svelte_store.Readable<any> | svelte_store.Writable<any>, first: any, update: any): svelte_store.Unsubscriber;
 /**
  * Subscribes to the given store with the update function provided and ignores the first automatic
  * update. All future updates are dispatched to the update function.
@@ -141,11 +131,11 @@ declare function subscribeFirstRest(store: svelte_store.Readable<any> | svelte_s
  * @param {import('svelte/store').Readable | import('svelte/store').Writable} store -
  *  Store to subscribe to...
  *
- * @param {function} update - function to receive future updates.
+ * @param {import('svelte/store').Updater} update - function to receive future updates.
  *
- * @returns {function} Store unsubscribe function.
+ * @returns {import('svelte/store').Unsubscriber} Store unsubscribe function.
  */
-declare function subscribeIgnoreFirst(store: svelte_store.Readable<any> | svelte_store.Writable<any>, update: Function): Function;
+declare function subscribeIgnoreFirst(store: svelte_store.Readable<any> | svelte_store.Writable<any>, update: any): svelte_store.Unsubscriber;
 /**
  * @external Store
  * @see [Svelte stores](https://svelte.dev/docs#Store_contract)
