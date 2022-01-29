@@ -1,13 +1,14 @@
 import * as svelte_store from 'svelte/store';
+import { get } from 'svelte/types/runtime/store';
 
 /**
  * - The backing Svelte store; a writable w/ get method attached.
  */
-type LSStore = svelte_store.Writable<any> & svelte_store.get_store_value;
+type LSStore = svelte_store.Writable<any> & typeof get;
 /**
  * - The backing Svelte store; a writable w/ get method attached.
  */
-type SSStore = svelte_store.Writable<any> & svelte_store.get_store_value;
+type SSStore = svelte_store.Writable<any> & typeof get;
 declare class LocalStorage {
     /**
      * Get value from the localstorage.
