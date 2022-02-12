@@ -53,6 +53,42 @@ declare function hasSetter(component: any, accessor: string): boolean;
  */
 declare function hashCode(str: string, seed?: number): number;
 /**
+ * Provides a method to determine if the passed in object is ApplicationShell or TJSApplicationShell.
+ *
+ * @param {*}  component - Object / component to test.
+ *
+ * @returns {boolean} Whether the component is a ApplicationShell or TJSApplicationShell.
+ */
+declare function isApplicationShell(component: any): boolean;
+/**
+ * Provides common object manipulation utilities including depth traversal, obtaining accessors, safely setting values /
+ * equality tests, and validation.
+ */
+/**
+ * Tests for whether an object is iterable.
+ *
+ * @param {object} object - An object.
+ *
+ * @returns {boolean} Whether object is iterable.
+ */
+declare function isIterable(object: object): boolean;
+/**
+ * Tests for whether an object is async iterable.
+ *
+ * @param {object} object - An object.
+ *
+ * @returns {boolean} Whether object is async iterable.
+ */
+declare function isIterableAsync(object: object): boolean;
+/**
+ * Tests for whether object is not null and a typeof object.
+ *
+ * @param {object} object - An object.
+ *
+ * @returns {boolean} Is it an object.
+ */
+declare function isObject(object: object): boolean;
+/**
  * Provides basic duck typing to determine if the provided function is a constructor function for a Svelte component.
  *
  * @param {*}  comp - Data to check as a Svelte component.
@@ -80,6 +116,40 @@ declare function outroAndDestroy(instance: any): Promise<any>;
  */
 declare function parseSvelteConfig(config: object, thisArg?: any): object;
 /**
+ * Provides a way to safely access an objects data / entries given an accessor string which describes the
+ * entries to walk. To access deeper entries into the object format the accessor string with `.` between entries
+ * to walk.
+ *
+ * @param {object}   data - An object to access entry data.
+ *
+ * @param {string}   accessor - A string describing the entries to access.
+ *
+ * @param {*}        defaultValue - (Optional) A default value to return if an entry for accessor is not found.
+ *
+ * @returns {object} The data object.
+ */
+declare function safeAccess(data: object, accessor: string, defaultValue?: any): object;
+/**
+ * Provides a way to safely set an objects data / entries given an accessor string which describes the
+ * entries to walk. To access deeper entries into the object format the accessor string with `.` between entries
+ * to walk.
+ *
+ * @param {object}   data - An object to access entry data.
+ *
+ * @param {string}   accessor - A string describing the entries to access.
+ *
+ * @param {*}        value - A new value to set if an entry for accessor is found.
+ *
+ * @param {string}   [operation='set'] - Operation to perform including: 'add', 'div', 'mult', 'set',
+ *                                       'set-undefined', 'sub'.
+ *
+ * @param {boolean}  [createMissing=true] - If true missing accessor entries will be created as objects
+ *                                          automatically.
+ *
+ * @returns {boolean} True if successful.
+ */
+declare function safeSet(data: object, accessor: string, value: any, operation?: string, createMissing?: boolean): boolean;
+/**
  * Generates a UUID v4 compliant ID. Please use a complete UUID generation package for guaranteed compliance.
  *
  * This code is an evolution of the following Gist.
@@ -92,4 +162,4 @@ declare function parseSvelteConfig(config: object, thisArg?: any): object;
  */
 declare function uuidv4(): string;
 
-export { debounce, hasAccessor, hasGetter, hasSetter, hashCode, isSvelteComponent, outroAndDestroy, parseSvelteConfig, uuidv4 };
+export { debounce, hasAccessor, hasGetter, hasSetter, hashCode, isApplicationShell, isIterable, isIterableAsync, isObject, isSvelteComponent, outroAndDestroy, parseSvelteConfig, safeAccess, safeSet, uuidv4 };

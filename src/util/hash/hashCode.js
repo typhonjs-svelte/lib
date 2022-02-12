@@ -11,6 +11,8 @@
  */
 export function hashCode(str, seed = 0)
 {
+   if (typeof str !== 'string') { return 0; }
+
    let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
 
    for (let ch, i = 0; i < str.length; i++)

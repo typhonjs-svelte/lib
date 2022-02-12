@@ -1,6 +1,41 @@
 import { group_outros, transition_out, check_outros } from 'svelte/internal';
 
 /**
+ * Defines the application shell contract. If Svelte components export getter / setters for the following properties
+ * then that component is considered an application shell.
+ *
+ * @type {string[]}
+ */
+const applicationShellContract = ['elementRoot'];
+
+Object.freeze(applicationShellContract);
+
+/**
+ * Provides a method to determine if the passed in object is ApplicationShell or TJSApplicationShell.
+ *
+ * @param {*}  component - Object / component to test.
+ *
+ * @returns {boolean} Whether the component is a ApplicationShell or TJSApplicationShell.
+ */
+function isApplicationShell(component)
+{
+   if (component === null || component === void 0) { return false; }
+
+   // Get the prototype which is the parent SvelteComponent that has any getter / setters.
+   const prototype = Object.getPrototypeOf(component);
+
+   // Verify the application shell contract. If the accessors (getters / setters) are defined for
+   // `applicationShellContract`.
+   for (const accessor of applicationShellContract)
+   {
+      const descriptor = Object.getOwnPropertyDescriptor(prototype, accessor);
+      if (descriptor === void 0 || descriptor.get === void 0 || descriptor.set === void 0) { return false; }
+   }
+
+   return true;
+}
+
+/**
  * Wraps a callback in a debounced timeout.
  *
  * Delay execution of the callback function until the function has not been called for delay milliseconds
@@ -95,6 +130,8 @@ function hasSetter(component, accessor)
  */
 function hashCode(str, seed = 0)
 {
+   if (typeof str !== 'string') { return 0; }
+
    let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
 
    for (let ch, i = 0; i < str.length; i++)
@@ -401,5 +438,163 @@ function s_PROCESS_PROPS(props, thisArg, config)
    return {};
 }
 
-export { debounce, hasAccessor, hasGetter, hasSetter, hashCode, isSvelteComponent, outroAndDestroy, parseSvelteConfig, uuidv4 };
+/**
+ * Provides common object manipulation utilities including depth traversal, obtaining accessors, safely setting values /
+ * equality tests, and validation.
+ */
+
+/**
+ * Tests for whether an object is iterable.
+ *
+ * @param {object} object - An object.
+ *
+ * @returns {boolean} Whether object is iterable.
+ */
+function isIterable(object)
+{
+   if (object === null || object === void 0 || typeof object !== 'object') { return false; }
+
+   return typeof object[Symbol.iterator] === 'function';
+}
+
+/**
+ * Tests for whether an object is async iterable.
+ *
+ * @param {object} object - An object.
+ *
+ * @returns {boolean} Whether object is async iterable.
+ */
+function isIterableAsync(object)
+{
+   if (object === null || object === void 0 || typeof object !== 'object') { return false; }
+
+   return typeof object[Symbol.asyncIterator] === 'function';
+}
+
+/**
+ * Tests for whether object is not null and a typeof object.
+ *
+ * @param {object} object - An object.
+ *
+ * @returns {boolean} Is it an object.
+ */
+function isObject(object)
+{
+   return object !== null && typeof object === 'object';
+}
+
+/**
+ * Provides a way to safely access an objects data / entries given an accessor string which describes the
+ * entries to walk. To access deeper entries into the object format the accessor string with `.` between entries
+ * to walk.
+ *
+ * @param {object}   data - An object to access entry data.
+ *
+ * @param {string}   accessor - A string describing the entries to access.
+ *
+ * @param {*}        defaultValue - (Optional) A default value to return if an entry for accessor is not found.
+ *
+ * @returns {object} The data object.
+ */
+function safeAccess(data, accessor, defaultValue = void 0)
+{
+   if (typeof data !== 'object') { return defaultValue; }
+   if (typeof accessor !== 'string') { return defaultValue; }
+
+   const access = accessor.split('.');
+
+   // Walk through the given object by the accessor indexes.
+   for (let cntr = 0; cntr < access.length; cntr++)
+   {
+      // If the next level of object access is undefined or null then return the empty string.
+      if (typeof data[access[cntr]] === 'undefined' || data[access[cntr]] === null) { return defaultValue; }
+
+      data = data[access[cntr]];
+   }
+
+   return data;
+}
+
+/**
+ * Provides a way to safely set an objects data / entries given an accessor string which describes the
+ * entries to walk. To access deeper entries into the object format the accessor string with `.` between entries
+ * to walk.
+ *
+ * @param {object}   data - An object to access entry data.
+ *
+ * @param {string}   accessor - A string describing the entries to access.
+ *
+ * @param {*}        value - A new value to set if an entry for accessor is found.
+ *
+ * @param {string}   [operation='set'] - Operation to perform including: 'add', 'div', 'mult', 'set',
+ *                                       'set-undefined', 'sub'.
+ *
+ * @param {boolean}  [createMissing=true] - If true missing accessor entries will be created as objects
+ *                                          automatically.
+ *
+ * @returns {boolean} True if successful.
+ */
+function safeSet(data, accessor, value, operation = 'set', createMissing = true)
+{
+   if (typeof data !== 'object') { throw new TypeError(`safeSet Error: 'data' is not an 'object'.`); }
+   if (typeof accessor !== 'string') { throw new TypeError(`safeSet Error: 'accessor' is not a 'string'.`); }
+
+   const access = accessor.split('.');
+
+   // Walk through the given object by the accessor indexes.
+   for (let cntr = 0; cntr < access.length; cntr++)
+   {
+      // If data is an array perform validation that the accessor is a positive integer otherwise quit.
+      if (Array.isArray(data))
+      {
+         const number = (+access[cntr]);
+
+         if (!Number.isInteger(number) || number < 0) { return false; }
+      }
+
+      if (cntr === access.length - 1)
+      {
+         switch (operation)
+         {
+            case 'add':
+               data[access[cntr]] += value;
+               break;
+
+            case 'div':
+               data[access[cntr]] /= value;
+               break;
+
+            case 'mult':
+               data[access[cntr]] *= value;
+               break;
+
+            case 'set':
+               data[access[cntr]] = value;
+               break;
+
+            case 'set-undefined':
+               if (typeof data[access[cntr]] === 'undefined') { data[access[cntr]] = value; }
+               break;
+
+            case 'sub':
+               data[access[cntr]] -= value;
+               break;
+         }
+      }
+      else
+      {
+         // If createMissing is true and the next level of object access is undefined then create a new object entry.
+         if (createMissing && typeof data[access[cntr]] === 'undefined') { data[access[cntr]] = {}; }
+
+         // Abort if the next level is null or not an object and containing a value.
+         if (data[access[cntr]] === null || typeof data[access[cntr]] !== 'object') { return false; }
+
+         data = data[access[cntr]];
+      }
+   }
+
+   return true;
+}
+
+export { debounce, hasAccessor, hasGetter, hasSetter, hashCode, isApplicationShell, isIterable, isIterableAsync, isObject, isSvelteComponent, outroAndDestroy, parseSvelteConfig, safeAccess, safeSet, uuidv4 };
 //# sourceMappingURL=index.js.map
