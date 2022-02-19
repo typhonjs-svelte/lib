@@ -49,12 +49,12 @@ const rollupConfigs = [{
    },
    {
       input: {
-         input: 'src/animation/index.js',
+         input: 'src/animate/index.js',
          external: s_LOCAL_EXTERNAL,
       },
       output: {
          output: {
-            file: 'dist/animation/index.js',
+            file: 'dist/animate/index.js',
             format: 'es',
             plugins: outputPlugins,
             sourcemap,

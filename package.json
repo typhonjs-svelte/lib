@@ -13,9 +13,9 @@
       "types": "./dist/action/index.d.ts",
       "import": "./dist/action/index.js"
     },
-    "./animation": {
-      "types": "./dist/animation/index.d.ts",
-      "import": "./dist/animation/index.js"
+    "./animate": {
+      "types": "./dist/animate/index.d.ts",
+      "import": "./dist/animate/index.js"
     },
     "./handler": {
       "types": "./dist/handler/index.d.ts",
