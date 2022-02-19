@@ -1,7 +1,7 @@
 import { fade }   from 'svelte/transition';
 import { linear } from 'svelte/easing';
 
-const s_LERP = (start, end, amt) => (1 - amt) * start + amt * end;
+import { lerp }   from '@typhonjs-svelte/lib/util';
 
 /**
  * Combines rotate & fade transitions into a single transition. For options `easing` this is applied to both transitions,
@@ -50,7 +50,7 @@ export function rotateFade(node, options)
          const fadeT = easingFade(t);
          const rotateT = easingRotate(t);
 
-         return `transform: rotate(${s_LERP(initialDeg, endDeg, rotateT)}deg); ${fadeTransition.css(fadeT, 1 - fadeT)}`;
+         return `transform: rotate(${lerp(initialDeg, endDeg, rotateT)}deg); ${fadeTransition.css(fadeT, 1 - fadeT)}`;
       }
    };
 }

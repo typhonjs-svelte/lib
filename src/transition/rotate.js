@@ -1,6 +1,6 @@
 import { linear } from 'svelte/easing';
 
-const s_LERP = (start, end, amt) => (1 - amt) * start + amt * end;
+import { lerp }   from '@typhonjs-svelte/lib/util';
 
 /**
  * Provides a rotate transition. For options `easing` is applied to to the rotate transition. The default easing is
@@ -40,7 +40,7 @@ export function rotate(node, options)
       css: (t) =>
       {
          const rotateT = easingRotate(t);
-         return `transform: rotate(${s_LERP(initialDeg, endDeg, rotateT)}deg)`;
+         return `transform: rotate(${lerp(initialDeg, endDeg, rotateT)}deg)`;
       }
    };
 }
