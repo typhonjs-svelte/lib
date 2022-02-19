@@ -20,9 +20,9 @@ const s_LOCAL_EXTERNAL = [
    'svelte', 'svelte/easing', 'svelte/internal', 'svelte/motion', 'svelte/store', 'svelte/transition',
    'svelte/types',
 
-   '@typhonjs-svelte/lib/action', '@typhonjs-svelte/lib/handler', '@typhonjs-svelte/lib/helper',
-   '@typhonjs-svelte/lib/store', '@typhonjs-svelte/lib/transition', '@typhonjs-svelte/lib/util',
-   '@typhonjs-svelte/lib/plugin/data', '@typhonjs-svelte/lib/plugin/system'
+   '@typhonjs-svelte/lib/action', '@typhonjs-svelte/lib/animation', '@typhonjs-svelte/lib/handler',
+   '@typhonjs-svelte/lib/helper', '@typhonjs-svelte/lib/store', '@typhonjs-svelte/lib/transition',
+   '@typhonjs-svelte/lib/util', '@typhonjs-svelte/lib/plugin/data', '@typhonjs-svelte/lib/plugin/system'
 ]
 
 // Defines potential output plugins to use conditionally if the .env file indicates the bundles should be
@@ -40,6 +40,21 @@ const rollupConfigs = [{
       output: {
          output: {
             file: 'dist/action/index.js',
+            format: 'es',
+            plugins: outputPlugins,
+            sourcemap,
+            // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
+         }
+      }
+   },
+   {
+      input: {
+         input: 'src/animation/index.js',
+         external: s_LOCAL_EXTERNAL,
+      },
+      output: {
+         output: {
+            file: 'dist/animation/index.js',
             format: 'es',
             plugins: outputPlugins,
             sourcemap,
