@@ -58,7 +58,7 @@
     "@typhonjs-config/eslint-config": "^0.3.0",
     "@typhonjs-fvtt/eslint-config-foundry.js": "^0.8.0",
     "@typhonjs-utils/dyn-array-reducer": "^0.1.0",
-    "@typhonjs-utils/object": "^0.0.3",
+    "@typhonjs-utils/object": "^0.0.8",
     "eslint": "^8",
     "rollup": "^2",
     "rollup-plugin-sourcemaps": "^0.6.0",
