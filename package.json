@@ -25,6 +25,10 @@
       "types": "./dist/helper/index.d.ts",
       "import": "./dist/helper/index.js"
     },
+    "./math": {
+      "types": "./dist/math/index.d.ts",
+      "import": "./dist/math/index.js"
+    },
     "./store": {
       "types": "./dist/store/index.d.ts",
       "import": "./dist/store/index.js"
@@ -60,6 +64,7 @@
     "@typhonjs-utils/dyn-array-reducer": "^0.1.0",
     "@typhonjs-utils/object": "^0.0.8",
     "eslint": "^8",
+    "rematrix": "^0.7",
     "rollup": "^2",
     "rollup-plugin-sourcemaps": "^0.6.0",
     "rollup-plugin-svelte": "^7",

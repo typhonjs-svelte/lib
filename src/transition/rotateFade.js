@@ -1,7 +1,7 @@
 import { fade }   from 'svelte/transition';
 import { linear } from 'svelte/easing';
 
-import { lerp }   from '@typhonjs-svelte/lib/util';
+import { lerp }   from '@typhonjs-svelte/lib/math';
 
 /**
  * Combines rotate & fade transitions into a single transition. For options `easing` this is applied to both transitions,
