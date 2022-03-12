@@ -15,6 +15,30 @@ function lerp$5(start, end, amount)
 }
 
 /**
+ * Converts the given number from degrees to radians.
+ *
+ * @param {number}   deg - Degree number to convert
+ *
+ * @returns {number} Degree as radians.
+ */
+function degToRad(deg)
+{
+   return deg * (Math.PI / 180.0);
+}
+
+/**
+ * Converts the given number from radians to degrees.
+ *
+ * @param {number}   rad - Radian number to convert.
+ *
+ * @returns {number} Degree as radians.
+ */
+function radToDeg(rad)
+{
+   return rad * (180.0 / Math.PI);
+}
+
+/**
  * Common utilities
  * @module glMatrix
  */
@@ -135,7 +159,7 @@ function copy$8(out, a) {
  * @returns {mat2} out
  */
 
-function identity$6(out) {
+function identity$5(out) {
   out[0] = 1;
   out[1] = 0;
   out[2] = 0;
@@ -265,7 +289,7 @@ function determinant$3(a) {
  * @returns {mat2} out
  */
 
-function multiply$9(out, a, b) {
+function multiply$8(out, a, b) {
   var a0 = a[0],
       a1 = a[1],
       a2 = a[2],
@@ -289,7 +313,7 @@ function multiply$9(out, a, b) {
  * @returns {mat2} out
  */
 
-function rotate$5(out, a, rad) {
+function rotate$4(out, a, rad) {
   var a0 = a[0],
       a1 = a[1],
       a2 = a[2],
@@ -311,7 +335,7 @@ function rotate$5(out, a, rad) {
  * @returns {mat2} out
  **/
 
-function scale$9(out, a, v) {
+function scale$8(out, a, v) {
   var a0 = a[0],
       a1 = a[1],
       a2 = a[2],
@@ -499,7 +523,7 @@ function multiplyScalarAndAdd$3(out, a, b, scale) {
  * @function
  */
 
-var mul$8 = multiply$9;
+var mul$8 = multiply$8;
 /**
  * Alias for {@link mat2.subtract}
  * @function
@@ -512,16 +536,16 @@ var mat2 = /*#__PURE__*/Object.freeze({
    create: create$8,
    clone: clone$8,
    copy: copy$8,
-   identity: identity$6,
+   identity: identity$5,
    fromValues: fromValues$8,
    set: set$8,
    transpose: transpose$2,
    invert: invert$5,
    adjoint: adjoint$2,
    determinant: determinant$3,
-   multiply: multiply$9,
-   rotate: rotate$5,
-   scale: scale$9,
+   multiply: multiply$8,
+   rotate: rotate$4,
+   scale: scale$8,
    fromRotation: fromRotation$4,
    fromScaling: fromScaling$3,
    str: str$8,
@@ -617,7 +641,7 @@ function copy$7(out, a) {
  * @returns {mat2d} out
  */
 
-function identity$5(out) {
+function identity$4(out) {
   out[0] = 1;
   out[1] = 0;
   out[2] = 0;
@@ -719,7 +743,7 @@ function determinant$2(a) {
  * @returns {mat2d} out
  */
 
-function multiply$8(out, a, b) {
+function multiply$7(out, a, b) {
   var a0 = a[0],
       a1 = a[1],
       a2 = a[2],
@@ -749,7 +773,7 @@ function multiply$8(out, a, b) {
  * @returns {mat2d} out
  */
 
-function rotate$4(out, a, rad) {
+function rotate$3(out, a, rad) {
   var a0 = a[0],
       a1 = a[1],
       a2 = a[2],
@@ -775,7 +799,7 @@ function rotate$4(out, a, rad) {
  * @returns {mat2d} out
  **/
 
-function scale$8(out, a, v) {
+function scale$7(out, a, v) {
   var a0 = a[0],
       a1 = a[1],
       a2 = a[2],
@@ -801,7 +825,7 @@ function scale$8(out, a, v) {
  * @returns {mat2d} out
  **/
 
-function translate$4(out, a, v) {
+function translate$3(out, a, v) {
   var a0 = a[0],
       a1 = a[1],
       a2 = a[2],
@@ -1015,7 +1039,7 @@ function equals$7(a, b) {
  * @function
  */
 
-var mul$7 = multiply$8;
+var mul$7 = multiply$7;
 /**
  * Alias for {@link mat2d.subtract}
  * @function
@@ -1028,15 +1052,15 @@ var mat2d = /*#__PURE__*/Object.freeze({
    create: create$7,
    clone: clone$7,
    copy: copy$7,
-   identity: identity$5,
+   identity: identity$4,
    fromValues: fromValues$7,
    set: set$7,
    invert: invert$4,
    determinant: determinant$2,
-   multiply: multiply$8,
-   rotate: rotate$4,
-   scale: scale$8,
-   translate: translate$4,
+   multiply: multiply$7,
+   rotate: rotate$3,
+   scale: scale$7,
+   translate: translate$3,
    fromRotation: fromRotation$3,
    fromScaling: fromScaling$2,
    fromTranslation: fromTranslation$3,
@@ -1203,7 +1227,7 @@ function set$6(out, m00, m01, m02, m10, m11, m12, m20, m21, m22) {
  * @returns {mat3} out
  */
 
-function identity$4(out) {
+function identity$3(out) {
   out[0] = 1;
   out[1] = 0;
   out[2] = 0;
@@ -1346,7 +1370,7 @@ function determinant$1(a) {
  * @returns {mat3} out
  */
 
-function multiply$7(out, a, b) {
+function multiply$6(out, a, b) {
   var a00 = a[0],
       a01 = a[1],
       a02 = a[2];
@@ -1385,7 +1409,7 @@ function multiply$7(out, a, b) {
  * @returns {mat3} out
  */
 
-function translate$3(out, a, v) {
+function translate$2(out, a, v) {
   var a00 = a[0],
       a01 = a[1],
       a02 = a[2],
@@ -1417,7 +1441,7 @@ function translate$3(out, a, v) {
  * @returns {mat3} out
  */
 
-function rotate$3(out, a, rad) {
+function rotate$2(out, a, rad) {
   var a00 = a[0],
       a01 = a[1],
       a02 = a[2],
@@ -1449,7 +1473,7 @@ function rotate$3(out, a, rad) {
  * @returns {mat3} out
  **/
 
-function scale$7(out, a, v) {
+function scale$6(out, a, v) {
   var x = v[0],
       y = v[1];
   out[0] = x * a[0];
@@ -1822,7 +1846,7 @@ function equals$6(a, b) {
  * @function
  */
 
-var mul$6 = multiply$7;
+var mul$6 = multiply$6;
 /**
  * Alias for {@link mat3.subtract}
  * @function
@@ -1838,15 +1862,15 @@ var mat3 = /*#__PURE__*/Object.freeze({
    copy: copy$6,
    fromValues: fromValues$6,
    set: set$6,
-   identity: identity$4,
+   identity: identity$3,
    transpose: transpose$1,
    invert: invert$3,
    adjoint: adjoint$1,
    determinant: determinant$1,
-   multiply: multiply$7,
-   translate: translate$3,
-   rotate: rotate$3,
-   scale: scale$7,
+   multiply: multiply$6,
+   translate: translate$2,
+   rotate: rotate$2,
+   scale: scale$6,
    fromTranslation: fromTranslation$2,
    fromRotation: fromRotation$2,
    fromScaling: fromScaling$1,
@@ -2046,7 +2070,7 @@ function set$5(out, m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, 
  * @returns {mat4} out
  */
 
-function identity$3(out) {
+function identity$2(out) {
   out[0] = 1;
   out[1] = 0;
   out[2] = 0;
@@ -2269,7 +2293,7 @@ function determinant(a) {
  * @returns {mat4} out
  */
 
-function multiply$6(out, a, b) {
+function multiply$5(out, a, b) {
   var a00 = a[0],
       a01 = a[1],
       a02 = a[2],
@@ -2330,7 +2354,7 @@ function multiply$6(out, a, b) {
  * @returns {mat4} out
  */
 
-function translate$2(out, a, v) {
+function translate$1(out, a, v) {
   var x = v[0],
       y = v[1],
       z = v[2];
@@ -2385,7 +2409,7 @@ function translate$2(out, a, v) {
  * @returns {mat4} out
  **/
 
-function scale$6(out, a, v) {
+function scale$5(out, a, v) {
   var x = v[0],
       y = v[1],
       z = v[2];
@@ -2417,7 +2441,7 @@ function scale$6(out, a, v) {
  * @returns {mat4} out
  */
 
-function rotate$2(out, a, rad, axis) {
+function rotate$1(out, a, rad, axis) {
   var x = axis[0],
       y = axis[1],
       z = axis[2];
@@ -2496,7 +2520,7 @@ function rotate$2(out, a, rad, axis) {
  * @returns {mat4} out
  */
 
-function rotateX$4(out, a, rad) {
+function rotateX$3(out, a, rad) {
   var s = Math.sin(rad);
   var c = Math.cos(rad);
   var a10 = a[4];
@@ -2540,7 +2564,7 @@ function rotateX$4(out, a, rad) {
  * @returns {mat4} out
  */
 
-function rotateY$4(out, a, rad) {
+function rotateY$3(out, a, rad) {
   var s = Math.sin(rad);
   var c = Math.cos(rad);
   var a00 = a[0];
@@ -2584,7 +2608,7 @@ function rotateY$4(out, a, rad) {
  * @returns {mat4} out
  */
 
-function rotateZ$4(out, a, rad) {
+function rotateZ$3(out, a, rad) {
   var s = Math.sin(rad);
   var c = Math.cos(rad);
   var a00 = a[0];
@@ -3272,7 +3296,7 @@ function perspectiveNO(out, fovy, aspect, near, far) {
  * @function
  */
 
-var perspective$1 = perspectiveNO;
+var perspective = perspectiveNO;
 /**
  * Generates a perspective projection matrix suitable for WebGPU with the given bounds.
  * The near/far clip planes correspond to a normalized device coordinate Z range of [0, 1],
@@ -3457,7 +3481,7 @@ function lookAt(out, eye, center, up) {
   var centerz = center[2];
 
   if (Math.abs(eyex - centerx) < EPSILON && Math.abs(eyey - centery) < EPSILON && Math.abs(eyez - centerz) < EPSILON) {
-    return identity$3(out);
+    return identity$2(out);
   }
 
   z0 = eyex - centerx;
@@ -3768,7 +3792,7 @@ function equals$5(a, b) {
  * @function
  */
 
-var mul$5 = multiply$6;
+var mul$5 = multiply$5;
 /**
  * Alias for {@link mat4.subtract}
  * @function
@@ -3783,18 +3807,18 @@ var mat4 = /*#__PURE__*/Object.freeze({
    copy: copy$5,
    fromValues: fromValues$5,
    set: set$5,
-   identity: identity$3,
+   identity: identity$2,
    transpose: transpose,
    invert: invert$2,
    adjoint: adjoint,
    determinant: determinant,
-   multiply: multiply$6,
-   translate: translate$2,
-   scale: scale$6,
-   rotate: rotate$2,
-   rotateX: rotateX$4,
-   rotateY: rotateY$4,
-   rotateZ: rotateZ$4,
+   multiply: multiply$5,
+   translate: translate$1,
+   scale: scale$5,
+   rotate: rotate$1,
+   rotateX: rotateX$3,
+   rotateY: rotateY$3,
+   rotateZ: rotateZ$3,
    fromTranslation: fromTranslation$1,
    fromScaling: fromScaling,
    fromRotation: fromRotation$1,
@@ -3811,7 +3835,7 @@ var mat4 = /*#__PURE__*/Object.freeze({
    fromQuat: fromQuat,
    frustum: frustum,
    perspectiveNO: perspectiveNO,
-   perspective: perspective$1,
+   perspective: perspective,
    perspectiveZO: perspectiveZO,
    perspectiveFromFieldOfView: perspectiveFromFieldOfView,
    orthoNO: orthoNO,
@@ -3965,7 +3989,7 @@ function subtract$2(out, a, b) {
  * @returns {vec3} out
  */
 
-function multiply$5(out, a, b) {
+function multiply$4(out, a, b) {
   out[0] = a[0] * b[0];
   out[1] = a[1] * b[1];
   out[2] = a[2] * b[2];
@@ -4067,7 +4091,7 @@ function round$2(out, a) {
  * @returns {vec3} out
  */
 
-function scale$5(out, a, b) {
+function scale$4(out, a, b) {
   out[0] = a[0] * b;
   out[1] = a[1] * b;
   out[2] = a[2] * b;
@@ -4152,7 +4176,7 @@ function negate$2(out, a) {
  * @returns {vec3} out
  */
 
-function inverse$3(out, a) {
+function inverse$2(out, a) {
   out[0] = 1.0 / a[0];
   out[1] = 1.0 / a[1];
   out[2] = 1.0 / a[2];
@@ -4390,7 +4414,7 @@ function transformQuat$1(out, a, q) {
  * @returns {vec3} out
  */
 
-function rotateX$3(out, a, b, rad) {
+function rotateX$2(out, a, b, rad) {
   var p = [],
       r = []; //Translate point to the origin
 
@@ -4416,7 +4440,7 @@ function rotateX$3(out, a, b, rad) {
  * @returns {vec3} out
  */
 
-function rotateY$3(out, a, b, rad) {
+function rotateY$2(out, a, b, rad) {
   var p = [],
       r = []; //Translate point to the origin
 
@@ -4442,7 +4466,7 @@ function rotateY$3(out, a, b, rad) {
  * @returns {vec3} out
  */
 
-function rotateZ$3(out, a, b, rad) {
+function rotateZ$2(out, a, b, rad) {
   var p = [],
       r = []; //Translate point to the origin
 
@@ -4541,7 +4565,7 @@ var sub$2 = subtract$2;
  * @function
  */
 
-var mul$4 = multiply$5;
+var mul$4 = multiply$4;
 /**
  * Alias for {@link vec3.divide}
  * @function
@@ -4628,20 +4652,20 @@ var vec3 = /*#__PURE__*/Object.freeze({
    set: set$4,
    add: add$4,
    subtract: subtract$2,
-   multiply: multiply$5,
+   multiply: multiply$4,
    divide: divide$2,
    ceil: ceil$2,
    floor: floor$2,
    min: min$2,
    max: max$2,
    round: round$2,
-   scale: scale$5,
+   scale: scale$4,
    scaleAndAdd: scaleAndAdd$2,
    distance: distance$2,
    squaredDistance: squaredDistance$2,
    squaredLength: squaredLength$4,
    negate: negate$2,
-   inverse: inverse$3,
+   inverse: inverse$2,
    normalize: normalize$4,
    dot: dot$4,
    cross: cross$2,
@@ -4652,9 +4676,9 @@ var vec3 = /*#__PURE__*/Object.freeze({
    transformMat4: transformMat4$2,
    transformMat3: transformMat3$1,
    transformQuat: transformQuat$1,
-   rotateX: rotateX$3,
-   rotateY: rotateY$3,
-   rotateZ: rotateZ$3,
+   rotateX: rotateX$2,
+   rotateY: rotateY$2,
+   rotateZ: rotateZ$2,
    angle: angle$1,
    zero: zero$2,
    str: str$4,
@@ -4800,7 +4824,7 @@ function subtract$1(out, a, b) {
  * @returns {vec4} out
  */
 
-function multiply$4(out, a, b) {
+function multiply$3(out, a, b) {
   out[0] = a[0] * b[0];
   out[1] = a[1] * b[1];
   out[2] = a[2] * b[2];
@@ -4909,7 +4933,7 @@ function round$1(out, a) {
  * @returns {vec4} out
  */
 
-function scale$4(out, a, b) {
+function scale$3(out, a, b) {
   out[0] = a[0] * b;
   out[1] = a[1] * b;
   out[2] = a[2] * b;
@@ -5014,7 +5038,7 @@ function negate$1(out, a) {
  * @returns {vec4} out
  */
 
-function inverse$2(out, a) {
+function inverse$1(out, a) {
   out[0] = 1.0 / a[0];
   out[1] = 1.0 / a[1];
   out[2] = 1.0 / a[2];
@@ -5254,7 +5278,7 @@ var sub$1 = subtract$1;
  * @function
  */
 
-var mul$3 = multiply$4;
+var mul$3 = multiply$3;
 /**
  * Alias for {@link vec4.divide}
  * @function
@@ -5342,21 +5366,21 @@ var vec4 = /*#__PURE__*/Object.freeze({
    set: set$3,
    add: add$3,
    subtract: subtract$1,
-   multiply: multiply$4,
+   multiply: multiply$3,
    divide: divide$1,
    ceil: ceil$1,
    floor: floor$1,
    min: min$1,
    max: max$1,
    round: round$1,
-   scale: scale$4,
+   scale: scale$3,
    scaleAndAdd: scaleAndAdd$1,
    distance: distance$1,
    squaredDistance: squaredDistance$1,
    length: length$3,
    squaredLength: squaredLength$3,
    negate: negate$1,
-   inverse: inverse$2,
+   inverse: inverse$1,
    normalize: normalize$3,
    dot: dot$3,
    cross: cross$1,
@@ -5408,7 +5432,7 @@ function create$2() {
  * @returns {quat} out
  */
 
-function identity$2(out) {
+function identity$1(out) {
   out[0] = 0;
   out[1] = 0;
   out[2] = 0;
@@ -5486,7 +5510,7 @@ function getAngle(a, b) {
  * @returns {quat} out
  */
 
-function multiply$3(out, a, b) {
+function multiply$2(out, a, b) {
   var ax = a[0],
       ay = a[1],
       az = a[2],
@@ -5510,7 +5534,7 @@ function multiply$3(out, a, b) {
  * @returns {quat} out
  */
 
-function rotateX$2(out, a, rad) {
+function rotateX$1(out, a, rad) {
   rad *= 0.5;
   var ax = a[0],
       ay = a[1],
@@ -5533,7 +5557,7 @@ function rotateX$2(out, a, rad) {
  * @returns {quat} out
  */
 
-function rotateY$2(out, a, rad) {
+function rotateY$1(out, a, rad) {
   rad *= 0.5;
   var ax = a[0],
       ay = a[1],
@@ -5556,7 +5580,7 @@ function rotateY$2(out, a, rad) {
  * @returns {quat} out
  */
 
-function rotateZ$2(out, a, rad) {
+function rotateZ$1(out, a, rad) {
   rad *= 0.5;
   var ax = a[0],
       ay = a[1],
@@ -5644,7 +5668,7 @@ function ln(out, a) {
 
 function pow(out, a, b) {
   ln(out, a);
-  scale$3(out, out, b);
+  scale$2(out, out, b);
   exp(out, out);
   return out;
 }
@@ -5904,7 +5928,7 @@ var add$2 = add$3;
  * @function
  */
 
-var mul$2 = multiply$3;
+var mul$2 = multiply$2;
 /**
  * Scales a quat by a scalar number
  *
@@ -5915,7 +5939,7 @@ var mul$2 = multiply$3;
  * @function
  */
 
-var scale$3 = scale$4;
+var scale$2 = scale$3;
 /**
  * Calculates the dot product of two quat's
  *
@@ -6088,14 +6112,14 @@ var setAxes = function () {
 var quat = /*#__PURE__*/Object.freeze({
    __proto__: null,
    create: create$2,
-   identity: identity$2,
+   identity: identity$1,
    setAxisAngle: setAxisAngle,
    getAxisAngle: getAxisAngle,
    getAngle: getAngle,
-   multiply: multiply$3,
-   rotateX: rotateX$2,
-   rotateY: rotateY$2,
-   rotateZ: rotateZ$2,
+   multiply: multiply$2,
+   rotateX: rotateX$1,
+   rotateY: rotateY$1,
+   rotateZ: rotateZ$1,
    calculateW: calculateW,
    exp: exp,
    ln: ln,
@@ -6113,7 +6137,7 @@ var quat = /*#__PURE__*/Object.freeze({
    set: set$2,
    add: add$2,
    mul: mul$2,
-   scale: scale$3,
+   scale: scale$2,
    dot: dot$2,
    lerp: lerp$2,
    length: length$2,
@@ -6347,7 +6371,7 @@ function copy$1(out, a) {
  * @returns {quat2} out
  */
 
-function identity$1(out) {
+function identity(out) {
   out[0] = 0;
   out[1] = 0;
   out[2] = 0;
@@ -6463,7 +6487,7 @@ function getTranslation(out, a) {
  * @returns {quat2} out
  */
 
-function translate$1(out, a, v) {
+function translate(out, a, v) {
   var ax1 = a[0],
       ay1 = a[1],
       az1 = a[2],
@@ -6494,7 +6518,7 @@ function translate$1(out, a, v) {
  * @returns {quat2} out
  */
 
-function rotateX$1(out, a, rad) {
+function rotateX(out, a, rad) {
   var bx = -a[0],
       by = -a[1],
       bz = -a[2],
@@ -6507,7 +6531,7 @@ function rotateX$1(out, a, rad) {
       ay1 = ay * bw + aw * by + az * bx - ax * bz,
       az1 = az * bw + aw * bz + ax * by - ay * bx,
       aw1 = aw * bw - ax * bx - ay * by - az * bz;
-  rotateX$2(out, a, rad);
+  rotateX$1(out, a, rad);
   bx = out[0];
   by = out[1];
   bz = out[2];
@@ -6527,7 +6551,7 @@ function rotateX$1(out, a, rad) {
  * @returns {quat2} out
  */
 
-function rotateY$1(out, a, rad) {
+function rotateY(out, a, rad) {
   var bx = -a[0],
       by = -a[1],
       bz = -a[2],
@@ -6540,7 +6564,7 @@ function rotateY$1(out, a, rad) {
       ay1 = ay * bw + aw * by + az * bx - ax * bz,
       az1 = az * bw + aw * bz + ax * by - ay * bx,
       aw1 = aw * bw - ax * bx - ay * by - az * bz;
-  rotateY$2(out, a, rad);
+  rotateY$1(out, a, rad);
   bx = out[0];
   by = out[1];
   bz = out[2];
@@ -6560,7 +6584,7 @@ function rotateY$1(out, a, rad) {
  * @returns {quat2} out
  */
 
-function rotateZ$1(out, a, rad) {
+function rotateZ(out, a, rad) {
   var bx = -a[0],
       by = -a[1],
       bz = -a[2],
@@ -6573,7 +6597,7 @@ function rotateZ$1(out, a, rad) {
       ay1 = ay * bw + aw * by + az * bx - ax * bz,
       az1 = az * bw + aw * bz + ax * by - ay * bx,
       aw1 = aw * bw - ax * bx - ay * by - az * bz;
-  rotateZ$2(out, a, rad);
+  rotateZ$1(out, a, rad);
   bx = out[0];
   by = out[1];
   bz = out[2];
@@ -6719,7 +6743,7 @@ function add$1(out, a, b) {
  * @returns {quat2} out
  */
 
-function multiply$2(out, a, b) {
+function multiply$1(out, a, b) {
   var ax0 = a[0],
       ay0 = a[1],
       az0 = a[2],
@@ -6751,7 +6775,7 @@ function multiply$2(out, a, b) {
  * @function
  */
 
-var mul$1 = multiply$2;
+var mul$1 = multiply$1;
 /**
  * Scales a dual quat by a scalar number
  *
@@ -6762,7 +6786,7 @@ var mul$1 = multiply$2;
  * @function
  */
 
-function scale$2(out, a, b) {
+function scale$1(out, a, b) {
   out[0] = a[0] * b;
   out[1] = a[1] * b;
   out[2] = a[2] * b;
@@ -6972,24 +6996,24 @@ var quat2 = /*#__PURE__*/Object.freeze({
    fromRotation: fromRotation,
    fromMat4: fromMat4,
    copy: copy$1,
-   identity: identity$1,
+   identity: identity,
    set: set$1,
    getReal: getReal,
    getDual: getDual,
    setReal: setReal,
    setDual: setDual,
    getTranslation: getTranslation,
-   translate: translate$1,
-   rotateX: rotateX$1,
-   rotateY: rotateY$1,
-   rotateZ: rotateZ$1,
+   translate: translate,
+   rotateX: rotateX,
+   rotateY: rotateY,
+   rotateZ: rotateZ,
    rotateByQuatAppend: rotateByQuatAppend,
    rotateByQuatPrepend: rotateByQuatPrepend,
    rotateAroundAxis: rotateAroundAxis,
    add: add$1,
-   multiply: multiply$2,
+   multiply: multiply$1,
    mul: mul$1,
-   scale: scale$2,
+   scale: scale$1,
    dot: dot$1,
    lerp: lerp$1,
    invert: invert,
@@ -7116,7 +7140,7 @@ function subtract(out, a, b) {
  * @returns {vec2} out
  */
 
-function multiply$1(out, a, b) {
+function multiply(out, a, b) {
   out[0] = a[0] * b[0];
   out[1] = a[1] * b[1];
   return out;
@@ -7211,7 +7235,7 @@ function round(out, a) {
  * @returns {vec2} out
  */
 
-function scale$1(out, a, b) {
+function scale(out, a, b) {
   out[0] = a[0] * b;
   out[1] = a[1] * b;
   return out;
@@ -7302,7 +7326,7 @@ function negate(out, a) {
  * @returns {vec2} out
  */
 
-function inverse$1(out, a) {
+function inverse(out, a) {
   out[0] = 1.0 / a[0];
   out[1] = 1.0 / a[1];
   return out;
@@ -7464,7 +7488,7 @@ function transformMat4(out, a, m) {
  * @returns {vec2} out
  */
 
-function rotate$1(out, a, b, rad) {
+function rotate(out, a, b, rad) {
   //Translate point to the origin
   var p0 = a[0] - b[0],
       p1 = a[1] - b[1],
@@ -7559,7 +7583,7 @@ var sub = subtract;
  * @function
  */
 
-var mul = multiply$1;
+var mul = multiply;
 /**
  * Alias for {@link vec2.divide}
  * @function
@@ -7637,21 +7661,21 @@ var vec2 = /*#__PURE__*/Object.freeze({
    set: set,
    add: add,
    subtract: subtract,
-   multiply: multiply$1,
+   multiply: multiply,
    divide: divide,
    ceil: ceil,
    floor: floor,
    min: min,
    max: max,
    round: round,
-   scale: scale$1,
+   scale: scale,
    scaleAndAdd: scaleAndAdd,
    distance: distance,
    squaredDistance: squaredDistance,
    length: length,
    squaredLength: squaredLength,
    negate: negate,
-   inverse: inverse$1,
+   inverse: inverse,
    normalize: normalize,
    dot: dot,
    cross: cross,
@@ -7661,7 +7685,7 @@ var vec2 = /*#__PURE__*/Object.freeze({
    transformMat2d: transformMat2d,
    transformMat3: transformMat3,
    transformMat4: transformMat4,
-   rotate: rotate$1,
+   rotate: rotate,
    angle: angle,
    zero: zero,
    str: str,
@@ -7677,307 +7701,5 @@ var vec2 = /*#__PURE__*/Object.freeze({
    forEach: forEach
 });
 
-/*! @license Rematrix v0.7.2
-
-	Copyright 2021 Julian Lloyd.
-
-	Permission is hereby granted, free of charge, to any person obtaining a copy
-	of this software and associated documentation files (the "Software"), to deal
-	in the Software without restriction, including without limitation the rights
-	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	copies of the Software, and to permit persons to whom the Software is
-	furnished to do so, subject to the following conditions:
-
-	The above copyright notice and this permission notice shall be included in
-	all copies or substantial portions of the Software.
-
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-	THE SOFTWARE.
-*/
-function format(source) {
-  if (source && source.constructor === Array) {
-    var values = source
-      .filter(function (value) { return typeof value === 'number'; })
-      .filter(function (value) { return !isNaN(value); });
-
-    if (source.length === 6 && values.length === 6) {
-      var matrix = identity();
-      matrix[0] = values[0];
-      matrix[1] = values[1];
-      matrix[4] = values[2];
-      matrix[5] = values[3];
-      matrix[12] = values[4];
-      matrix[13] = values[5];
-      return matrix
-    } else if (source.length === 16 && values.length === 16) {
-      return source
-    }
-  }
-  throw new TypeError('Expected a `number[]` with length 6 or 16.')
-}
-
-function fromString(source) {
-  if (typeof source === 'string') {
-    var match = source.match(/matrix(3d)?\(([^)]+)\)/);
-    if (match) {
-      var raw = match[2].split(',').map(parseFloat);
-      return format(raw)
-    }
-    if (source === 'none' || source === '') {
-      return identity()
-    }
-  }
-  throw new TypeError('Expected a string containing `matrix()` or `matrix3d()')
-}
-
-function identity() {
-  var matrix = [];
-  for (var i = 0; i < 16; i++) {
-    i % 5 == 0 ? matrix.push(1) : matrix.push(0);
-  }
-  return matrix
-}
-
-function inverse(source) {
-  var m = format(source);
-
-  var s0 = m[0] * m[5] - m[4] * m[1];
-  var s1 = m[0] * m[6] - m[4] * m[2];
-  var s2 = m[0] * m[7] - m[4] * m[3];
-  var s3 = m[1] * m[6] - m[5] * m[2];
-  var s4 = m[1] * m[7] - m[5] * m[3];
-  var s5 = m[2] * m[7] - m[6] * m[3];
-
-  var c5 = m[10] * m[15] - m[14] * m[11];
-  var c4 = m[9] * m[15] - m[13] * m[11];
-  var c3 = m[9] * m[14] - m[13] * m[10];
-  var c2 = m[8] * m[15] - m[12] * m[11];
-  var c1 = m[8] * m[14] - m[12] * m[10];
-  var c0 = m[8] * m[13] - m[12] * m[9];
-
-  var determinant = 1 / (s0 * c5 - s1 * c4 + s2 * c3 + s3 * c2 - s4 * c1 + s5 * c0);
-
-  if (isNaN(determinant) || determinant === Infinity) {
-    throw new Error('Inverse determinant attempted to divide by zero.')
-  }
-
-  return [
-    (m[5] * c5 - m[6] * c4 + m[7] * c3) * determinant,
-    (-m[1] * c5 + m[2] * c4 - m[3] * c3) * determinant,
-    (m[13] * s5 - m[14] * s4 + m[15] * s3) * determinant,
-    (-m[9] * s5 + m[10] * s4 - m[11] * s3) * determinant,
-
-    (-m[4] * c5 + m[6] * c2 - m[7] * c1) * determinant,
-    (m[0] * c5 - m[2] * c2 + m[3] * c1) * determinant,
-    (-m[12] * s5 + m[14] * s2 - m[15] * s1) * determinant,
-    (m[8] * s5 - m[10] * s2 + m[11] * s1) * determinant,
-
-    (m[4] * c4 - m[5] * c2 + m[7] * c0) * determinant,
-    (-m[0] * c4 + m[1] * c2 - m[3] * c0) * determinant,
-    (m[12] * s4 - m[13] * s2 + m[15] * s0) * determinant,
-    (-m[8] * s4 + m[9] * s2 - m[11] * s0) * determinant,
-
-    (-m[4] * c3 + m[5] * c1 - m[6] * c0) * determinant,
-    (m[0] * c3 - m[1] * c1 + m[2] * c0) * determinant,
-    (-m[12] * s3 + m[13] * s1 - m[14] * s0) * determinant,
-    (m[8] * s3 - m[9] * s1 + m[10] * s0) * determinant ]
-}
-
-function multiply(matrixA, matrixB) {
-  var fma = format(matrixA);
-  var fmb = format(matrixB);
-  var product = [];
-
-  for (var i = 0; i < 4; i++) {
-    var row = [fma[i], fma[i + 4], fma[i + 8], fma[i + 12]];
-    for (var j = 0; j < 4; j++) {
-      var k = j * 4;
-      var col = [fmb[k], fmb[k + 1], fmb[k + 2], fmb[k + 3]];
-      var result = row[0] * col[0] + row[1] * col[1] + row[2] * col[2] + row[3] * col[3];
-
-      product[i + k] = result;
-    }
-  }
-
-  return product
-}
-
-function perspective(distance) {
-  var matrix = identity();
-  matrix[11] = -1 / distance;
-  return matrix
-}
-
-function rotate(angle) {
-  return rotateZ(angle)
-}
-
-function rotateX(angle) {
-  var theta = (Math.PI / 180) * angle;
-  var matrix = identity();
-
-  matrix[5] = matrix[10] = Math.cos(theta);
-  matrix[6] = matrix[9] = Math.sin(theta);
-  matrix[9] *= -1;
-
-  return matrix
-}
-
-function rotateY(angle) {
-  var theta = (Math.PI / 180) * angle;
-  var matrix = identity();
-
-  matrix[0] = matrix[10] = Math.cos(theta);
-  matrix[2] = matrix[8] = Math.sin(theta);
-  matrix[2] *= -1;
-
-  return matrix
-}
-
-function rotateZ(angle) {
-  var theta = (Math.PI / 180) * angle;
-  var matrix = identity();
-
-  matrix[0] = matrix[5] = Math.cos(theta);
-  matrix[1] = matrix[4] = Math.sin(theta);
-  matrix[4] *= -1;
-
-  return matrix
-}
-
-function scale(scalar, scalarY) {
-  var matrix = identity();
-
-  matrix[0] = scalar;
-  matrix[5] = typeof scalarY === 'number' ? scalarY : scalar;
-
-  return matrix
-}
-
-function scaleX(scalar) {
-  var matrix = identity();
-  matrix[0] = scalar;
-  return matrix
-}
-
-function scaleY(scalar) {
-  var matrix = identity();
-  matrix[5] = scalar;
-  return matrix
-}
-
-function scaleZ(scalar) {
-  var matrix = identity();
-  matrix[10] = scalar;
-  return matrix
-}
-
-function skew(angleX, angleY) {
-  var thetaX = (Math.PI / 180) * angleX;
-  var matrix = identity();
-
-  matrix[4] = Math.tan(thetaX);
-
-  if (angleY) {
-    var thetaY = (Math.PI / 180) * angleY;
-    matrix[1] = Math.tan(thetaY);
-  }
-
-  return matrix
-}
-
-function skewX(angle) {
-  var theta = (Math.PI / 180) * angle;
-  var matrix = identity();
-
-  matrix[4] = Math.tan(theta);
-
-  return matrix
-}
-
-function skewY(angle) {
-  var theta = (Math.PI / 180) * angle;
-  var matrix = identity();
-
-  matrix[1] = Math.tan(theta);
-
-  return matrix
-}
-
-function toString(source) {
-  return ("matrix3d(" + (format(source).join(', ')) + ")")
-}
-
-function translate(distanceX, distanceY) {
-  var matrix = identity();
-  matrix[12] = distanceX;
-
-  if (distanceY) {
-    matrix[13] = distanceY;
-  }
-
-  return matrix
-}
-
-function translate3d(distanceX, distanceY, distanceZ) {
-  var matrix = identity();
-  if (distanceX !== undefined && distanceY !== undefined && distanceZ !== undefined) {
-    matrix[12] = distanceX;
-    matrix[13] = distanceY;
-    matrix[14] = distanceZ;
-  }
-  return matrix
-}
-
-function translateX(distance) {
-  var matrix = identity();
-  matrix[12] = distance;
-  return matrix
-}
-
-function translateY(distance) {
-  var matrix = identity();
-  matrix[13] = distance;
-  return matrix
-}
-
-function translateZ(distance) {
-  var matrix = identity();
-  matrix[14] = distance;
-  return matrix
-}
-
-var rematrix_es = /*#__PURE__*/Object.freeze({
-   __proto__: null,
-   format: format,
-   fromString: fromString,
-   identity: identity,
-   inverse: inverse,
-   multiply: multiply,
-   perspective: perspective,
-   rotate: rotate,
-   rotateX: rotateX,
-   rotateY: rotateY,
-   rotateZ: rotateZ,
-   scale: scale,
-   scaleX: scaleX,
-   scaleY: scaleY,
-   scaleZ: scaleZ,
-   skew: skew,
-   skewX: skewX,
-   skewY: skewY,
-   toString: toString,
-   translate: translate,
-   translate3d: translate3d,
-   translateX: translateX,
-   translateY: translateY,
-   translateZ: translateZ
-});
-
-export { rematrix_es as Rematrix, common as glMatrix, lerp$5 as lerp, mat2, mat2d, mat3, mat4, quat, quat2, vec2, vec3, vec4 };
+export { degToRad, common as glMatrix, lerp$5 as lerp, mat2, mat2d, mat3, mat4, quat, quat2, radToDeg, vec2, vec3, vec4 };
 //# sourceMappingURL=index.js.map
