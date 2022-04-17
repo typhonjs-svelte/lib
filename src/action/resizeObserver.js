@@ -1,39 +1,6 @@
 import { isWritableStore } from '@typhonjs-svelte/lib/store';
 
 /**
- * Provides an action to apply style properties provided as an object.
- *
- * @param {HTMLElement} node - Target element
- *
- * @param {object}      properties - Key / value object of properties to set.
- *
- * @returns {Function} Update function.
- */
-function applyStyles(node, properties)
-{
-   /** Sets properties on node. */
-   function setProperties()
-   {
-      if (typeof properties !== 'object') { return; }
-
-      for (const prop of Object.keys(properties))
-      {
-         node.style.setProperty(`${prop}`, properties[prop]);
-      }
-   }
-
-   setProperties();
-
-   return {
-      update(newProperties)
-      {
-         properties = newProperties;
-         setProperties();
-      }
-   };
-}
-
-/**
  * Provides an action to monitor the given HTMLElement node with `ResizeObserver` posting width / height changes
  * to the target in various ways depending on the shape of the target. The target can be one of the following and the
  * precedence order is listed from top to bottom:
@@ -58,7 +25,7 @@ function applyStyles(node, properties)
  * @returns {{update: Function, destroy: Function}} The action lifecycle methods.
  * @see {@link https://github.com/sveltejs/svelte/issues/4233}
  */
-function resizeObserver(node, target)
+export function resizeObserver(node, target)
 {
    let updateType = setUpdateType(target);
 
@@ -159,6 +126,3 @@ function setUpdateType(target)
 
    return s_UPDATE_TYPES.none;
 }
-
-export { applyStyles, resizeObserver };
-//# sourceMappingURL=index.js.map
