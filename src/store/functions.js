@@ -24,7 +24,55 @@ export function isReadableStore(store)
 
 /**
  * Provides a basic test for a given variable to test if it has the shape of a writable store by having a `subscribe`
- * and `set` functions.
+ * function and a `set` function.
+ *
+ * Note: functions are also objects, so test that the variable might be a function w/ a `subscribe` function.
+ *
+ * @param {*}  store - variable to test that might be a store.
+ *
+ * @returns {boolean} Whether the variable tested has the shape of a store.
+ */
+export function isSettableStore(store)
+{
+   if (store === null || store === void 0) { return false; }
+
+   switch (typeof store)
+   {
+      case 'function':
+      case 'object':
+         return typeof store.subscribe === 'function' && typeof store.set === 'function';
+   }
+
+   return false;
+}
+
+/**
+ * Provides a basic test for a given variable to test if it has the shape of a writable store by having a `subscribe`
+ * function and an `update` function.
+ *
+ * Note: functions are also objects, so test that the variable might be a function w/ a `subscribe` function.
+ *
+ * @param {*}  store - variable to test that might be a store.
+ *
+ * @returns {boolean} Whether the variable tested has the shape of a store.
+ */
+export function isUpdatableStore(store)
+{
+   if (store === null || store === void 0) { return false; }
+
+   switch (typeof store)
+   {
+      case 'function':
+      case 'object':
+         return typeof store.subscribe === 'function' && typeof store.update === 'function';
+   }
+
+   return false;
+}
+
+/**
+ * Provides a basic test for a given variable to test if it has the shape of a writable store by having a `subscribe`
+ * `set`, and `update` functions.
  *
  * Note: functions are also objects, so test that the variable might be a function w/ `subscribe` & `set` functions.
  *
@@ -40,7 +88,8 @@ export function isWritableStore(store)
    {
       case 'function':
       case 'object':
-         return typeof store.subscribe === 'function' && typeof store.set === 'function';
+         return typeof store.subscribe === 'function' && typeof store.set === 'function' &&
+          typeof store.update === 'function';
    }
 
    return false;
