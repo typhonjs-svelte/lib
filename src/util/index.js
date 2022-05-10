@@ -9,6 +9,7 @@ export {
    isIterableAsync,
    isIterable,
    isObject,
+   isPlainObject,
    safeAccess,
    safeSet
 } from '@typhonjs-utils/object';

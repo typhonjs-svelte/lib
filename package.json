@@ -62,7 +62,7 @@
     "@typhonjs-config/eslint-config": "^0.3.0",
     "@typhonjs-fvtt/eslint-config-foundry.js": "^0.8.0",
     "@typhonjs-utils/dyn-array-reducer": "^0.1.0",
-    "@typhonjs-utils/object": "^0.0.8",
+    "@typhonjs-utils/object": "^0.0.9",
     "eslint": "^8",
     "gl-matrix": "^3",
     "rollup": "^2",
