@@ -2,6 +2,25 @@ import { isUpdatableStore } from '@typhonjs-svelte/lib/store';
 import { styleParsePixels } from '@typhonjs-svelte/lib/util';
 
 /**
+ * Provides an action to always blur the element when any pointer up event occurs on the element.
+ *
+ * @param {HTMLElement}   node - The node to handle always blur on pointer up.
+ */
+function alwaysBlur(node)
+{
+   function blur()
+   {
+      setTimeout(() => { if (document.activeElement === node) { node.blur(); } }, 0);
+   }
+
+   node.addEventListener('pointerup', blur);
+
+   return {
+      destroy: () => node.removeEventListener('pointerup', blur)
+   };
+}
+
+/**
  * Provides an action to apply style properties provided as an object.
  *
  * @param {HTMLElement} node - Target element
@@ -30,6 +49,41 @@ function applyStyles(node, properties)
       {
          properties = newProperties;
          setProperties();
+      }
+   };
+}
+
+/**
+ * Provides an action to blur the element when any pointer down event occurs outside the element. This can be useful
+ * for input elements including select to blur / unfocus the element when any pointer down occurs outside the element.
+ *
+ * @param {HTMLElement}   node - The node to handle automatic blur on focus loss.
+ */
+function autoBlur(node)
+{
+   function blur() { document.body.removeEventListener('pointerdown', onPointerDown); }
+   function focus() { document.body.addEventListener('pointerdown', onPointerDown); }
+
+   /**
+    * Blur the node if a pointer down event happens outside the node.
+    * @param {PointerEvent} event
+    */
+   function onPointerDown(event)
+   {
+      if (event.target === node || node.contains(event.target)) { return; }
+
+      if (document.activeElement === node) { node.blur(); }
+   }
+
+   node.addEventListener('blur', blur);
+   node.addEventListener('focus', focus);
+
+   return {
+      destroy: () =>
+      {
+         document.body.removeEventListener('pointerdown', onPointerDown);
+         node.removeEventListener('blur', blur);
+         node.removeEventListener('focus', focus);
       }
    };
 }
@@ -392,5 +446,5 @@ function s_UPDATE_SUBSCRIBER(subscriber, contentWidth, contentHeight)
  * @property {{resizedObserver: Writable<object>}} [stores] - An object with a writable store.
  */
 
-export { applyStyles, resizeObserver };
+export { alwaysBlur, applyStyles, autoBlur, resizeObserver };
 //# sourceMappingURL=index.js.map

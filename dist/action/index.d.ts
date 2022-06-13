@@ -1,5 +1,13 @@
 type ResizeObserverTarget = object | Function;
 /**
+ * Provides an action to always blur the element when any pointer up event occurs on the element.
+ *
+ * @param {HTMLElement}   node - The node to handle always blur on pointer up.
+ */
+declare function alwaysBlur(node: HTMLElement): {
+    destroy: () => void;
+};
+/**
  * Provides an action to apply style properties provided as an object.
  *
  * @param {HTMLElement} node - Target element
@@ -9,6 +17,15 @@ type ResizeObserverTarget = object | Function;
  * @returns {Function} Update function.
  */
 declare function applyStyles(node: HTMLElement, properties: object): Function;
+/**
+ * Provides an action to blur the element when any pointer down event occurs outside the element. This can be useful
+ * for input elements including select to blur / unfocus the element when any pointer down occurs outside the element.
+ *
+ * @param {HTMLElement}   node - The node to handle automatic blur on focus loss.
+ */
+declare function autoBlur(node: HTMLElement): {
+    destroy: () => void;
+};
 /**
  * Provides an action to monitor the given HTMLElement node with `ResizeObserver` posting width / height changes
  * to the target in various ways depending on the shape of the target. The target can be one of the following and the
@@ -52,4 +69,4 @@ declare namespace resizeObserver {
     function updateCache(el: HTMLElement): void;
 }
 
-export { ResizeObserverTarget, applyStyles, resizeObserver };
+export { ResizeObserverTarget, alwaysBlur, applyStyles, autoBlur, resizeObserver };
