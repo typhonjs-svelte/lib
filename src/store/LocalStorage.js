@@ -119,14 +119,14 @@ function s_CREATE_STORE(key, defaultValue = void 0)
 {
    try
    {
-      if (localStorage.getItem(key))
-      {
-         defaultValue = JSON.parse(localStorage.getItem(key));
-      }
+      const value = localStorage.getItem(key);
+      if (value) { defaultValue = JSON.parse(value); }
    }
    catch (err) { /**/ }
 
    const store = writable(key, defaultValue);
+
+
    store.get = () => get(store);
 
    return store;

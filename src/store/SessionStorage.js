@@ -119,10 +119,8 @@ function s_CREATE_STORE(key, defaultValue = void 0)
 {
    try
    {
-      if (sessionStorage.getItem(key))
-      {
-         defaultValue = JSON.parse(sessionStorage.getItem(key));
-      }
+      const value = sessionStorage.getItem(key);
+      if (value) { defaultValue = JSON.parse(value); }
    }
    catch (err) { /**/ }
 
