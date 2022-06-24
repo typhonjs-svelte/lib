@@ -1,4 +1,3 @@
-import { isWritableStore as isWritableStore$1 } from '@typhonjs-svelte/lib/store';
 import { writable as writable$2, get, derived } from 'svelte/store';
 import { noop, run_all, is_function } from 'svelte/internal';
 
@@ -978,7 +977,7 @@ function subscribeFirstRest(store, first, update)
  */
 function storeCallback(store, setCallback)
 {
-   if (!isWritableStore$1(store)) { throw new TypeError(`'store' is not a writable store.`); }
+   if (!isWritableStore(store)) { throw new TypeError(`'store' is not a writable store.`); }
    if (typeof setCallback !== 'function') { throw new TypeError(`'setCallback' is not a function.`); }
 
    /** @type {import('svelte/store').Writable} */

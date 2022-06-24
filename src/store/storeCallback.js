@@ -1,4 +1,4 @@
-import { isWritableStore } from "@typhonjs-svelte/lib/store";
+import { isWritableStore } from "./functions.js";
 
 /**
  * Wraps a writable stores set method invoking a callback after the store is set. This allows parent / child
