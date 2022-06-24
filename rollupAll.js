@@ -1,6 +1,5 @@
 import path                from 'path';
 
-import { babel }           from '@rollup/plugin-babel';        // Babel is used for private class fields for browser usage.
 import resolve             from '@rollup/plugin-node-resolve';
 import svelte              from 'rollup-plugin-svelte';
 import { generateTSDef }   from '@typhonjs-build-test/esm-d-ts';
@@ -118,17 +117,7 @@ const rollupConfigs = [{
          external: s_LOCAL_EXTERNAL,
          plugins: [
             resolve(),
-            sourcemaps(),
-            babel({
-               babelHelpers: 'bundled',
-               presets: [
-                  ['@babel/preset-env', {
-                     bugfixes: true,
-                     shippedProposals: true,
-                     targets: { esmodules: true }
-                  }]
-               ]
-            })
+            sourcemaps()
          ]
       },
       output: {
