@@ -1,3 +1,5 @@
+import * as svelte_store from 'svelte/store';
+
 type ResizeObserverTarget = object | Function;
 /**
  * Provides an action to always blur the element when any pointer up event occurs on the element.
@@ -5,6 +7,39 @@ type ResizeObserverTarget = object | Function;
  * @param {HTMLElement}   node - The node to handle always blur on pointer up.
  */
 declare function alwaysBlur(node: HTMLElement): {
+    destroy: () => void;
+};
+/**
+ * @typedef {object | Function} ResizeObserverTarget
+ *
+ * @property {number} [contentHeight] -
+ *
+ * @property {number} [contentWidth] -
+ *
+ * @property {number} [offsetHeight] -
+ *
+ * @property {number} [offsetWidth] -
+ *
+ * @property {Writable<object> | Function} [resizedObserver] - Either a function or a writable store.
+ *
+ * @property {Function} [setContentSize] - A function that is invoked with content width & height changes.
+ *
+ * @property {Function} [setDimension] - A function that is invoked with offset width & height changes.
+ *
+ * @property {{resizedObserver: Writable<object>}} [stores] - An object with a writable store.
+ */
+/**
+ * Provides an action to save `scrollTop` of an element with a vertical scrollbar. This action should be used on the
+ * scrollable element and must include a writable store that holds the active store for the current `scrollTop` value.
+ * You may switch the stores externally and this action will set the `scrollTop` based on the newly set store. This is
+ * useful for instance providing a select box that controls the scrollable container.
+ *
+ * @param {HTMLElement} element - The target scrollable HTML element.
+ *
+ * @param {import('svelte/store').Writable<number>}   store - A writable store that stores the element scrollTop.
+ */
+declare function applyScrolltop(element: HTMLElement, store: svelte_store.Writable<number>): {
+    update: (newStore: any) => void;
     destroy: () => void;
 };
 /**
@@ -69,4 +104,4 @@ declare namespace resizeObserver {
     function updateCache(el: HTMLElement): void;
 }
 
-export { ResizeObserverTarget, alwaysBlur, applyStyles, autoBlur, resizeObserver };
+export { ResizeObserverTarget, alwaysBlur, applyScrolltop, applyStyles, autoBlur, resizeObserver };

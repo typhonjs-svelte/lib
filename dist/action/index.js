@@ -1,5 +1,5 @@
-import { isUpdatableStore } from '@typhonjs-svelte/lib/store';
-import { styleParsePixels } from '@typhonjs-svelte/lib/util';
+import { isUpdatableStore, isWritableStore } from '@typhonjs-svelte/lib/store';
+import { styleParsePixels, debounce } from '@typhonjs-svelte/lib/util';
 
 /**
  * Provides an action to always blur the element when any pointer up event occurs on the element.
@@ -17,74 +17,6 @@ function alwaysBlur(node)
 
    return {
       destroy: () => node.removeEventListener('pointerup', blur)
-   };
-}
-
-/**
- * Provides an action to apply style properties provided as an object.
- *
- * @param {HTMLElement} node - Target element
- *
- * @param {object}      properties - Key / value object of properties to set.
- *
- * @returns {Function} Update function.
- */
-function applyStyles(node, properties)
-{
-   /** Sets properties on node. */
-   function setProperties()
-   {
-      if (typeof properties !== 'object') { return; }
-
-      for (const prop of Object.keys(properties))
-      {
-         node.style.setProperty(`${prop}`, properties[prop]);
-      }
-   }
-
-   setProperties();
-
-   return {
-      update(newProperties)
-      {
-         properties = newProperties;
-         setProperties();
-      }
-   };
-}
-
-/**
- * Provides an action to blur the element when any pointer down event occurs outside the element. This can be useful
- * for input elements including select to blur / unfocus the element when any pointer down occurs outside the element.
- *
- * @param {HTMLElement}   node - The node to handle automatic blur on focus loss.
- */
-function autoBlur(node)
-{
-   function blur() { document.body.removeEventListener('pointerdown', onPointerDown); }
-   function focus() { document.body.addEventListener('pointerdown', onPointerDown); }
-
-   /**
-    * Blur the node if a pointer down event happens outside the node.
-    * @param {PointerEvent} event
-    */
-   function onPointerDown(event)
-   {
-      if (event.target === node || node.contains(event.target)) { return; }
-
-      if (document.activeElement === node) { node.blur(); }
-   }
-
-   node.addEventListener('blur', blur);
-   node.addEventListener('focus', focus);
-
-   return {
-      destroy: () =>
-      {
-         document.body.removeEventListener('pointerdown', onPointerDown);
-         node.removeEventListener('blur', blur);
-         node.removeEventListener('focus', focus);
-      }
    };
 }
 
@@ -446,5 +378,139 @@ function s_UPDATE_SUBSCRIBER(subscriber, contentWidth, contentHeight)
  * @property {{resizedObserver: Writable<object>}} [stores] - An object with a writable store.
  */
 
-export { alwaysBlur, applyStyles, autoBlur, resizeObserver };
+/**
+ * Provides an action to save `scrollTop` of an element with a vertical scrollbar. This action should be used on the
+ * scrollable element and must include a writable store that holds the active store for the current `scrollTop` value.
+ * You may switch the stores externally and this action will set the `scrollTop` based on the newly set store. This is
+ * useful for instance providing a select box that controls the scrollable container.
+ *
+ * @param {HTMLElement} element - The target scrollable HTML element.
+ *
+ * @param {import('svelte/store').Writable<number>}   store - A writable store that stores the element scrollTop.
+ */
+function applyScrolltop(element, store)
+{
+   if (!isWritableStore(store))
+   {
+      throw new TypeError(`applyScrolltop error: 'store' must be a writable Svelte store.`);
+   }
+
+   function storeUpdate(value)
+   {
+      if (!Number.isFinite(value)) { return; }
+
+      // For some reason for scrollTop to take on first update from a new element setTimeout is necessary.
+      setTimeout(() => element.scrollTop = value, 0);
+   }
+
+   let unsubscribe = store.subscribe(storeUpdate);
+
+   const resizeControl = resizeObserver(element, debounce(() => store.set(element.scrollTop), 500));
+
+   /**
+    * Save target `scrollTop` to the current set store.
+    *
+    * @param {Event} event -
+    */
+   function onScroll(event)
+   {
+      store.set(event.target.scrollTop);
+   }
+
+   const debounceFn = debounce((e) => onScroll(e), 500);
+
+   element.addEventListener('scroll', debounceFn);
+
+   return {
+      update: (newStore) =>
+      {
+         unsubscribe();
+         store = newStore;
+
+         if (!isWritableStore(store))
+         {
+            throw new TypeError(`applyScrolltop.update error: 'store' must be a writable Svelte store.`);
+         }
+
+         unsubscribe = store.subscribe(storeUpdate);
+      },
+
+      destroy: () =>
+      {
+         element.removeEventListener('scroll', debounceFn);
+         unsubscribe();
+         resizeControl.destroy();
+      }
+   };
+}
+
+/**
+ * Provides an action to apply style properties provided as an object.
+ *
+ * @param {HTMLElement} node - Target element
+ *
+ * @param {object}      properties - Key / value object of properties to set.
+ *
+ * @returns {Function} Update function.
+ */
+function applyStyles(node, properties)
+{
+   /** Sets properties on node. */
+   function setProperties()
+   {
+      if (typeof properties !== 'object') { return; }
+
+      for (const prop of Object.keys(properties))
+      {
+         node.style.setProperty(`${prop}`, properties[prop]);
+      }
+   }
+
+   setProperties();
+
+   return {
+      update(newProperties)
+      {
+         properties = newProperties;
+         setProperties();
+      }
+   };
+}
+
+/**
+ * Provides an action to blur the element when any pointer down event occurs outside the element. This can be useful
+ * for input elements including select to blur / unfocus the element when any pointer down occurs outside the element.
+ *
+ * @param {HTMLElement}   node - The node to handle automatic blur on focus loss.
+ */
+function autoBlur(node)
+{
+   function blur() { document.body.removeEventListener('pointerdown', onPointerDown); }
+   function focus() { document.body.addEventListener('pointerdown', onPointerDown); }
+
+   /**
+    * Blur the node if a pointer down event happens outside the node.
+    * @param {PointerEvent} event
+    */
+   function onPointerDown(event)
+   {
+      if (event.target === node || node.contains(event.target)) { return; }
+
+      if (document.activeElement === node) { node.blur(); }
+   }
+
+   node.addEventListener('blur', blur);
+   node.addEventListener('focus', focus);
+
+   return {
+      destroy: () =>
+      {
+         document.body.removeEventListener('pointerdown', onPointerDown);
+         node.removeEventListener('blur', blur);
+         node.removeEventListener('focus', focus);
+      }
+   };
+}
+
+export { alwaysBlur, applyScrolltop, applyStyles, autoBlur, resizeObserver };
 //# sourceMappingURL=index.js.map

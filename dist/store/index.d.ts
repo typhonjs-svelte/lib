@@ -24,6 +24,16 @@ declare class DynArrayReducer<T> {
      */
     constructor(data?: Iterable<T> | any);
     /**
+     * Returns the internal data of this instance. Be careful!
+     *
+     * Note: if an array is set as initial data then that array is used as the internal data. If any changes are
+     * performed to the data externally do invoke {@link index.update} with `true` to recalculate the index and notify
+     * all subscribers.
+     *
+     * @returns {T[]} The internal data.
+     */
+    get data(): T[];
+    /**
      * @returns {AdapterFilters<T>} The filters adapter.
      */
     get filters(): AdapterFilters<T>;
@@ -43,6 +53,15 @@ declare class DynArrayReducer<T> {
      * @returns {AdapterSort<T>} The sort adapter.
      */
     get sort(): AdapterSort<T>;
+    /**
+     * Removes internal data and pushes new data. This does not destroy any initial array set to internal data unless
+     * `replace` is set to true.
+     *
+     * @param {T[] | Iterable<T>} data - New data to set to internal data.
+     *
+     * @param {boolean} [replace=false] - New data to set to internal data.
+     */
+    setData(data: T[] | Iterable<T>, replace?: boolean): void;
     /**
      *
      * @param {function(DynArrayReducer<T>): void} handler - Callback function that is invoked on update / changes.

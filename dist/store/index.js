@@ -462,9 +462,14 @@ class Indexer
     * @param {number[]}    oldIndex - Old index array.
     *
     * @param {number|null} oldHash - Old index hash value.
+    *
+    * @param {boolean}     [force=false] - When true forces an update to subscribers.
     */
-   calcHashUpdate(oldIndex, oldHash)
+   calcHashUpdate(oldIndex, oldHash, force = false)
    {
+      // Use force if a boolean otherwise default to false.
+      const actualForce = typeof force === 'boolean' ? force : /* c8 ignore next */ false;
+
       let newHash = null;
       const newIndex = this.indexAdapter.index;
 
@@ -478,7 +483,7 @@ class Indexer
 
       this.indexAdapter.hash = newHash;
 
-      if (oldHash === newHash ? !s_ARRAY_EQUALS(oldIndex, newIndex) : true) { this.hostUpdate(); }
+      if (actualForce || (oldHash === newHash ? !s_ARRAY_EQUALS(oldIndex, newIndex) : true)) { this.hostUpdate(); }
    }
 
    initAdapters(filtersAdapter, sortAdapter)
@@ -532,7 +537,13 @@ class Indexer
       return data;
    }
 
-   update()
+   /**
+    * Update the reducer indexes. If there are changes subscribers are notified. If data order is changed externally
+    * pass in true to force an update to subscribers.
+    *
+    * @param {boolean}  [force=false] - When true forces an update to subscribers.
+    */
+   update(force = false)
    {
       const oldIndex = this.indexAdapter.index;
       const oldHash = this.indexAdapter.hash;
@@ -555,7 +566,7 @@ class Indexer
          this.indexAdapter.index.sort(this.sortFn);
       }
 
-      this.calcHashUpdate(oldIndex, oldHash);
+      this.calcHashUpdate(oldIndex, oldHash, force);
    }
 }
 
@@ -689,6 +700,17 @@ class DynArrayReducer
    }
 
    /**
+    * Returns the internal data of this instance. Be careful!
+    *
+    * Note: if an array is set as initial data then that array is used as the internal data. If any changes are
+    * performed to the data externally do invoke {@link index.update} with `true` to recalculate the index and notify
+    * all subscribers.
+    *
+    * @returns {T[]} The internal data.
+    */
+   get data() { return this.#items; }
+
+   /**
     * @returns {AdapterFilters<T>} The filters adapter.
     */
    get filters() { return this.#filters; }
@@ -711,6 +733,41 @@ class DynArrayReducer
     * @returns {AdapterSort<T>} The sort adapter.
     */
    get sort() { return this.#sort; }
+
+   /**
+    * Removes internal data and pushes new data. This does not destroy any initial array set to internal data unless
+    * `replace` is set to true.
+    *
+    * @param {T[] | Iterable<T>} data - New data to set to internal data.
+    *
+    * @param {boolean} [replace=false] - New data to set to internal data.
+    */
+   setData(data, replace = false)
+   {
+      if (!s_IS_ITERABLE(data)) { throw new TypeError(`DynArrayReducer.setData error: 'data' is not iterable.`); }
+
+      if (typeof replace !== 'boolean')
+      {
+         throw new TypeError(`DynArrayReducer.setData error: 'replace' is not a boolean.`);
+      }
+
+      // Replace internal data with new array or create an array from an iterable.
+      if (replace)
+      {
+         this.#items = Array.isArray(data) ? data : [...data];
+      }
+      else
+      {
+         // Remove all entries in internal data. This will not replace any initially set array.
+         this.#items.length = 0;
+
+         // Add all new data.
+         this.#items.push(...data);
+      }
+
+      // Recalculate index and force an update to any subscribers.
+      this.index.update(true);
+   }
 
    /**
     *
