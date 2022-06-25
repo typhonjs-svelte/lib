@@ -43,7 +43,7 @@ import { isWritableStore } from '@typhonjs-svelte/lib/store';
  * @returns {(node: Element, { from: DOMRect, to: DOMRect }, params?: *) =>
  *  import('svelte/animate').AnimationConfig} Wrapped animation function.
  */
-function animateEvents(fn, store = void 0)
+export function animateEvents(fn, store = void 0)
 {
    if (typeof fn !== 'function') { throw new TypeError(`'fn' is not a function.`); }
    if (store !== void 0 && !isWritableStore(store)) { throw new TypeError(`'store' is not a writable store.`); }
@@ -80,35 +80,8 @@ function animateEvents(fn, store = void 0)
             endFired = true;
             startFired = false;
          }
-      };
+      }
 
       return animationConfig;
    }
 }
-
-/**
- * Awaits `requestAnimationFrame` calls by the counter specified. This allows asynchronous applications for direct /
- * inline style modification amongst other direct animation techniques.
- *
- * @param {number}   [cntr=1] - A positive integer greater than 0 for amount of requestAnimationFrames to wait.
- *
- * @returns {Promise<number>} Returns current time equivalent to `performance.now()`.
- */
-async function nextAnimationFrame(cntr = 1)
-{
-   if (!Number.isInteger(cntr) || cntr < 1)
-   {
-      throw new TypeError(`nextAnimationFrame error: 'cntr' must be a positive integer greater than 0.`);
-   }
-
-   let currentTime = performance.now();
-   for (;--cntr >= 0;)
-   {
-      currentTime = await new Promise((resolve) => requestAnimationFrame(resolve));
-   }
-
-   return currentTime;
-}
-
-export { animateEvents, nextAnimationFrame };
-//# sourceMappingURL=index.js.map
