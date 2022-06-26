@@ -1,8 +1,10 @@
+export * from './hash';
+export * from './string';
+export * from './style';
+export * from './svelte';
+
 export * from './debounce.js';
 export * from './hasAccessor.js';
-export * from './hash/index.js';
-export * from './style/index.js';
-export * from './svelte/index.js';
 
 export {
    deepMerge,

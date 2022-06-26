@@ -115,6 +115,16 @@ declare function isPlainObject(value: any): boolean;
  */
 declare function isSvelteComponent(comp: any): boolean;
 /**
+ * Normalizes a string.
+ *
+ * @param {string}   query - A string to normalize for comparisons.
+ *
+ * @returns {string} Cleaned string.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize
+ */
+declare function normalizeString(query: string): string;
+/**
  * Runs outro transition then destroys Svelte component.
  *
  * Workaround for https://github.com/sveltejs/svelte/issues/4056
@@ -188,4 +198,4 @@ declare function styleParsePixels(value: string): number | undefined;
  */
 declare function uuidv4(): string;
 
-export { debounce, deepMerge, hasAccessor, hasGetter, hasSetter, hashCode, isApplicationShell, isIterable, isIterableAsync, isObject, isPlainObject, isSvelteComponent, outroAndDestroy, parseSvelteConfig, safeAccess, safeSet, styleParsePixels, uuidv4 };
+export { debounce, deepMerge, hasAccessor, hasGetter, hasSetter, hashCode, isApplicationShell, isIterable, isIterableAsync, isObject, isPlainObject, isSvelteComponent, normalizeString, outroAndDestroy, parseSvelteConfig, safeAccess, safeSet, styleParsePixels, uuidv4 };

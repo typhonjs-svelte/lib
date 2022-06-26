@@ -1,97 +1,6 @@
 import { group_outros, transition_out, check_outros } from 'svelte/internal';
 
 /**
- * Wraps a callback in a debounced timeout.
- *
- * Delay execution of the callback function until the function has not been called for the given delay in milliseconds.
- *
- * @param {Function} callback - A function to execute once the debounced threshold has been passed.
- *
- * @param {number}   delay - An amount of time in milliseconds to delay.
- *
- * @return {Function} A wrapped function that can be called to debounce execution.
- */
-function debounce(callback, delay)
-{
-   let timeoutId;
-
-   return function(...args)
-   {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => { callback.apply(this, args); }, delay);
-   }
-}
-
-/**
- * Provides a method to determine if the passed in Svelte component has a getter accessor.
- *
- * @param {*}        object - An object.
- *
- * @param {string}   accessor - Accessor to test.
- *
- * @returns {boolean} Whether the component has the getter for accessor.
- */
-function hasGetter(object, accessor)
-{
-   if (object === null || object === void 0) { return false; }
-
-   // Walk parent prototype chain. Check for descriptor at each prototype level.
-   for (let o = Object.getPrototypeOf(object); o; o = Object.getPrototypeOf(o))
-   {
-      const descriptor = Object.getOwnPropertyDescriptor(o, accessor);
-      if (descriptor !== void 0 && descriptor.get !== void 0) { return true; }
-   }
-
-   return false;
-}
-
-/**
- * Provides a method to determine if the passed in Svelte component has a getter & setter accessor.
- *
- * @param {*}        object - An object.
- *
- * @param {string}   accessor - Accessor to test.
- *
- * @returns {boolean} Whether the component has the getter and setter for accessor.
- */
-function hasAccessor(object, accessor)
-{
-   if (object === null || object === void 0) { return false; }
-
-   // Walk parent prototype chain. Check for descriptor at each prototype level.
-   for (let o = Object.getPrototypeOf(object); o; o = Object.getPrototypeOf(o))
-   {
-      const descriptor = Object.getOwnPropertyDescriptor(o, accessor);
-      if (descriptor !== void 0 && descriptor.get !== void 0 && descriptor.set !== void 0) { return true; }
-   }
-
-   return false;
-}
-
-/**
- * Provides a method to determine if the passed in Svelte component has a setter accessor.
- *
- * @param {*}        object - An object.
- *
- * @param {string}   accessor - Accessor to test.
- *
- * @returns {boolean} Whether the component has the setter for accessor.
- */
-function hasSetter(object, accessor)
-{
-   if (object === null || object === void 0) { return false; }
-
-   // Walk parent prototype chain. Check for descriptor at each prototype level.
-   for (let o = Object.getPrototypeOf(object); o; o = Object.getPrototypeOf(o))
-   {
-      const descriptor = Object.getOwnPropertyDescriptor(o, accessor);
-      if (descriptor !== void 0 && descriptor.set !== void 0) { return true; }
-   }
-
-   return false;
-}
-
-/**
  * Provides a solid string hashing algorithm.
  *
  * Sourced from: https://stackoverflow.com/a/52171480
@@ -136,6 +45,20 @@ function uuidv4()
 {
    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
     (c ^ (globalThis.crypto || globalThis.msCrypto).getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));
+}
+
+/**
+ * Normalizes a string.
+ *
+ * @param {string}   query - A string to normalize for comparisons.
+ *
+ * @returns {string} Cleaned string.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize
+ */
+function normalizeString(query)
+{
+   return query.trim().normalize('NFD').replace(/[\x00-\x1F]/gm, '');
 }
 
 const s_REGEX = /(\d+)\s*px/;
@@ -467,6 +390,97 @@ function s_PROCESS_PROPS(props, thisArg, config)
 }
 
 /**
+ * Wraps a callback in a debounced timeout.
+ *
+ * Delay execution of the callback function until the function has not been called for the given delay in milliseconds.
+ *
+ * @param {Function} callback - A function to execute once the debounced threshold has been passed.
+ *
+ * @param {number}   delay - An amount of time in milliseconds to delay.
+ *
+ * @return {Function} A wrapped function that can be called to debounce execution.
+ */
+function debounce(callback, delay)
+{
+   let timeoutId;
+
+   return function(...args)
+   {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => { callback.apply(this, args); }, delay);
+   }
+}
+
+/**
+ * Provides a method to determine if the passed in Svelte component has a getter accessor.
+ *
+ * @param {*}        object - An object.
+ *
+ * @param {string}   accessor - Accessor to test.
+ *
+ * @returns {boolean} Whether the component has the getter for accessor.
+ */
+function hasGetter(object, accessor)
+{
+   if (object === null || object === void 0) { return false; }
+
+   // Walk parent prototype chain. Check for descriptor at each prototype level.
+   for (let o = Object.getPrototypeOf(object); o; o = Object.getPrototypeOf(o))
+   {
+      const descriptor = Object.getOwnPropertyDescriptor(o, accessor);
+      if (descriptor !== void 0 && descriptor.get !== void 0) { return true; }
+   }
+
+   return false;
+}
+
+/**
+ * Provides a method to determine if the passed in Svelte component has a getter & setter accessor.
+ *
+ * @param {*}        object - An object.
+ *
+ * @param {string}   accessor - Accessor to test.
+ *
+ * @returns {boolean} Whether the component has the getter and setter for accessor.
+ */
+function hasAccessor(object, accessor)
+{
+   if (object === null || object === void 0) { return false; }
+
+   // Walk parent prototype chain. Check for descriptor at each prototype level.
+   for (let o = Object.getPrototypeOf(object); o; o = Object.getPrototypeOf(o))
+   {
+      const descriptor = Object.getOwnPropertyDescriptor(o, accessor);
+      if (descriptor !== void 0 && descriptor.get !== void 0 && descriptor.set !== void 0) { return true; }
+   }
+
+   return false;
+}
+
+/**
+ * Provides a method to determine if the passed in Svelte component has a setter accessor.
+ *
+ * @param {*}        object - An object.
+ *
+ * @param {string}   accessor - Accessor to test.
+ *
+ * @returns {boolean} Whether the component has the setter for accessor.
+ */
+function hasSetter(object, accessor)
+{
+   if (object === null || object === void 0) { return false; }
+
+   // Walk parent prototype chain. Check for descriptor at each prototype level.
+   for (let o = Object.getPrototypeOf(object); o; o = Object.getPrototypeOf(o))
+   {
+      const descriptor = Object.getOwnPropertyDescriptor(o, accessor);
+      if (descriptor !== void 0 && descriptor.set !== void 0) { return true; }
+   }
+
+   return false;
+}
+
+/**
  * Provides common object manipulation utilities including depth traversal, obtaining accessors, safely setting values /
  * equality tests, and validation.
  */
@@ -710,5 +724,5 @@ function _deepMerge(target = {}, ...sourceObj)
    return target;
 }
 
-export { debounce, deepMerge, hasAccessor, hasGetter, hasSetter, hashCode, isApplicationShell, isIterable, isIterableAsync, isObject, isPlainObject, isSvelteComponent, outroAndDestroy, parseSvelteConfig, safeAccess, safeSet, styleParsePixels, uuidv4 };
+export { debounce, deepMerge, hasAccessor, hasGetter, hasSetter, hashCode, isApplicationShell, isIterable, isIterableAsync, isObject, isPlainObject, isSvelteComponent, normalizeString, outroAndDestroy, parseSvelteConfig, safeAccess, safeSet, styleParsePixels, uuidv4 };
 //# sourceMappingURL=index.js.map
