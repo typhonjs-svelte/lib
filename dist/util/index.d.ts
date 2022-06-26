@@ -197,5 +197,15 @@ declare function styleParsePixels(value: string): number | undefined;
  * @returns {string} UUIDv4
  */
 declare function uuidv4(): string;
+declare namespace uuidv4 {
+    /**
+     * Validates that the given string is formatted as a UUIDv4 string.
+     *
+     * @param {string}   uuid - UUID string to test.
+     *
+     * @returns {boolean} Is UUIDv4 string.
+     */
+    function isValid(uuid: string): boolean;
+}
 
 export { debounce, deepMerge, hasAccessor, hasGetter, hasSetter, hashCode, isApplicationShell, isIterable, isIterableAsync, isObject, isPlainObject, isSvelteComponent, normalizeString, outroAndDestroy, parseSvelteConfig, safeAccess, safeSet, styleParsePixels, uuidv4 };
