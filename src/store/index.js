@@ -1,7 +1,5 @@
 export * from '@typhonjs-utils/dyn-array-reducer';
 
-export * from './filter';
-
 export * from './functions.js';
 export * from './storeCallback.js';
 

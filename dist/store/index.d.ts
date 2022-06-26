@@ -170,23 +170,6 @@ declare class SessionStorage {
     #private;
 }
 /**
- * Creates a filter function to compare objects by a give property key against a regex test. The returned function
- * is also a writable Svelte store that builds a regex from the stores value.
- *
- * This filter function can be used w/ DynArrayReducer and bound as a store to input elements.
- *
- * @param {string}   property - Property key to compare.
- *
- * @param {object}   [opts] - Optional parameters.
- *
- * @param {boolean}  [opts.caseSensitive=false] - When true regex test is case-sensitive.
- *
- * @returns {(data: object) => boolean} The query string filter.
- */
-declare function createFilterQuery(property: string, { caseSensitive }?: {
-    caseSensitive?: boolean;
-}): (data: object) => boolean;
-/**
  * Provides a basic test for a given variable to test if it has the shape of a readable store by having a `subscribe`
  * function.
  *
@@ -381,4 +364,4 @@ declare class AdapterSort<T> {
     #private;
 }
 
-export { DynArrayReducer, LSStore, LocalStorage, SSStore, SessionStorage, createFilterQuery, isReadableStore, isUpdatableStore, isWritableStore, propertyStore, storeCallback, subscribeFirstRest, subscribeIgnoreFirst, writableDerived };
+export { DynArrayReducer, LSStore, LocalStorage, SSStore, SessionStorage, isReadableStore, isUpdatableStore, isWritableStore, propertyStore, storeCallback, subscribeFirstRest, subscribeIgnoreFirst, writableDerived };
