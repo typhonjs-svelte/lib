@@ -114,6 +114,7 @@ declare function isPlainObject(value: any): boolean;
  * @returns {boolean} Whether basic duck typing succeeds.
  */
 declare function isSvelteComponent(comp: any): boolean;
+declare function klona(x: any): any;
 /**
  * Normalizes a string.
  *
@@ -208,4 +209,4 @@ declare namespace uuidv4 {
     function isValid(uuid: string): boolean;
 }
 
-export { debounce, deepMerge, hasAccessor, hasGetter, hasSetter, hashCode, isApplicationShell, isIterable, isIterableAsync, isObject, isPlainObject, isSvelteComponent, normalizeString, outroAndDestroy, parseSvelteConfig, safeAccess, safeSet, styleParsePixels, uuidv4 };
+export { debounce, deepMerge, hasAccessor, hasGetter, hasSetter, hashCode, isApplicationShell, isIterable, isIterableAsync, isObject, isPlainObject, isSvelteComponent, klona, normalizeString, outroAndDestroy, parseSvelteConfig, safeAccess, safeSet, styleParsePixels, uuidv4 };

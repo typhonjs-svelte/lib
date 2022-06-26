@@ -6,6 +6,8 @@ export * from './svelte';
 export * from './debounce.js';
 export * from './hasAccessor.js';
 
+export { klona } from 'klona/full';
+
 export {
    deepMerge,
    isIterableAsync,
