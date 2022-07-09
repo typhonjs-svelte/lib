@@ -1,3 +1,13 @@
+type StackingContext = {
+    /**
+     * A DOM Element
+     */
+    node: Element;
+    /**
+     * Reason for why a stacking context was created
+     */
+    reason: string;
+};
 /**
  * Wraps a callback in a debounced timeout.
  *
@@ -22,6 +32,19 @@ declare function debounce(callback: Function, delay: number): Function;
  * @returns {object}    Target object.
  */
 declare function deepMerge(target?: object, ...sourceObj: object[]): object;
+/**
+ * Recursive function that finds the closest parent stacking context.
+ * See also https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context
+ *
+ * Original author: Kerry Liu / https://github.com/gwwar
+ * @see: https://github.com/gwwar/z-context/blob/master/content-script.js
+ * @see: https://github.com/gwwar/z-context/blob/master/LICENSE
+ *
+ * @param {Element} node -
+ *
+ * @returns {StackingContext} The closest parent stacking context
+ */
+declare function getStackingContext(node: Element): StackingContext;
 /**
  * Provides a method to determine if the passed in Svelte component has a getter & setter accessor.
  *
@@ -209,4 +232,4 @@ declare namespace uuidv4 {
     function isValid(uuid: string): boolean;
 }
 
-export { debounce, deepMerge, hasAccessor, hasGetter, hasSetter, hashCode, isApplicationShell, isIterable, isIterableAsync, isObject, isPlainObject, isSvelteComponent, klona, normalizeString, outroAndDestroy, parseSvelteConfig, safeAccess, safeSet, styleParsePixels, uuidv4 };
+export { StackingContext, debounce, deepMerge, getStackingContext, hasAccessor, hasGetter, hasSetter, hashCode, isApplicationShell, isIterable, isIterableAsync, isObject, isPlainObject, isSvelteComponent, klona, normalizeString, outroAndDestroy, parseSvelteConfig, safeAccess, safeSet, styleParsePixels, uuidv4 };
