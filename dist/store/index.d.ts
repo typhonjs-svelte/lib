@@ -91,7 +91,7 @@ declare class LocalStorage {
      *
      * @returns {LSStore} The new LSStore.
      */
-    static "__#196558@#createStore"(key: string, defaultValue?: boolean): svelte_store.Writable<any>;
+    static "__#196560@#createStore"(key: string, defaultValue?: boolean): svelte_store.Writable<any>;
     /**
      * Get value from the localStorage.
      *
@@ -146,7 +146,7 @@ declare class SessionStorage {
      *
      * @returns {LSStore} The new LSStore.
      */
-    static "__#196559@#createStore"(key: string, defaultValue?: boolean): svelte_store.Writable<any>;
+    static "__#196561@#createStore"(key: string, defaultValue?: boolean): svelte_store.Writable<any>;
     /**
      * Get value from the sessionStorage.
      *
