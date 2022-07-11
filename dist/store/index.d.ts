@@ -22,7 +22,7 @@ declare class DynArrayReducer<T> {
      *
      * @returns {boolean} Is data iterable.
      */
-    static "__#196559@#isIterable"(data: any): boolean;
+    static "__#196719@#isIterable"(data: any): boolean;
     /**
      * Initializes DynArrayReducer. Any iterable is supported for initial data. Take note that if `data` is an array it
      * will be used as the host array and not copied. All non-array iterables otherwise create a new array / copy.
@@ -111,7 +111,7 @@ declare class LocalStorage {
      *
      * @returns {LSStore} The new LSStore.
      */
-    static "__#196560@#createStore"(key: string, defaultValue?: boolean): svelte_store.Writable<any>;
+    static "__#196720@#createStore"(key: string, defaultValue?: boolean): svelte_store.Writable<any>;
     /**
      * Get value from the localStorage.
      *
@@ -166,7 +166,7 @@ declare class SessionStorage {
      *
      * @returns {LSStore} The new LSStore.
      */
-    static "__#196561@#createStore"(key: string, defaultValue?: boolean): svelte_store.Writable<any>;
+    static "__#196721@#createStore"(key: string, defaultValue?: boolean): svelte_store.Writable<any>;
     /**
      * Get value from the sessionStorage.
      *
