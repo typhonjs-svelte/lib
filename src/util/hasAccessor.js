@@ -11,6 +11,10 @@ export function hasGetter(object, accessor)
 {
    if (object === null || object === void 0) { return false; }
 
+   // Check for instance accessor.
+   const iDescriptor = Object.getOwnPropertyDescriptor(object, accessor);
+   if (iDescriptor !== void 0 && iDescriptor.get !== void 0) { return true; }
+
    // Walk parent prototype chain. Check for descriptor at each prototype level.
    for (let o = Object.getPrototypeOf(object); o; o = Object.getPrototypeOf(o))
    {
@@ -34,6 +38,10 @@ export function hasAccessor(object, accessor)
 {
    if (object === null || object === void 0) { return false; }
 
+   // Check for instance accessor.
+   const iDescriptor = Object.getOwnPropertyDescriptor(object, accessor);
+   if (iDescriptor !== void 0 && iDescriptor.get !== void 0 && iDescriptor.set !== void 0) { return true; }
+
    // Walk parent prototype chain. Check for descriptor at each prototype level.
    for (let o = Object.getPrototypeOf(object); o; o = Object.getPrototypeOf(o))
    {
@@ -56,6 +64,10 @@ export function hasAccessor(object, accessor)
 export function hasSetter(object, accessor)
 {
    if (object === null || object === void 0) { return false; }
+
+   // Check for instance accessor.
+   const iDescriptor = Object.getOwnPropertyDescriptor(object, accessor);
+   if (iDescriptor !== void 0 && iDescriptor.set !== void 0) { return true; }
 
    // Walk parent prototype chain. Check for descriptor at each prototype level.
    for (let o = Object.getPrototypeOf(object); o; o = Object.getPrototypeOf(o))
