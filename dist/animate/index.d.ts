@@ -51,6 +51,7 @@ declare function animateEvents(fn: (node: Element, { from: DOMRect, to: DOMRect 
     from: any;
     to: any;
 }, params?: any) => svelte_animate.AnimationConfig;
+
 /**
  * Awaits `requestAnimationFrame` calls by the counter specified. This allows asynchronous applications for direct /
  * inline style modification amongst other direct animation techniques.

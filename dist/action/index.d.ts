@@ -1,6 +1,5 @@
 import * as svelte_store from 'svelte/store';
 
-type ResizeObserverTarget = object | Function;
 /**
  * Provides an action to always blur the element when any pointer up event occurs on the element.
  *
@@ -9,25 +8,7 @@ type ResizeObserverTarget = object | Function;
 declare function alwaysBlur(node: HTMLElement): {
     destroy: () => void;
 };
-/**
- * @typedef {object | Function} ResizeObserverTarget
- *
- * @property {number} [contentHeight] -
- *
- * @property {number} [contentWidth] -
- *
- * @property {number} [offsetHeight] -
- *
- * @property {number} [offsetWidth] -
- *
- * @property {Writable<object> | Function} [resizedObserver] - Either a function or a writable store.
- *
- * @property {Function} [setContentSize] - A function that is invoked with content width & height changes.
- *
- * @property {Function} [setDimension] - A function that is invoked with offset width & height changes.
- *
- * @property {{resizedObserver: Writable<object>}} [stores] - An object with a writable store.
- */
+
 /**
  * Provides an action to save `scrollTop` of an element with a vertical scrollbar. This action should be used on the
  * scrollable element and must include a writable store that holds the active store for the current `scrollTop` value.
@@ -42,6 +23,7 @@ declare function applyScrolltop(element: HTMLElement, store: svelte_store.Writab
     update: (newStore: any) => void;
     destroy: () => void;
 };
+
 /**
  * Provides an action to apply style properties provided as an object.
  *
@@ -52,6 +34,7 @@ declare function applyScrolltop(element: HTMLElement, store: svelte_store.Writab
  * @returns {Function} Update function.
  */
 declare function applyStyles(node: HTMLElement, properties: object): Function;
+
 /**
  * Provides an action to blur the element when any pointer down event occurs outside the element. This can be useful
  * for input elements including select to blur / unfocus the element when any pointer down occurs outside the element.
@@ -61,6 +44,8 @@ declare function applyStyles(node: HTMLElement, properties: object): Function;
 declare function autoBlur(node: HTMLElement): {
     destroy: () => void;
 };
+
+type ResizeObserverTarget = object | Function;
 /**
  * Provides an action to monitor the given HTMLElement node with `ResizeObserver` posting width / height changes
  * to the target in various ways depending on the shape of the target. The target can be one of the following and the
