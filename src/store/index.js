@@ -1,4 +1,4 @@
-export * from '@typhonjs-utils/dyn-array-reducer';
+export * from '@typhonjs-utils/dynamic-reducer';
 
 export * from './functions.js';
 
