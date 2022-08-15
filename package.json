@@ -7,7 +7,6 @@
   "contributors": [
     "Michael Leahy <support@typhonjs.io> (https://github.com/typhonrt)"
   ],
-  "svelte": "src/index-svelte.js",
   "exports": {
     "./action": {
       "types": "./dist/action/index.d.ts",
@@ -55,10 +54,10 @@
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13",
-    "@typhonjs-build-test/esm-d-ts": "^0.0.2",
+    "@typhonjs-build-test/esm-d-ts": "^0.0.4",
     "@typhonjs-config/eslint-config": "^0.3.0",
     "@typhonjs-fvtt/eslint-config-foundry.js": "^0.8.0",
-    "@typhonjs-utils/dyn-array-reducer": "^0.3.0",
+    "@typhonjs-utils/dynamic-reducer": "^0.0.4",
     "@typhonjs-utils/object": "^0.0.9",
     "eslint": "^8",
     "gl-matrix": "^3",
