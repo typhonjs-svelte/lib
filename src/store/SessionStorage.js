@@ -18,7 +18,7 @@ export class SessionStorage
     *
     * @param {boolean}  [defaultValue] - A default value to set for the store.
     *
-    * @returns {LSStore} The new LSStore.
+    * @returns {SSStore} The new SSStore.
     */
    static #createStore(key, defaultValue = void 0)
    {
@@ -39,7 +39,7 @@ export class SessionStorage
     *
     * @param {boolean}              [defaultValue] - A default value to set for the store.
     *
-    * @returns {LSStore} The store for the given key.
+    * @returns {SSStore} The store for the given key.
     */
    #getStore(key, defaultValue = void 0)
    {
@@ -101,7 +101,7 @@ export class SessionStorage
     *
     * @param {*}        [defaultValue] - A default value to return if key not present in session storage.
     *
-    * @returns {LSStore} The Svelte store for this key.
+    * @returns {SSStore} The Svelte store for this key.
     */
    getStore(key, defaultValue)
    {
