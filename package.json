@@ -57,7 +57,7 @@
     "@typhonjs-build-test/esm-d-ts": "^0.0.4",
     "@typhonjs-config/eslint-config": "^0.3.0",
     "@typhonjs-fvtt/eslint-config-foundry.js": "^0.8.0",
-    "@typhonjs-utils/dynamic-reducer": "^0.0.4",
+    "@typhonjs-utils/dynamic-reducer": "^0.0.5",
     "@typhonjs-utils/object": "^0.0.9",
     "eslint": "^8",
     "gl-matrix": "^3",

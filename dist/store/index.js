@@ -243,9 +243,8 @@ class AdapterDerived {
      * @param [force] - Force an update to subscribers.
      */
     update(force = false) {
-        /* c8 ignore next */
         if (this.#destroyed) {
-            throw Error(`AdapterDerived.update error: this instance has been destroyed.`);
+            return;
         }
         for (const reducer of this.#derived.values()) {
             reducer.index.update(force);
@@ -1048,13 +1047,15 @@ class DerivedArrayReducer {
      */
     destroy() {
         this.#destroyed = true;
+        // Remove any external data reference and perform a final update.
+        this.#array = [null];
+        this.#index.update(true);
         // Remove all subscriptions.
         this.#subscriptions.length = 0;
         this.#derived.destroy();
         this.#index.destroy();
         this.#filters.clear();
         this.#sort.clear();
-        this.#array = [null];
     }
     /**
      * Provides a callback for custom derived reducers to initialize any data / custom configuration. This allows
@@ -1270,13 +1271,15 @@ class DynArrayReducer {
             return;
         }
         this.#destroyed = true;
+        this.#derived.destroy();
+        // Set the backing data to null and provide a final update.
+        this.#array = [null];
+        this.index.update(true);
         // Remove all subscriptions.
         this.#subscriptions.length = 0;
-        this.#derived.destroy();
         this.#index.destroy();
         this.#filters.clear();
         this.#sort.clear();
-        this.#array = [null];
     }
     /**
      * Provides a callback for custom reducers to initialize any data / custom configuration. This allows
@@ -1605,13 +1608,15 @@ class DerivedMapReducer {
      */
     destroy() {
         this.#destroyed = true;
+        // Remove any external data reference and perform a final update.
+        this.#map = [null];
+        this.#index.update(true);
         // Remove all subscriptions.
         this.#subscriptions.length = 0;
         this.#derived.destroy();
         this.#index.destroy();
         this.#filters.clear();
         this.#sort.clear();
-        this.#map = [null];
     }
     /**
      * Provides a callback for custom derived reducers to initialize any data / custom configuration. This allows
@@ -1829,13 +1834,15 @@ class DynMapReducer {
             return;
         }
         this.#destroyed = true;
+        this.#derived.destroy();
+        // Set the backing data to null and provide a final update.
+        this.#map = [null];
+        this.index.update(true);
         // Remove all subscriptions.
         this.#subscriptions.length = 0;
-        this.#derived.destroy();
         this.#index.destroy();
         this.#filters.clear();
         this.#sort.clear();
-        this.#map = [null];
     }
     /**
      * Provides a callback for custom reducers to initialize any data / custom configuration. This allows
