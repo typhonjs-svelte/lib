@@ -1,5 +1,3 @@
-import { StateMachineOptions } from './states';
-
 /**
  * Provides a solid string hashing algorithm.
  *
