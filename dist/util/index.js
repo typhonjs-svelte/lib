@@ -831,11 +831,11 @@ class InTagNameState {
         }
         if (isSpace(character)) {
             if (this.isNameBufferAnAllowedTag()) {
-                transition(new InTagState(0 /* Allowed */, this.options));
+                transition(new InTagState(0 /* TagMode.Allowed */, this.options));
                 return TAG_START + (this.isClosingTag ? "/" : "") + this.nameBuffer + character;
             }
             else {
-                transition(new InTagState(1 /* Disallowed */, this.options));
+                transition(new InTagState(1 /* TagMode.Disallowed */, this.options));
                 return this.options.tagReplacementText;
             }
         }
@@ -884,7 +884,7 @@ class InTagState {
         else if (isQuote(character)) {
             transition(new InQuotedStringInTagState(this.mode, character, this.options));
         }
-        if (this.mode == 1 /* Disallowed */) {
+        if (this.mode == 1 /* TagMode.Disallowed */) {
             return "";
         }
         if (character == TAG_START) {
@@ -905,7 +905,7 @@ class InQuotedStringInTagState {
         if (character == this.quoteCharacter) {
             transition(new InTagState(this.mode, this.options));
         }
-        if (this.mode == 1 /* Disallowed */) {
+        if (this.mode == 1 /* TagMode.Disallowed */) {
             return "";
         }
         if (character == TAG_START) {
@@ -1205,5 +1205,5 @@ function _deepMerge(target = {}, ...sourceObj)
    return target;
 }
 
-export { debounce, deepMerge, getStackingContext, hasAccessor, hasGetter, hasPrototype, hasSetter, hashCode, isApplicationShell, isHMRProxy, isIterable, isIterableAsync, isObject, isPlainObject, isSvelteComponent, klona, normalizeString, outroAndDestroy, parseSvelteConfig, safeAccess, safeSet, striptags as stripHtml, styleParsePixels, uuidv4 };
+export { debounce, deepMerge, getStackingContext, hasAccessor, hasGetter, hasPrototype, hasSetter, hashCode, isApplicationShell, isHMRProxy, isIterable, isIterableAsync, isObject, isPlainObject, isSvelteComponent, klona, normalizeString, outroAndDestroy, parseSvelteConfig, safeAccess, safeSet, striptags, styleParsePixels, uuidv4 };
 //# sourceMappingURL=index.js.map

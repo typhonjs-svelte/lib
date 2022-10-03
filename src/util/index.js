@@ -9,7 +9,7 @@ export * from './hasPrototype.js';
 
 export { klona } from 'klona/full';
 
-export { striptags as stripHtml } from 'striptags';
+export { striptags } from 'striptags';
 
 export {
    deepMerge,
