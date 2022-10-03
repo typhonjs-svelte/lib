@@ -1,3 +1,5 @@
+import { StateMachineOptions } from './states';
+
 /**
  * Provides a solid string hashing algorithm.
  *
@@ -186,4 +188,6 @@ declare function hasSetter(object: any, accessor: string): boolean;
  */
 declare function hasPrototype(target: any, Prototype: Function): boolean;
 
-export { StackingContext, debounce, getStackingContext, hasAccessor, hasGetter, hasPrototype, hasSetter, hashCode, isApplicationShell, isHMRProxy, isSvelteComponent, normalizeString, outroAndDestroy, parseSvelteConfig, styleParsePixels, uuidv4 };
+declare function striptags(text: string, options?: Partial<StateMachineOptions>): string;
+
+export { StackingContext, debounce, getStackingContext, hasAccessor, hasGetter, hasPrototype, hasSetter, hashCode, isApplicationShell, isHMRProxy, isSvelteComponent, normalizeString, outroAndDestroy, parseSvelteConfig, striptags as stripHtml, styleParsePixels, uuidv4 };

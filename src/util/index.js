@@ -9,6 +9,8 @@ export * from './hasPrototype.js';
 
 export { klona } from 'klona/full';
 
+export { striptags as stripHtml } from 'striptags';
+
 export {
    deepMerge,
    isIterableAsync,
