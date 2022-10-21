@@ -2038,15 +2038,17 @@ function subscribeIgnoreFirst(store, update)
 {
    let firedFirst = false;
 
-   return store.subscribe((value) => {
+   return store.subscribe((value) =>
+   {
       if (!firedFirst)
       {
          firedFirst = true;
       }
-      else {
+      else
+      {
          update(value);
       }
-   })
+   });
 }
 
 /**
@@ -2066,16 +2068,18 @@ function subscribeFirstRest(store, first, update)
 {
    let firedFirst = false;
 
-   return store.subscribe((value) => {
+   return store.subscribe((value) =>
+   {
       if (!firedFirst)
       {
          firedFirst = true;
          first(value);
       }
-      else {
+      else
+      {
          update(value);
       }
-   })
+   });
 }
 
 // src/generator.ts
@@ -2252,7 +2256,8 @@ class LocalStorage
          try
          {
             value = storageValue === 'undefined' ? void 0 : JSON.parse(storageValue);
-         } catch (err)
+         }
+         catch (err)
          {
             value = defaultValue;
          }
@@ -2406,7 +2411,8 @@ class SessionStorage
          try
          {
             value = storageValue === 'undefined' ? void 0 : JSON.parse(storageValue);
-         } catch (err)
+         }
+         catch (err)
          {
             value = defaultValue;
          }
