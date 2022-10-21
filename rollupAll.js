@@ -1,17 +1,11 @@
 import path                from 'path';
 
 import resolve             from '@rollup/plugin-node-resolve';
-import svelte              from 'rollup-plugin-svelte';
 import { generateTSDef }   from '@typhonjs-build-test/esm-d-ts';
 import fs                  from 'fs-extra';
 import { rollup }          from 'rollup';
-import sourcemaps          from 'rollup-plugin-sourcemaps';
-import { terser }          from 'rollup-plugin-terser';
 import upath               from 'upath';
 
-import terserConfig  from './terser.config.mjs';
-
-const s_COMPRESS = false;
 const s_SOURCEMAPS = true;
 
 // Defines Svelte and all local exports as external.
@@ -23,11 +17,11 @@ const s_LOCAL_EXTERNAL = [
    '@typhonjs-svelte/lib/helper', '@typhonjs-svelte/lib/math', '@typhonjs-svelte/lib/store',
    '@typhonjs-svelte/lib/transition', '@typhonjs-svelte/lib/util', '@typhonjs-svelte/lib/plugin/data',
    '@typhonjs-svelte/lib/plugin/system'
-]
+];
 
 // Defines potential output plugins to use conditionally if the .env file indicates the bundles should be
 // minified / mangled.
-const outputPlugins = s_COMPRESS ? [terser(terserConfig)] : [];
+const outputPlugins = [];
 
 // Defines whether source maps are generated / loaded from the .env file.
 const sourcemap = s_SOURCEMAPS;
@@ -38,13 +32,12 @@ const rollupConfigs = [{
          external: s_LOCAL_EXTERNAL,
       },
       output: {
-         output: {
-            file: 'dist/action/index.js',
-            format: 'es',
-            plugins: outputPlugins,
-            sourcemap,
-            // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
-         }
+         file: 'dist/action/index.js',
+         format: 'es',
+         generatedCode: { constBindings: true },
+         plugins: outputPlugins,
+         sourcemap,
+         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
       }
    },
    {
@@ -53,13 +46,12 @@ const rollupConfigs = [{
          external: s_LOCAL_EXTERNAL,
       },
       output: {
-         output: {
-            file: 'dist/animate/index.js',
-            format: 'es',
-            plugins: outputPlugins,
-            sourcemap,
-            // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
-         }
+         file: 'dist/animate/index.js',
+         format: 'es',
+         generatedCode: { constBindings: true },
+         plugins: outputPlugins,
+         sourcemap,
+         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
       }
    },
    {
@@ -68,13 +60,12 @@ const rollupConfigs = [{
          external: s_LOCAL_EXTERNAL,
       },
       output: {
-         output: {
-            file: 'dist/handler/index.js',
-            format: 'es',
-            plugins: outputPlugins,
-            sourcemap,
-            // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
-         }
+         file: 'dist/handler/index.js',
+         format: 'es',
+         generatedCode: { constBindings: true },
+         plugins: outputPlugins,
+         sourcemap,
+         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
       }
    },
    {
@@ -83,13 +74,12 @@ const rollupConfigs = [{
          external: s_LOCAL_EXTERNAL,
       },
       output: {
-         output: {
-            file: 'dist/helper/index.js',
-            format: 'es',
-            plugins: outputPlugins,
-            sourcemap,
-            // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
-         }
+         file: 'dist/helper/index.js',
+         format: 'es',
+         generatedCode: { constBindings: true },
+         plugins: outputPlugins,
+         sourcemap,
+         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
       }
    },
    {
@@ -97,18 +87,16 @@ const rollupConfigs = [{
          input: 'src/math/index.js',
          external: s_LOCAL_EXTERNAL,
          plugins: [
-            resolve(),
-            sourcemaps()
+            resolve()
          ]
       },
       output: {
-         output: {
-            file: 'dist/math/index.js',
-            format: 'es',
-            plugins: outputPlugins,
-            sourcemap,
-            // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
-         }
+         file: 'dist/math/index.js',
+         format: 'es',
+         generatedCode: { constBindings: true },
+         plugins: outputPlugins,
+         sourcemap,
+         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
       }
    },
    {
@@ -116,18 +104,16 @@ const rollupConfigs = [{
          input: 'src/store/index.js',
          external: s_LOCAL_EXTERNAL,
          plugins: [
-            resolve(),
-            sourcemaps()
+            resolve()
          ]
       },
       output: {
-         output: {
-            file: 'dist/store/index.js',
-            format: 'es',
-            plugins: outputPlugins,
-            sourcemap,
-            // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
-         }
+         file: 'dist/store/index.js',
+         format: 'es',
+         generatedCode: { constBindings: true },
+         plugins: outputPlugins,
+         sourcemap,
+         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
       }
    },
    {
@@ -135,19 +121,16 @@ const rollupConfigs = [{
          input: 'src/transition/index.js',
          external: s_LOCAL_EXTERNAL,
          plugins: [
-            resolve(),
-            sourcemaps()
+            resolve()
          ]
       },
       output: {
-         output: {
-            file: 'dist/transition/index.js',
-            format: 'es',
-            plugins: outputPlugins,
-            preferConst: true,
-            sourcemap,
-            // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
-         }
+         file: 'dist/transition/index.js',
+         format: 'es',
+         generatedCode: { constBindings: true },
+         plugins: outputPlugins,
+         sourcemap,
+         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
       }
    },
    {
@@ -155,19 +138,16 @@ const rollupConfigs = [{
          input: 'src/util/index.js',
          external: s_LOCAL_EXTERNAL,
          plugins: [
-            resolve(),
-            sourcemaps()
+            resolve()
          ]
       },
       output: {
-         output: {
-            file: 'dist/util/index.js',
-            format: 'es',
-            plugins: outputPlugins,
-            preferConst: true,
-            sourcemap,
-            // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
-         }
+         file: 'dist/util/index.js',
+         format: 'es',
+         generatedCode: { constBindings: true },
+         plugins: outputPlugins,
+         sourcemap,
+         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
       }
    },
    {
@@ -176,13 +156,12 @@ const rollupConfigs = [{
          external: s_LOCAL_EXTERNAL
       },
       output: {
-         output: {
-            file: 'dist/plugin/data/index.js',
-            format: 'es',
-            plugins: outputPlugins,
-            sourcemap,
-            // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
-         }
+         file: 'dist/plugin/data/index.js',
+         format: 'es',
+         generatedCode: { constBindings: true },
+         plugins: outputPlugins,
+         sourcemap,
+         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
       }
    },
    {
@@ -190,18 +169,16 @@ const rollupConfigs = [{
          input: 'src/plugin/system/index.js',
          external: s_LOCAL_EXTERNAL,
          plugins: [
-            resolve(),
-            sourcemaps()
+            resolve()
          ]
       },
       output: {
-         output: {
-            file: 'dist/plugin/system/index.js',
-            format: 'es',
-            plugins: outputPlugins,
-            sourcemap,
-            // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
-         }
+         file: 'dist/plugin/system/index.js',
+         format: 'es',
+         generatedCode: { constBindings: true },
+         plugins: outputPlugins,
+         sourcemap,
+         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
       }
    }
 ];
@@ -209,6 +186,8 @@ const rollupConfigs = [{
 for (const config of rollupConfigs)
 {
    console.log(`Generating bundle: ${config.input.input}`);
+// console.log(`config input: `, config.input);
+// console.log(`config output: `, config.output);
 
    const bundle = await rollup(config.input);
 
@@ -221,10 +200,10 @@ for (const config of rollupConfigs)
 
    await generateTSDef({
       main: config.input.input,
-      output: upath.changeExt(config.output.output.file, '.d.ts')
+      output: upath.changeExt(config.output.file, '.d.ts')
    });
 
-   fs.writeJSONSync(`${path.dirname(config.output.output.file)}/package.json`, {
+   fs.writeJSONSync(`${path.dirname(config.output.file)}/package.json`, {
       main: './index.js',
       module: './index.js',
       type: 'module',
