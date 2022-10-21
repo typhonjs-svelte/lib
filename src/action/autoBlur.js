@@ -3,15 +3,25 @@
  * for input elements including select to blur / unfocus the element when any pointer down occurs outside the element.
  *
  * @param {HTMLElement}   node - The node to handle automatic blur on focus loss.
+ *
+ * @returns {{destroy: Function}} Lifecycle functions.
  */
 export function autoBlur(node)
 {
-   function blur() { document.body.removeEventListener('pointerdown', onPointerDown); }
-   function focus() { document.body.addEventListener('pointerdown', onPointerDown) }
+   /**
+    * Removes listener on blur.
+    */
+   function onBlur() { document.body.removeEventListener('pointerdown', onPointerDown); }
+
+   /**
+    * Adds listener on focus.
+    */
+   function onFocus() { document.body.addEventListener('pointerdown', onPointerDown); }
 
    /**
     * Blur the node if a pointer down event happens outside the node.
-    * @param {PointerEvent} event
+    *
+    * @param {PointerEvent} event -
     */
    function onPointerDown(event)
    {
@@ -20,15 +30,15 @@ export function autoBlur(node)
       if (document.activeElement === node) { node.blur(); }
    }
 
-   node.addEventListener('blur', blur);
-   node.addEventListener('focus', focus);
+   node.addEventListener('blur', onBlur);
+   node.addEventListener('focus', onFocus);
 
    return {
       destroy: () =>
       {
          document.body.removeEventListener('pointerdown', onPointerDown);
-         node.removeEventListener('blur', blur);
-         node.removeEventListener('focus', focus);
+         node.removeEventListener('blur', onBlur);
+         node.removeEventListener('focus', onFocus);
       }
    };
 }

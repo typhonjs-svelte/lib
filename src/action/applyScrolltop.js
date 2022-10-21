@@ -12,6 +12,8 @@ import { resizeObserver }  from "./resizeObserver.js";
  * @param {HTMLElement} element - The target scrollable HTML element.
  *
  * @param {import('svelte/store').Writable<number>}   store - A writable store that stores the element scrollTop.
+ *
+ * @returns {{destroy: Function, update: Function}} Lifecycle functions.
  */
 export function applyScrolltop(element, store)
 {
@@ -20,17 +22,23 @@ export function applyScrolltop(element, store)
       throw new TypeError(`applyScrolltop error: 'store' must be a writable Svelte store.`);
    }
 
+   /**
+    * Updates element `scrollTop`.
+    *
+    * @param {number}   value -
+    */
    function storeUpdate(value)
    {
       if (!Number.isFinite(value)) { return; }
 
       // For some reason for scrollTop to take on first update from a new element setTimeout is necessary.
-      setTimeout(() => element.scrollTop = value, 0)
+      setTimeout(() => element.scrollTop = value, 0);
    }
 
    let unsubscribe = store.subscribe(storeUpdate);
 
-   const resizeControl = resizeObserver(element, debounce(() => {
+   const resizeControl = resizeObserver(element, debounce(() =>
+   {
       if (element.isConnected) { store.set(element.scrollTop); }
    }, 500));
 
@@ -59,7 +67,7 @@ export function applyScrolltop(element, store)
             throw new TypeError(`applyScrolltop.update error: 'store' must be a writable Svelte store.`);
          }
 
-         unsubscribe = store.subscribe(storeUpdate)
+         unsubscribe = store.subscribe(storeUpdate);
       },
 
       destroy: () =>

@@ -73,7 +73,8 @@ export class LocalStorage
          try
          {
             value = storageValue === 'undefined' ? void 0 : JSON.parse(storageValue);
-         } catch (err)
+         }
+         catch (err)
          {
             value = defaultValue;
          }

@@ -85,15 +85,17 @@ export function subscribeIgnoreFirst(store, update)
 {
    let firedFirst = false;
 
-   return store.subscribe((value) => {
+   return store.subscribe((value) =>
+   {
       if (!firedFirst)
       {
          firedFirst = true;
       }
-      else {
+      else
+      {
          update(value);
       }
-   })
+   });
 }
 
 /**
@@ -113,14 +115,16 @@ export function subscribeFirstRest(store, first, update)
 {
    let firedFirst = false;
 
-   return store.subscribe((value) => {
+   return store.subscribe((value) =>
+   {
       if (!firedFirst)
       {
          firedFirst = true;
          first(value);
       }
-      else {
+      else
+      {
          update(value);
       }
-   })
+   });
 }

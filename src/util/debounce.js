@@ -7,7 +7,7 @@
  *
  * @param {number}   delay - An amount of time in milliseconds to delay.
  *
- * @return {Function} A wrapped function that can be called to debounce execution.
+ * @returns {Function} A wrapped function that can be called to debounce execution.
  */
 export function debounce(callback, delay)
 {
@@ -16,6 +16,6 @@ export function debounce(callback, delay)
    return function(...args)
    {
       clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => { callback.apply(this, args) }, delay);
-   }
+      timeoutId = setTimeout(() => { callback.apply(this, args); }, delay);
+   };
 }

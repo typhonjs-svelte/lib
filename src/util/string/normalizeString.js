@@ -9,5 +9,5 @@
  */
 export function normalizeString(query)
 {
-   return query.trim().normalize('NFD').replace(/[\x00-\x1F]/gm, '');
+   return query.trim().normalize('NFD').replace(/[\x00-\x1F]/gm, ''); // eslint-disable-line no-control-regex
 }
