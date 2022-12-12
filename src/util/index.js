@@ -1,3 +1,4 @@
+export * from './browser/index.js';
 export * from './hash/index.js';
 export * from './string/index.js';
 export * from './style/index.js';

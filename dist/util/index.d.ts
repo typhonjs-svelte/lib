@@ -1,4 +1,31 @@
 /**
+ * Provides access to the Clipboard API for reading / writing text strings. This requires a secure context.
+ *
+ * Note: `writeText` will attempt to use the older `execCommand` if available when `navigator.clipboard` is not
+ * available.
+ */
+declare class ClipboardAccess {
+    /**
+     * Uses `navigator.clipboard` if available to read text from the clipboard.
+     *
+     * Note: Always returns `undefined` when `navigator.clipboard` is not available or the clipboard contains the
+     * empty string.
+     *
+     * @returns {Promise<string|undefined>} The current clipboard text or undefined.
+     */
+    static readText(): Promise<string | undefined>;
+    /**
+     * Uses `navigator.clipboard` if available then falls back to `document.execCommand('copy')` if available to copy
+     * the given text to the clipboard.
+     *
+     * @param {string}   text - Text to copy to the browser clipboard.
+     *
+     * @returns {Promise<boolean>} Copy successful.
+     */
+    static writeText(text: string): Promise<boolean>;
+}
+
+/**
  * Provides a solid string hashing algorithm.
  *
  * Sourced from: https://stackoverflow.com/a/52171480
@@ -279,4 +306,4 @@ interface StateMachineOptions {
 }
 declare function striptags(text: string, options?: Partial<StateMachineOptions>): string;
 
-export { StackingContext, StyleManager, debounce, getStackingContext, hasAccessor, hasGetter, hasPrototype, hasSetter, hashCode, isApplicationShell, isHMRProxy, isSvelteComponent, normalizeString, outroAndDestroy, parseSvelteConfig, striptags, styleParsePixels, uuidv4 };
+export { ClipboardAccess, StackingContext, StyleManager, debounce, getStackingContext, hasAccessor, hasGetter, hasPrototype, hasSetter, hashCode, isApplicationShell, isHMRProxy, isSvelteComponent, normalizeString, outroAndDestroy, parseSvelteConfig, striptags, styleParsePixels, uuidv4 };
