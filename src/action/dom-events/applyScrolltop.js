@@ -1,7 +1,7 @@
 import { isWritableStore } from '@typhonjs-svelte/lib/store';
 import { debounce }        from '@typhonjs-svelte/lib/util';
 
-import { resizeObserver }  from "./resizeObserver.js";
+import { resizeObserver }  from "../resizeObserver.js";
 
 /**
  * Provides an action to save `scrollTop` of an element with a vertical scrollbar. This action should be used on the

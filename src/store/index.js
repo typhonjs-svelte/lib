@@ -1,9 +1,9 @@
 export * from '@typhonjs-utils/dynamic-reducer';
 
-export * from './functions.js';
+export * from './dom-events/index.js';
+export * from './storage/index.js';
 
-export * from './LocalStorage.js';
-export * from './SessionStorage.js';
+export * from './functions.js';
 
 export * from 'svelte-writable-derived';
 
