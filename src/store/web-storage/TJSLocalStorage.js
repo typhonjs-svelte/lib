@@ -1,30 +1,26 @@
-import { writable }  from 'svelte-persistent-store/session';
+import { writable }  from 'svelte-persistent-store/local';
 
-/**
- * @typedef {import('svelte/store').Writable} SSStore - The backing Svelte store; a writable w/ get method attached.
- */
-
-export class SessionStorage
+export class TJSLocalStorage
 {
    /**
-    * @type {Map<string, SSStore>}
+    * @type {Map<string, import('svelte/store').Writable>}
     */
    #stores = new Map();
 
    /**
-    * Creates a new SSStore for the given key.
+    * Creates a new writable store for the given key.
     *
     * @param {string}   key - Key to lookup in stores map.
     *
     * @param {boolean}  [defaultValue] - A default value to set for the store.
     *
-    * @returns {SSStore} The new SSStore.
+    * @returns {import('svelte/store').Writable} The new store.
     */
    static #createStore(key, defaultValue = void 0)
    {
       try
       {
-         const value = sessionStorage.getItem(key);
+         const value = localStorage.getItem(key);
          if (value !== null) { defaultValue = value === 'undefined' ? void 0 : JSON.parse(value); }
       }
       catch (err) { /**/ }
@@ -33,20 +29,20 @@ export class SessionStorage
    }
 
    /**
-    * Gets a store from the SSStore Map or creates a new store for the key and a given default value.
+    * Gets a store from the stores Map or creates a new store for the key and a given default value.
     *
     * @param {string}               key - Key to lookup in stores map.
     *
     * @param {boolean}              [defaultValue] - A default value to set for the store.
     *
-    * @returns {SSStore} The store for the given key.
+    * @returns {import('svelte/store').Writable} The store for the given key.
     */
    #getStore(key, defaultValue = void 0)
    {
       let store = this.#stores.get(key);
       if (store === void 0)
       {
-         store = SessionStorage.#createStore(key, defaultValue);
+         store = TJSLocalStorage.#createStore(key, defaultValue);
          this.#stores.set(key, store);
       }
 
@@ -54,9 +50,9 @@ export class SessionStorage
    }
 
    /**
-    * Get value from the sessionStorage.
+    * Get value from the localStorage.
     *
-    * @param {string}   key - Key to lookup in sessionStorage.
+    * @param {string}   key - Key to lookup in localStorage.
     *
     * @param {*}        [defaultValue] - A default value to return if key not present in session storage.
     *
@@ -66,7 +62,7 @@ export class SessionStorage
    {
       let value = defaultValue;
 
-      const storageValue = sessionStorage.getItem(key);
+      const storageValue = localStorage.getItem(key);
 
       if (storageValue !== null)
       {
@@ -86,7 +82,7 @@ export class SessionStorage
             const newValue = JSON.stringify(defaultValue);
 
             // If there is no existing storage value and defaultValue is defined the storage value needs to be set.
-            sessionStorage.setItem(key, newValue === 'undefined' ? void 0 : newValue);
+            localStorage.setItem(key, newValue === 'undefined' ? void 0 : newValue);
          }
          catch (err) { /* */ }
       }
@@ -98,11 +94,11 @@ export class SessionStorage
     * Returns the backing Svelte store for the given key; potentially sets a default value if the key
     * is not already set.
     *
-    * @param {string}   key - Key to lookup in sessionStorage.
+    * @param {string}   key - Key to lookup in localStorage.
     *
     * @param {*}        [defaultValue] - A default value to return if key not present in session storage.
     *
-    * @returns {SSStore} The Svelte store for this key.
+    * @returns {import('svelte/store').Writable} The Svelte store for this key.
     */
    getStore(key, defaultValue)
    {
@@ -110,9 +106,9 @@ export class SessionStorage
    }
 
    /**
-    * Sets the value for the given key in sessionStorage.
+    * Sets the value for the given key in localStorage.
     *
-    * @param {string}   key - Key to lookup in sessionStorage.
+    * @param {string}   key - Key to lookup in localStorage.
     *
     * @param {*}        value - A value to set for this key.
     */
@@ -125,7 +121,7 @@ export class SessionStorage
    /**
     * Convenience method to swap a boolean value stored in session storage.
     *
-    * @param {string}   key - Key to lookup in sessionStorage.
+    * @param {string}   key - Key to lookup in localStorage.
     *
     * @param {boolean}  [defaultValue] - A default value to return if key not present in session storage.
     *
@@ -139,7 +135,7 @@ export class SessionStorage
 
       try
       {
-         currentValue = !!JSON.parse(sessionStorage.getItem(key));
+         currentValue = !!JSON.parse(localStorage.getItem(key));
       }
       catch (err) { /**/ }
 

@@ -1,2 +1,2 @@
-export * from './store/LocalStorage.js';
-export * from './store/SessionStorage.js';
+export * from './store/web-storage/TJSLocalStorage.js';
+export * from './store/web-storage/TJSSessionStorage.js';

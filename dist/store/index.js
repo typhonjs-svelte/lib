@@ -2350,25 +2350,21 @@ var storage$1 = typeof window !== "undefined" ? window.localStorage : void 0;
 var g$1 = generator(storage$1);
 var writable$1 = g$1.writable;
 
-/**
- * @typedef {import('svelte/store').Writable} LSStore - The backing Svelte store; a writable w/ get method attached.
- */
-
-class LocalStorage
+class TJSLocalStorage
 {
    /**
-    * @type {Map<string, LSStore>}
+    * @type {Map<string, import('svelte/store').Writable>}
     */
    #stores = new Map();
 
    /**
-    * Creates a new LSStore for the given key.
+    * Creates a new writable store for the given key.
     *
     * @param {string}   key - Key to lookup in stores map.
     *
     * @param {boolean}  [defaultValue] - A default value to set for the store.
     *
-    * @returns {LSStore} The new LSStore.
+    * @returns {import('svelte/store').Writable} The new store.
     */
    static #createStore(key, defaultValue = void 0)
    {
@@ -2383,20 +2379,20 @@ class LocalStorage
    }
 
    /**
-    * Gets a store from the LSStore Map or creates a new store for the key and a given default value.
+    * Gets a store from the stores Map or creates a new store for the key and a given default value.
     *
     * @param {string}               key - Key to lookup in stores map.
     *
     * @param {boolean}              [defaultValue] - A default value to set for the store.
     *
-    * @returns {LSStore} The store for the given key.
+    * @returns {import('svelte/store').Writable} The store for the given key.
     */
    #getStore(key, defaultValue = void 0)
    {
       let store = this.#stores.get(key);
       if (store === void 0)
       {
-         store = LocalStorage.#createStore(key, defaultValue);
+         store = TJSLocalStorage.#createStore(key, defaultValue);
          this.#stores.set(key, store);
       }
 
@@ -2452,7 +2448,7 @@ class LocalStorage
     *
     * @param {*}        [defaultValue] - A default value to return if key not present in session storage.
     *
-    * @returns {LSStore} The Svelte store for this key.
+    * @returns {import('svelte/store').Writable} The Svelte store for this key.
     */
    getStore(key, defaultValue)
    {
@@ -2505,25 +2501,21 @@ var storage = typeof window !== "undefined" ? window.sessionStorage : void 0;
 var g = generator(storage);
 var writable = g.writable;
 
-/**
- * @typedef {import('svelte/store').Writable} SSStore - The backing Svelte store; a writable w/ get method attached.
- */
-
-class SessionStorage
+class TJSSessionStorage
 {
    /**
-    * @type {Map<string, SSStore>}
+    * @type {Map<string, import('svelte/store').Writable>}
     */
    #stores = new Map();
 
    /**
-    * Creates a new SSStore for the given key.
+    * Creates a new store for the given key.
     *
     * @param {string}   key - Key to lookup in stores map.
     *
     * @param {boolean}  [defaultValue] - A default value to set for the store.
     *
-    * @returns {SSStore} The new SSStore.
+    * @returns {import('svelte/store').Writable} The new store.
     */
    static #createStore(key, defaultValue = void 0)
    {
@@ -2538,20 +2530,20 @@ class SessionStorage
    }
 
    /**
-    * Gets a store from the SSStore Map or creates a new store for the key and a given default value.
+    * Gets a store from the `stores` Map or creates a new store for the key and a given default value.
     *
     * @param {string}               key - Key to lookup in stores map.
     *
     * @param {boolean}              [defaultValue] - A default value to set for the store.
     *
-    * @returns {SSStore} The store for the given key.
+    * @returns {import('svelte/store').Writable} The store for the given key.
     */
    #getStore(key, defaultValue = void 0)
    {
       let store = this.#stores.get(key);
       if (store === void 0)
       {
-         store = SessionStorage.#createStore(key, defaultValue);
+         store = TJSSessionStorage.#createStore(key, defaultValue);
          this.#stores.set(key, store);
       }
 
@@ -2607,7 +2599,7 @@ class SessionStorage
     *
     * @param {*}        [defaultValue] - A default value to return if key not present in session storage.
     *
-    * @returns {SSStore} The Svelte store for this key.
+    * @returns {import('svelte/store').Writable} The Svelte store for this key.
     */
    getStore(key, defaultValue)
    {
@@ -2944,5 +2936,5 @@ function propertyStore(origin, propName) {
 	}
 }
 
-export { DerivedArrayReducer, DerivedMapReducer, DynArrayReducer, DynMapReducer, KeyStore, LocalStorage, SessionStorage, isReadableStore, isUpdatableStore, isWritableStore, propertyStore, subscribeFirstRest, subscribeIgnoreFirst, writableDerived };
+export { DerivedArrayReducer, DerivedMapReducer, DynArrayReducer, DynMapReducer, KeyStore, TJSLocalStorage, TJSSessionStorage, isReadableStore, isUpdatableStore, isWritableStore, propertyStore, subscribeFirstRest, subscribeIgnoreFirst, writableDerived };
 //# sourceMappingURL=index.js.map
