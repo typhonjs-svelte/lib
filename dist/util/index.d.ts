@@ -7,7 +7,7 @@ declare class A11yHelper {
      *
      * @param {HTMLElement|Document} [element=document] - Optional element to start query.
      *
-     * @param {object} [options] - Iterable list of classes to ignore elements.
+     * @param {object} [options] - Optional parameters.
      *
      * @param {Iterable<string>} [options.ignoreClasses] - Iterable list of classes to ignore elements.
      *
@@ -24,7 +24,9 @@ declare class A11yHelper {
      *
      * @param {HTMLElement|Document} [element=document] Optional element to start query.
      *
-     * @param {object} [options] - Iterable list of classes to ignore elements.
+     * @param {object} [options] - Optional parameters.
+     *
+     * @param {boolean} [options.anchorHref=true] - When true anchors must have an HREF.
      *
      * @param {Iterable<string>} [options.ignoreClasses] - Iterable list of classes to ignore elements.
      *
@@ -32,7 +34,8 @@ declare class A11yHelper {
      *
      * @returns {Array<HTMLElement>} Child keyboard focusable
      */
-    static getFocusableElements(element?: HTMLElement | Document, { ignoreClasses, ignoreElements }?: {
+    static getFocusableElements(element?: HTMLElement | Document, { anchorHref, ignoreClasses, ignoreElements }?: {
+        anchorHref?: boolean;
         ignoreClasses?: Iterable<string>;
         ignoreElements?: Set<HTMLElement>;
     }): Array<HTMLElement>;
@@ -41,7 +44,7 @@ declare class A11yHelper {
      *
      * @param {HTMLElement|Document} [element=document] - Optional element to start query.
      *
-     * @param {object} [options] - Iterable list of classes to ignore elements.
+     * @param {object} [options] - Optional parameters.
      *
      * @param {Iterable<string>} [options.ignoreClasses] - Iterable list of classes to ignore elements.
      *
@@ -53,6 +56,23 @@ declare class A11yHelper {
         ignoreClasses?: Iterable<string>;
         ignoreElements?: Set<HTMLElement>;
     }): HTMLElement;
+    /**
+     * Tests if the given element is focusable.
+     *
+     * @param {HTMLElement} [el] - Element to test.
+     *
+     * @param {object} [options] - Optional parameters.
+     *
+     * @param {boolean} [options.anchorHref=true] - When true anchors must have an HREF.
+     *
+     * @param {Iterable<string>} [options.ignoreClasses] - Iterable list of classes to ignore elements.
+     *
+     * @returns {boolean} Element is focusable.
+     */
+    static isFocusable(el?: HTMLElement, { anchorHref, ignoreClasses }?: {
+        anchorHref?: boolean;
+        ignoreClasses?: Iterable<string>;
+    }): boolean;
 }
 
 /**
