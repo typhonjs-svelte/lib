@@ -3,6 +3,20 @@
  */
 declare class A11yHelper {
     /**
+     * Apply focus to the HTMLElement targets in a given FocusOptions data object. An iterable list `options.focusEl`
+     * can contain HTMLElements or selector strings. If multiple focus targets are provided in a list then the first
+     * valid target found will be focused. If focus target is a string then a lookup via `document.querySelector` is
+     * performed. In this case you should provide a unique selector for the desired focus target.
+     *
+     * Note: The body of this method is postponed to the next clock tick to allow any changes in the DOM to occur that
+     * might alter focus targets before applying.
+     *
+     * @param {FocusOptions|{ focusOptions: FocusOptions }}   options - The focus options instance to apply.
+     */
+    static applyFocusOptions(options: FocusOptions | {
+        focusOptions: FocusOptions;
+    }): void;
+    /**
      * Returns first focusable element within a specified element.
      *
      * @param {HTMLElement|Document} [element=document] - Optional element to start query.
@@ -40,6 +54,41 @@ declare class A11yHelper {
         ignoreElements?: Set<HTMLElement>;
     }): Array<HTMLElement>;
     /**
+     * Gets a FocusOptions object from the given DOM event allowing for optional X / Y screen space overrides.
+     * Browsers (Firefox / Chrome) forwards a mouse event for the context menu keyboard button. Provides detection of
+     * when the context menu event is from the keyboard. Firefox as of (1/23) does not provide the correct screen space
+     * coordinates, so for keyboard context menu presses coordinates are generated from the centroid point of the
+     * element.
+     *
+     * A default fallback element or selector string may be provided to provide the focus target. If the event comes from
+     * the keyboard however the source focused element is inserted as the target with the fallback value appended to the
+     * list of focus targets. When FocusOptions is applied by {@link A11yHelper.applyFocusOptions} the target focus
+     * list is iterated through until a connected target is found and focus applied.
+     *
+     * @param {object} options - Options
+     *
+     * @param {KeyboardEvent|MouseEvent}   [options.event] - The source DOM event.
+     *
+     * @param {number}   [options.x] - Used when an event isn't provided; integer of event source in screen space.
+     *
+     * @param {number}   [options.y] - Used when an event isn't provided; integer of event source in screen space.
+     *
+     * @param {HTMLElement|string} [options.focusEl] - A specific HTMLElement or selector string
+     *
+     * @returns {FocusOptions}
+     *
+     * @see https://bugzilla.mozilla.org/show_bug.cgi?id=1426671
+     * @see https://bugzilla.mozilla.org/show_bug.cgi?id=314314
+     *
+     * TODO: Evaluate / test against touch input devices.
+     */
+    static getFocusOptions({ event, x, y, focusEl, debug }: {
+        event?: KeyboardEvent | MouseEvent;
+        x?: number;
+        y?: number;
+        focusEl?: HTMLElement | string;
+    }): FocusOptions;
+    /**
      * Returns first focusable element within a specified element.
      *
      * @param {HTMLElement|Document} [element=document] - Optional element to start query.
@@ -74,6 +123,32 @@ declare class A11yHelper {
         ignoreClasses?: Iterable<string>;
     }): boolean;
 }
+/**
+ * - Provides essential data to return focus to an HTMLElement after a series of UI
+ * actions like working with context menus and modal dialogs.
+ */
+type FocusOptions = {
+    /**
+     * - When true logs to console the actions taken in {@link A11yHelper.applyFocusOptions }.
+     */
+    debug?: boolean;
+    /**
+     * - List of targets to attempt to focus.
+     */
+    focusEl?: Iterable<HTMLElement | string>;
+    /**
+     * - The source of the event: 'keyboard' for instance.
+     */
+    source?: string;
+    /**
+     * - Potential X coordinate of initial event.
+     */
+    x?: number;
+    /**
+     * - Potential Y coordinate of initial event.
+     */
+    y?: number;
+};
 
 /**
  * Provides access to the Clipboard API for reading / writing text strings. This requires a secure context.
@@ -383,4 +458,4 @@ interface StateMachineOptions {
 }
 declare function striptags(text: string, options?: Partial<StateMachineOptions>): string;
 
-export { A11yHelper, ClipboardAccess, StackingContext, StyleManager, debounce, getStackingContext, hasAccessor, hasGetter, hasPrototype, hasSetter, hashCode, isApplicationShell, isHMRProxy, isSvelteComponent, normalizeString, outroAndDestroy, parseSvelteConfig, striptags, styleParsePixels, uuidv4 };
+export { A11yHelper, ClipboardAccess, FocusOptions, StackingContext, StyleManager, debounce, getStackingContext, hasAccessor, hasGetter, hasPrototype, hasSetter, hashCode, isApplicationShell, isHMRProxy, isSvelteComponent, normalizeString, outroAndDestroy, parseSvelteConfig, striptags, styleParsePixels, uuidv4 };

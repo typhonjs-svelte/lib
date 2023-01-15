@@ -1,10 +1,78 @@
-import { isIterable } from '@typhonjs-utils/object';
+import {
+   isIterable,
+   isObject } from '@typhonjs-utils/object';
 
 /**
  * Provides several helpful utility methods for accessibility and keyboard navigation.
  */
 export class A11yHelper
 {
+   /**
+    * Apply focus to the HTMLElement targets in a given FocusOptions data object. An iterable list `options.focusEl`
+    * can contain HTMLElements or selector strings. If multiple focus targets are provided in a list then the first
+    * valid target found will be focused. If focus target is a string then a lookup via `document.querySelector` is
+    * performed. In this case you should provide a unique selector for the desired focus target.
+    *
+    * Note: The body of this method is postponed to the next clock tick to allow any changes in the DOM to occur that
+    * might alter focus targets before applying.
+    *
+    * @param {FocusOptions|{ focusOptions: FocusOptions }}   options - The focus options instance to apply.
+    */
+   static applyFocusOptions(options)
+   {
+      if (!isObject(options)) { return; }
+
+      // Handle the case of receiving an object with embedded `focusOptions`.
+      const focusOpts = isObject(options?.focusOptions) ? options.focusOptions : options;
+
+      setTimeout(() =>
+      {
+         const debug = typeof focusOpts.debug === 'boolean' ? focusOpts.debug : false;
+
+         if (isIterable(focusOpts.focusEl))
+         {
+            if (debug)
+            {
+               console.log(`A11yHelper.applyFocusOptions debug - Attempting to apply focus target: `, focusOpts.focusEl);
+            }
+
+            for (const target of focusOpts.focusEl)
+            {
+               if (target instanceof HTMLElement && target.isConnected)
+               {
+                  target.focus();
+                  if (debug)
+                  {
+                     console.log(`A11yHelper.applyFocusOptions debug - Applied focus to target: `, target);
+                  }
+                  break;
+               }
+               else if (typeof target === 'string')
+               {
+                  const element = document.querySelector(target);
+                  if (element instanceof HTMLElement && element.isConnected)
+                  {
+                     element.focus();
+                     if (debug)
+                     {
+                        console.log(`A11yHelper.applyFocusOptions debug - Applied focus to target: `, element);
+                     }
+                     break;
+                  }
+                  else if (debug)
+                  {
+                     console.log(`A11yHelper.applyFocusOptions debug - Could not query selector: `, target);
+                  }
+               }
+            }
+         }
+         else if (debug)
+         {
+            console.log(`A11yHelper.applyFocusOptions debug - No focus targets defined.`);
+         }
+      }, 0);
+   }
+
    /**
     * Returns first focusable element within a specified element.
     *
@@ -117,6 +185,126 @@ export class A11yHelper
    }
 
    /**
+    * Gets a FocusOptions object from the given DOM event allowing for optional X / Y screen space overrides.
+    * Browsers (Firefox / Chrome) forwards a mouse event for the context menu keyboard button. Provides detection of
+    * when the context menu event is from the keyboard. Firefox as of (1/23) does not provide the correct screen space
+    * coordinates, so for keyboard context menu presses coordinates are generated from the centroid point of the
+    * element.
+    *
+    * A default fallback element or selector string may be provided to provide the focus target. If the event comes from
+    * the keyboard however the source focused element is inserted as the target with the fallback value appended to the
+    * list of focus targets. When FocusOptions is applied by {@link A11yHelper.applyFocusOptions} the target focus
+    * list is iterated through until a connected target is found and focus applied.
+    *
+    * @param {object} options - Options
+    *
+    * @param {KeyboardEvent|MouseEvent}   [options.event] - The source DOM event.
+    *
+    * @param {number}   [options.x] - Used when an event isn't provided; integer of event source in screen space.
+    *
+    * @param {number}   [options.y] - Used when an event isn't provided; integer of event source in screen space.
+    *
+    * @param {HTMLElement|string} [options.focusEl] - A specific HTMLElement or selector string
+    *
+    * @returns {FocusOptions}
+    *
+    * @see https://bugzilla.mozilla.org/show_bug.cgi?id=1426671
+    * @see https://bugzilla.mozilla.org/show_bug.cgi?id=314314
+    *
+    * TODO: Evaluate / test against touch input devices.
+    */
+   static getFocusOptions({ event, x, y, focusEl, debug = true })
+   {
+      if (focusEl !== void 0 && !(focusEl instanceof HTMLElement) && typeof focusEl !== 'string')
+      {
+         throw new TypeError(
+          `A11yHelper.getFocusOptions error: 'focusEl' is not a HTMLElement or string.`);
+      }
+
+      if (debug !== void 0 && typeof debug !== 'boolean')
+      {
+         throw new TypeError(`A11yHelper.getFocusOptions error: 'debug' is not a boolean.`);
+      }
+
+      // Handle the case when no event is provided and x, y, or focusEl is explicitly defined.
+      if (event === void 0)
+      {
+         if (typeof x !== 'number')
+         {
+            throw new TypeError(`A11yHelper.getFocusOptions error: 'event' not defined and 'x' is not a number.`);
+         }
+
+         if (typeof y !== 'number')
+         {
+            throw new TypeError(`A11yHelper.getFocusOptions error: 'event' not defined and 'y' is not a number.`);
+         }
+
+         return {
+            debug,
+            focusEl: focusEl !== void 0 ? [focusEl] : void 0,
+            x,
+            y,
+         }
+      }
+
+      if (!(event instanceof KeyboardEvent) && !(event instanceof MouseEvent))
+      {
+         throw new TypeError(`A11yHelper.getFocusOptions error: 'event' is not a KeyboardEvent or MouseEvent.`);
+      }
+
+      if (x !== void 0 && !Number.isInteger(x))
+      {
+         throw new TypeError(`A11yHelper.getFocusOptions error: 'x' is not a number.`);
+      }
+
+      if (y !== void 0 && !Number.isInteger(y))
+      {
+         throw new TypeError(`A11yHelper.getFocusOptions error: 'y' is not a number.`);
+      }
+
+      /** @type {HTMLElement} */
+      const targetEl = event.target;
+
+      if (!(targetEl instanceof HTMLElement))
+      {
+         throw new TypeError(`A11yHelper.getFocusOptions error: 'event.target' is not an HTMLElement.`);
+      }
+
+      const result = { debug };
+
+      if (event instanceof MouseEvent)
+      {
+         // Firefox currently (1/23) does not correctly determine the location of a keyboard originated
+         // context menu location, so calculate position from middle of the event target.
+         // Firefox fires a mouse event for the context menu key.
+         if (event?.button !== 2 && event.type === 'contextmenu')
+         {
+            const rect = targetEl.getBoundingClientRect();
+            result.x = x ?? rect.left + (rect.width / 2);
+            result.y = y ?? rect.top + (rect.height / 2);
+            result.focusEl = focusEl !== void 0 ? [targetEl, focusEl] : [targetEl];
+            result.source = 'keyboard'
+         }
+         else
+         {
+            result.x = x ?? event.pageX;
+            result.y = y ?? event.pageY;
+            result.focusEl = focusEl !== void 0 ? [focusEl] : void 0;
+         }
+      }
+      else
+      {
+         const rect = targetEl.getBoundingClientRect();
+         result.x = x ?? rect.left + (rect.width / 2);
+         result.y = y ?? rect.top + (rect.height / 2);
+         result.focusEl = focusEl !== void 0 ? [targetEl, focusEl] : [targetEl];
+         result.source = 'keyboard'
+      }
+
+      return result;
+   }
+
+   /**
     * Returns first focusable element within a specified element.
     *
     * @param {HTMLElement|Document} [element=document] - Optional element to start query.
@@ -185,3 +373,18 @@ export class A11yHelper
       return false;
    }
 }
+
+/**
+ * @typedef {object} FocusOptions - Provides essential data to return focus to an HTMLElement after a series of UI
+ * actions like working with context menus and modal dialogs.
+ *
+ * @property {boolean} [debug] - When true logs to console the actions taken in {@link A11yHelper.applyFocusOptions}.
+ *
+ * @property {Iterable<HTMLElement|string>} [focusEl] - List of targets to attempt to focus.
+ *
+ * @property {string} [source] - The source of the event: 'keyboard' for instance.
+ *
+ * @property {number} [x] - Potential X coordinate of initial event.
+ *
+ * @property {number} [y] - Potential Y coordinate of initial event.
+ */
