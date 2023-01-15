@@ -69,13 +69,15 @@ declare class A11yHelper {
      *
      * @param {KeyboardEvent|MouseEvent}   [options.event] - The source DOM event.
      *
+     * @param {boolean} [options.debug] - When true {@link A11yHelper.applyFocusOptions} logs focus target data.
+     *
+     * @param {HTMLElement|string} [options.focusEl] - A specific HTMLElement or selector string
+     *
      * @param {number}   [options.x] - Used when an event isn't provided; integer of event source in screen space.
      *
      * @param {number}   [options.y] - Used when an event isn't provided; integer of event source in screen space.
      *
-     * @param {HTMLElement|string} [options.focusEl] - A specific HTMLElement or selector string
-     *
-     * @returns {FocusOptions}
+     * @returns {FocusOptions} A FocusOptions object.
      *
      * @see https://bugzilla.mozilla.org/show_bug.cgi?id=1426671
      * @see https://bugzilla.mozilla.org/show_bug.cgi?id=314314
@@ -84,9 +86,10 @@ declare class A11yHelper {
      */
     static getFocusOptions({ event, x, y, focusEl, debug }: {
         event?: KeyboardEvent | MouseEvent;
+        debug?: boolean;
+        focusEl?: HTMLElement | string;
         x?: number;
         y?: number;
-        focusEl?: HTMLElement | string;
     }): FocusOptions;
     /**
      * Returns first focusable element within a specified element.

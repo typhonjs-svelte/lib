@@ -200,20 +200,22 @@ export class A11yHelper
     *
     * @param {KeyboardEvent|MouseEvent}   [options.event] - The source DOM event.
     *
+    * @param {boolean} [options.debug] - When true {@link A11yHelper.applyFocusOptions} logs focus target data.
+    *
+    * @param {HTMLElement|string} [options.focusEl] - A specific HTMLElement or selector string
+    *
     * @param {number}   [options.x] - Used when an event isn't provided; integer of event source in screen space.
     *
     * @param {number}   [options.y] - Used when an event isn't provided; integer of event source in screen space.
     *
-    * @param {HTMLElement|string} [options.focusEl] - A specific HTMLElement or selector string
-    *
-    * @returns {FocusOptions}
+    * @returns {FocusOptions} A FocusOptions object.
     *
     * @see https://bugzilla.mozilla.org/show_bug.cgi?id=1426671
     * @see https://bugzilla.mozilla.org/show_bug.cgi?id=314314
     *
     * TODO: Evaluate / test against touch input devices.
     */
-   static getFocusOptions({ event, x, y, focusEl, debug = true })
+   static getFocusOptions({ event, x, y, focusEl, debug = false })
    {
       if (focusEl !== void 0 && !(focusEl instanceof HTMLElement) && typeof focusEl !== 'string')
       {
