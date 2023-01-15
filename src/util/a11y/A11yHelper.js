@@ -202,7 +202,7 @@ export class A11yHelper
     *
     * @param {boolean} [options.debug] - When true {@link A11yHelper.applyFocusOptions} logs focus target data.
     *
-    * @param {HTMLElement|string} [options.focusEl] - A specific HTMLElement or selector string
+    * @param {HTMLElement|string} [options.focusEl] - A specific HTMLElement or selector string as the focus target.
     *
     * @param {number}   [options.x] - Used when an event isn't provided; integer of event source in screen space.
     *
