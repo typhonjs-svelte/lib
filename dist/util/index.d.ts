@@ -154,6 +154,69 @@ type FocusOptions = {
 };
 
 /**
+ * Provides management of a single Promise that can be shared and accessed across JS & Svelte components. This allows a
+ * Promise to be created and managed as part of the TRL application lifecycle and accessed safely in various control
+ * flow scenarios. When resolution of the current managed Promise starts further interaction is prevented.
+ *
+ * Note: to enable debugging / log statements set the static `logging` variable to true.
+ */
+declare class ManagedPromise {
+    /** @type {boolean} */
+    static "__#164809@#logging": boolean;
+    /**
+     * Sets global logging enabled state.
+     *
+     * @param {boolean}  logging - New logging enabled state.
+     */
+    static set logging(arg: boolean);
+    /**
+     * @returns {boolean} Whether global logging is enabled.
+     */
+    static get logging(): boolean;
+    /**
+     * @returns {boolean} Whether there is an active managed Promise.
+     */
+    get active(): boolean;
+    /**
+     * Resolves any current Promise with undefined and creates a new current Promise.
+     *
+     * @template T
+     *
+     * @param {object} opts - Options.
+     *
+     * @param {boolean}  [opts.reuse=false] - When true if there is an existing live Promise it is returned immediately.
+     *
+     * @returns {Promise<T>} The new current managed Promise.
+     */
+    create<T>({ reuse }?: {
+        reuse?: boolean;
+    }): Promise<T>;
+    /**
+     * Gets the current Promise if any.
+     *
+     * @returns {Promise<any>} Current Promise.
+     */
+    get(): Promise<any>;
+    /**
+     * Rejects the current Promise if applicable.
+     *
+     * @param {*}  [result] - Result to reject.
+     *
+     * @returns {boolean} Was the promise rejected.
+     */
+    reject(result?: any): boolean;
+    /**
+     * Resolves the current Promise if applicable.
+     *
+     * @param {*}  [result] - Result to resolve.
+     *
+     * @returns {boolean} Was the promise resolved.
+     */
+    resolve(result?: any): boolean;
+    #private;
+}
+
+/**
  * Provides access to the Clipboard API for reading / writing text strings. This requires a secure context.
  *
  * Note: `writeText` will attempt to use the older `execCommand` if available when `navigator.clipboard` is not
@@ -453,6 +516,8 @@ declare function hasSetter(object: any, accessor: string): boolean;
  */
 declare function hasPrototype(target: any, Prototype: Function): boolean;
 
+declare function klona<T>(input: T): T;
+
 interface StateMachineOptions {
     readonly allowedTags?: Set<string>;
     readonly disallowedTags?: Set<string>;
@@ -461,4 +526,4 @@ interface StateMachineOptions {
 }
 declare function striptags(text: string, options?: Partial<StateMachineOptions>): string;
 
-export { A11yHelper, ClipboardAccess, FocusOptions, StackingContext, StyleManager, debounce, getStackingContext, hasAccessor, hasGetter, hasPrototype, hasSetter, hashCode, isApplicationShell, isHMRProxy, isSvelteComponent, normalizeString, outroAndDestroy, parseSvelteConfig, striptags, styleParsePixels, uuidv4 };
+export { A11yHelper, ClipboardAccess, FocusOptions, ManagedPromise, StackingContext, StyleManager, debounce, getStackingContext, hasAccessor, hasGetter, hasPrototype, hasSetter, hashCode, isApplicationShell, isHMRProxy, isSvelteComponent, klona, normalizeString, outroAndDestroy, parseSvelteConfig, striptags, styleParsePixels, uuidv4 };
