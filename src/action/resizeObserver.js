@@ -1,5 +1,8 @@
 import { isUpdatableStore }   from '@typhonjs-svelte/lib/store';
-import { styleParsePixels }   from '@typhonjs-svelte/lib/util';
+
+import {
+   isObject,
+   styleParsePixels }         from '@typhonjs-svelte/lib/util';
 
 /**
  * Provides an action to monitor the given HTMLElement node with `ResizeObserver` posting width / height changes
@@ -243,7 +246,7 @@ function s_GET_UPDATE_TYPE(target)
    const targetType = typeof target;
 
    // Does the target have resizeObserved writable store?
-   if ((targetType === 'object' || targetType === 'function'))
+   if (targetType !== null && (targetType === 'object' || targetType === 'function'))
    {
       if (isUpdatableStore(target.resizeObserved))
       {
@@ -252,7 +255,7 @@ function s_GET_UPDATE_TYPE(target)
 
       // Now check for a child stores object which is a common TRL pattern for exposing stores.
       const stores = target?.stores;
-      if (typeof stores === 'object' || typeof stores === 'function')
+      if (isObject(stores) || typeof stores === 'function')
       {
          if (isUpdatableStore(stores.resizeObserved))
          {
@@ -261,7 +264,7 @@ function s_GET_UPDATE_TYPE(target)
       }
    }
 
-   if (targetType === 'object') { return s_UPDATE_TYPES.attribute; }
+   if (targetType !== null && targetType === 'object') { return s_UPDATE_TYPES.attribute; }
 
    if (targetType === 'function') { return s_UPDATE_TYPES.function; }
 
