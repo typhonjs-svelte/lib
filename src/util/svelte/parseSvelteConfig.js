@@ -1,3 +1,5 @@
+import { isObject }          from '@typhonjs-utils/object';
+
 import { isSvelteComponent } from './isSvelteComponent.js';
 
 /**
@@ -112,7 +114,7 @@ export function parseSvelteConfig(config, thisArg = void 0)
       delete svelteConfig.context;
 
       const result = contextFunc.call(thisArg);
-      if (typeof result === 'object')
+      if (isObject(result))
       {
          externalContext = { ...result };
       }
@@ -127,7 +129,7 @@ export function parseSvelteConfig(config, thisArg = void 0)
       externalContext = Object.fromEntries(svelteConfig.context);
       delete svelteConfig.context;
    }
-   else if (typeof svelteConfig.context === 'object')
+   else if (isObject(svelteConfig.context))
    {
       externalContext = svelteConfig.context;
       delete svelteConfig.context;
@@ -164,7 +166,7 @@ export function parseSvelteConfig(config, thisArg = void 0)
 
       delete svelteConfig.children;
    }
-   else if (typeof svelteConfig.children === 'object')
+   else if (isObject(svelteConfig.children))
    {
       if (!isSvelteComponent(svelteConfig.children.class))
       {
@@ -183,7 +185,7 @@ export function parseSvelteConfig(config, thisArg = void 0)
       svelteConfig.context = new Map();
    }
 
-   svelteConfig.context.set('external', externalContext);
+   svelteConfig.context.set('#external', externalContext);
 
    return svelteConfig;
 }
@@ -206,7 +208,7 @@ function s_PROCESS_PROPS(props, thisArg, config)
    if (typeof props === 'function')
    {
       const result = props.call(thisArg);
-      if (typeof result === 'object')
+      if (isObject(result))
       {
          return result;
       }
@@ -216,7 +218,7 @@ function s_PROCESS_PROPS(props, thisArg, config)
           JSON.stringify(config)}`);
       }
    }
-   else if (typeof props === 'object')
+   else if (isObject(props))
    {
       return props;
    }

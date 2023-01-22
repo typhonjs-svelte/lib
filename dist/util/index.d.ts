@@ -162,7 +162,7 @@ type FocusOptions = {
  */
 declare class ManagedPromise {
     /** @type {boolean} */
-    static "__#164809@#logging": boolean;
+    static "__#164814@#logging": boolean;
     /**
      * Sets global logging enabled state.
      *
