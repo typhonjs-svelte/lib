@@ -176,7 +176,11 @@ declare class ManagedPromise {
     /**
      * @returns {boolean} Whether there is an active managed Promise.
      */
-    get active(): boolean;
+    get isActive(): boolean;
+    /**
+     * @returns {boolean} Whether there is an active managed Promise and resolution is currently being processed.
+     */
+    get isProcessing(): boolean;
     /**
      * Resolves any current Promise with undefined and creates a new current Promise.
      *

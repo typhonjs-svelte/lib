@@ -24,9 +24,17 @@ export class ManagedPromise
    /**
     * @returns {boolean} Whether there is an active managed Promise.
     */
-   get active()
+   get isActive()
    {
       return this.#current !== void 0;
+   }
+
+   /**
+    * @returns {boolean} Whether there is an active managed Promise and resolution is currently being processed.
+    */
+   get isProcessing()
+   {
+      return this.#current !== void 0 ? this.#current.isProcessing : false;
    }
 
    /**
@@ -89,6 +97,7 @@ export class ManagedPromise
       const promise = new Promise((resolve, reject) =>
       {
          this.#current = {
+            isProcessing: false,
             reject,
             resolve
          };
