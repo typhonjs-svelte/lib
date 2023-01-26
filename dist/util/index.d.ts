@@ -3,7 +3,7 @@
  */
 declare class A11yHelper {
     /**
-     * Apply focus to the HTMLElement targets in a given FocusOptions data object. An iterable list `options.focusEl`
+     * Apply focus to the HTMLElement targets in a given A11yFocusSource data object. An iterable list `options.focusEl`
      * can contain HTMLElements or selector strings. If multiple focus targets are provided in a list then the first
      * valid target found will be focused. If focus target is a string then a lookup via `document.querySelector` is
      * performed. In this case you should provide a unique selector for the desired focus target.
@@ -11,10 +11,10 @@ declare class A11yHelper {
      * Note: The body of this method is postponed to the next clock tick to allow any changes in the DOM to occur that
      * might alter focus targets before applying.
      *
-     * @param {FocusOptions|{ focusOptions: FocusOptions }}   options - The focus options instance to apply.
+     * @param {A11yFocusSource|{ focusSource: A11yFocusSource }}   options - The focus options instance to apply.
      */
-    static applyFocusOptions(options: FocusOptions | {
-        focusOptions: FocusOptions;
+    static applyFocusSource(options: A11yFocusSource | {
+        focusSource: A11yFocusSource;
     }): void;
     /**
      * Returns first focusable element within a specified element.
@@ -54,7 +54,7 @@ declare class A11yHelper {
         ignoreElements?: Set<HTMLElement>;
     }): Array<HTMLElement>;
     /**
-     * Gets a FocusOptions object from the given DOM event allowing for optional X / Y screen space overrides.
+     * Gets a A11yFocusSource object from the given DOM event allowing for optional X / Y screen space overrides.
      * Browsers (Firefox / Chrome) forwards a mouse event for the context menu keyboard button. Provides detection of
      * when the context menu event is from the keyboard. Firefox as of (1/23) does not provide the correct screen space
      * coordinates, so for keyboard context menu presses coordinates are generated from the centroid point of the
@@ -62,14 +62,14 @@ declare class A11yHelper {
      *
      * A default fallback element or selector string may be provided to provide the focus target. If the event comes from
      * the keyboard however the source focused element is inserted as the target with the fallback value appended to the
-     * list of focus targets. When FocusOptions is applied by {@link A11yHelper.applyFocusOptions} the target focus
+     * list of focus targets. When A11yFocusSource is applied by {@link A11yHelper.applyFocusSource} the target focus
      * list is iterated through until a connected target is found and focus applied.
      *
      * @param {object} options - Options
      *
      * @param {KeyboardEvent|MouseEvent}   [options.event] - The source DOM event.
      *
-     * @param {boolean} [options.debug] - When true {@link A11yHelper.applyFocusOptions} logs focus target data.
+     * @param {boolean} [options.debug] - When true {@link A11yHelper.applyFocusSource} logs focus target data.
      *
      * @param {HTMLElement|string} [options.focusEl] - A specific HTMLElement or selector string as the focus target.
      *
@@ -77,20 +77,20 @@ declare class A11yHelper {
      *
      * @param {number}   [options.y] - Used when an event isn't provided; integer of event source in screen space.
      *
-     * @returns {FocusOptions} A FocusOptions object.
+     * @returns {A11yFocusSource} A A11yFocusSource object.
      *
      * @see https://bugzilla.mozilla.org/show_bug.cgi?id=1426671
      * @see https://bugzilla.mozilla.org/show_bug.cgi?id=314314
      *
      * TODO: Evaluate / test against touch input devices.
      */
-    static getFocusOptions({ event, x, y, focusEl, debug }: {
+    static getFocusSource({ event, x, y, focusEl, debug }: {
         event?: KeyboardEvent | MouseEvent;
         debug?: boolean;
         focusEl?: HTMLElement | string;
         x?: number;
         y?: number;
-    }): FocusOptions;
+    }): A11yFocusSource;
     /**
      * Returns first focusable element within a specified element.
      *
@@ -130,9 +130,9 @@ declare class A11yHelper {
  * - Provides essential data to return focus to an HTMLElement after a series of UI
  * actions like working with context menus and modal dialogs.
  */
-type FocusOptions = {
+type A11yFocusSource = {
     /**
-     * - When true logs to console the actions taken in {@link A11yHelper.applyFocusOptions }.
+     * - When true logs to console the actions taken in {@link A11yHelper.applyFocusSource }.
      */
     debug?: boolean;
     /**
@@ -162,7 +162,7 @@ type FocusOptions = {
  */
 declare class ManagedPromise {
     /** @type {boolean} */
-    static "__#164814@#logging": boolean;
+    static "__#164816@#logging": boolean;
     /**
      * Sets global logging enabled state.
      *
@@ -530,4 +530,4 @@ interface StateMachineOptions {
 }
 declare function striptags(text: string, options?: Partial<StateMachineOptions>): string;
 
-export { A11yHelper, ClipboardAccess, FocusOptions, ManagedPromise, StackingContext, StyleManager, debounce, getStackingContext, hasAccessor, hasGetter, hasPrototype, hasSetter, hashCode, isApplicationShell, isHMRProxy, isSvelteComponent, klona, normalizeString, outroAndDestroy, parseSvelteConfig, striptags, styleParsePixels, uuidv4 };
+export { A11yFocusSource, A11yHelper, ClipboardAccess, ManagedPromise, StackingContext, StyleManager, debounce, getStackingContext, hasAccessor, hasGetter, hasPrototype, hasSetter, hashCode, isApplicationShell, isHMRProxy, isSvelteComponent, klona, normalizeString, outroAndDestroy, parseSvelteConfig, striptags, styleParsePixels, uuidv4 };
