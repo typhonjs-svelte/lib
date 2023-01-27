@@ -340,17 +340,19 @@ class A11yHelper
     *
     * @param {HTMLElement|Document} [element=document] Optional element to start query.
     *
-    * @param {object} [options] - Optional parameters.
+    * @param {object}            [options] - Optional parameters.
     *
-    * @param {boolean} [options.anchorHref=true] - When true anchors must have an HREF.
+    * @param {boolean}           [options.anchorHref=true] - When true anchors must have an HREF.
     *
-    * @param {Iterable<string>} [options.ignoreClasses] - Iterable list of classes to ignore elements.
+    * @param {Iterable<string>}  [options.ignoreClasses] - Iterable list of classes to ignore elements.
     *
-    * @param {Set<HTMLElement>} [options.ignoreElements] - Set of elements to ignore.
+    * @param {Set<HTMLElement>}  [options.ignoreElements] - Set of elements to ignore.
+    *
+    * @param {string}            [options.selectors] - Custom list of focusable selectors for `querySelectorAll`.
     *
     * @returns {Array<HTMLElement>} Child keyboard focusable
     */
-   static getFocusableElements(element = document, { anchorHref = true, ignoreClasses, ignoreElements } = {})
+   static getFocusableElements(element = document, { anchorHref = true, ignoreClasses, ignoreElements, selectors } = {})
    {
       if (!(element instanceof HTMLElement) && !(element instanceof Document))
       {
@@ -372,12 +374,19 @@ class A11yHelper
          throw new TypeError(`'ignoreElements' is not a Set.`);
       }
 
-      const allElements = [...element.querySelectorAll(`button, details, embed, iframe, input:not([type=hidden]), a${
-       anchorHref ? '[href]' : ''}, object, select, textarea, [tabindex]:not([tabindex="-1"])`)];
+      if (selectors !== void 0 && typeof selectors !== 'string')
+      {
+         throw new TypeError(`'selectors' is not a string.`);
+      }
+
+      const selectorQuery = selectors ?? this.#getFocusableSelectors(anchorHref);
+
+      const allElements = [...element.querySelectorAll(selectorQuery)];
 
       if (ignoreElements && ignoreClasses)
       {
-         return allElements.filter((el) => {
+         return allElements.filter((el) =>
+         {
             let hasIgnoreClass = false;
             for (const ignoreClass of ignoreClasses)
             {
@@ -390,12 +399,13 @@ class A11yHelper
 
             return !hasIgnoreClass && !ignoreElements.has(el) && el.style.display !== 'none' &&
              el.style.visibility !== 'hidden' && !el.hasAttribute('disabled') &&
-              el.getAttribute('aria-hidden') !== 'true';
+             el.getAttribute('aria-hidden') !== 'true';
          });
       }
       else if (ignoreClasses)
       {
-         return allElements.filter((el) => {
+         return allElements.filter((el) =>
+         {
             let hasIgnoreClass = false;
             for (const ignoreClass of ignoreClasses)
             {
@@ -412,18 +422,33 @@ class A11yHelper
       }
       else if (ignoreElements)
       {
-         return allElements.filter((el) => {
+         return allElements.filter((el) =>
+         {
             return !ignoreElements.has(el) && el.style.display !== 'none' && el.style.visibility !== 'hidden' &&
              !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true';
          });
       }
       else
       {
-         return allElements.filter((el) => {
+         return allElements.filter((el) =>
+         {
             return el.style.display !== 'none' && el.style.visibility !== 'hidden' && !el.hasAttribute('disabled') &&
              el.getAttribute('aria-hidden') !== 'true';
          });
       }
+   }
+
+   /**
+    * Returns the default focusable selectors query.
+    *
+    * @param {boolean}  [anchorHref=true] - When true anchors must have an HREF.
+    *
+    * @returns {string} Focusable selectors for `querySelectorAll`.
+    */
+   static #getFocusableSelectors(anchorHref = true)
+   {
+      return `button, details summary:not([tabindex="-1"]), embed, iframe, input:not([type=hidden]), object, select, a${
+       anchorHref ? '[href]' : ''}, textarea, [tabindex]:not([tabindex="-1"])`
    }
 
    /**

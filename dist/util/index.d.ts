@@ -38,21 +38,32 @@ declare class A11yHelper {
      *
      * @param {HTMLElement|Document} [element=document] Optional element to start query.
      *
-     * @param {object} [options] - Optional parameters.
+     * @param {object}            [options] - Optional parameters.
      *
-     * @param {boolean} [options.anchorHref=true] - When true anchors must have an HREF.
+     * @param {boolean}           [options.anchorHref=true] - When true anchors must have an HREF.
      *
-     * @param {Iterable<string>} [options.ignoreClasses] - Iterable list of classes to ignore elements.
+     * @param {Iterable<string>}  [options.ignoreClasses] - Iterable list of classes to ignore elements.
      *
-     * @param {Set<HTMLElement>} [options.ignoreElements] - Set of elements to ignore.
+     * @param {Set<HTMLElement>}  [options.ignoreElements] - Set of elements to ignore.
+     *
+     * @param {string}            [options.selectors] - Custom list of focusable selectors for `querySelectorAll`.
      *
      * @returns {Array<HTMLElement>} Child keyboard focusable
      */
-    static getFocusableElements(element?: HTMLElement | Document, { anchorHref, ignoreClasses, ignoreElements }?: {
+    static getFocusableElements(element?: HTMLElement | Document, { anchorHref, ignoreClasses, ignoreElements, selectors }?: {
         anchorHref?: boolean;
         ignoreClasses?: Iterable<string>;
         ignoreElements?: Set<HTMLElement>;
+        selectors?: string;
     }): Array<HTMLElement>;
+    /**
+     * Returns the default focusable selectors query.
+     *
+     * @param {boolean}  [anchorHref=true] - When true anchors must have an HREF.
+     *
+     * @returns {string} Focusable selectors for `querySelectorAll`.
+     */
+    static "__#164822@#getFocusableSelectors"(anchorHref?: boolean): string;
     /**
      * Gets a A11yFocusSource object from the given DOM event allowing for optional X / Y screen space overrides.
      * Browsers (Firefox / Chrome) forwards a mouse event for the context menu keyboard button. Provides detection of
@@ -162,7 +173,7 @@ type A11yFocusSource = {
  */
 declare class ManagedPromise {
     /** @type {boolean} */
-    static "__#164816@#logging": boolean;
+    static "__#164823@#logging": boolean;
     /**
      * Sets global logging enabled state.
      *
