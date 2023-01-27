@@ -156,8 +156,8 @@ export class A11yHelper
             }
 
             return !hasIgnoreClass && !ignoreElements.has(el) && el.style.display !== 'none' &&
-             el.style.visibility !== 'hidden' && !el.hasAttribute('disabled') &&
-             el.getAttribute('aria-hidden') !== 'true';
+             el.style.visibility !== 'hidden' && !el.hasAttribute('disabled') && !el.hasAttribute('inert') &&
+              el.getAttribute('aria-hidden') !== 'true';
          });
       }
       else if (ignoreClasses)
