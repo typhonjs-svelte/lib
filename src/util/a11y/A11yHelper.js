@@ -205,8 +205,8 @@ export class A11yHelper
     */
    static #getFocusableSelectors(anchorHref = true)
    {
-      return `button, details summary:not([tabindex="-1"]), embed, iframe, input:not([type=hidden]), object, select, a${
-       anchorHref ? '[href]' : ''}, textarea, [tabindex]:not([tabindex="-1"])`
+      return `button, [contenteditable=true], details summary:not([tabindex="-1"]), embed, iframe, object, a${
+       anchorHref ? '[href]' : ''}, input:not([type=hidden]), select, textarea, [tabindex]:not([tabindex="-1"])`;
    }
 
    /**
