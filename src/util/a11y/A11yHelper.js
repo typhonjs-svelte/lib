@@ -33,7 +33,7 @@ export class A11yHelper
          {
             if (debug)
             {
-               console.log(`A11yHelper.applyFocusSource debug - Attempting to apply focus target: `, focusOpts.focusEl);
+               console.debug(`A11yHelper.applyFocusSource debug - Attempting to apply focus target: `, focusOpts.focusEl);
             }
 
             for (const target of focusOpts.focusEl)
@@ -43,7 +43,7 @@ export class A11yHelper
                   target.focus();
                   if (debug)
                   {
-                     console.log(`A11yHelper.applyFocusSource debug - Applied focus to target: `, target);
+                     console.debug(`A11yHelper.applyFocusSource debug - Applied focus to target: `, target);
                   }
                   break;
                }
@@ -55,20 +55,20 @@ export class A11yHelper
                      element.focus();
                      if (debug)
                      {
-                        console.log(`A11yHelper.applyFocusSource debug - Applied focus to target: `, element);
+                        console.debug(`A11yHelper.applyFocusSource debug - Applied focus to target: `, element);
                      }
                      break;
                   }
                   else if (debug)
                   {
-                     console.log(`A11yHelper.applyFocusSource debug - Could not query selector: `, target);
+                     console.debug(`A11yHelper.applyFocusSource debug - Could not query selector: `, target);
                   }
                }
             }
          }
          else if (debug)
          {
-            console.log(`A11yHelper.applyFocusSource debug - No focus targets defined.`);
+            console.debug(`A11yHelper.applyFocusSource debug - No focus targets defined.`);
          }
       }, 0);
    }
@@ -175,7 +175,7 @@ export class A11yHelper
             }
 
             return !hasIgnoreClass && el.style.display !== 'none' && el.style.visibility !== 'hidden' &&
-             !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true';
+             !el.hasAttribute('disabled') && !el.hasAttribute('inert') && el.getAttribute('aria-hidden') !== 'true';
          });
       }
       else if (ignoreElements)
@@ -183,7 +183,7 @@ export class A11yHelper
          return allElements.filter((el) =>
          {
             return !ignoreElements.has(el) && el.style.display !== 'none' && el.style.visibility !== 'hidden' &&
-             !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true';
+             !el.hasAttribute('disabled') && !el.hasAttribute('inert') && el.getAttribute('aria-hidden') !== 'true';
          });
       }
       else
@@ -191,7 +191,7 @@ export class A11yHelper
          return allElements.filter((el) =>
          {
             return el.style.display !== 'none' && el.style.visibility !== 'hidden' && !el.hasAttribute('disabled') &&
-             el.getAttribute('aria-hidden') !== 'true';
+             !el.hasAttribute('inert') && el.getAttribute('aria-hidden') !== 'true';
          });
       }
    }
@@ -205,8 +205,9 @@ export class A11yHelper
     */
    static #getFocusableSelectors(anchorHref = true)
    {
-      return `button, [contenteditable=true], details summary:not([tabindex="-1"]), embed, iframe, object, a${
-       anchorHref ? '[href]' : ''}, input:not([type=hidden]), select, textarea, [tabindex]:not([tabindex="-1"])`;
+      return `button, [contenteditable=""], [contenteditable="true"], details summary:not([tabindex="-1"]), embed, a${
+       anchorHref ? '[href]' : ''}, iframe, object, input:not([type=hidden]), select, textarea, ` +
+        `[tabindex]:not([tabindex="-1"])`;
    }
 
    /**
@@ -381,12 +382,16 @@ export class A11yHelper
          throw new TypeError(`'ignoreClasses' is not an iterable list.`);
       }
 
+      const contenteditableAttr = el.getAttribute('contenteditable');
+      const contenteditableFocusable = typeof contenteditableAttr === 'string' &&
+       (contenteditableAttr === '' || contenteditableAttr === 'true');
+
       const tabindexAttr = el.getAttribute('tabindex');
       const tabindexFocusable = typeof tabindexAttr === 'string' && tabindexAttr !== '-1';
 
       const isAnchor = el instanceof HTMLAnchorElement;
 
-      if (tabindexFocusable || isAnchor || el instanceof HTMLButtonElement ||
+      if (contenteditableFocusable || tabindexFocusable || isAnchor || el instanceof HTMLButtonElement ||
        el instanceof HTMLDetailsElement || el instanceof HTMLEmbedElement || el instanceof HTMLIFrameElement ||
         el instanceof HTMLInputElement || el instanceof HTMLObjectElement || el instanceof HTMLSelectElement ||
          el instanceof HTMLTextAreaElement)
@@ -397,7 +402,7 @@ export class A11yHelper
          }
 
          return el.style.display !== 'none' && el.style.visibility !== 'hidden' && !el.hasAttribute('disabled') &&
-          el.getAttribute('aria-hidden') !== 'true';
+          !el.hasAttribute('inert') && el.getAttribute('aria-hidden') !== 'true';
       }
 
       return false;
