@@ -398,8 +398,8 @@ class A11yHelper
             }
 
             return !hasIgnoreClass && !ignoreElements.has(el) && el.style.display !== 'none' &&
-             el.style.visibility !== 'hidden' && !el.hasAttribute('disabled') &&
-             el.getAttribute('aria-hidden') !== 'true';
+             el.style.visibility !== 'hidden' && !el.hasAttribute('disabled') && !el.hasAttribute('inert') &&
+              el.getAttribute('aria-hidden') !== 'true';
          });
       }
       else if (ignoreClasses)
@@ -417,7 +417,7 @@ class A11yHelper
             }
 
             return !hasIgnoreClass && el.style.display !== 'none' && el.style.visibility !== 'hidden' &&
-             !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true';
+             !el.hasAttribute('disabled') && !el.hasAttribute('inert') && el.getAttribute('aria-hidden') !== 'true';
          });
       }
       else if (ignoreElements)
@@ -425,7 +425,7 @@ class A11yHelper
          return allElements.filter((el) =>
          {
             return !ignoreElements.has(el) && el.style.display !== 'none' && el.style.visibility !== 'hidden' &&
-             !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true';
+             !el.hasAttribute('disabled') && !el.hasAttribute('inert') && el.getAttribute('aria-hidden') !== 'true';
          });
       }
       else
@@ -433,7 +433,7 @@ class A11yHelper
          return allElements.filter((el) =>
          {
             return el.style.display !== 'none' && el.style.visibility !== 'hidden' && !el.hasAttribute('disabled') &&
-             el.getAttribute('aria-hidden') !== 'true';
+             !el.hasAttribute('inert') && el.getAttribute('aria-hidden') !== 'true';
          });
       }
    }
@@ -447,8 +447,8 @@ class A11yHelper
     */
    static #getFocusableSelectors(anchorHref = true)
    {
-      return `button, [contenteditable=true], details summary:not([tabindex="-1"]), embed, iframe, object, a${
-       anchorHref ? '[href]' : ''}, input:not([type=hidden]), select, textarea, [tabindex]:not([tabindex="-1"])`;
+      return `button, [contenteditable=""], [contenteditable="true"], details summary:not([tabindex="-1"]), embed, a${
+       anchorHref ? '[href]' : ''}, iframe, object, input:not([type=hidden]), select, textarea, [tabindex]:not([tabindex="-1"])`;
    }
 
    /**
@@ -623,12 +623,16 @@ class A11yHelper
          throw new TypeError(`'ignoreClasses' is not an iterable list.`);
       }
 
+      const contenteditableAttr = el.getAttribute('contenteditable');
+      const contenteditableFocusable = typeof contenteditableAttr === 'string' &&
+       (contenteditableAttr === '' || contenteditableAttr === 'true');
+
       const tabindexAttr = el.getAttribute('tabindex');
       const tabindexFocusable = typeof tabindexAttr === 'string' && tabindexAttr !== '-1';
 
       const isAnchor = el instanceof HTMLAnchorElement;
 
-      if (tabindexFocusable || isAnchor || el instanceof HTMLButtonElement ||
+      if (contenteditableFocusable || tabindexFocusable || isAnchor || el instanceof HTMLButtonElement ||
        el instanceof HTMLDetailsElement || el instanceof HTMLEmbedElement || el instanceof HTMLIFrameElement ||
         el instanceof HTMLInputElement || el instanceof HTMLObjectElement || el instanceof HTMLSelectElement ||
          el instanceof HTMLTextAreaElement)
@@ -639,7 +643,7 @@ class A11yHelper
          }
 
          return el.style.display !== 'none' && el.style.visibility !== 'hidden' && !el.hasAttribute('disabled') &&
-          el.getAttribute('aria-hidden') !== 'true';
+          !el.hasAttribute('inert') && el.getAttribute('aria-hidden') !== 'true';
       }
 
       return false;
