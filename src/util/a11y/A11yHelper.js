@@ -407,6 +407,18 @@ export class A11yHelper
 
       return false;
    }
+
+   /**
+    * Convenience method to check if the given data is a valid focus source.
+    *
+    * @param {HTMLElement|string}   data - Either an HTMLElement or selector string.
+    *
+    * @returns {boolean} Is valid focus source.
+    */
+   static isFocusSource(data)
+   {
+      return data instanceof HTMLElement || typeof data === 'string';
+   }
 }
 
 /**
