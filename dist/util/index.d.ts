@@ -63,7 +63,7 @@ declare class A11yHelper {
      *
      * @returns {string} Focusable selectors for `querySelectorAll`.
      */
-    static "__#164822@#getFocusableSelectors"(anchorHref?: boolean): string;
+    static "__#164828@#getFocusableSelectors"(anchorHref?: boolean): string;
     /**
      * Gets a A11yFocusSource object from the given DOM event allowing for optional X / Y screen space overrides.
      * Browsers (Firefox / Chrome) forwards a mouse event for the context menu keyboard button. Provides detection of
@@ -136,6 +136,14 @@ declare class A11yHelper {
         anchorHref?: boolean;
         ignoreClasses?: Iterable<string>;
     }): boolean;
+    /**
+     * Convenience method to check if the given data is a valid focus source.
+     *
+     * @param {HTMLElement|string}   data - Either an HTMLElement or selector string.
+     *
+     * @returns {boolean} Is valid focus source.
+     */
+    static isFocusSource(data: HTMLElement | string): boolean;
 }
 /**
  * - Provides essential data to return focus to an HTMLElement after a series of UI
@@ -173,7 +181,7 @@ type A11yFocusSource = {
  */
 declare class ManagedPromise {
     /** @type {boolean} */
-    static "__#164823@#logging": boolean;
+    static "__#164829@#logging": boolean;
     /**
      * Sets global logging enabled state.
      *
@@ -331,8 +339,17 @@ type StackingContext = {
 };
 
 /**
- * First pass at a system to create a unique style sheet for the UI library that loads default values for all CSS
- * variables.
+ * Provides a managed dynamic style sheet / element useful in configuring global CSS variables. When creating an
+ * instance of StyleManager you must provide a "document key" / string for the style element added. The style element
+ * can be accessed via `document[docKey]`.
+ *
+ * Instances of StyleManager can also be versioned by supplying a positive integer greater than or equal to `1` via the
+ * 'version' option. This version number is assigned to the associated style element. When a StyleManager instance is
+ * created and there is an existing instance with a version that is lower than the current instance all CSS rules are
+ * removed letting the higher version to take precedence. This isn't a perfect system and requires thoughtful
+ * construction of CSS variables exposed, but allows multiple independently compiled TRL packages to load the latest
+ * CSS variables. It is recommended to always set `overwrite` option of {@link StyleManager.setProperty} and
+ * {@link StyleManager.setProperties} to `false` when loading initial values.
  */
 declare class StyleManager {
     /**
@@ -345,18 +362,23 @@ declare class StyleManager {
      *
      * @param {Document} [opts.document] - Target document to load styles into.
      *
+     * @param {number}   [opts.version] - An integer representing the version / level of styles being managed.
+     *
      */
-    constructor({ docKey, selector, document }?: {
+    constructor({ docKey, selector, document, version }?: {
         docKey: string;
         selector?: string;
         document?: Document;
+        version?: number;
     });
     /**
-     * Provides an accessor to get the `cssText` for the style sheet.
-     *
-     * @returns {string}
+     * @returns {string} Provides an accessor to get the `cssText` for the style sheet.
      */
     get cssText(): string;
+    /**
+     * @returns {number} Returns the version of this instance.
+     */
+    get version(): number;
     /**
      * Provides a copy constructor to duplicate an existing StyleManager instance into a new document.
      *
@@ -397,12 +419,11 @@ declare class StyleManager {
      */
     setProperty(key: string, value: string, overwrite?: boolean): void;
     /**
-     * Removes the property keys specified. If `keys` is a string a single property is removed. Or if `keys` is an
-     * iterable list then all property keys in the list are removed.
+     * Removes the property keys specified. If `keys` is an iterable list then all property keys in the list are removed.
      *
-     * @param {string|Iterable<string>} keys - The property keys to remove.
+     * @param {Iterable<string>} keys - The property keys to remove.
      */
-    removeProperties(keys: string | Iterable<string>): void;
+    removeProperties(keys: Iterable<string>): void;
     /**
      * Removes a particular CSS variable.
      *

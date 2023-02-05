@@ -275,7 +275,7 @@ class A11yHelper
          {
             if (debug)
             {
-               console.log(`A11yHelper.applyFocusSource debug - Attempting to apply focus target: `, focusOpts.focusEl);
+               console.debug(`A11yHelper.applyFocusSource debug - Attempting to apply focus target: `, focusOpts.focusEl);
             }
 
             for (const target of focusOpts.focusEl)
@@ -285,7 +285,7 @@ class A11yHelper
                   target.focus();
                   if (debug)
                   {
-                     console.log(`A11yHelper.applyFocusSource debug - Applied focus to target: `, target);
+                     console.debug(`A11yHelper.applyFocusSource debug - Applied focus to target: `, target);
                   }
                   break;
                }
@@ -297,20 +297,20 @@ class A11yHelper
                      element.focus();
                      if (debug)
                      {
-                        console.log(`A11yHelper.applyFocusSource debug - Applied focus to target: `, element);
+                        console.debug(`A11yHelper.applyFocusSource debug - Applied focus to target: `, element);
                      }
                      break;
                   }
                   else if (debug)
                   {
-                     console.log(`A11yHelper.applyFocusSource debug - Could not query selector: `, target);
+                     console.debug(`A11yHelper.applyFocusSource debug - Could not query selector: `, target);
                   }
                }
             }
          }
          else if (debug)
          {
-            console.log(`A11yHelper.applyFocusSource debug - No focus targets defined.`);
+            console.debug(`A11yHelper.applyFocusSource debug - No focus targets defined.`);
          }
       }, 0);
    }
@@ -448,7 +448,8 @@ class A11yHelper
    static #getFocusableSelectors(anchorHref = true)
    {
       return `button, [contenteditable=""], [contenteditable="true"], details summary:not([tabindex="-1"]), embed, a${
-       anchorHref ? '[href]' : ''}, iframe, object, input:not([type=hidden]), select, textarea, [tabindex]:not([tabindex="-1"])`;
+       anchorHref ? '[href]' : ''}, iframe, object, input:not([type=hidden]), select, textarea, ` +
+        `[tabindex]:not([tabindex="-1"])`;
    }
 
    /**
@@ -647,6 +648,18 @@ class A11yHelper
       }
 
       return false;
+   }
+
+   /**
+    * Convenience method to check if the given data is a valid focus source.
+    *
+    * @param {HTMLElement|string}   data - Either an HTMLElement or selector string.
+    *
+    * @returns {boolean} Is valid focus source.
+    */
+   static isFocusSource(data)
+   {
+      return data instanceof HTMLElement || typeof data === 'string';
    }
 }
 
@@ -1224,11 +1237,23 @@ function getStackingContext(node)
  */
 
 /**
- * First pass at a system to create a unique style sheet for the UI library that loads default values for all CSS
- * variables.
+ * Provides a managed dynamic style sheet / element useful in configuring global CSS variables. When creating an
+ * instance of StyleManager you must provide a "document key" / string for the style element added. The style element
+ * can be accessed via `document[docKey]`.
+ *
+ * Instances of StyleManager can also be versioned by supplying a positive integer greater than or equal to `1` via the
+ * 'version' option. This version number is assigned to the associated style element. When a StyleManager instance is
+ * created and there is an existing instance with a version that is lower than the current instance all CSS rules are
+ * removed letting the higher version to take precedence. This isn't a perfect system and requires thoughtful
+ * construction of CSS variables exposed, but allows multiple independently compiled TRL packages to load the latest
+ * CSS variables. It is recommended to always set `overwrite` option of {@link StyleManager.setProperty} and
+ * {@link StyleManager.setProperties} to `false` when loading initial values.
  */
 class StyleManager
 {
+   /** @type {CSSStyleRule} */
+   #cssRule;
+
    /** @type {string} */
    #docKey;
 
@@ -1238,8 +1263,8 @@ class StyleManager
    /** @type {HTMLStyleElement} */
    #styleElement;
 
-   /** @type {CSSStyleRule} */
-   #cssRule;
+   /** @type {number} */
+   #version;
 
    /**
     *
@@ -1251,20 +1276,37 @@ class StyleManager
     *
     * @param {Document} [opts.document] - Target document to load styles into.
     *
+    * @param {number}   [opts.version] - An integer representing the version / level of styles being managed.
+    *
     */
-   constructor({ docKey, selector = ':root', document = globalThis.document } = {})
+   constructor({ docKey, selector = ':root', document = globalThis.document, version } = {})
    {
-      if (typeof selector !== 'string') { throw new TypeError(`StyleManager error: 'selector' is not a string.`); }
       if (typeof docKey !== 'string') { throw new TypeError(`StyleManager error: 'docKey' is not a string.`); }
+
+      if (!(document instanceof Document))
+      {
+         throw new TypeError(`StyleManager error: 'document' is not an instance of Document.`);
+      }
+
+      if (typeof selector !== 'string') { throw new TypeError(`StyleManager error: 'selector' is not a string.`); }
+
+      if (version !== void 0 && !Number.isSafeInteger(version) && version < 1)
+      {
+         throw new TypeError(`StyleManager error: 'version' is defined and is not a positive integer >= 1.`);
+      }
 
       this.#selector = selector;
       this.#docKey = docKey;
+      this.#version = version;
 
       if (document[this.#docKey] === void 0)
       {
          this.#styleElement = document.createElement('style');
 
          document.head.append(this.#styleElement);
+
+         // Set initial style manager version if any supplied.
+         this.#styleElement._STYLE_MANAGER_VERSION = version;
 
          this.#styleElement.sheet.insertRule(`${selector} {}`, 0);
 
@@ -1276,17 +1318,34 @@ class StyleManager
       {
          this.#styleElement = document[docKey];
          this.#cssRule = this.#styleElement.sheet.cssRules[0];
+
+         if (version)
+         {
+            const existingVersion = this.#styleElement._STYLE_MANAGER_VERSION ?? 0;
+
+            // Remove all existing CSS rules / text if version is greater than existing version.
+            if (version > existingVersion)
+            {
+               this.#cssRule.style.cssText = '';
+            }
+         }
       }
    }
 
    /**
-    * Provides an accessor to get the `cssText` for the style sheet.
-    *
-    * @returns {string}
+    * @returns {string} Provides an accessor to get the `cssText` for the style sheet.
     */
    get cssText()
    {
       return this.#cssRule.style.cssText;
+   }
+
+   /**
+    * @returns {number} Returns the version of this instance.
+    */
+   get version()
+   {
+      return this.#version;
    }
 
    /**
@@ -1300,7 +1359,17 @@ class StyleManager
     */
    clone(document = globalThis.document)
    {
-      const newStyleManager = new StyleManager({ selector: this.#selector, docKey: this.#docKey, document });
+      if (!(document instanceof Document))
+      {
+         throw new TypeError(`StyleManager error: 'document' is not an instance of Document.`);
+      }
+
+      const newStyleManager = new StyleManager({
+         selector: this.#selector,
+         docKey: this.#docKey,
+         document,
+         version: this.#version
+      });
 
       newStyleManager.#cssRule.style.cssText = this.#cssRule.style.cssText;
 
@@ -1337,6 +1406,8 @@ class StyleManager
     */
    getProperty(key)
    {
+      if (typeof key !== 'string') { throw new TypeError(`StyleManager error: 'key' is not a string.`); }
+
       return this.#cssRule.style.getPropertyValue(key);
    }
 
@@ -1349,6 +1420,10 @@ class StyleManager
     */
    setProperties(rules, overwrite = true)
    {
+      if (!isObject(rules)) { throw new TypeError(`StyleManager error: 'rules' is not an object.`); }
+
+      if (typeof overwrite !== 'boolean') { throw new TypeError(`StyleManager error: 'overwrite' is not a boolean.`); }
+
       if (overwrite)
       {
          for (const [key, value] of Object.entries(rules))
@@ -1380,6 +1455,12 @@ class StyleManager
     */
    setProperty(key, value, overwrite = true)
    {
+      if (typeof key !== 'string') { throw new TypeError(`StyleManager error: 'key' is not a string.`); }
+
+      if (typeof value !== 'string') { throw new TypeError(`StyleManager error: 'value' is not a string.`); }
+
+      if (typeof overwrite !== 'boolean') { throw new TypeError(`StyleManager error: 'overwrite' is not a boolean.`); }
+
       if (overwrite)
       {
          this.#cssRule.style.setProperty(key, value);
@@ -1394,19 +1475,17 @@ class StyleManager
    }
 
    /**
-    * Removes the property keys specified. If `keys` is a string a single property is removed. Or if `keys` is an
-    * iterable list then all property keys in the list are removed.
+    * Removes the property keys specified. If `keys` is an iterable list then all property keys in the list are removed.
     *
-    * @param {string|Iterable<string>} keys - The property keys to remove.
+    * @param {Iterable<string>} keys - The property keys to remove.
     */
    removeProperties(keys)
    {
-      if (isIterable(keys))
+      if (!isIterable(keys)) { throw new TypeError(`StyleManager error: 'keys' is not an iterable list.`); }
+
+      for (const key of keys)
       {
-         for (const key of keys)
-         {
-            if (typeof key === 'string') { this.#cssRule.style.removeProperty(key); }
-         }
+         if (typeof key === 'string') { this.#cssRule.style.removeProperty(key); }
       }
    }
 
@@ -1419,6 +1498,8 @@ class StyleManager
     */
    removeProperty(key)
    {
+      if (typeof key !== 'string') { throw new TypeError(`StyleManager error: 'key' is not a string.`); }
+
       return this.#cssRule.style.removeProperty(key);
    }
 }
