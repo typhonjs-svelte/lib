@@ -119,7 +119,7 @@ export class StyleManager
     *
     * Note: This is used to support the `PopOut` module.
     *
-    * @param [document] Target browser document to clone into.
+    * @param {Document} [document] Target browser document to clone into.
     *
     * @returns {StyleManager} New style manager instance.
     */

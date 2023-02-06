@@ -1083,7 +1083,7 @@ declare class TJSLocalStorage {
      *
      * @returns {import('svelte/store').Writable} The new store.
      */
-    static "__#116232@#createStore"(key: string, defaultValue?: boolean): svelte_store.Writable<any>;
+    static "__#116235@#createStore"(key: string, defaultValue?: boolean): svelte_store.Writable<any>;
     /**
      * Get value from the localStorage.
      *
@@ -1136,7 +1136,7 @@ declare class TJSSessionStorage {
      *
      * @returns {import('svelte/store').Writable} The new store.
      */
-    static "__#116233@#createStore"(key: string, defaultValue?: boolean): svelte_store.Writable<any>;
+    static "__#116236@#createStore"(key: string, defaultValue?: boolean): svelte_store.Writable<any>;
     /**
      * Get value from the sessionStorage.
      *

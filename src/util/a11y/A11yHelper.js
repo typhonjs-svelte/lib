@@ -272,7 +272,7 @@ export class A11yHelper
             focusEl: focusEl !== void 0 ? [focusEl] : void 0,
             x,
             y,
-         }
+         };
       }
 
       if (!(event instanceof KeyboardEvent) && !(event instanceof MouseEvent))
@@ -311,7 +311,7 @@ export class A11yHelper
             result.x = x ?? rect.left + (rect.width / 2);
             result.y = y ?? rect.top + (rect.height / 2);
             result.focusEl = focusEl !== void 0 ? [targetEl, focusEl] : [targetEl];
-            result.source = 'keyboard'
+            result.source = 'keyboard';
          }
          else
          {
@@ -326,7 +326,7 @@ export class A11yHelper
          result.x = x ?? rect.left + (rect.width / 2);
          result.y = y ?? rect.top + (rect.height / 2);
          result.focusEl = focusEl !== void 0 ? [targetEl, focusEl] : [targetEl];
-         result.source = 'keyboard'
+         result.source = 'keyboard';
       }
 
       return result;

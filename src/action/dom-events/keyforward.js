@@ -10,8 +10,6 @@
  */
 export function keyforward(node, keyStore)
 {
-   let localFocused = false;
-
    if (typeof keyStore?.keydown !== 'function' || typeof keyStore.keyup !== 'function')
    {
       throw new TypeError(`'keyStore' doesn't have required 'keydown' or 'keyup' methods.`);
@@ -33,12 +31,18 @@ export function keyforward(node, keyStore)
       keyStore.keyup(event);
    }
 
+   /**
+    * Activates key listeners.
+    */
    function activateListeners()
    {
       node.addEventListener('keydown', onKeydown);
       node.addEventListener('keyup', onKeyup);
    }
 
+   /**
+    * Removes key listeners.
+    */
    function removeListeners()
    {
       node.removeEventListener('keydown', onKeydown);
