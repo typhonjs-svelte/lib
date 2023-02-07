@@ -49,10 +49,12 @@ export class StyleManager
    {
       if (typeof docKey !== 'string') { throw new TypeError(`StyleManager error: 'docKey' is not a string.`); }
 
-      if (!(document instanceof Document))
-      {
-         throw new TypeError(`StyleManager error: 'document' is not an instance of Document.`);
-      }
+      // TODO: Verify 'document' type from Popout FVTT module. For some reason the popout document trips this
+      //  unintentionally.
+      // if (!(document instanceof Document))
+      // {
+      //    throw new TypeError(`StyleManager error: 'document' is not an instance of Document.`);
+      // }
 
       if (typeof selector !== 'string') { throw new TypeError(`StyleManager error: 'selector' is not a string.`); }
 
@@ -125,11 +127,6 @@ export class StyleManager
     */
    clone(document = globalThis.document)
    {
-      if (!(document instanceof Document))
-      {
-         throw new TypeError(`StyleManager error: 'document' is not an instance of Document.`);
-      }
-
       const newStyleManager = new StyleManager({
          selector: this.#selector,
          docKey: this.#docKey,
