@@ -514,7 +514,7 @@ class A11yHelper
             focusEl: focusEl !== void 0 ? [focusEl] : void 0,
             x,
             y,
-         }
+         };
       }
 
       if (!(event instanceof KeyboardEvent) && !(event instanceof MouseEvent))
@@ -1283,10 +1283,12 @@ class StyleManager
    {
       if (typeof docKey !== 'string') { throw new TypeError(`StyleManager error: 'docKey' is not a string.`); }
 
-      if (!(document instanceof Document))
-      {
-         throw new TypeError(`StyleManager error: 'document' is not an instance of Document.`);
-      }
+      // TODO: Verify 'document' type from Popout FVTT module. For some reason the popout document trips this
+      //  unintentionally.
+      // if (!(document instanceof Document))
+      // {
+      //    throw new TypeError(`StyleManager error: 'document' is not an instance of Document.`);
+      // }
 
       if (typeof selector !== 'string') { throw new TypeError(`StyleManager error: 'selector' is not a string.`); }
 
@@ -1353,17 +1355,12 @@ class StyleManager
     *
     * Note: This is used to support the `PopOut` module.
     *
-    * @param [document] Target browser document to clone into.
+    * @param {Document} [document] Target browser document to clone into.
     *
     * @returns {StyleManager} New style manager instance.
     */
    clone(document = globalThis.document)
    {
-      if (!(document instanceof Document))
-      {
-         throw new TypeError(`StyleManager error: 'document' is not an instance of Document.`);
-      }
-
       const newStyleManager = new StyleManager({
          selector: this.#selector,
          docKey: this.#docKey,

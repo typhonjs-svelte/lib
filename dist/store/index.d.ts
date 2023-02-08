@@ -1009,15 +1009,11 @@ declare class KeyStore {
      */
     keydown(event: KeyboardEvent): void;
     /**
-     * Returns current pressed keys iterator.
-     *
-     * @returns {IterableIterator<string>}
+     * @returns {IterableIterator<string>} Returns current pressed keys iterator.
      */
     keysPressed(): IterableIterator<string>;
     /**
-     * Returns currently tracked keys iterator.
-     *
-     * @returns {IterableIterator<string>}
+     * @returns {IterableIterator<string>} Returns currently tracked keys iterator.
      */
     keysTracked(): IterableIterator<string>;
     /**

@@ -63,7 +63,7 @@ declare class A11yHelper {
      *
      * @returns {string} Focusable selectors for `querySelectorAll`.
      */
-    static "__#164828@#getFocusableSelectors"(anchorHref?: boolean): string;
+    static "__#164829@#getFocusableSelectors"(anchorHref?: boolean): string;
     /**
      * Gets a A11yFocusSource object from the given DOM event allowing for optional X / Y screen space overrides.
      * Browsers (Firefox / Chrome) forwards a mouse event for the context menu keyboard button. Provides detection of
@@ -181,7 +181,7 @@ type A11yFocusSource = {
  */
 declare class ManagedPromise {
     /** @type {boolean} */
-    static "__#164829@#logging": boolean;
+    static "__#164830@#logging": boolean;
     /**
      * Sets global logging enabled state.
      *
@@ -384,7 +384,7 @@ declare class StyleManager {
      *
      * Note: This is used to support the `PopOut` module.
      *
-     * @param [document] Target browser document to clone into.
+     * @param {Document} [document] Target browser document to clone into.
      *
      * @returns {StyleManager} New style manager instance.
      */
