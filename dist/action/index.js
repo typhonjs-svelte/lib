@@ -513,7 +513,7 @@ function autoBlur(node)
  *
  * @param {import('svelte/store').Writable<boolean>}  storeFocused - Update store for focus changes.
  *
- * @returns {{update: update, destroy: (function(): void)}} Action lifecycle methods.
+ * @returns {{update: (function(object): void), destroy: (function(): void)}} Action lifecycle methods.
  */
 function isFocused(node, storeFocused)
 {
@@ -586,7 +586,7 @@ function isFocused(node, storeFocused)
  *
  * @param {{keydown: Function, keyup: Function}}   keyStore - Object to forward events key down / up events to...
  *
- * @returns {{update: update, destroy: (function(): void)}} Action lifecycle methods.
+ * @returns {{update: (function(object): void), destroy: (function(): void)}} Action lifecycle methods.
  */
 function keyforward(node, keyStore)
 {
