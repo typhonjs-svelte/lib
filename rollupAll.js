@@ -200,7 +200,8 @@ for (const config of rollupConfigs)
 
    await generateTSDef({
       main: config.input.input,
-      output: upath.changeExt(config.output.file, '.d.ts')
+      output: upath.changeExt(config.output.file, '.d.ts'),
+      bundlePackageExports: true
    });
 
    fs.writeJSONSync(`${path.dirname(config.output.file)}/package.json`, {
