@@ -1,10 +1,6 @@
-import path                from 'path';
-
 import resolve             from '@rollup/plugin-node-resolve';
-import { generateTSDef }   from '@typhonjs-build-test/esm-d-ts';
-import fs                  from 'fs-extra';
+import { generateDTS }     from '@typhonjs-build-test/esm-d-ts';
 import { rollup }          from 'rollup';
-import upath               from 'upath';
 
 const s_SOURCEMAPS = true;
 
@@ -26,60 +22,108 @@ const outputPlugins = [];
 // Defines whether source maps are generated / loaded from the .env file.
 const sourcemap = s_SOURCEMAPS;
 
+// GenerateDTS options -----------------------------------------------------------------------------------------------
+
+// Provides naive search / replace of bundled declaration file rewriting the re-bundled definitions from
+// @typhonjs-svelte/lib. This will alter the JSDoc comments and import symbols.
+const replace = {
+   _typhonjs_svelte_lib_: '_typhonjs_fvtt_svelte_',
+   '@typhonjs-svelte/lib/': '@typhonjs-fvtt/svelte/'
+};
+
+/**
+ * Filter out "Duplicate identifier 'DOMRect'" messages.
+ *
+ * TODO: NOTE - The filtering of 2300 is unwanted churn, but 1014 can be a valid error though currently there is no
+ * great way to describe destructuring rest parameters as a function argument with JSDoc that Typescript agrees with.
+ * See this issue:
+ *
+ * @param {import('typescript').Diagnostic} diagnostic -
+ *
+ * @param {string} message -
+ *
+ * @returns {boolean} Return true to filter message.
+ */
+const filterDiagnostic = (diagnostic, message) =>
+ (diagnostic.code === 2300 && message === `Duplicate identifier 'DOMRect'.`) ||
+ (diagnostic.code === 1014 && message === `A rest parameter must be last in a parameter list.`);
+
+// We don't care about external warning messages for `@typhonjs-svelte/lib` imports.
+const ignorePattern = /^@typhonjs-svelte\/lib/;
+
+const onwarn = (warning, warn) =>
+{
+   if (warning.code === 'UNRESOLVED_IMPORT' && ignorePattern.test(warning.exporter)) { return; }
+   warn(warning);
+};
+
+// Rollup plugin options for generateDTS.
+const dtsPluginOptions = { bundlePackageExports: true, filterDiagnostic, onwarn };
+
+// -------------------------------------------------------------------------------------------------------------------
+
 const rollupConfigs = [{
       input: {
          input: 'src/action/index.js',
          external: s_LOCAL_EXTERNAL,
+         plugins: [
+            generateDTS.plugin(dtsPluginOptions)
+         ]
       },
       output: {
          file: 'dist/action/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          plugins: outputPlugins,
-         sourcemap,
-         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
+         sourcemap
       }
    },
    {
       input: {
          input: 'src/animate/index.js',
          external: s_LOCAL_EXTERNAL,
+         plugins: [
+            generateDTS.plugin(dtsPluginOptions)
+         ]
       },
       output: {
          file: 'dist/animate/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          plugins: outputPlugins,
-         sourcemap,
-         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
+         sourcemap
       }
    },
    {
       input: {
          input: 'src/handler/index.js',
          external: s_LOCAL_EXTERNAL,
+         plugins: [
+            generateDTS.plugin(dtsPluginOptions)
+         ]
       },
       output: {
          file: 'dist/handler/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          plugins: outputPlugins,
-         sourcemap,
-         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
+         sourcemap
       }
    },
    {
       input: {
          input: 'src/helper/index.js',
          external: s_LOCAL_EXTERNAL,
+         plugins: [
+            generateDTS.plugin(dtsPluginOptions)
+         ]
       },
       output: {
          file: 'dist/helper/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          plugins: outputPlugins,
-         sourcemap,
-         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
+         sourcemap
       }
    },
    {
@@ -87,7 +131,8 @@ const rollupConfigs = [{
          input: 'src/math/index.js',
          external: s_LOCAL_EXTERNAL,
          plugins: [
-            resolve()
+            resolve(),
+            generateDTS.plugin(dtsPluginOptions)
          ]
       },
       output: {
@@ -95,8 +140,7 @@ const rollupConfigs = [{
          format: 'es',
          generatedCode: { constBindings: true },
          plugins: outputPlugins,
-         sourcemap,
-         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
+         sourcemap
       }
    },
    {
@@ -104,7 +148,8 @@ const rollupConfigs = [{
          input: 'src/store/index.js',
          external: s_LOCAL_EXTERNAL,
          plugins: [
-            resolve()
+            resolve(),
+            generateDTS.plugin(dtsPluginOptions)
          ]
       },
       output: {
@@ -112,8 +157,24 @@ const rollupConfigs = [{
          format: 'es',
          generatedCode: { constBindings: true },
          plugins: outputPlugins,
-         sourcemap,
-         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
+         sourcemap
+      }
+   },
+   {
+      input: {
+         input: 'src/store/position/index.js',
+         external: s_LOCAL_EXTERNAL,
+         plugins: [
+            resolve(),
+            generateDTS.plugin({ ...dtsPluginOptions, prependGen: ['src/store/position/typedefs.js'] })
+         ]
+      },
+      output: {
+         file: 'dist/store/position/index.js',
+         format: 'es',
+         generatedCode: { constBindings: true },
+         plugins: outputPlugins,
+         sourcemap
       }
    },
    {
@@ -121,7 +182,8 @@ const rollupConfigs = [{
          input: 'src/transition/index.js',
          external: s_LOCAL_EXTERNAL,
          plugins: [
-            resolve()
+            resolve(),
+            generateDTS.plugin(dtsPluginOptions)
          ]
       },
       output: {
@@ -129,8 +191,7 @@ const rollupConfigs = [{
          format: 'es',
          generatedCode: { constBindings: true },
          plugins: outputPlugins,
-         sourcemap,
-         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
+         sourcemap
       }
    },
    {
@@ -138,7 +199,8 @@ const rollupConfigs = [{
          input: 'src/util/index.js',
          external: s_LOCAL_EXTERNAL,
          plugins: [
-            resolve()
+            resolve(),
+            generateDTS.plugin(dtsPluginOptions)
          ]
       },
       output: {
@@ -146,22 +208,23 @@ const rollupConfigs = [{
          format: 'es',
          generatedCode: { constBindings: true },
          plugins: outputPlugins,
-         sourcemap,
-         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
+         sourcemap
       }
    },
    {
       input: {
          input: 'src/plugin/data/index.js',
-         external: s_LOCAL_EXTERNAL
+         external: s_LOCAL_EXTERNAL,
+         plugins: [
+            generateDTS.plugin(dtsPluginOptions)
+         ]
       },
       output: {
          file: 'dist/plugin/data/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          plugins: outputPlugins,
-         sourcemap,
-         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
+         sourcemap
       }
    },
    {
@@ -169,7 +232,8 @@ const rollupConfigs = [{
          input: 'src/plugin/system/index.js',
          external: s_LOCAL_EXTERNAL,
          plugins: [
-            resolve()
+            resolve(),
+            generateDTS.plugin(dtsPluginOptions)
          ]
       },
       output: {
@@ -177,8 +241,7 @@ const rollupConfigs = [{
          format: 'es',
          generatedCode: { constBindings: true },
          plugins: outputPlugins,
-         sourcemap,
-         // sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
+         sourcemap
       }
    }
 ];
@@ -186,28 +249,8 @@ const rollupConfigs = [{
 for (const config of rollupConfigs)
 {
    console.log(`Generating bundle: ${config.input.input}`);
-// console.log(`config input: `, config.input);
-// console.log(`config output: `, config.output);
 
    const bundle = await rollup(config.input);
-
    await bundle.write(config.output);
-
-   // closes the bundle
    await bundle.close();
-
-   console.log(`Generating TS Declaration: ${config.input.input}`);
-
-   await generateTSDef({
-      main: config.input.input,
-      output: upath.changeExt(config.output.file, '.d.ts'),
-      bundlePackageExports: true
-   });
-
-   fs.writeJSONSync(`${path.dirname(config.output.file)}/package.json`, {
-      main: './index.js',
-      module: './index.js',
-      type: 'module',
-      types: './index.d.ts'
-   });
 }
