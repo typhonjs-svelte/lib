@@ -32,6 +32,10 @@
       "types": "./dist/store/index.d.ts",
       "import": "./dist/store/index.js"
     },
+    "./store/position": {
+      "types": "./dist/store/position/index.d.ts",
+      "import": "./dist/store/position/index.js"
+    },
     "./transition": {
       "types": "./dist/transition/index.d.ts",
       "import": "./dist/transition/index.js"
