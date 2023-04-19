@@ -352,7 +352,7 @@ type ValidatorData = {
  *          position validator options.
  */
 type PositionValidatorOptions = ValidatorFn | ValidatorData | Iterable<ValidatorFn | ValidatorData>;
-
+export { PositionInitialHelper, PositionValidatorOptions, PositionDataExtended };
 import * as _typhonjs_svelte_lib_animate from '@typhonjs-svelte/lib/animate';
 
 /**
