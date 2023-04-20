@@ -24,13 +24,6 @@ const sourcemap = s_SOURCEMAPS;
 
 // GenerateDTS options -----------------------------------------------------------------------------------------------
 
-// Provides naive search / replace of bundled declaration file rewriting the re-bundled definitions from
-// @typhonjs-svelte/lib. This will alter the JSDoc comments and import symbols.
-const replace = {
-   _typhonjs_svelte_lib_: '_typhonjs_fvtt_svelte_',
-   '@typhonjs-svelte/lib/': '@typhonjs-fvtt/svelte/'
-};
-
 /**
  * Filter out "Duplicate identifier 'DOMRect'" messages.
  *
@@ -132,7 +125,10 @@ const rollupConfigs = [{
          external: s_LOCAL_EXTERNAL,
          plugins: [
             resolve(),
-            generateDTS.plugin(dtsPluginOptions)
+            generateDTS.plugin({ ...dtsPluginOptions, replace: {
+               '/// <reference types="gl-matrix/index.js" />': '',  // Remove reference in dist/math/index.d.ts
+               "export \\* from 'gl-matrix';": ''
+            } })
          ]
       },
       output: {
@@ -166,7 +162,13 @@ const rollupConfigs = [{
          external: s_LOCAL_EXTERNAL,
          plugins: [
             resolve(),
-            generateDTS.plugin({ ...dtsPluginOptions, prependGen: ['src/store/position/typedefs.js'] })
+            generateDTS.plugin({
+               ...dtsPluginOptions,
+               prependGen: ['src/store/position/typedefs.js'],
+               prependString: [
+                  'export { TJSPositionInitialHelper, TJSPositionValidatorOptions, TJSPositionDataExtended };'
+               ]
+            })
          ]
       },
       output: {
