@@ -240,6 +240,21 @@ declare class ManagedPromise {
 }
 
 /**
+ * Provides utility methods for checking browser capabilities.
+ *
+ * TODO: perhaps add support for various standard media query checks for level 4 & 5.
+ * @see https://kilianvalkhof.com/2021/web/detecting-media-query-support-in-css-and-javascript/
+ */
+declare class BrowserSupports {
+    /**
+     * Check for container query support.
+     *
+     * @returns {boolean} True if container queries supported.
+     */
+    static get containerQueries(): boolean;
+}
+
+/**
  * Provides access to the Clipboard API for reading / writing text strings. This requires a secure context.
  *
  * Note: `writeText` will attempt to use the older `execCommand` if available when `navigator.clipboard` is not
@@ -643,4 +658,4 @@ declare function safeAccess(data: object, accessor: string, defaultValue?: any):
  */
 declare function safeSet(data: object, accessor: string, value: any, operation?: string, createMissing?: boolean): boolean;
 
-export { A11yFocusSource, A11yHelper, ClipboardAccess, ManagedPromise, StackingContext, StyleManager, debounce, deepMerge, getStackingContext, hasAccessor, hasGetter, hasPrototype, hasSetter, hashCode, isApplicationShell, isHMRProxy, isIterable, isIterableAsync, isObject, isPlainObject, isSvelteComponent, klona, normalizeString, outroAndDestroy, parseSvelteConfig, safeAccess, safeSet, striptags, styleParsePixels, uuidv4 };
+export { A11yFocusSource, A11yHelper, BrowserSupports, ClipboardAccess, ManagedPromise, StackingContext, StyleManager, debounce, deepMerge, getStackingContext, hasAccessor, hasGetter, hasPrototype, hasSetter, hashCode, isApplicationShell, isHMRProxy, isIterable, isIterableAsync, isObject, isPlainObject, isSvelteComponent, klona, normalizeString, outroAndDestroy, parseSvelteConfig, safeAccess, safeSet, striptags, styleParsePixels, uuidv4 };
