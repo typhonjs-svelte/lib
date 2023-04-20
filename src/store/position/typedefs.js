@@ -179,6 +179,10 @@
  * @see https://glmatrix.net/docs/module-mat4.html
  */
 
+/**
+ * @typedef {'top left' | 'top center' | 'top right' | 'center left' | 'center' | 'center right' | 'bottom left' | 'bottom center' | 'bottom right' } TJSTransformOrigin - The supported transform origin strings.
+ */
+
 // From: position/validators/AdapterValidators.js --------------------------------------------------------------------
 
 /**
