@@ -166,7 +166,7 @@ const rollupConfigs = [{
                ...dtsPluginOptions,
                prependGen: ['src/store/position/typedefs.js'],
                prependString: [
-                  'export { TJSPositionInitialHelper, TJSPositionValidatorOptions, TJSPositionDataExtended };'
+                  'export { TJSPositionInitialHelper, TJSPositionValidatorOptions, TJSPositionDataExtended, TJSTransformOrigin };'
                ]
             })
          ]
