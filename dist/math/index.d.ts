@@ -1,5 +1,5 @@
-/// <reference types="gl-matrix/index.js" />
-export * from 'gl-matrix';
+
+
 
 /**
  * Performs linear interpolation between a start & end value by given amount between 0 - 1 inclusive.
