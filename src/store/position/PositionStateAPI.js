@@ -4,22 +4,22 @@ import { lerp }         from '@typhonjs-svelte/lib/math';
 import { isIterable }   from '@typhonjs-svelte/lib/util';
 
 // Explicit import for TS declaration generation.
-import { PositionData } from './PositionData.js';  // eslint-disable-line no-unused-vars
+import { TJSPositionData } from './TJSPositionData.js';  // eslint-disable-line no-unused-vars
 
 export class PositionStateAPI
 {
-   /** @type {PositionData} */
+   /** @type {TJSPositionData} */
    #data;
 
    /**
-    * @type {Map<string, PositionDataExtended>}
+    * @type {Map<string, TJSPositionDataExtended>}
     */
    #dataSaved = new Map();
 
-   /** @type {Position} */
+   /** @type {TJSPosition} */
    #position;
 
-   /** @type {Transforms} */
+   /** @type {TJSTransforms} */
    #transforms;
 
    constructor(position, data, transforms)
@@ -36,7 +36,7 @@ export class PositionStateAPI
     *
     * @param {string}   options.name - Saved data set name.
     *
-    * @returns {PositionDataExtended} The saved data set.
+    * @returns {TJSPositionDataExtended} The saved data set.
     */
    get({ name })
    {
@@ -48,7 +48,7 @@ export class PositionStateAPI
    /**
     * Returns any associated default data.
     *
-    * @returns {PositionDataExtended} Associated default data.
+    * @returns {TJSPositionDataExtended} Associated default data.
     */
    getDefault()
    {
@@ -62,7 +62,7 @@ export class PositionStateAPI
     *
     * @param {string}   options.name - Name to remove and retrieve.
     *
-    * @returns {PositionDataExtended} Saved position data.
+    * @returns {TJSPositionDataExtended} Saved position data.
     */
    remove({ name })
    {
@@ -92,7 +92,7 @@ export class PositionStateAPI
       // Quit early if there is no saved default data.
       if (typeof defaultData !== 'object') { return false; }
 
-      // Cancel all animations for Position if there are currently any scheduled.
+      // Cancel all animations for TJSPosition if there are currently any scheduled.
       if (this.#position.animate.isScheduled)
       {
          this.#position.animate.cancel();
@@ -146,7 +146,7 @@ export class PositionStateAPI
     *
     * @param {Function}          [params.interpolate=lerp] - Interpolation function.
     *
-    * @returns {PositionDataExtended|Promise<PositionDataExtended>} Saved position data.
+    * @returns {TJSPositionDataExtended|Promise<TJSPositionDataExtended>} Saved position data.
     */
    restore({ name, remove = false, properties, silent = false, async = false, animateTo = false, duration = 0.1,
     ease = linear, interpolate = lerp })
@@ -210,7 +210,7 @@ export class PositionStateAPI
     *
     * @param {...*}     [opts.extra] - Extra data to add to saved data.
     *
-    * @returns {PositionData} Current position data
+    * @returns {TJSPositionData} Current position data
     */
    save({ name, ...extra })
    {
@@ -230,7 +230,7 @@ export class PositionStateAPI
     *
     * @param {string}   opts.name - name to index this saved data.
     *
-    * @param {...*}     [opts.data] - Position data to set.
+    * @param {...*}     [opts.data] - TJSPosition data to set.
     */
    set({ name, ...data })
    {

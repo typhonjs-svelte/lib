@@ -1,25 +1,25 @@
 import { writable }        from 'svelte/store';
 
-import { TransformData }   from '../transform/TransformData.js';
-import { PositionData }    from '../PositionData.js';
+import { TJSTransformData }   from '../transform/TJSTransformData.js';
+import { TJSPositionData }    from '../TJSPositionData.js';
 
 export class UpdateElementData
 {
    constructor()
    {
       /**
-       * Stores the private data from Position.
+       * Stores the private data from TJSPosition.
        *
-       * @type {PositionData}
+       * @type {TJSPositionData}
        */
       this.data = void 0;
 
       /**
        * Provides a copy of local data sent to subscribers.
        *
-       * @type {PositionData}
+       * @type {TJSPositionData}
        */
-      this.dataSubscribers = new PositionData();
+      this.dataSubscribers = new TJSPositionData();
 
       /**
        * Stores the current dimension data used for the readable `dimension` store.
@@ -34,12 +34,12 @@ export class UpdateElementData
       this.changeSet = void 0;
 
       /**
-       * @type {PositionOptions}
+       * @type {TJSPositionOptions}
        */
       this.options = void 0;
 
       /**
-       * Stores if this Position / update data is queued for update.
+       * Stores if this TJSPosition / update data is queued for update.
        *
        * @type {boolean}
        */
@@ -51,7 +51,7 @@ export class UpdateElementData
       this.styleCache = void 0;
 
       /**
-       * @type {Transforms}
+       * @type {TJSTransforms}
        */
       this.transforms = void 0;
 
@@ -59,12 +59,12 @@ export class UpdateElementData
        * Stores the current transform data used for the readable `transform` store. It is only active when there are
        * subscribers to the store or calculateTransform options is true.
        *
-       * @type {TransformData}
+       * @type {TJSTransformData}
        */
-      this.transformData = new TransformData();
+      this.transformData = new TJSTransformData();
 
       /**
-       * @type {(function(PositionData): void)[]}
+       * @type {(function(TJSPositionData): void)[]}
        */
       this.subscriptions = void 0;
 
@@ -76,7 +76,7 @@ export class UpdateElementData
       // When there are subscribers set option to calculate transform updates; set to false when no subscribers.
 
       /**
-       * @type {import('svelte/store').Writable<TransformData>}
+       * @type {import('svelte/store').Writable<TJSTransformData>}
        */
       this.storeTransform = writable(this.transformData, () =>
       {

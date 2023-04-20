@@ -1,5 +1,5 @@
 /**
- * Provides animation management and scheduling allowing all Position instances to utilize one micro-task.
+ * Provides animation management and scheduling allowing all TJSPosition instances to utilize one micro-task.
  */
 export class AnimationManager
 {
@@ -123,9 +123,9 @@ export class AnimationManager
    }
 
    /**
-    * Cancels all animations for given Position instance.
+    * Cancels all animations for given TJSPosition instance.
     *
-    * @param {Position} position - Position instance.
+    * @param {TJSPosition} position - TJSPosition instance.
     */
    static cancel(position)
    {
@@ -176,11 +176,11 @@ export class AnimationManager
    }
 
    /**
-    * Gets all {@link AnimationControl} instances for a given Position instance.
+    * Gets all {@link AnimationControl} instances for a given TJSPosition instance.
     *
-    * @param {Position} position - Position instance.
+    * @param {TJSPosition} position - TJSPosition instance.
     *
-    * @returns {AnimationControl[]} All scheduled AnimationControl instances for the given Position instance.
+    * @returns {AnimationControl[]} All scheduled AnimationControl instances for the given TJSPosition instance.
     */
    static getScheduled(position)
    {

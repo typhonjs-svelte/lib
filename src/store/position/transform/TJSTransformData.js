@@ -1,9 +1,9 @@
 import { mat4, vec3 }   from '@typhonjs-svelte/lib/math';
 
 /**
- * Provides the output data for {@link Transforms.getData}.
+ * Provides the output data for {@link TJSTransforms.getData}.
  */
-export class TransformData
+export class TJSTransformData
 {
    constructor()
    {

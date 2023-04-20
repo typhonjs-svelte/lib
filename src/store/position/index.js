@@ -1,4 +1,4 @@
-export * from './Position.js';
+export * from './TJSPosition.js';
 
 export * from './transform/index.js';
-export * from './PositionData.js';
+export * from './TJSPositionData.js';

@@ -1,7 +1,7 @@
 import { isObject } from '@typhonjs-svelte/lib/util';
 
 /**
- * Provides a TJSBasicAnimation implementation for Position animation.
+ * Provides a TJSBasicAnimation implementation for TJSPosition animation.
  */
 export class AnimationControl
 {

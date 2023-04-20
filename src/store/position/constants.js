@@ -1,5 +1,5 @@
 /**
- * Stores the PositionData properties that can be animated.
+ * Stores the TJSPositionData properties that can be animated.
  *
  * @type {Set<string>}
  */
@@ -13,7 +13,7 @@ const animateKeys = new Set([
 ]);
 
 /**
- * Defines the keys of PositionData that are transform keys.
+ * Defines the keys of TJSPositionData that are transform keys.
  *
  * @type {string[]}
  */
@@ -29,7 +29,7 @@ Object.freeze(transformKeys);
 const relativeRegex = /^([-+*])=(-?[\d]*\.?[\d]+)$/;
 
 /**
- * Provides numeric defaults for all parameters. This is used by {@link Position.get} to optionally provide
+ * Provides numeric defaults for all parameters. This is used by {@link TJSPosition.get} to optionally provide
  * numeric defaults.
  *
  * @type {{rotation: number, scale: number, minWidth: null, minHeight: null, translateZ: number, top: number, left: number, maxHeight: null, translateY: number, translateX: number, width: number, transformOrigin: null, rotateX: number, rotateY: number, height: number, maxWidth: null, zIndex: null, rotateZ: number}}
@@ -61,9 +61,9 @@ const numericDefaults = {
 Object.freeze(numericDefaults);
 
 /**
- * Sets numeric defaults for a {@link PositionData} like object.
+ * Sets numeric defaults for a {@link TJSPositionData} like object.
  *
- * @param {object}   data - A PositionData like object.
+ * @param {object}   data - A TJSPositionData like object.
  */
 function setNumericDefaults(data)
 {
@@ -81,7 +81,7 @@ function setNumericDefaults(data)
 }
 
 /**
- * Defines bitwise keys for transforms used in {@link Transforms.getMat4}.
+ * Defines bitwise keys for transforms used in {@link TJSTransforms.getMat4}.
  *
  * @type {object}
  */

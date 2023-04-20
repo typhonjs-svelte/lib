@@ -129,7 +129,7 @@ export class StyleCache
       this.resizeObserved.offsetHeight = void 0;
       this.resizeObserved.offsetWidth = void 0;
 
-      // Reset the tracked element this Position instance is modifying.
+      // Reset the tracked element this TJSPosition instance is modifying.
       this.stores.element.set(void 0);
    }
 
@@ -158,7 +158,7 @@ export class StyleCache
 
       this.hasWillChange = willChange !== '' && willChange !== 'auto';
 
-      // Update the tracked element this Position instance is modifying.
+      // Update the tracked element this TJSPosition instance is modifying.
       this.stores.element.set(el);
    }
 }

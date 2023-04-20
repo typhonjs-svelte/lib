@@ -8,13 +8,13 @@ import { AnimationGroupControl } from './AnimationGroupControl.js';
 
 // Explicit import for TS declaration generation.
 import { AnimationControl }      from './AnimationControl.js'; // eslint-disable-line no-unused-vars
-import { Position }              from '../Position.js';        // eslint-disable-line no-unused-vars
+import { TJSPosition }              from '../TJSPosition.js';        // eslint-disable-line no-unused-vars
 
 /**
- * Provides a public API for grouping multiple {@link Position} animations together with the AnimationManager.
+ * Provides a public API for grouping multiple {@link TJSPosition} animations together with the AnimationManager.
  *
- * Note: To remove cyclic dependencies as this class provides the Position static / group Animation API `instanceof`
- * checks are not done against Position. Instead, a check for the animate property being an instanceof
+ * Note: To remove cyclic dependencies as this class provides the TJSPosition static / group Animation API `instanceof`
+ * checks are not done against TJSPosition. Instead, a check for the animate property being an instanceof
  * {@link AnimationAPI} is performed in {@link AnimationGroupAPI.#isPosition}.
  *
  * @see AnimationAPI
@@ -22,11 +22,11 @@ import { Position }              from '../Position.js';        // eslint-disable
 export class AnimationGroupAPI
 {
    /**
-    * Checks of the given object is a Position instance by checking for AnimationAPI.
+    * Checks of the given object is a TJSPosition instance by checking for AnimationAPI.
     *
     * @param {*}  object - Any data.
     *
-    * @returns {boolean} Is Position.
+    * @returns {boolean} Is TJSPosition.
     */
    static #isPosition(object)
    {
@@ -34,9 +34,9 @@ export class AnimationGroupAPI
    }
 
    /**
-    * Cancels any animation for given Position data.
+    * Cancels any animation for given TJSPosition data.
     *
-    * @param {Position|{position: Position}|Iterable<Position>|Iterable<{position: Position}>} position -
+    * @param {TJSPosition|{position: TJSPosition}|Iterable<TJSPosition>|Iterable<{position: TJSPosition}>} position -
     */
    static cancel(position)
    {
@@ -74,16 +74,16 @@ export class AnimationGroupAPI
    }
 
    /**
-    * Cancels all Position animation.
+    * Cancels all TJSPosition animation.
     */
    static cancelAll() { AnimationManager.cancelAll(); }
 
    /**
     * Gets all animation controls for the given position data.
     *
-    * @param {Position|{position: Position}|Iterable<Position>|Iterable<{position: Position}>} position -
+    * @param {TJSPosition|{position: TJSPosition}|Iterable<TJSPosition>|Iterable<{position: TJSPosition}>} position -
     *
-    * @returns {{position: Position, data: object|void, controls: AnimationControl[]}[]} Results array.
+    * @returns {{position: TJSPosition, data: object|void, controls: AnimationControl[]}[]} Results array.
     */
    static getScheduled(position)
    {
@@ -131,9 +131,9 @@ export class AnimationGroupAPI
    }
 
    /**
-    * Provides the `from` animation tween for one or more Position instances as a group.
+    * Provides the `from` animation tween for one or more TJSPosition instances as a group.
     *
-    * @param {Position|{position: Position}|Iterable<Position>|Iterable<{position: Position}>} position -
+    * @param {TJSPosition|{position: TJSPosition}|Iterable<TJSPosition>|Iterable<{position: TJSPosition}>} position -
     *
     * @param {object|Function}   fromData -
     *
@@ -270,9 +270,9 @@ export class AnimationGroupAPI
    }
 
    /**
-    * Provides the `fromTo` animation tween for one or more Position instances as a group.
+    * Provides the `fromTo` animation tween for one or more TJSPosition instances as a group.
     *
-    * @param {Position|{position: Position}|Iterable<Position>|Iterable<{position: Position}>} position -
+    * @param {TJSPosition|{position: TJSPosition}|Iterable<TJSPosition>|Iterable<{position: TJSPosition}>} position -
     *
     * @param {object|Function}   fromData -
     *
@@ -443,9 +443,9 @@ export class AnimationGroupAPI
    }
 
    /**
-    * Provides the `to` animation tween for one or more Position instances as a group.
+    * Provides the `to` animation tween for one or more TJSPosition instances as a group.
     *
-    * @param {Position|{position: Position}|Iterable<Position>|Iterable<{position: Position}>} position -
+    * @param {TJSPosition|{position: TJSPosition}|Iterable<TJSPosition>|Iterable<{position: TJSPosition}>} position -
     *
     * @param {object|Function}   toData -
     *
@@ -582,9 +582,9 @@ export class AnimationGroupAPI
    }
 
    /**
-    * Provides the `to` animation tween for one or more Position instances as a group.
+    * Provides the `to` animation tween for one or more TJSPosition instances as a group.
     *
-    * @param {Position|{position: Position}|Iterable<Position>|Iterable<{position: Position}>} position -
+    * @param {TJSPosition|{position: TJSPosition}|Iterable<TJSPosition>|Iterable<{position: TJSPosition}>} position -
     *
     * @param {Iterable<string>}  keys -
     *

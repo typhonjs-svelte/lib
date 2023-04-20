@@ -15,14 +15,14 @@ import {
    setNumericDefaults }       from '../constants.js';
 
 // Explicit import for TS declaration generation.
-import { Position }           from '../Position.js';     // eslint-disable-line no-unused-vars
-import { PositionData }       from '../PositionData.js'; // eslint-disable-line no-unused-vars
+import { TJSPosition }           from '../TJSPosition.js';     // eslint-disable-line no-unused-vars
+import { TJSPositionData }       from '../TJSPositionData.js'; // eslint-disable-line no-unused-vars
 export class AnimationAPI
 {
-   /** @type {PositionData} */
+   /** @type {TJSPositionData} */
    #data;
 
-   /** @type {Position} */
+   /** @type {TJSPosition} */
    #position;
 
    /**
@@ -41,9 +41,9 @@ export class AnimationAPI
    #cleanup;
 
    /**
-    * @param {Position}       position -
+    * @param {TJSPosition}       position -
     *
-    * @param {PositionData}   data -
+    * @param {TJSPositionData}   data -
     */
    constructor(position, data)
    {
@@ -54,7 +54,7 @@ export class AnimationAPI
    }
 
    /**
-    * Returns whether there are scheduled animations whether active or delayed for this Position.
+    * Returns whether there are scheduled animations whether active or delayed for this TJSPosition.
     *
     * @returns {boolean} Are there active animation instances.
     */
@@ -149,7 +149,7 @@ export class AnimationAPI
    }
 
    /**
-    * Cancels all animation instances for this Position instance.
+    * Cancels all animation instances for this TJSPosition instance.
     */
    cancel()
    {
@@ -172,9 +172,9 @@ export class AnimationAPI
    }
 
    /**
-    * Returns all currently scheduled AnimationControl instances for this Position instance.
+    * Returns all currently scheduled AnimationControl instances for this TJSPosition instance.
     *
-    * @returns {AnimationControl[]} All currently scheduled animation controls for this Position instance.
+    * @returns {AnimationControl[]} All currently scheduled animation controls for this TJSPosition instance.
     */
    getScheduled()
    {
@@ -184,7 +184,7 @@ export class AnimationAPI
    /**
     * Provides a tween from given position data to the current position.
     *
-    * @param {PositionDataExtended} fromData - The starting position.
+    * @param {TJSPositionDataExtended} fromData - The starting position.
     *
     * @param {object}         [opts] - Optional parameters.
     *
@@ -261,9 +261,9 @@ export class AnimationAPI
    /**
     * Provides a tween from given position data to the current position.
     *
-    * @param {PositionDataExtended} fromData - The starting position.
+    * @param {TJSPositionDataExtended} fromData - The starting position.
     *
-    * @param {PositionDataExtended} toData - The ending position.
+    * @param {TJSPositionDataExtended} toData - The ending position.
     *
     * @param {object}         [opts] - Optional parameters.
     *
@@ -352,7 +352,7 @@ export class AnimationAPI
    /**
     * Provides a tween to given position data from the current position.
     *
-    * @param {PositionDataExtended} toData - The destination position.
+    * @param {TJSPositionDataExtended} toData - The destination position.
     *
     * @param {object}         [opts] - Optional parameters.
     *

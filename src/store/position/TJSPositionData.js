@@ -1,7 +1,7 @@
 /**
  * Defines stored positional data.
  */
-export class PositionData
+export class TJSPositionData
 {
    constructor({ height = null, left = null, maxHeight = null, maxWidth = null, minHeight = null, minWidth = null,
     rotateX = null, rotateY = null, rotateZ = null, scale = null, translateX = null, translateY = null,
@@ -98,9 +98,9 @@ export class PositionData
    /**
     * Copies given data to this instance.
     *
-    * @param {PositionData}   data - Copy from this instance.
+    * @param {TJSPositionData}   data - Copy from this instance.
     *
-    * @returns {PositionData} This instance.
+    * @returns {TJSPositionData} This instance.
     */
    copy(data)
    {

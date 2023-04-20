@@ -1,9 +1,9 @@
-import { TransformData }   from '../transform/TransformData.js';
+import { TJSTransformData }   from '../transform/TJSTransformData.js';
 
 // Explicit import for TS declaration generation.
-import { PositionData }    from '../PositionData.js'; // eslint-disable-line no-unused-vars
+import { TJSPositionData }    from '../TJSPositionData.js'; // eslint-disable-line no-unused-vars
 
-const s_TRANSFORM_DATA = new TransformData();
+const s_TRANSFORM_DATA = new TJSTransformData();
 
 export class TransformBounds
 {
@@ -157,7 +157,7 @@ export class TransformBounds
     *
     * @param {ValidationData}   valData - The associated validation data for position updates.
     *
-    * @returns {PositionData} Potentially adjusted position data.
+    * @returns {TJSPositionData} Potentially adjusted position data.
     */
    validator(valData)
    {

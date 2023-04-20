@@ -2,10 +2,10 @@ import { degToRad, mat4, vec3 }  from '@typhonjs-svelte/lib/math';
 
 import * as constants            from '../constants.js';
 
-import { TransformData }         from './TransformData.js';
+import { TJSTransformData }         from './TJSTransformData.js';
 
 // Explicit import for TS declaration generation.
-import { PositionData }          from '../PositionData.js'; // eslint-disable-line no-unused-vars
+import { TJSPositionData }          from '../TJSPositionData.js'; // eslint-disable-line no-unused-vars
 
 /** @type {number[]} */
 const s_SCALE_VECTOR = [1, 1, 1];
@@ -22,7 +22,7 @@ const s_MAT4_TEMP = mat4.create();
 /** @type {Vector3} */
 const s_VEC3_TEMP = vec3.create();
 
-export class Transforms
+export class TJSTransforms
 {
    /**
     * Stores the transform keys in the order added.
@@ -280,18 +280,18 @@ export class Transforms
    }
 
    /**
-    * Collects all data including a bounding rect, transform matrix, and points array of the given {@link PositionData}
+    * Collects all data including a bounding rect, transform matrix, and points array of the given {@link TJSPositionData}
     * instance with the applied local transform data.
     *
-    * @param {PositionData} position - The position data to process.
+    * @param {TJSPositionData} position - The position data to process.
     *
-    * @param {TransformData} [output] - Optional TransformData output instance.
+    * @param {TJSTransformData} [output] - Optional TJSTransformData output instance.
     *
     * @param {object} [validationData] - Optional validation data for adjustment parameters.
     *
-    * @returns {TransformData} The output TransformData instance.
+    * @returns {TJSTransformData} The output TJSTransformData instance.
     */
-   getData(position, output = new TransformData(), validationData = {})
+   getData(position, output = new TJSTransformData(), validationData = {})
    {
       const valWidth = validationData.width ?? 0;
       const valHeight = validationData.height ?? 0;
@@ -403,7 +403,7 @@ export class Transforms
     * then the stored local transform order is applied then all remaining transform keys are applied. This allows the
     * construction of a transform matrix in advance of setting local data and is useful in collision detection.
     *
-    * @param {object}   [data] - PositionData instance or local transform data.
+    * @param {object}   [data] - TJSPositionData instance or local transform data.
     *
     * @param {Matrix4}  [output] - The output mat4 instance.
     *
@@ -538,7 +538,7 @@ export class Transforms
     * then the stored local transform order is applied then all remaining transform keys are applied. This allows the
     * construction of a transform matrix in advance of setting local data and is useful in collision detection.
     *
-    * @param {object}   [data] - PositionData instance or local transform data.
+    * @param {object}   [data] - TJSPositionData instance or local transform data.
     *
     * @param {Matrix4}  [output] - The output mat4 instance.
     *
@@ -632,7 +632,7 @@ export class Transforms
     *
     * @param {object} data - An object to test for transform data.
     *
-    * @returns {boolean} Whether the given PositionData has transforms.
+    * @returns {boolean} Whether the given TJSPositionData has transforms.
     */
    hasTransform(data)
    {
@@ -677,13 +677,13 @@ export class Transforms
  * translation.
  *
  * This method is used internally, but may be useful if you need the origin translation matrices to transform
- * bespoke points based on any `transformOrigin` set in {@link PositionData}.
+ * bespoke points based on any `transformOrigin` set in {@link TJSPositionData}.
  *
- * @param {string}   transformOrigin - The transform origin attribute from PositionData.
+ * @param {string}   transformOrigin - The transform origin attribute from TJSPositionData.
  *
- * @param {number}   width - The PositionData width or validation data width when 'auto'.
+ * @param {number}   width - The TJSPositionData width or validation data width when 'auto'.
  *
- * @param {number}   height - The PositionData height or validation data height when 'auto'.
+ * @param {number}   height - The TJSPositionData height or validation data height when 'auto'.
  *
  * @param {Matrix4[]}   output - Output Mat4 array.
  *

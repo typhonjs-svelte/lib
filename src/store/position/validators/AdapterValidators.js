@@ -13,9 +13,9 @@ import { isObject }     from '@typhonjs-svelte/lib/util';
  * runs before a higher weighted validator. If no weight is specified the default of '1' is assigned and it is appended
  * to the end of the validators list.
  *
- * This class forms the public API which is accessible from the `.validators` getter in the main Position instance.
+ * This class forms the public API which is accessible from the `.validators` getter in the main TJSPosition instance.
  * ```
- * const position = new Position(<PositionData>);
+ * const position = new TJSPosition(<TJSPositionData>);
  * position.validators.add(...);
  * position.validators.clear();
  * position.validators.length;

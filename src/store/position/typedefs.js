@@ -10,10 +10,10 @@
  *                                  function to update options for quickTo function.
  */
 
-// From: position/Position.js ----------------------------------------------------------------------------------------
+// From: position/TJSPosition.js ----------------------------------------------------------------------------------------
 
 /**
- * @typedef {object} PositionInitialHelper
+ * @typedef {object} TJSPositionInitialHelper
  *
  * @property {(width: number) => number} getLeft - Returns the left position given the width of the browser window.
  *
@@ -21,7 +21,7 @@
  */
 
 /**
- * @typedef {object} PositionGetOptions
+ * @typedef {object} TJSPositionGetOptions
  *
  * @property {Iterable<string>} keys - When provided only these keys are copied.
  *
@@ -31,23 +31,23 @@
  */
 
 /**
- * @typedef {object} PositionOptions - Options set in constructor.
+ * @typedef {object} TJSPositionOptions - Options set in constructor.
  *
  * @property {boolean} calculateTransform - When true always calculate transform data.
  *
- * @property {PositionInitialHelper} initialHelper - Provides a helper for setting initial position data.
+ * @property {TJSPositionInitialHelper} initialHelper - Provides a helper for setting initial position data.
  *
- * @property {boolean} ortho - Sets Position to orthographic mode using just transform / matrix3d for positioning.
+ * @property {boolean} ortho - Sets TJSPosition to orthographic mode using just transform / matrix3d for positioning.
  *
  * @property {boolean} transformSubscribed - Set to true when there are subscribers to the readable transform store.
  */
 
 /**
- * @typedef {PositionOptions & PositionData} PositionOptionsAll
+ * @typedef {TJSPositionOptions & TJSPositionData} TJSPositionOptionsAll
  */
 
 /**
- * @typedef {HTMLElement | object} PositionParent
+ * @typedef {HTMLElement | object} TJSPositionParent
  *
  * @property {Function} [elementTarget] - Potentially returns any parent object.
  */
@@ -65,7 +65,7 @@
  */
 
 /**
- * @typedef {object} StorePosition - Provides individual writable stores for {@link Position}.
+ * @typedef {object} StorePosition - Provides individual writable stores for {@link TJSPosition}.
  *
  * @property {import('svelte/store').Readable<{width: number, height: number}>} dimension - Readable store for dimension
  *                                                                                          data.
@@ -108,7 +108,7 @@
  *
  * @property {import('svelte/store').Writable<number|null>} scale - Derived store for `scale` updates.
  *
- * @property {import('svelte/store').Readable<TransformData>} transform - Readable store for transform data.
+ * @property {import('svelte/store').Readable<TJSTransformData>} transform - Readable store for transform data.
  *
  * @property {import('svelte/store').Writable<string>} transformOrigin - Derived store for `transformOrigin`.
  *
@@ -122,7 +122,7 @@
  */
 
 /**
- * @typedef {object} PositionDataExtended
+ * @typedef {object} TJSPositionDataExtended
  *
  * @property {number|string|null} [height] -
  *
@@ -165,39 +165,7 @@
  * @property {number|null} [rotation] - Alias for `rotateZ`.
  */
 
-/**
- * @typedef {object} ValidationData
- *
- * @property {PositionData} position -
- *
- * @property {PositionParent} parent -
- *
- * @property {HTMLElement} el -
- *
- * @property {CSSStyleDeclaration} computed -
- *
- * @property {Transforms} transforms -
- *
- * @property {number} height -
- *
- * @property {number} width -
- *
- * @property {number|undefined} marginLeft -
- *
- * @property {number|undefined} marginTop -
- *
- * @property {number|undefined} maxHeight -
- *
- * @property {number|undefined} maxWidth -
- *
- * @property {number|undefined} minHeight -
- *
- * @property {number|undefined} minWidth -
- *
- * @property {object} rest - The rest of any data submitted to {@link Position.set}
- */
-
-// From: position/transform/TransformData.js -------------------------------------------------------------------------
+// From: position/transform/TJSTransformData.js -------------------------------------------------------------------------
 
 /**
  * @typedef {Float32Array} Vector3 - 3 Dimensional Vector.
@@ -216,15 +184,15 @@
 /**
  * @typedef {object} ValidationData
  *
- * @property {PositionData} position -
+ * @property {TJSPositionData} position -
  *
- * @property {PositionParent} parent -
+ * @property {TJSPositionParent} parent -
  *
  * @property {HTMLElement} el -
  *
  * @property {CSSStyleDeclaration} computed -
  *
- * @property {Transforms} transforms -
+ * @property {TJSTransforms} transforms -
  *
  * @property {number} height -
  *
@@ -242,16 +210,16 @@
  *
  * @property {number|undefined} minWidth -
  *
- * @property {object} rest - The rest of any data submitted to {@link Position.set}
+ * @property {object} rest - The rest of any data submitted to {@link TJSPosition.set}
  */
 
 /**
- * @callback ValidatorFn - Position validator function that takes a {@link PositionData} instance potentially
+ * @callback ValidatorFn - TJSPosition validator function that takes a {@link TJSPositionData} instance potentially
  *                             modifying it or returning null if invalid.
  *
  * @param {ValidationData} valData - Validation data.
  *
- * @returns {PositionData|null} The validated position data or null to cancel position update.
+ * @returns {TJSPositionData|null} The validated position data or null to cancel position update.
  *
  */
 
@@ -260,7 +228,7 @@
  *
  * @property {*}           [id=undefined] - An ID associated with this validator. Can be used to remove the validator.
  *
- * @property {ValidatorFn} validator - Position validator function that takes a {@link PositionData} instance
+ * @property {ValidatorFn} validator - TJSPosition validator function that takes a {@link TJSPositionData} instance
  *                                     potentially modifying it or returning null if invalid.
  *
  * @property {number}      [weight=1] - A number between 0 and 1 inclusive to position this validator against others.
@@ -269,6 +237,6 @@
  */
 
 /**
- * @typedef {ValidatorFn|ValidatorData|Iterable<ValidatorFn|ValidatorData>} PositionValidatorOptions Defines the
+ * @typedef {ValidatorFn|ValidatorData|Iterable<ValidatorFn|ValidatorData>} TJSPositionValidatorOptions Defines the
  *          position validator options.
  */
