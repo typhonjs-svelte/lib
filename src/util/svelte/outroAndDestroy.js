@@ -1,4 +1,4 @@
-import { check_outros, group_outros, transition_out } from 'svelte/internal';
+import { check_outros, group_outros, transition_out } from '#svelte/internal';
 
 /**
  * Runs outro transition then destroys Svelte component.

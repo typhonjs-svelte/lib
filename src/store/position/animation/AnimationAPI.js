@@ -1,4 +1,4 @@
-import { cubicOut }           from 'svelte/easing';
+import { cubicOut }           from '#svelte/easing';
 
 import { lerp }               from '@typhonjs-svelte/lib/math';
 import {

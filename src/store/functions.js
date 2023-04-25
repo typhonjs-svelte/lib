@@ -74,12 +74,12 @@ export function isWritableStore(store)
  * Subscribes to the given store with the update function provided and ignores the first automatic
  * update. All future updates are dispatched to the update function.
  *
- * @param {import('svelte/store').Readable | import('svelte/store').Writable} store -
+ * @param {import('#svelte/store').Readable | import('#svelte/store').Writable} store -
  *  Store to subscribe to...
  *
- * @param {import('svelte/store').Updater} update - function to receive future updates.
+ * @param {import('#svelte/store').Updater} update - function to receive future updates.
  *
- * @returns {import('svelte/store').Unsubscriber} Store unsubscribe function.
+ * @returns {import('#svelte/store').Unsubscriber} Store unsubscribe function.
  */
 export function subscribeIgnoreFirst(store, update)
 {
@@ -102,14 +102,14 @@ export function subscribeIgnoreFirst(store, update)
  * Subscribes to the given store with two update functions provided. The first function is invoked on the initial
  * subscription. All future updates are dispatched to the update function.
  *
- * @param {import('svelte/store').Readable | import('svelte/store').Writable} store -
+ * @param {import('#svelte/store').Readable | import('#svelte/store').Writable} store -
  *  Store to subscribe to...
  *
- * @param {import('svelte/store').Updater} first - Function to receive first update.
+ * @param {import('#svelte/store').Updater} first - Function to receive first update.
  *
- * @param {import('svelte/store').Updater} update - Function to receive future updates.
+ * @param {import('#svelte/store').Updater} update - Function to receive future updates.
  *
- * @returns {import('svelte/store').Unsubscriber} Store unsubscribe function.
+ * @returns {import('#svelte/store').Unsubscriber} Store unsubscribe function.
  */
 export function subscribeFirstRest(store, first, update)
 {

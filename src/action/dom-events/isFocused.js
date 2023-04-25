@@ -7,7 +7,7 @@ import { isWritableStore } from '@typhonjs-svelte/lib/store';
  *
  * @param {HTMLElement} node - Target element.
  *
- * @param {import('svelte/store').Writable<boolean>}  storeFocused - Update store for focus changes.
+ * @param {import('#svelte/store').Writable<boolean>}  storeFocused - Update store for focus changes.
  *
  * @returns {{update: (function(object): void), destroy: (function(): void)}} Action lifecycle methods.
  */

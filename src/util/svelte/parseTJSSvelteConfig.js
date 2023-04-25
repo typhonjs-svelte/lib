@@ -12,7 +12,7 @@ import { isSvelteComponent } from './isSvelteComponent.js';
  *
  * @returns {object} The processed Svelte config object.
  */
-export function parseSvelteConfig(config, thisArg = void 0)
+export function parseTJSSvelteConfig(config, thisArg = void 0)
 {
    if (typeof config !== 'object')
    {

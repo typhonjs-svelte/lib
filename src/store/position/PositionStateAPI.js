@@ -1,4 +1,4 @@
-import { linear }       from 'svelte/easing';
+import { linear }       from '#svelte/easing';
 
 import { lerp }         from '@typhonjs-svelte/lib/math';
 import { isIterable }   from '@typhonjs-svelte/lib/util';

@@ -11,7 +11,7 @@ import { resizeObserver }  from "../resizeObserver.js";
  *
  * @param {HTMLElement} element - The target scrollable HTML element.
  *
- * @param {import('svelte/store').Writable<number>}   store - A writable store that stores the element scrollTop.
+ * @param {import('#svelte/store').Writable<number>}   store - A writable store that stores the element scrollTop.
  *
  * @returns {{destroy: Function, update: Function}} Lifecycle functions.
  */

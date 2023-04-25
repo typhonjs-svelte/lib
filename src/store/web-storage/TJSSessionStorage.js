@@ -3,7 +3,7 @@ import { writable }  from 'svelte-persistent-store/session';
 export class TJSSessionStorage
 {
    /**
-    * @type {Map<string, import('svelte/store').Writable>}
+    * @type {Map<string, import('#svelte/store').Writable>}
     */
    #stores = new Map();
 
@@ -14,7 +14,7 @@ export class TJSSessionStorage
     *
     * @param {boolean}  [defaultValue] - A default value to set for the store.
     *
-    * @returns {import('svelte/store').Writable} The new store.
+    * @returns {import('#svelte/store').Writable} The new store.
     */
    static #createStore(key, defaultValue = void 0)
    {
@@ -35,7 +35,7 @@ export class TJSSessionStorage
     *
     * @param {boolean}              [defaultValue] - A default value to set for the store.
     *
-    * @returns {import('svelte/store').Writable} The store for the given key.
+    * @returns {import('#svelte/store').Writable} The store for the given key.
     */
    #getStore(key, defaultValue = void 0)
    {
@@ -98,7 +98,7 @@ export class TJSSessionStorage
     *
     * @param {*}        [defaultValue] - A default value to return if key not present in session storage.
     *
-    * @returns {import('svelte/store').Writable} The Svelte store for this key.
+    * @returns {import('#svelte/store').Writable} The Svelte store for this key.
     */
    getStore(key, defaultValue)
    {
