@@ -14,48 +14,52 @@
   },
   "exports": {
     "./action": {
-      "types": "./dist/action/index.d.ts",
-      "import": "./dist/action/index.js"
+      "types": "./_dist/action/index.d.ts",
+      "import": "./_dist/action/index.js"
     },
     "./animate": {
-      "types": "./dist/animate/index.d.ts",
-      "import": "./dist/animate/index.js"
+      "types": "./_dist/animate/index.d.ts",
+      "import": "./_dist/animate/index.js"
+    },
+    "./animate/action": {
+      "types": "./_dist/animate/action/index.d.ts",
+      "import": "./_dist/animate/action/index.js"
     },
     "./handler": {
-      "types": "./dist/handler/index.d.ts",
-      "import": "./dist/handler/index.js"
+      "types": "./_dist/handler/index.d.ts",
+      "import": "./_dist/handler/index.js"
     },
     "./helper": {
-      "types": "./dist/helper/index.d.ts",
-      "import": "./dist/helper/index.js"
+      "types": "./_dist/helper/index.d.ts",
+      "import": "./_dist/helper/index.js"
     },
     "./math": {
-      "types": "./dist/math/index.d.ts",
-      "import": "./dist/math/index.js"
+      "types": "./_dist/math/index.d.ts",
+      "import": "./_dist/math/index.js"
     },
     "./store": {
-      "types": "./dist/store/index.d.ts",
-      "import": "./dist/store/index.js"
+      "types": "./_dist/store/index.d.ts",
+      "import": "./_dist/store/index.js"
     },
     "./store/position": {
-      "types": "./dist/store/position/index.d.ts",
-      "import": "./dist/store/position/index.js"
+      "types": "./_dist/store/position/index.d.ts",
+      "import": "./_dist/store/position/index.js"
     },
     "./transition": {
-      "types": "./dist/transition/index.d.ts",
-      "import": "./dist/transition/index.js"
+      "types": "./_dist/transition/index.d.ts",
+      "import": "./_dist/transition/index.js"
     },
     "./util": {
-      "types": "./dist/util/index.d.ts",
-      "import": "./dist/util/index.js"
+      "types": "./_dist/util/index.d.ts",
+      "import": "./_dist/util/index.js"
     },
     "./plugin/data": {
-      "types": "./dist/plugin/data/index.d.ts",
-      "import": "./dist/plugin/data/index.js"
+      "types": "./_dist/plugin/data/index.d.ts",
+      "import": "./_dist/plugin/data/index.js"
     },
     "./plugin/system": {
-      "types": "./dist/plugin/system/index.d.ts",
-      "import": "./dist/plugin/system/index.js"
+      "types": "./_dist/plugin/system/index.d.ts",
+      "import": "./_dist/plugin/system/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -92,7 +96,7 @@
     "eslint": "eslint ."
   },
   "files": [
-    "/dist",
+    "/_dist",
     "/src"
   ],
   "directories": {},

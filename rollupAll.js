@@ -19,7 +19,7 @@ const rollupConfigs = [{
          ]
       },
       output: {
-         file: 'dist/action/index.js',
+         file: '_dist/action/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          sourcemap
@@ -34,7 +34,22 @@ const rollupConfigs = [{
          ]
       },
       output: {
-         file: 'dist/animate/index.js',
+         file: '_dist/animate/index.js',
+         format: 'es',
+         generatedCode: { constBindings: true },
+         sourcemap
+      }
+   },
+   {
+      input: {
+         input: 'src/animate/action/index.js',
+         plugins: [
+            importsExternal(),
+            generateDTS.plugin(dtsPluginOptions)
+         ]
+      },
+      output: {
+         file: '_dist/animate/action/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          sourcemap
@@ -49,7 +64,7 @@ const rollupConfigs = [{
          ]
       },
       output: {
-         file: 'dist/handler/index.js',
+         file: '_dist/handler/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          sourcemap
@@ -64,7 +79,7 @@ const rollupConfigs = [{
          ]
       },
       output: {
-         file: 'dist/helper/index.js',
+         file: '_dist/helper/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          sourcemap
@@ -77,13 +92,13 @@ const rollupConfigs = [{
             importsExternal(),
             resolve(),
             generateDTS.plugin({ ...dtsPluginOptions, replace: {
-               '/// <reference types="gl-matrix/index.js" />': '',  // Remove reference in dist/math/index.d.ts
+               '/// <reference types="gl-matrix/index.js" />': '',  // Remove reference in __dist/math/index.d.ts
                "export \\* from 'gl-matrix';": ''
             } })
          ]
       },
       output: {
-         file: 'dist/math/index.js',
+         file: '_dist/math/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          sourcemap
@@ -99,7 +114,7 @@ const rollupConfigs = [{
          ]
       },
       output: {
-         file: 'dist/store/index.js',
+         file: '_dist/store/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          sourcemap
@@ -115,7 +130,7 @@ const rollupConfigs = [{
          ]
       },
       output: {
-         file: 'dist/store/position/index.js',
+         file: '_dist/store/position/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          sourcemap
@@ -131,7 +146,7 @@ const rollupConfigs = [{
          ]
       },
       output: {
-         file: 'dist/transition/index.js',
+         file: '_dist/transition/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          sourcemap
@@ -147,7 +162,7 @@ const rollupConfigs = [{
          ]
       },
       output: {
-         file: 'dist/util/index.js',
+         file: '_dist/util/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          sourcemap
@@ -162,7 +177,7 @@ const rollupConfigs = [{
          ]
       },
       output: {
-         file: 'dist/plugin/data/index.js',
+         file: '_dist/plugin/data/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          sourcemap
@@ -178,7 +193,7 @@ const rollupConfigs = [{
          ]
       },
       output: {
-         file: 'dist/plugin/system/index.js',
+         file: '_dist/plugin/system/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          sourcemap
