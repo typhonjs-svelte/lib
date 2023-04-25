@@ -10,13 +10,13 @@ const s_SCALE_VECTOR = [1, 1, 1];
 /** @type {number[]} */
 const s_TRANSLATE_VECTOR = [0, 0, 0];
 
-/** @type {Matrix4} */
+/** @type {import('../').Matrix4} */
 const s_MAT4_RESULT = mat4.create();
 
-/** @type {Matrix4} */
+/** @type {import('../').Matrix4} */
 const s_MAT4_TEMP = mat4.create();
 
-/** @type {Vector3} */
+/** @type {import('../').Vector3} */
 const s_VEC3_TEMP = vec3.create();
 
 export class TJSTransforms
@@ -280,7 +280,7 @@ export class TJSTransforms
     * Collects all data including a bounding rect, transform matrix, and points array of the given {@link TJSPositionData}
     * instance with the applied local transform data.
     *
-    * @param {TJSPositionData} position - The position data to process.
+    * @param {import('../').TJSPositionData} position - The position data to process.
     *
     * @param {TJSTransformData} [output] - Optional TJSTransformData output instance.
     *
@@ -402,9 +402,9 @@ export class TJSTransforms
     *
     * @param {object}   [data] - TJSPositionData instance or local transform data.
     *
-    * @param {Matrix4}  [output] - The output mat4 instance.
+    * @param {import('../').Matrix4}  [output] - The output mat4 instance.
     *
-    * @returns {Matrix4} Transform matrix.
+    * @returns {import('../').Matrix4} Transform matrix.
     */
    getMat4(data = this._data, output = mat4.create())
    {
@@ -537,9 +537,9 @@ export class TJSTransforms
     *
     * @param {object}   [data] - TJSPositionData instance or local transform data.
     *
-    * @param {Matrix4}  [output] - The output mat4 instance.
+    * @param {import('../').Matrix4}  [output] - The output mat4 instance.
     *
-    * @returns {Matrix4} Transform matrix.
+    * @returns {import('../').Matrix4} Transform matrix.
     */
    getMat4Ortho(data = this._data, output = mat4.create())
    {
@@ -682,9 +682,9 @@ export class TJSTransforms
  *
  * @param {number}   height - The TJSPositionData height or validation data height when 'auto'.
  *
- * @param {Matrix4[]}   output - Output Mat4 array.
+ * @param {import('../').Matrix4[]}   output - Output Mat4 array.
  *
- * @returns {Matrix4[]} Output Mat4 array.
+ * @returns {import('../').Matrix4[]} Output Mat4 array.
  */
 function s_GET_ORIGIN_TRANSLATION(transformOrigin, width, height, output)
 {

@@ -5,18 +5,18 @@ import { isIterable }   from '#svelte-lib/util';
 
 export class PositionStateAPI
 {
-   /** @type {TJSPositionData} */
+   /** @type {import('./TJSPositionData').TJSPositionData} */
    #data;
 
    /**
-    * @type {Map<string, TJSPositionDataExtended>}
+    * @type {Map<string, import('./').TJSPositionDataExtended>}
     */
    #dataSaved = new Map();
 
-   /** @type {TJSPosition} */
+   /** @type {import('./').TJSPosition} */
    #position;
 
-   /** @type {TJSTransforms} */
+   /** @type {import('./transform').TJSTransforms} */
    #transforms;
 
    constructor(position, data, transforms)
@@ -33,7 +33,7 @@ export class PositionStateAPI
     *
     * @param {string}   options.name - Saved data set name.
     *
-    * @returns {TJSPositionDataExtended} The saved data set.
+    * @returns {import('./').TJSPositionDataExtended} The saved data set.
     */
    get({ name })
    {
@@ -45,7 +45,7 @@ export class PositionStateAPI
    /**
     * Returns any associated default data.
     *
-    * @returns {TJSPositionDataExtended} Associated default data.
+    * @returns {import('./').TJSPositionDataExtended} Associated default data.
     */
    getDefault()
    {
@@ -59,7 +59,7 @@ export class PositionStateAPI
     *
     * @param {string}   options.name - Name to remove and retrieve.
     *
-    * @returns {TJSPositionDataExtended} Saved position data.
+    * @returns {import('./').TJSPositionDataExtended} Saved position data.
     */
    remove({ name })
    {
@@ -143,7 +143,8 @@ export class PositionStateAPI
     *
     * @param {Function}          [params.interpolate=lerp] - Interpolation function.
     *
-    * @returns {TJSPositionDataExtended|Promise<TJSPositionDataExtended>} Saved position data.
+    * @returns {import('./').TJSPositionDataExtended | Promise<import('./').TJSPositionDataExtended>} Saved position
+    *          data.
     */
    restore({ name, remove = false, properties, silent = false, async = false, animateTo = false, duration = 0.1,
     ease = linear, interpolate = lerp })
@@ -207,7 +208,7 @@ export class PositionStateAPI
     *
     * @param {...*}     [opts.extra] - Extra data to add to saved data.
     *
-    * @returns {TJSPositionData} Current position data
+    * @returns {import('./').TJSPositionData} Current position data
     */
    save({ name, ...extra })
    {

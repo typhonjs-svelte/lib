@@ -22,7 +22,7 @@ export class UpdateElementManager
     *
     * @param {HTMLElement}       el - An HTMLElement instance.
     *
-    * @param {UpdateElementData} updateData - An UpdateElementData instance.
+    * @param {import('./UpdateElementData').UpdateElementData} updateData - An UpdateElementData instance.
     *
     * @returns {Promise<number>} The unified next frame update promise. Returns `currentTime`.
     */
@@ -106,7 +106,7 @@ export class UpdateElementManager
     *
     * @param {HTMLElement}       el - An HTMLElement instance.
     *
-    * @param {UpdateElementData} updateData - An UpdateElementData instance.
+    * @param {import('./UpdateElementData').UpdateElementData} updateData - An UpdateElementData instance.
     */
    static immediate(el, updateData)
    {
@@ -134,7 +134,7 @@ export class UpdateElementManager
    }
 
    /**
-    * @param {UpdateElementData} updateData - Data change set.
+    * @param {import('./UpdateElementData').UpdateElementData} updateData - Data change set.
     */
    static updateSubscribers(updateData)
    {
@@ -174,7 +174,7 @@ export class UpdateElementManager
  *
  * @param {HTMLElement} el - The target HTMLElement.
  *
- * @param {UpdateElementData} updateData - Update data.
+ * @param {import('./UpdateElementData').UpdateElementData} updateData - Update data.
  */
 function s_UPDATE_ELEMENT(el, updateData)
 {
@@ -227,7 +227,7 @@ function s_UPDATE_ELEMENT(el, updateData)
  *
  * @param {HTMLElement} el - The target HTMLElement.
  *
- * @param {UpdateElementData} updateData - Update data.
+ * @param {import('./UpdateElementData').UpdateElementData} updateData - Update data.
  */
 function s_UPDATE_ELEMENT_ORTHO(el, updateData)
 {
@@ -267,7 +267,7 @@ function s_UPDATE_ELEMENT_ORTHO(el, updateData)
  *
  * @param {HTMLElement} el - The target HTMLElement.
  *
- * @param {UpdateElementData} updateData - Update element data.
+ * @param {import('./UpdateElementData').UpdateElementData} updateData - Update element data.
  */
 function s_UPDATE_TRANSFORM(el, updateData)
 {

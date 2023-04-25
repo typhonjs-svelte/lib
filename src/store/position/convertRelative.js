@@ -3,9 +3,9 @@ import * as constants from './constants.js';
 /**
  * Converts any relative string values for animatable keys to actual updates performed against current data.
  *
- * @param {TJSPositionDataExtended}    positionData - position data.
+ * @param {import('./').TJSPositionDataExtended}    positionData - position data.
  *
- * @param {TJSPosition|TJSPositionData}   position - The source position instance.
+ * @param {import('./').TJSPosition | import('./').TJSPositionData}   position - The source position instance.
  */
 export function convertRelative(positionData, position)
 {

@@ -34,7 +34,7 @@ export class StyleCache
       this.hasWillChange = false;
 
       /**
-       * @type {ResizeObserverData}
+       * @type {import('./').ResizeObserverData}
        */
       this.resizeObserved = {
          contentHeight: void 0,
@@ -46,7 +46,7 @@ export class StyleCache
       /**
        * Provides a writable store to track offset & content width / height from an associated `resizeObserver` action.
        *
-       * @type {Writable<ResizeObserverData>}
+       * @type {import('#svelte/store').Writable<import('./').ResizeObserverData>}
        */
       const storeResizeObserved = writable(this.resizeObserved);
 

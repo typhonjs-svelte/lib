@@ -125,7 +125,7 @@ export class AnimationManager
    /**
     * Cancels all animations for given TJSPosition instance.
     *
-    * @param {TJSPosition} position - TJSPosition instance.
+    * @param {import('../').TJSPosition} position - TJSPosition instance.
     */
    static cancel(position)
    {
@@ -178,9 +178,10 @@ export class AnimationManager
    /**
     * Gets all {@link AnimationControl} instances for a given TJSPosition instance.
     *
-    * @param {TJSPosition} position - TJSPosition instance.
+    * @param {import('../').TJSPosition} position - TJSPosition instance.
     *
-    * @returns {AnimationControl[]} All scheduled AnimationControl instances for the given TJSPosition instance.
+    * @returns {import('./AnimationControl').AnimationControl[]} All scheduled AnimationControl instances for the given
+    *          TJSPosition instance.
     */
    static getScheduled(position)
    {

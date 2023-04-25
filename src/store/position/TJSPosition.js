@@ -71,7 +71,7 @@ export class TJSPosition
    /**
     * Stores ongoing options that are set in the constructor or by transform store subscription.
     *
-    * @type {TJSPositionOptions}
+    * @type {import('./').TJSPositionOptions}
     */
    #options = {
       calculateTransform: false,
@@ -83,7 +83,7 @@ export class TJSPosition
    /**
     * The associated parent for positional data tracking. Used in validators.
     *
-    * @type {TJSPositionParent}
+    * @type {import('./').TJSPositionParent}
     */
    #parent;
 
@@ -95,7 +95,7 @@ export class TJSPosition
    #positionChangeSet = new PositionChangeSet();
 
    /**
-    * @type {StorePosition}
+    * @type {import('./').StorePosition}
     */
    #stores;
 
@@ -136,7 +136,7 @@ export class TJSPosition
    #validators;
 
    /**
-    * @type {ValidatorData[]}
+    * @type {import('./').ValidatorData[]}
     */
    #validatorData;
 
@@ -179,7 +179,7 @@ export class TJSPosition
     *
     * @param {TJSPosition}          position - A position instance.
     *
-    * @param {TJSPositionOptions}   options - TJSPosition options.
+    * @param {import('./').TJSPositionOptions}   options - TJSPosition options.
     *
     * @returns {TJSPosition} A duplicate position instance.
     */
@@ -198,10 +198,10 @@ export class TJSPosition
    }
 
    /**
-    * @param {TJSPositionParent|TJSPositionOptionsAll}   [parent] - A potential parent element or object w/ `elementTarget`
-    *                                                      getter. May also be the TJSPositionOptions object w/ 1 argument.
+    * @param {import('./').TJSPositionParent | import('./').TJSPositionOptionsAll}   [parent] - A potential parent
+    *        element or object w/ `elementTarget` getter. May also be the TJSPositionOptions object w/ 1 argument.
     *
-    * @param {TJSPositionOptionsAll}   [options] - Default values.
+    * @param {import('./').TJSPositionOptionsAll}   [options] - Default values.
     */
    constructor(parent, options)
    {
@@ -465,7 +465,7 @@ export class TJSPosition
    /**
     * Returns the associated {@link TJSPositionParent} instance.
     *
-    * @returns {TJSPositionParent} The TJSPositionParent instance.
+    * @returns {import('./').TJSPositionParent} The TJSPositionParent instance.
     */
    get parent() { return this.#parent; }
 
@@ -479,7 +479,7 @@ export class TJSPosition
    /**
     * Returns the derived writable stores for individual data variables.
     *
-    * @returns {StorePosition} Derived / writable stores.
+    * @returns {import('./').StorePosition} Derived / writable stores.
     */
    get stores() { return this.#stores; }
 
@@ -518,7 +518,7 @@ export class TJSPosition
    /**
     * Sets the associated {@link TJSPositionParent} instance. Resets the style cache and default data.
     *
-    * @param {TJSPositionParent|void} parent - A TJSPositionParent instance.
+    * @param {import('./').TJSPositionParent | void} parent - A TJSPositionParent instance.
     */
    set parent(parent)
    {
@@ -778,8 +778,8 @@ export class TJSPosition
     *
     * @param {object|TJSPositionData}  [position] - Target to assign current position data.
     *
-    * @param {TJSPositionGetOptions}   [options] - Defines options for specific keys and substituting null for numeric
-    *                                           default values.
+    * @param {import('./').TJSPositionGetOptions}   [options] - Defines options for specific keys and substituting null
+    *        for numeric default values.
     *
     * @returns {TJSPositionData} Passed in object with current position data.
     */
@@ -853,7 +853,7 @@ export class TJSPosition
     * Updates to any target element are decoupled from the underlying TJSPosition data. This method returns this instance
     * that you can then await on the target element inline style update by using {@link TJSPosition.elementUpdated}.
     *
-    * @param {TJSPositionDataExtended} [position] - TJSPosition data to set.
+    * @param {import('./').TJSPositionDataExtended} [position] - TJSPosition data to set.
     *
     * @returns {TJSPosition} This TJSPosition instance.
     */
@@ -1114,7 +1114,7 @@ export class TJSPosition
    }
 
    /**
-    * @param {TJSPositionDataExtended} opts -
+    * @param {import('./').TJSPositionDataExtended} opts -
     *
     * @param {number|null} opts.left -
     *
@@ -1356,7 +1356,7 @@ export class TJSPosition
 const s_DATA_UPDATE = new TJSPositionData();
 
 /**
- * @type {ValidationData}
+ * @type {import('./').ValidationData}
  */
 const s_VALIDATION_DATA = {
    position: void 0,

@@ -3,7 +3,7 @@
  */
 export class AnimationGroupControl
 {
-   /** @type {AnimationControl[]} */
+   /** @type {import('./AnimationControl').AnimationControl[]} */
    #animationControls;
 
    /** @type {Promise<Awaited<unknown>[]>} */
@@ -24,7 +24,8 @@ export class AnimationGroupControl
    static get voidControl() { return this.#voidControl; }
 
    /**
-    * @param {AnimationControl[]} animationControls - An array of AnimationControl instances.
+    * @param {import('./AnimationControl').AnimationControl[]} animationControls - An array of AnimationControl
+    *        instances.
     */
    constructor(animationControls)
    {

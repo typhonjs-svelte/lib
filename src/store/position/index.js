@@ -48,7 +48,7 @@ export * from './TJSPositionData.js';
  */
 
 /**
- * @typedef {TJSPositionOptions & TJSPositionData} TJSPositionOptionsAll
+ * @typedef {TJSPositionOptions & import('./').TJSPositionData} TJSPositionOptionsAll
  */
 
 /**
@@ -113,7 +113,8 @@ export * from './TJSPositionData.js';
  *
  * @property {import('#svelte/store').Writable<number|null>} scale - Derived store for `scale` updates.
  *
- * @property {import('#svelte/store').Readable<TJSTransformData>} transform - Readable store for transform data.
+ * @property {import('#svelte/store').Readable<import('./transform').TJSTransformData>} transform - Readable store for
+ *           transform data.
  *
  * @property {import('#svelte/store').Writable<string>} transformOrigin - Derived store for `transformOrigin`.
  *
@@ -193,7 +194,7 @@ export * from './TJSPositionData.js';
 /**
  * @typedef {object} ValidationData
  *
- * @property {TJSPositionData} position -
+ * @property {import('./').TJSPositionData} position -
  *
  * @property {TJSPositionParent} parent -
  *
@@ -201,7 +202,7 @@ export * from './TJSPositionData.js';
  *
  * @property {CSSStyleDeclaration} computed -
  *
- * @property {TJSTransforms} transforms -
+ * @property {import('./transform').TJSTransforms} transforms -
  *
  * @property {number} height -
  *
@@ -228,8 +229,8 @@ export * from './TJSPositionData.js';
  *
  * @param {ValidationData} valData - Validation data.
  *
- * @returns {TJSPositionData|null} The validated position data or null to cancel position update.
- *
+ * @returns {import('./TJSPositionData').TJSPositionData | null} The validated position data or null to cancel position
+ *          update.
  */
 
 /**
@@ -238,7 +239,7 @@ export * from './TJSPositionData.js';
  * @property {*}           [id=undefined] - An ID associated with this validator. Can be used to remove the validator.
  *
  * @property {ValidatorFn} validator - TJSPosition validator function that takes a {@link TJSPositionData} instance
- *                                     potentially modifying it or returning null if invalid.
+ *           potentially modifying it or returning null if invalid.
  *
  * @property {number}      [weight=1] - A number between 0 and 1 inclusive to position this validator against others.
  *

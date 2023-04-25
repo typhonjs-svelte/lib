@@ -30,14 +30,15 @@ export class AdapterValidators
    #enabled = true;
 
    /**
-    * @type {ValidatorData[]}
+    * @type {import('../').ValidatorData[]}
     */
    #validatorData;
 
    #mapUnsubscribe = new Map();
 
    /**
-    * @returns {[AdapterValidators, ValidatorData[]]} Returns this and internal storage for validator adapter.
+    * @returns {[AdapterValidators, import('../').ValidatorData[]]} Returns this and internal storage for validator
+    *          adapter.
     */
    constructor()
    {
@@ -71,8 +72,7 @@ export class AdapterValidators
    /**
     * Provides an iterator for validators.
     *
-    * @returns {Generator<ValidatorData|undefined>} Generator / iterator of validators.
-    * @yields {ValidatorData}
+    * @yields {import('../').ValidatorData}
     */
    *[Symbol.iterator]()
    {
@@ -85,7 +85,7 @@ export class AdapterValidators
    }
 
    /**
-    * @param {...(ValidatorFn|ValidatorData)}   validators -
+    * @param {...(import('../').ValidatorFn | import('../').ValidatorData)}   validators -
     */
    add(...validators)
    {
@@ -208,7 +208,7 @@ export class AdapterValidators
    }
 
    /**
-    * @param {...(ValidatorFn|ValidatorData)}   validators -
+    * @param {...(import('../').ValidatorFn | import('../').ValidatorData)}   validators -
     */
    remove(...validators)
    {
@@ -249,8 +249,8 @@ export class AdapterValidators
     * Remove validators by the provided callback. The callback takes 3 parameters: `id`, `validator`, and `weight`.
     * Any truthy value returned will remove that validator.
     *
-    * @param {function(*, ValidatorFn, number): boolean} callback - Callback function to evaluate each validator
-    *                                                                  entry.
+    * @param {function(*, import('../').ValidatorFn, number): boolean} callback - Callback function to evaluate each
+    *        validator entry.
     */
    removeBy(callback)
    {

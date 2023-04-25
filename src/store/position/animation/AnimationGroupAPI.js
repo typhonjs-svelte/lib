@@ -32,7 +32,7 @@ export class AnimationGroupAPI
    /**
     * Cancels any animation for given TJSPosition data.
     *
-    * @param {TJSPosition|{position: TJSPosition}|Iterable<TJSPosition>|Iterable<{position: TJSPosition}>} position -
+    * @param {import('../').TJSPosition | {position: import('../').TJSPosition} | Iterable<import('../').TJSPosition> | Iterable<{position: import('../').TJSPosition}>} position -
     */
    static cancel(position)
    {
@@ -77,9 +77,9 @@ export class AnimationGroupAPI
    /**
     * Gets all animation controls for the given position data.
     *
-    * @param {TJSPosition|{position: TJSPosition}|Iterable<TJSPosition>|Iterable<{position: TJSPosition}>} position -
+    * @param {import('../').TJSPosition | {position: import('../').TJSPosition} | Iterable<import('../').TJSPosition> | Iterable<{position: import('../').TJSPosition}>} position -
     *
-    * @returns {{position: TJSPosition, data: object|void, controls: AnimationControl[]}[]} Results array.
+    * @returns {{ position: import('../').TJSPosition, data: object | void, controls: import('./AnimationControl').AnimationControl[]}[]} Results array.
     */
    static getScheduled(position)
    {
@@ -129,7 +129,7 @@ export class AnimationGroupAPI
    /**
     * Provides the `from` animation tween for one or more TJSPosition instances as a group.
     *
-    * @param {TJSPosition|{position: TJSPosition}|Iterable<TJSPosition>|Iterable<{position: TJSPosition}>} position -
+    * @param {import('../').TJSPosition | {position: import('../').TJSPosition} | Iterable<import('../').TJSPosition> | Iterable<{position: import('../').TJSPosition}>} position -
     *
     * @param {object|Function}   fromData -
     *
@@ -150,7 +150,7 @@ export class AnimationGroupAPI
       }
 
       /**
-       * @type {AnimationControl[]}
+       * @type {import('./AnimationControl').AnimationControl[]}
        */
       const animationControls = [];
 
@@ -268,7 +268,7 @@ export class AnimationGroupAPI
    /**
     * Provides the `fromTo` animation tween for one or more TJSPosition instances as a group.
     *
-    * @param {TJSPosition|{position: TJSPosition}|Iterable<TJSPosition>|Iterable<{position: TJSPosition}>} position -
+    * @param {import('../').TJSPosition | {position: import('../').TJSPosition} | Iterable<import('../').TJSPosition> | Iterable<{position: import('../').TJSPosition}>} position -
     *
     * @param {object|Function}   fromData -
     *
@@ -296,7 +296,7 @@ export class AnimationGroupAPI
       }
 
       /**
-       * @type {AnimationControl[]}
+       * @type {import('./AnimationControl').AnimationControl[]}
        */
       const animationControls = [];
 
@@ -441,7 +441,7 @@ export class AnimationGroupAPI
    /**
     * Provides the `to` animation tween for one or more TJSPosition instances as a group.
     *
-    * @param {TJSPosition|{position: TJSPosition}|Iterable<TJSPosition>|Iterable<{position: TJSPosition}>} position -
+    * @param {import('../').TJSPosition | {position: import('../').TJSPosition} | Iterable<import('../').TJSPosition> | Iterable<{position: import('../').TJSPosition}>} position -
     *
     * @param {object|Function}   toData -
     *
@@ -462,7 +462,7 @@ export class AnimationGroupAPI
       }
 
       /**
-       * @type {AnimationControl[]}
+       * @type {import('./AnimationControl').AnimationControl[]}
        */
       const animationControls = [];
 
@@ -580,13 +580,13 @@ export class AnimationGroupAPI
    /**
     * Provides the `to` animation tween for one or more TJSPosition instances as a group.
     *
-    * @param {TJSPosition|{position: TJSPosition}|Iterable<TJSPosition>|Iterable<{position: TJSPosition}>} position -
+    * @param {import('../').TJSPosition | {position: import('../').TJSPosition} | Iterable<import('../').TJSPosition> | Iterable<{position: import('../').TJSPosition}>} position -
     *
     * @param {Iterable<string>}  keys -
     *
     * @param {object|Function}   options -
     *
-    * @returns {quickToCallback} Basic animation control.
+    * @returns {import('../').quickToCallback} Basic animation control.
     */
    static quickTo(position, keys, options)
    {
@@ -601,7 +601,7 @@ export class AnimationGroupAPI
       }
 
       /**
-       * @type {quickToCallback[]}
+       * @type {import('../').quickToCallback[]}
        */
       const quickToCallbacks = [];
 
@@ -792,7 +792,7 @@ export class AnimationGroupAPI
        *
        * @param {Function}          [options.interpolate] - Interpolation function.
        *
-       * @returns {quickToCallback} The quickTo callback.
+       * @returns {import('../').quickToCallback} The quickTo callback.
        */
       quickToCB.options = (options) => // eslint-disable-line no-shadow
       {

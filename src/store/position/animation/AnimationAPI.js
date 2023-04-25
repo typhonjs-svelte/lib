@@ -16,10 +16,10 @@ import {
 
 export class AnimationAPI
 {
-   /** @type {TJSPositionData} */
+   /** @type {import('../').TJSPositionData} */
    #data;
 
-   /** @type {TJSPosition} */
+   /** @type {import('../').TJSPosition} */
    #position;
 
    /**
@@ -38,9 +38,9 @@ export class AnimationAPI
    #cleanup;
 
    /**
-    * @param {TJSPosition}       position -
+    * @param {import('../').TJSPosition}       position -
     *
-    * @param {TJSPositionData}   data -
+    * @param {import('../').TJSPositionData}   data -
     */
    constructor(position, data)
    {
@@ -181,7 +181,7 @@ export class AnimationAPI
    /**
     * Provides a tween from given position data to the current position.
     *
-    * @param {TJSPositionDataExtended} fromData - The starting position.
+    * @param {import('../').TJSPositionDataExtended} fromData - The starting position.
     *
     * @param {object}         [opts] - Optional parameters.
     *
@@ -258,9 +258,9 @@ export class AnimationAPI
    /**
     * Provides a tween from given position data to the current position.
     *
-    * @param {TJSPositionDataExtended} fromData - The starting position.
+    * @param {import('../').TJSPositionDataExtended} fromData - The starting position.
     *
-    * @param {TJSPositionDataExtended} toData - The ending position.
+    * @param {import('../').TJSPositionDataExtended} toData - The ending position.
     *
     * @param {object}         [opts] - Optional parameters.
     *
@@ -349,7 +349,7 @@ export class AnimationAPI
    /**
     * Provides a tween to given position data from the current position.
     *
-    * @param {TJSPositionDataExtended} toData - The destination position.
+    * @param {import('../').TJSPositionDataExtended} toData - The destination position.
     *
     * @param {object}         [opts] - Optional parameters.
     *
@@ -435,7 +435,7 @@ export class AnimationAPI
     *
     * @param {Function}          [opts.interpolate=lerp] - Interpolation function.
     *
-    * @returns {quickToCallback} quick-to tween function.
+    * @returns {import('../').quickToCallback} quick-to tween function.
     */
    quickTo(keys, { duration = 1, ease = cubicOut, interpolate = lerp } = {})
    {
@@ -593,7 +593,7 @@ export class AnimationAPI
        *
        * @param {Function}          [opts.interpolate] - Interpolation function.
        *
-       * @returns {quickToCallback} The quickTo callback.
+       * @returns {import('../').quickToCallback} The quickTo callback.
        */
       quickToCB.options = ({ duration, ease, interpolate } = {}) => // eslint-disable-line no-shadow
       {

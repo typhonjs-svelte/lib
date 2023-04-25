@@ -29,12 +29,12 @@ export class UpdateElementData
       this.dimensionData = { width: 0, height: 0 };
 
       /**
-       * @type {PositionChangeSet}
+       * @type {import('../PositionChangeSet').PositionChangeSet}
        */
       this.changeSet = void 0;
 
       /**
-       * @type {TJSPositionOptions}
+       * @type {import('../').TJSPositionOptions}
        */
       this.options = void 0;
 
@@ -46,12 +46,12 @@ export class UpdateElementData
       this.queued = false;
 
       /**
-       * @type {StyleCache}
+       * @type {import('../StyleCache').StyleCache}
        */
       this.styleCache = void 0;
 
       /**
-       * @type {TJSTransforms}
+       * @type {import('../transform').TJSTransforms}
        */
       this.transforms = void 0;
 

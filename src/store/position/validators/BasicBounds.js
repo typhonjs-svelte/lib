@@ -148,9 +148,9 @@ export class BasicBounds
     * Provides a validator that respects transforms in positional data constraining the position to within the target
     * elements bounds.
     *
-    * @param {ValidationData}   valData - The associated validation data for position updates.
+    * @param {import('../').ValidationData}   valData - The associated validation data for position updates.
     *
-    * @returns {TJSPositionData} Potentially adjusted position data.
+    * @returns {import('../').TJSPositionData} Potentially adjusted position data.
     */
    validator(valData)
    {
