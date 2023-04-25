@@ -1,3 +1,3 @@
 export * from './getStackingContext.js';
-export * from './StyleManager.js';
 export * from './styleParsePixels.js';
+export * from './TJSStyleManager.js';

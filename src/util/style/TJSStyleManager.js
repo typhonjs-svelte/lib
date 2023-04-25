@@ -4,18 +4,18 @@ import {
 
 /**
  * Provides a managed dynamic style sheet / element useful in configuring global CSS variables. When creating an
- * instance of StyleManager you must provide a "document key" / string for the style element added. The style element
+ * instance of TJSStyleManager you must provide a "document key" / string for the style element added. The style element
  * can be accessed via `document[docKey]`.
  *
- * Instances of StyleManager can also be versioned by supplying a positive integer greater than or equal to `1` via the
- * 'version' option. This version number is assigned to the associated style element. When a StyleManager instance is
- * created and there is an existing instance with a version that is lower than the current instance all CSS rules are
- * removed letting the higher version to take precedence. This isn't a perfect system and requires thoughtful
+ * Instances of TJSStyleManager can also be versioned by supplying a positive integer greater than or equal to `1` via
+ * the 'version' option. This version number is assigned to the associated style element. When a TJSStyleManager
+ * instance is created and there is an existing instance with a version that is lower than the current instance all CSS
+ * rules are removed letting the higher version to take precedence. This isn't a perfect system and requires thoughtful
  * construction of CSS variables exposed, but allows multiple independently compiled TRL packages to load the latest
- * CSS variables. It is recommended to always set `overwrite` option of {@link StyleManager.setProperty} and
- * {@link StyleManager.setProperties} to `false` when loading initial values.
+ * CSS variables. It is recommended to always set `overwrite` option of {@link TJSStyleManager.setProperty} and
+ * {@link TJSStyleManager.setProperties} to `false` when loading initial values.
  */
-export class StyleManager
+export class TJSStyleManager
 {
    /** @type {CSSStyleRule} */
    #cssRule;
@@ -53,7 +53,7 @@ export class StyleManager
       //  unintentionally.
       // if (!(document instanceof Document))
       // {
-      //    throw new TypeError(`StyleManager error: 'document' is not an instance of Document.`);
+      //    throw new TypeError(`TJSStyleManager error: 'document' is not an instance of Document.`);
       // }
 
       if (typeof selector !== 'string') { throw new TypeError(`StyleManager error: 'selector' is not a string.`); }
@@ -117,17 +117,17 @@ export class StyleManager
    }
 
    /**
-    * Provides a copy constructor to duplicate an existing StyleManager instance into a new document.
+    * Provides a copy constructor to duplicate an existing TJSStyleManager instance into a new document.
     *
     * Note: This is used to support the `PopOut` module.
     *
     * @param {Document} [document] Target browser document to clone into.
     *
-    * @returns {StyleManager} New style manager instance.
+    * @returns {TJSStyleManager} New style manager instance.
     */
    clone(document = globalThis.document)
    {
-      const newStyleManager = new StyleManager({
+      const newStyleManager = new TJSStyleManager({
          selector: this.#selector,
          docKey: this.#docKey,
          document,
