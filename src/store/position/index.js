@@ -58,6 +58,13 @@ export * from './TJSPositionData.js';
  */
 
 /**
+ * @typedef {object} TJSPositionable
+ *
+ * @property {import('./').TJSPosition}   position - An instance of TJSPosition that manages application positional
+ *           state.
+ */
+
+/**
  * @typedef {object} ResizeObserverData
  *
  * @property {number|undefined} contentHeight -
