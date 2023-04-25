@@ -1,5 +1,6 @@
 export * from '@typhonjs-utils/dynamic-reducer';
 
+export * from './array-object/index.js';
 export * from './dom-events/index.js';
 export * from './web-storage/index.js';
 
