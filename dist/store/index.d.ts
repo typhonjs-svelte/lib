@@ -1,4 +1,4 @@
-import * as svelte_store from 'svelte/store';
+import * as _svelte_store from 'svelte/store';
 import { Writable, Readable } from 'svelte/store';
 
 /**
@@ -1077,9 +1077,9 @@ declare class TJSLocalStorage {
      *
      * @param {boolean}  [defaultValue] - A default value to set for the store.
      *
-     * @returns {import('svelte/store').Writable} The new store.
+     * @returns {import('#svelte/store').Writable} The new store.
      */
-    static "__#121591@#createStore"(key: string, defaultValue?: boolean): svelte_store.Writable<any>;
+    static "__#121649@#createStore"(key: string, defaultValue?: boolean): _svelte_store.Writable<any>;
     /**
      * Get value from the localStorage.
      *
@@ -1098,9 +1098,9 @@ declare class TJSLocalStorage {
      *
      * @param {*}        [defaultValue] - A default value to return if key not present in session storage.
      *
-     * @returns {import('svelte/store').Writable} The Svelte store for this key.
+     * @returns {import('#svelte/store').Writable} The Svelte store for this key.
      */
-    getStore(key: string, defaultValue?: any): svelte_store.Writable<any>;
+    getStore(key: string, defaultValue?: any): _svelte_store.Writable<any>;
     /**
      * Sets the value for the given key in localStorage.
      *
@@ -1130,9 +1130,9 @@ declare class TJSSessionStorage {
      *
      * @param {boolean}  [defaultValue] - A default value to set for the store.
      *
-     * @returns {import('svelte/store').Writable} The new store.
+     * @returns {import('#svelte/store').Writable} The new store.
      */
-    static "__#121592@#createStore"(key: string, defaultValue?: boolean): svelte_store.Writable<any>;
+    static "__#121650@#createStore"(key: string, defaultValue?: boolean): _svelte_store.Writable<any>;
     /**
      * Get value from the sessionStorage.
      *
@@ -1151,9 +1151,9 @@ declare class TJSSessionStorage {
      *
      * @param {*}        [defaultValue] - A default value to return if key not present in session storage.
      *
-     * @returns {import('svelte/store').Writable} The Svelte store for this key.
+     * @returns {import('#svelte/store').Writable} The Svelte store for this key.
      */
-    getStore(key: string, defaultValue?: any): svelte_store.Writable<any>;
+    getStore(key: string, defaultValue?: any): _svelte_store.Writable<any>;
     /**
      * Sets the value for the given key in sessionStorage.
      *
@@ -1212,28 +1212,28 @@ declare function isWritableStore(store: any): boolean;
  * Subscribes to the given store with the update function provided and ignores the first automatic
  * update. All future updates are dispatched to the update function.
  *
- * @param {import('svelte/store').Readable | import('svelte/store').Writable} store -
+ * @param {import('#svelte/store').Readable | import('#svelte/store').Writable} store -
  *  Store to subscribe to...
  *
- * @param {import('svelte/store').Updater} update - function to receive future updates.
+ * @param {import('#svelte/store').Updater} update - function to receive future updates.
  *
- * @returns {import('svelte/store').Unsubscriber} Store unsubscribe function.
+ * @returns {import('#svelte/store').Unsubscriber} Store unsubscribe function.
  */
-declare function subscribeIgnoreFirst(store: svelte_store.Readable<any> | svelte_store.Writable<any>, update: any): svelte_store.Unsubscriber;
+declare function subscribeIgnoreFirst(store: _svelte_store.Readable<any> | _svelte_store.Writable<any>, update: any): _svelte_store.Unsubscriber;
 /**
  * Subscribes to the given store with two update functions provided. The first function is invoked on the initial
  * subscription. All future updates are dispatched to the update function.
  *
- * @param {import('svelte/store').Readable | import('svelte/store').Writable} store -
+ * @param {import('#svelte/store').Readable | import('#svelte/store').Writable} store -
  *  Store to subscribe to...
  *
- * @param {import('svelte/store').Updater} first - Function to receive first update.
+ * @param {import('#svelte/store').Updater} first - Function to receive first update.
  *
- * @param {import('svelte/store').Updater} update - Function to receive future updates.
+ * @param {import('#svelte/store').Updater} update - Function to receive future updates.
  *
- * @returns {import('svelte/store').Unsubscriber} Store unsubscribe function.
+ * @returns {import('#svelte/store').Unsubscriber} Store unsubscribe function.
  */
-declare function subscribeFirstRest(store: svelte_store.Readable<any> | svelte_store.Writable<any>, first: any, update: any): svelte_store.Unsubscriber;
+declare function subscribeFirstRest(store: _svelte_store.Readable<any> | _svelte_store.Writable<any>, first: any, update: any): _svelte_store.Unsubscriber;
 
 /** The minimal requirements of the
  * [writable store contract](https://svelte.dev/docs#component-format-script-4-prefix-stores-with-$-to-access-their-values-store-contract).

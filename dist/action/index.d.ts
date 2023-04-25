@@ -1,4 +1,4 @@
-import * as svelte_store from 'svelte/store';
+import * as _svelte_store from 'svelte/store';
 
 /**
  * Provides an action to always blur the element when any pointer up event occurs on the element.
@@ -19,11 +19,11 @@ declare function alwaysBlur(node: HTMLElement): {
  *
  * @param {HTMLElement} element - The target scrollable HTML element.
  *
- * @param {import('svelte/store').Writable<number>}   store - A writable store that stores the element scrollTop.
+ * @param {import('#svelte/store').Writable<number>}   store - A writable store that stores the element scrollTop.
  *
  * @returns {{destroy: Function, update: Function}} Lifecycle functions.
  */
-declare function applyScrolltop(element: HTMLElement, store: svelte_store.Writable<number>): {
+declare function applyScrolltop(element: HTMLElement, store: _svelte_store.Writable<number>): {
     destroy: Function;
     update: Function;
 };
@@ -47,11 +47,11 @@ declare function autoBlur(node: HTMLElement): {
  *
  * @param {HTMLElement} node - Target element.
  *
- * @param {import('svelte/store').Writable<boolean>}  storeFocused - Update store for focus changes.
+ * @param {import('#svelte/store').Writable<boolean>}  storeFocused - Update store for focus changes.
  *
  * @returns {{update: (function(object): void), destroy: (function(): void)}} Action lifecycle methods.
  */
-declare function isFocused(node: HTMLElement, storeFocused: svelte_store.Writable<boolean>): {
+declare function isFocused(node: HTMLElement, storeFocused: _svelte_store.Writable<boolean>): {
     update: ((arg0: object) => void);
     destroy: (() => void);
 };
