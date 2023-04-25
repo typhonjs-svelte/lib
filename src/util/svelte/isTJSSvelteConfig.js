@@ -33,6 +33,7 @@ export function isTJSSvelteConfig(config, raiseException = false)
    return true;
 }
 
+/* eslint-disable */  // jsdoc/valid-types doesn't like the Google closure constructor function. TODO: verify in future eslint-plugin-jsdoc version
 /**
  * @typedef {object} TJSSvelteConfig
  *
@@ -52,3 +53,4 @@ export function isTJSSvelteConfig(config, raiseException = false)
  *
  * @property {boolean}  [$$inline] -
  */
+/* eslint-enable */
