@@ -6,10 +6,6 @@ import { AnimationManager }      from './AnimationManager.js';
 import { AnimationAPI }          from './AnimationAPI.js';
 import { AnimationGroupControl } from './AnimationGroupControl.js';
 
-// Explicit import for TS declaration generation.
-import { AnimationControl }      from './AnimationControl.js'; // eslint-disable-line no-unused-vars
-import { TJSPosition }              from '../TJSPosition.js';        // eslint-disable-line no-unused-vars
-
 /**
  * Provides a public API for grouping multiple {@link TJSPosition} animations together with the AnimationManager.
  *

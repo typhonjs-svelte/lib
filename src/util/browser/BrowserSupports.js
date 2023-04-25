@@ -1,8 +1,8 @@
 /**
  * Provides utility methods for checking browser capabilities.
  *
- * TODO: perhaps add support for various standard media query checks for level 4 & 5.
  * @see https://kilianvalkhof.com/2021/web/detecting-media-query-support-in-css-and-javascript/
+ * TODO: perhaps add support for various standard media query checks for level 4 & 5.
  */
 export class BrowserSupports
 {

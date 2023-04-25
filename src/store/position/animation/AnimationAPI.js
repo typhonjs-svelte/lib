@@ -14,9 +14,6 @@ import {
    animateKeys,
    setNumericDefaults }       from '../constants.js';
 
-// Explicit import for TS declaration generation.
-import { TJSPosition }           from '../TJSPosition.js';     // eslint-disable-line no-unused-vars
-import { TJSPositionData }       from '../TJSPositionData.js'; // eslint-disable-line no-unused-vars
 export class AnimationAPI
 {
    /** @type {TJSPositionData} */

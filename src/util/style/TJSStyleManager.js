@@ -43,7 +43,6 @@ export class TJSStyleManager
     * @param {Document} [opts.document] - Target document to load styles into.
     *
     * @param {number}   [opts.version] - An integer representing the version / level of styles being managed.
-    *
     */
    constructor({ docKey, selector = ':root', document = globalThis.document, version } = {})
    {
@@ -177,7 +176,7 @@ export class TJSStyleManager
    /**
     * Set rules by property / value; useful for CSS variables.
     *
-    * @param {Object<string, string>}  rules - An object with property / value string pairs to load.
+    * @param {{ [key: string]: string }}  rules - An object with property / value string pairs to load.
     *
     * @param {boolean}                 [overwrite=true] - When true overwrites any existing values.
     */

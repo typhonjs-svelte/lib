@@ -1,6 +1,3 @@
-// Explicit import for TS declaration generation.
-import { TJSPositionData } from '../TJSPositionData.js'; // eslint-disable-line no-unused-vars
-
 export class BasicBounds
 {
    /**

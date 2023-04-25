@@ -3,9 +3,6 @@ import { linear }       from '#svelte/easing';
 import { lerp }         from '#svelte-lib/math';
 import { isIterable }   from '#svelte-lib/util';
 
-// Explicit import for TS declaration generation.
-import { TJSPositionData } from './TJSPositionData.js';  // eslint-disable-line no-unused-vars
-
 export class PositionStateAPI
 {
    /** @type {TJSPositionData} */

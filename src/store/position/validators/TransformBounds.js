@@ -1,8 +1,5 @@
 import { TJSTransformData }   from '../transform/TJSTransformData.js';
 
-// Explicit import for TS declaration generation.
-import { TJSPositionData }    from '../TJSPositionData.js'; // eslint-disable-line no-unused-vars
-
 const s_TRANSFORM_DATA = new TJSTransformData();
 
 export class TransformBounds
