@@ -1,4 +1,4 @@
-import { isObject } from '@typhonjs-svelte/lib/util';
+import { isObject } from '#svelte-lib/util';
 
 /**
  * Provides a TJSBasicAnimation implementation for TJSPosition animation.

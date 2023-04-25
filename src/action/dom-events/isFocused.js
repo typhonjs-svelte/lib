@@ -1,4 +1,4 @@
-import { isWritableStore } from '@typhonjs-svelte/lib/store';
+import { isWritableStore } from '#svelte-lib/store';
 
 /**
  * Provides an action to monitor focus state of a given element and set an associated store with current focus state.

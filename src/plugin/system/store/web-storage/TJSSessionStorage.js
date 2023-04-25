@@ -1,4 +1,4 @@
-import { TJSSessionStorage as SS }  from '@typhonjs-svelte/lib/store';
+import { TJSSessionStorage as SS }  from '#svelte-lib/store';
 
 export class TJSSessionStorage
 {

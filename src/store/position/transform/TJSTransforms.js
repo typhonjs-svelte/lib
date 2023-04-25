@@ -1,4 +1,4 @@
-import { degToRad, mat4, vec3 }  from '@typhonjs-svelte/lib/math';
+import { degToRad, mat4, vec3 }  from '#svelte-lib/math';
 
 import * as constants            from '../constants.js';
 

@@ -1,11 +1,11 @@
 import {
    propertyStore,
-   subscribeIgnoreFirst }        from '@typhonjs-svelte/lib/store';
+   subscribeIgnoreFirst }        from '#svelte-lib/store';
 
 import {
    isIterable,
    isObject,
-   isPlainObject }               from '@typhonjs-svelte/lib/util';
+   isPlainObject }               from '#svelte-lib/util';
 
 import { AnimationAPI }          from './animation/AnimationAPI.js';
 import { AnimationGroupAPI }     from './animation/AnimationGroupAPI.js';

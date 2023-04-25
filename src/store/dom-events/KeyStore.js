@@ -1,4 +1,4 @@
-import { isIterable } from '@typhonjs-svelte/lib/util';
+import { isIterable } from '#svelte-lib/util';
 
 /**
  * Provides a readable store to track keys actively pressed. KeyStore is designed to be used with the {@link keyforward}

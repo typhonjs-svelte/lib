@@ -1,7 +1,7 @@
 import { writable }           from '#svelte/store';
 
-import { propertyStore }      from '@typhonjs-svelte/lib/store';
-import { styleParsePixels }   from '@typhonjs-svelte/lib/util';
+import { propertyStore }      from '#svelte-lib/store';
+import { styleParsePixels }   from '#svelte-lib/util';
 export class StyleCache
 {
    constructor()

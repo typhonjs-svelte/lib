@@ -1,4 +1,4 @@
-import { TJSLocalStorage as LS } from '@typhonjs-svelte/lib/store';
+import { TJSLocalStorage as LS } from '#svelte-lib/store';
 
 export class TJSLocalStorage
 {

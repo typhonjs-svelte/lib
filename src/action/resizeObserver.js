@@ -1,8 +1,8 @@
-import { isUpdatableStore }   from '@typhonjs-svelte/lib/store';
+import { isUpdatableStore }   from '#svelte-lib/store';
 
 import {
    isObject,
-   styleParsePixels }         from '@typhonjs-svelte/lib/util';
+   styleParsePixels }         from '#svelte-lib/util';
 
 /**
  * Provides an action to monitor the given HTMLElement node with `ResizeObserver` posting width / height changes

@@ -1,6 +1,6 @@
 import { linear } from '#svelte/easing';
 
-import { lerp }   from '@typhonjs-svelte/lib/math';
+import { lerp }   from '#svelte-lib/math';
 
 /**
  * Provides a rotate transition. For options `easing` is applied to to the rotate transition. The default easing is

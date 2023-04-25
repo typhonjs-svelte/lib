@@ -1,9 +1,9 @@
 import { cubicOut }           from '#svelte/easing';
 
-import { lerp }               from '@typhonjs-svelte/lib/math';
+import { lerp }               from '#svelte-lib/math';
 import {
    isIterable,
-   isObject }                 from '@typhonjs-svelte/lib/util';
+   isObject }                 from '#svelte-lib/util';
 
 import { AnimationControl }   from './AnimationControl.js';
 import { AnimationManager }   from './AnimationManager.js';

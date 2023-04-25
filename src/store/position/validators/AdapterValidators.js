@@ -1,4 +1,4 @@
-import { isObject }     from '@typhonjs-svelte/lib/util';
+import { isObject }     from '#svelte-lib/util';
 
 /**
  * Provides the storage and sequencing of managed position validators. Each validator added may be a bespoke function or

@@ -1,5 +1,5 @@
-import { isWritableStore } from '@typhonjs-svelte/lib/store';
-import { debounce }        from '@typhonjs-svelte/lib/util';
+import { isWritableStore } from '#svelte-lib/store';
+import { debounce }        from '#svelte-lib/util';
 
 import { resizeObserver }  from "../resizeObserver.js";
 

@@ -1,4 +1,4 @@
-import { mat4, vec3 }   from '@typhonjs-svelte/lib/math';
+import { mat4, vec3 }   from '#svelte-lib/math';
 
 /**
  * Provides the output data for {@link TJSTransforms.getData}.

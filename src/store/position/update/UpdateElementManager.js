@@ -1,4 +1,4 @@
-import { nextAnimationFrame }    from '@typhonjs-svelte/lib/animate';
+import { nextAnimationFrame }    from '#svelte-lib/animate';
 
 /**
  * Decouples updates to any parent target HTMLElement inline styles. Invoke {@link TJSPosition.elementUpdated} to await

@@ -1,7 +1,7 @@
 import { linear }       from '#svelte/easing';
 
-import { lerp }         from '@typhonjs-svelte/lib/math';
-import { isIterable }   from '@typhonjs-svelte/lib/util';
+import { lerp }         from '#svelte-lib/math';
+import { isIterable }   from '#svelte-lib/util';
 
 // Explicit import for TS declaration generation.
 import { TJSPositionData } from './TJSPositionData.js';  // eslint-disable-line no-unused-vars
