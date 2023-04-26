@@ -4,7 +4,7 @@ import {
    isIterable,
    normalizeString }       from '#svelte-lib/util';
 
-import { isWritableStore } from '../../functions.js';
+import { isWritableStore } from '../../../functions.js';
 
 /**
  * Creates a filter function to compare objects by a give property key against a regex test. The returned function

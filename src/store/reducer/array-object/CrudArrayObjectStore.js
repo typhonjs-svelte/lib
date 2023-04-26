@@ -23,7 +23,7 @@ export class CrudArrayObjectStore extends ArrayObjectStore
     *
     * @param {object}                  [opts.extraData] -
     *
-    * @param {import('./').ArrayObjectStoreParams}  [opts.rest] - Rest of ArrayObjectStore parameters.
+    * @param {import('./index.js').ArrayObjectStoreParams}  [opts.rest] - Rest of ArrayObjectStore parameters.
     */
    constructor({ crudDispatch, extraData, ...rest })
    {
@@ -108,7 +108,7 @@ export class CrudArrayObjectStore extends ArrayObjectStore
     * attached. When the update is an object with a valid UUIDv4 string as the id property the `crudDispatch`
     * function is invoked with  along with the data payload
     *
-    * @param {import('./').ArrayObjectUpdateData} [update] -
+    * @param {import('./index.js').ArrayObjectUpdateData} [update] -
     */
    updateSubscribers(update)
    {
@@ -132,7 +132,7 @@ export class CrudArrayObjectStore extends ArrayObjectStore
 }
 
 /**
- * @typedef {import('./').ArrayObjectStoreParams & CrudArrayObjectStoreParamProps} CrudArrayObjectStoreParams
+ * @typedef {import('./index.js').ArrayObjectStoreParams & CrudArrayObjectStoreParamProps} CrudArrayObjectStoreParams
  */
 
 /**

@@ -8,7 +8,7 @@ import {
 
 import {
    isWritableStore,
-   subscribeIgnoreFirst }     from '../functions.js';
+   subscribeIgnoreFirst }     from '../../functions.js';
 
 import { ObjectEntryStore }   from './ObjectEntryStore.js';
 
@@ -58,7 +58,7 @@ export class ArrayObjectStore
    static get EntryStore() { return ObjectEntryStore; }
 
    /**
-    * @param {import('./').ArrayObjectStoreParams} params -
+    * @param {import('./index.js').ArrayObjectStoreParams} params -
     */
    constructor({ StoreClass, defaultData = [], childDebounce = 250, dataReducer = false, manualUpdate = false } = {})
    {
@@ -406,7 +406,7 @@ export class ArrayObjectStore
    /**
     * Updates subscribers.
     *
-    * @param {import('./').ArrayObjectUpdateData}  [update] -
+    * @param {import('./index.js').ArrayObjectUpdateData}  [update] -
     */
    updateSubscribers(update)
    {
