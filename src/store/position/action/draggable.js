@@ -13,7 +13,7 @@ import {
  *
  * @param {object}            params - Required parameters.
  *
- * @param {import('#svelte-lib/store/position').TJSPosition}   params.position - A position instance.
+ * @param {import('..').TJSPosition}   params.position - A position instance.
  *
  * @param {boolean}           [params.active=true] - A boolean value; attached to a readable store.
  *

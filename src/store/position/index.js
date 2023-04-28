@@ -1,7 +1,8 @@
 export * from './TJSPosition.js';
-
-export * from './transform/index.js';
 export * from './TJSPositionData.js';
+
+export * from './action/index.js';
+export * from './transform/index.js';
 
 // From: position/animation/AnimationAPI.js --------------------------------------------------------------------------
 

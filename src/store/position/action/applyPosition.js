@@ -5,7 +5,7 @@ import { hasSetter } from '#svelte-lib/util';
  *
  * @param {HTMLElement}       node - The node associated with the action.
  *
- * @param {import('#svelte-lib/store/position').TJSPosition}   position - A position instance.
+ * @param {import('..').TJSPosition}   position - A position instance.
  *
  * @returns {{update: Function, destroy: Function}} The action lifecycle methods.
  */
