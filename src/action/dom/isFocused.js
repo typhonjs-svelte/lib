@@ -9,7 +9,8 @@ import { isWritableStore } from '#svelte-lib/store';
  *
  * @param {import('#svelte/store').Writable<boolean>}  storeFocused - Update store for focus changes.
  *
- * @returns {{update: (function(object): void), destroy: (function(): void)}} Action lifecycle methods.
+ * @returns {{update: (function(import('#svelte/store').Writable<boolean>): void), destroy: Function}} Action lifecycle
+ *          methods.
  */
 export function isFocused(node, storeFocused)
 {

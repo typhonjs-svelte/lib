@@ -6,7 +6,7 @@
  *
  * @param {import('..').KeyStore}   keyStore - KeyStore to forward events key down / up events to...
  *
- * @returns {{update: (function(import('..').KeyStore): void), destroy: (function(): void)}} Action lifecycle methods.
+ * @returns {{update: (function(import('..').KeyStore): void), destroy: Function}} Action lifecycle methods.
  */
 export function keyforward(node, keyStore)
 {

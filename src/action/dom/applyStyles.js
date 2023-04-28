@@ -3,9 +3,9 @@
  *
  * @param {HTMLElement} node - Target element
  *
- * @param {object}      properties - Key / value object of properties to set.
+ * @param {Record<string, string>}  properties - Key / value object of properties to set.
  *
- * @returns {Function} Update function.
+ * @returns {{update: (function(Record<string, string>): void) }} Update function.
  */
 export function applyStyles(node, properties)
 {
