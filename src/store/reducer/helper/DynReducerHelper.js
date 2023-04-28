@@ -13,7 +13,7 @@ export class DynReducerHelper
     *
     * @returns {{
     *    regexObjectQuery: (properties: string|Iterable<string>, options?: {caseSensitive?: boolean, store?: import('#svelte/store').Writable<string>}) => (((data: {}) => boolean) & import('#svelte/store').Writable<string>)
-    * }}
+    * }} All available filters.
     */
    static get filters() { return filters; }
 }
