@@ -4,9 +4,9 @@
  *
  * @param {HTMLElement} node - Target element.
  *
- * @param {{keydown: Function, keyup: Function}}   keyStore - Object to forward events key down / up events to...
+ * @param {import('..').KeyStore}   keyStore - KeyStore to forward events key down / up events to...
  *
- * @returns {{update: (function(object): void), destroy: (function(): void)}} Action lifecycle methods.
+ * @returns {{update: (function(import('..').KeyStore): void), destroy: (function(): void)}} Action lifecycle methods.
  */
 export function keyforward(node, keyStore)
 {
