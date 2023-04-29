@@ -57,6 +57,14 @@
       "types": "./_dist/store/reducer/index.d.ts",
       "import": "./_dist/store/reducer/index.js"
     },
+    "./store/storage/web": {
+      "types": "./_dist/store/storage/web/index.d.ts",
+      "import": "./_dist/store/storage/web/index.js"
+    },
+    "./store/storage/web/plugin": {
+      "types": "./_dist/store/storage/web/plugin/index.d.ts",
+      "import": "./_dist/store/storage/web/plugin/index.js"
+    },
     "./transition": {
       "types": "./_dist/transition/index.d.ts",
       "import": "./_dist/transition/index.js"

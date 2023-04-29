@@ -185,6 +185,38 @@ const rollupConfigs = [{
    },
    {
       input: {
+         input: 'src/store/storage/web/index.js',
+         plugins: [
+            importsExternal(),
+            resolve(),
+            generateDTS.plugin(dtsPluginOptions)
+         ]
+      },
+      output: {
+         file: '_dist/store/storage/web/index.js',
+         format: 'es',
+         generatedCode: { constBindings: true },
+         sourcemap
+      }
+   },
+   {
+      input: {
+         input: 'src/store/storage/web/plugin/index.js',
+         plugins: [
+            importsExternal(),
+            resolve(),
+            generateDTS.plugin(dtsPluginOptions)
+         ]
+      },
+      output: {
+         file: '_dist/store/storage/web/plugin/index.js',
+         format: 'es',
+         generatedCode: { constBindings: true },
+         sourcemap
+      }
+   },
+   {
+      input: {
          input: 'src/transition/index.js',
          plugins: [
             importsExternal(),
@@ -210,37 +242,6 @@ const rollupConfigs = [{
       },
       output: {
          file: '_dist/util/index.js',
-         format: 'es',
-         generatedCode: { constBindings: true },
-         sourcemap
-      }
-   },
-   {
-      input: {
-         input: 'src/plugin/data/index.js',
-         plugins: [
-            importsExternal(),
-            generateDTS.plugin(dtsPluginOptions)
-         ]
-      },
-      output: {
-         file: '_dist/plugin/data/index.js',
-         format: 'es',
-         generatedCode: { constBindings: true },
-         sourcemap
-      }
-   },
-   {
-      input: {
-         input: 'src/plugin/system/index.js',
-         plugins: [
-            importsExternal(),
-            resolve(),
-            generateDTS.plugin(dtsPluginOptions)
-         ]
-      },
-      output: {
-         file: '_dist/plugin/system/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          sourcemap

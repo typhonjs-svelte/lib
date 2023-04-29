@@ -1,8 +1,8 @@
-import { TJSLocalStorage as LS } from '#svelte-lib/store';
+import { TJSLocalStorage } from '#svelte-lib/store/storage/web';
 
-export class TJSLocalStorage
+export class TJSPLocalStorage
 {
-   #storage = new LS();
+   #storage = new TJSLocalStorage();
 
    onPluginLoad(ev)
    {

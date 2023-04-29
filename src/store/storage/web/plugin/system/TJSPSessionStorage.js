@@ -1,8 +1,8 @@
-import { TJSSessionStorage as SS }  from '#svelte-lib/store';
+import { TJSSessionStorage }  from '#svelte-lib/store/storage/web';
 
-export class TJSSessionStorage
+export class TJSPSessionStorage
 {
-   #storage = new SS();
+   #storage = new TJSSessionStorage();
 
    onPluginLoad(ev)
    {
