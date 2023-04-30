@@ -1,4 +1,4 @@
-import { mat4, vec3 }   from '#svelte-lib/math';
+import { Mat4, Vec3 }   from '#svelte-lib/math/gl-matrix';
 
 /**
  * Provides the output data for {@link TJSTransforms.getData}.
@@ -18,26 +18,26 @@ export class TJSTransformData
    #boundingRect = new DOMRect();
 
    /**
-    * Stores the individual transformed corner points of the window in screenspace clockwise from:
+    * Stores the individual transformed corner points of the window in screen space clockwise from:
     * top left -> top right -> bottom right -> bottom left.
     *
-    * @type {import('../').Vector3[]}
+    * @type {import('#svelte-lib/math/gl-matrix').Vec3[]}
     */
-   #corners = [vec3.create(), vec3.create(), vec3.create(), vec3.create()];
+   #corners = [Vec3.create(), Vec3.create(), Vec3.create(), Vec3.create()];
 
    /**
-    * Stores the current gl-matrix mat4 data.
+    * Stores the current gl-matrix Mat4 data.
     *
-    * @type {import('../').Matrix4}
+    * @type {import('#svelte-lib/math/gl-matrix').Mat4}
     */
-   #mat4 = mat4.create();
+   #mat4 = Mat4.create();
 
    /**
     * Stores the pre & post origin translations to apply to matrix transforms.
     *
-    * @type {import('../').Matrix4[]}
+    * @type {import('#svelte-lib/math/gl-matrix').Mat4[]}
     */
-   #originTranslations = [mat4.create(), mat4.create()];
+   #originTranslations = [Mat4.create(), Mat4.create()];
 
    /**
     * @returns {DOMRect} The bounding rectangle.
@@ -45,7 +45,7 @@ export class TJSTransformData
    get boundingRect() { return this.#boundingRect; }
 
    /**
-    * @returns {import('../').Vector3[]} The transformed corner points as vec3 in screen space.
+    * @returns {import('#svelte-lib/math/gl-matrix').Vec3[]} The transformed corner points as Vec3 in screen space.
     */
    get corners() { return this.#corners; }
 
@@ -55,12 +55,12 @@ export class TJSTransformData
    get css() { return `matrix3d(${this.mat4.join(',')})`; }
 
    /**
-    * @returns {import('../').Matrix4} The transform matrix.
+    * @returns {import('#svelte-lib/math/gl-matrix').Mat4} The transform matrix.
     */
    get mat4() { return this.#mat4; }
 
    /**
-    * @returns {import('../').Matrix4[]} The pre / post translation matrices for origin translation.
+    * @returns {import('#svelte-lib/math/gl-matrix').Mat4[]} The pre / post translation matrices for origin translation.
     */
    get originTranslations() { return this.#originTranslations; }
 }

@@ -1,6 +1,3 @@
-
-
-
 /**
  * Performs linear interpolation between a start & end value by given amount between 0 - 1 inclusive.
  *

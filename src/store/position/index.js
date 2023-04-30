@@ -182,18 +182,6 @@ export * from './transform/index.js';
 // From: position/transform/TJSTransformData.js -------------------------------------------------------------------------
 
 /**
- * @typedef {Float32Array} Vector3 - 3 Dimensional Vector.
- *
- * @see https://glmatrix.net/docs/module-vec3.html
- */
-
-/**
- * @typedef {Float32Array} Matrix4 - 4x4 Matrix; Format: column-major, when typed out it looks like row-major.
- *
- * @see https://glmatrix.net/docs/module-mat4.html
- */
-
-/**
  * @typedef {'top left' | 'top center' | 'top right' | 'center left' | 'center' | 'center right' | 'bottom left' | 'bottom center' | 'bottom right' } TJSTransformOrigin - The supported transform origin strings.
  */
 

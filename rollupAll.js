@@ -106,14 +106,27 @@ const rollupConfigs = [{
          plugins: [
             importsExternal(),
             resolve(),
-            generateDTS.plugin({ ...dtsPluginOptions, replace: {
-               '/// <reference types="gl-matrix/index.js" />': '',  // Remove reference in __dist/math/index.d.ts
-               "export \\* from 'gl-matrix';": ''
-            } })
+            generateDTS.plugin(dtsPluginOptions)
          ]
       },
       output: {
          file: '_dist/math/index.js',
+         format: 'es',
+         generatedCode: { constBindings: true },
+         sourcemap
+      }
+   },
+   {
+      input: {
+         input: 'src/math/gl-matrix/index.js',
+         plugins: [
+            importsExternal(),
+            resolve(),
+            generateDTS.plugin(dtsPluginOptions)
+         ]
+      },
+      output: {
+         file: '_dist/math/gl-matrix/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          sourcemap

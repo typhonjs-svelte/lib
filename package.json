@@ -7,6 +7,7 @@
   "contributors": [
     "Michael Leahy <support@typhonjs.io> (https://github.com/typhonrt)"
   ],
+  "sideEffects": false,
   "imports": {
     "#svelte-lib/*": "@typhonjs-svelte/lib/*",
     "#svelte/*": "svelte/*",
@@ -40,6 +41,10 @@
     "./math": {
       "types": "./_dist/math/index.d.ts",
       "import": "./_dist/math/index.js"
+    },
+    "./math/gl-matrix": {
+      "types": "./_dist/math/gl-matrix/index.d.ts",
+      "import": "./_dist/math/gl-matrix/index.js"
     },
     "./store": {
       "types": "./_dist/store/index.d.ts",
@@ -91,7 +96,7 @@
     "@typhonjs-svelte/dynamic-reducer": "^0.0.8",
     "@typhonjs-utils/object": "^0.0.10",
     "eslint": "^8",
-    "gl-matrix": "^3.4.3",
+    "gl-matrix": "github:typhonjs-svelte/gl-matrix-dist-test#glmatrix-next",
     "klona": "2.0.6",
     "rollup": "^3",
     "striptags": "github:typhonjs-svelte/striptags",
