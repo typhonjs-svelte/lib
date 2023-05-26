@@ -16,7 +16,7 @@ export { striptags } from 'striptags';
 
 export {
    deepMerge,
-   isIterableAsync,
+   isAsyncIterable,
    isIterable,
    isObject,
    isPlainObject,

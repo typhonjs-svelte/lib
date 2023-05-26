@@ -94,7 +94,7 @@
     "@typhonjs-build-test/rollup-external-imports": "^0.0.1",
     "@typhonjs-config/eslint-config": "^0.6.0",
     "@typhonjs-svelte/dynamic-reducer": "^0.0.8",
-    "@typhonjs-utils/object": "^0.0.12",
+    "@typhonjs-utils/object": "^0.0.14",
     "eslint": "^8",
     "gl-matrix": "github:typhonjs-svelte/gl-matrix-dist-test#glmatrix-next",
     "klona": "2.0.6",
