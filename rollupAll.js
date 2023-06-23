@@ -1,6 +1,6 @@
 import resolve             from '@rollup/plugin-node-resolve';
 import { generateDTS }     from '@typhonjs-build-test/esm-d-ts';
-import { importsExternal } from '@typhonjs-build-test/rollup-external-imports';
+import { importsExternal } from '@typhonjs-build-test/rollup-plugin-pkg-imports';
 import { rollup }          from 'rollup';
 
 const sourcemap = true; // Defines whether source maps are generated.

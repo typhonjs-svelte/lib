@@ -90,22 +90,22 @@
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15",
-    "@typhonjs-build-test/esm-d-ts": "^0.0.25",
-    "@typhonjs-build-test/rollup-external-imports": "^0.0.1",
+    "@typhonjs-build-test/esm-d-ts": "^0.0.26",
+    "@typhonjs-build-test/rollup-plugin-pkg-imports": "^0.0.2",
     "@typhonjs-config/eslint-config": "^0.6.0",
     "@typhonjs-svelte/dynamic-reducer": "^0.0.8",
-    "@typhonjs-utils/object": "^0.0.14",
+    "@typhonjs-utils/object": "^0.0.17",
     "eslint": "^8",
     "gl-matrix": "github:typhonjs-svelte/gl-matrix-dist-test#glmatrix-next",
     "klona": "2.0.6",
     "rollup": "^3",
     "striptags": "github:typhonjs-svelte/striptags",
     "svelte-persistent-store": "github:typhonjs-svelte/svelte-persistent-store",
-    "svelte-writable-derived": "^3.0.1",
+    "svelte-writable-derived": "^3.1.0",
     "upath": "^2.0.1"
   },
   "peerDependencies": {
-    "svelte": ">=3.58.0"
+    "svelte": "3.59.2"
   },
   "engines": {
     "node": ">=14.18"
