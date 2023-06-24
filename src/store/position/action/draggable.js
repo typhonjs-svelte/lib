@@ -84,14 +84,18 @@ function draggable(node, { position, active = true, button = 0, storeDragging = 
    let quickTo = position.animate.quickTo(['top', 'left'], easeOptions);
 
    /**
-    * Remember event handlers associated with this action so they may be later unregistered.
+    * Remember event handlers associated with this action, so they may be later unregistered.
     *
-    * @type {object}
+    * @type {({ [key: string]: [
+    *    keyof HTMLElementEventMap,
+    *    (this:HTMLElement, ev: HTMLElementEventMap[keyof HTMLElementEventMap]) => any,
+    *    boolean | AddEventListenerOptions]
+    * })}
     */
    const handlers = {
-      dragDown: ['pointerdown', (e) => onDragPointerDown(e), false],
-      dragMove: ['pointermove', (e) => onDragPointerChange(e), false],
-      dragUp: ['pointerup', (e) => onDragPointerUp(e), false]
+      dragDown: ['pointerdown', onDragPointerDown, false],
+      dragMove: ['pointermove', onDragPointerChange, false],
+      dragUp: ['pointerup', onDragPointerUp, false]
    };
 
    /**
@@ -302,6 +306,9 @@ class DraggableOptions
 {
    #ease = false;
 
+   /**
+    * @type {{ duration: number, ease: (t: number) => number | string }}
+    */
    #easeOptions = { duration: 0.1, ease: cubicOut };
 
    /**
@@ -311,6 +318,14 @@ class DraggableOptions
     */
    #subscriptions = [];
 
+   /**
+    *
+    * @param {object} [opts] - Optional parameters.
+    *
+    * @param {boolean}  [opts.ease] -
+    *
+    * @param {object}   [opts.easeOptions] -
+    */
    constructor({ ease, easeOptions } = {})
    {
       // Define the following getters directly on this instance and make them enumerable. This allows them to be
