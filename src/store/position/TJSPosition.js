@@ -13,15 +13,16 @@ import * as constants            from './constants.js';
 import { convertRelative }       from './convertRelative.js';
 import { Centered }              from './initial/index.js';
 import { PositionChangeSet }     from './PositionChangeSet.js';
-import { TJSPositionData }          from './TJSPositionData.js';
+import { TJSPositionData }       from './TJSPositionData.js';
 import { PositionStateAPI }      from './PositionStateAPI.js';
 import { StyleCache }            from './StyleCache.js';
-import { TJSTransformData }         from './transform/TJSTransformData.js';
+import {
+   TJSTransformData,
+   TJSTransforms }               from './transform/index.js';
 import {
    AdapterValidators,
    BasicBounds,
    TransformBounds }             from './validators/index.js';
-import { TJSTransforms }            from './transform/TJSTransforms.js';
 import { UpdateElementData }     from './update/UpdateElementData.js';
 import { UpdateElementManager }  from './update/UpdateElementManager.js';
 
