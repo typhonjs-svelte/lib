@@ -9,6 +9,7 @@
   ],
   "sideEffects": false,
   "imports": {
+    "#runtime/*": "@typhonjs-svelte/runtime-base/*",
     "#svelte-lib/*": "@typhonjs-svelte/lib/*",
     "#svelte/*": "svelte/*",
     "#svelte": "svelte"
@@ -41,10 +42,6 @@
     "./math": {
       "types": "./_dist/math/index.d.ts",
       "import": "./_dist/math/index.js"
-    },
-    "./math/gl-matrix": {
-      "types": "./_dist/math/gl-matrix/index.d.ts",
-      "import": "./_dist/math/gl-matrix/index.js"
     },
     "./store": {
       "types": "./_dist/store/index.d.ts",
@@ -94,9 +91,9 @@
     "@typhonjs-build-test/rollup-plugin-pkg-imports": "^0.0.2",
     "@typhonjs-config/eslint-config": "^0.6.0",
     "@typhonjs-svelte/dynamic-reducer": "^0.0.8",
+    "@typhonjs-svelte/runtime-base": "github:typhonjs-svelte/runtime-base",
     "@typhonjs-utils/object": "^0.0.17",
     "eslint": "^8",
-    "gl-matrix": "github:typhonjs-svelte/gl-matrix-dist-test#glmatrix-next",
     "klona": "2.0.6",
     "rollup": "^3",
     "striptags": "github:typhonjs-svelte/striptags",

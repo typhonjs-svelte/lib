@@ -118,22 +118,6 @@ const rollupConfigs = [{
    },
    {
       input: {
-         input: 'src/math/gl-matrix/index.js',
-         plugins: [
-            importsExternal(),
-            resolve(),
-            generateDTS.plugin(dtsPluginOptions)
-         ]
-      },
-      output: {
-         file: '_dist/math/gl-matrix/index.js',
-         format: 'es',
-         generatedCode: { constBindings: true },
-         sourcemap
-      }
-   },
-   {
-      input: {
          input: 'src/store/index.js',
          plugins: [
             importsExternal(),
