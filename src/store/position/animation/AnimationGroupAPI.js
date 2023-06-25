@@ -1,6 +1,6 @@
 import {
    isIterable,
-   isObject }                    from '#svelte-lib/util';
+   isObject }                    from '#runtime/util/object';
 
 import { AnimationManager }      from './AnimationManager.js';
 import { AnimationAPI }          from './AnimationAPI.js';

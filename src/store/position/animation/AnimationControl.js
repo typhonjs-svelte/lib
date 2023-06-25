@@ -1,4 +1,4 @@
-import { isObject } from '#svelte-lib/util';
+import { isObject } from '#runtime/util/object';
 
 /**
  * Provides a TJSBasicAnimation implementation for TJSPosition animation.

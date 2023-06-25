@@ -1,8 +1,8 @@
 import { get, writable }   from '#svelte/store';
 
-import {
-   isIterable,
-   normalizeString }       from '#svelte-lib/util';
+import { normalizeString } from '#svelte-lib/util';
+
+import { isIterable }      from '#runtime/util/object';
 
 import { isWritableStore } from '../../../functions.js';
 

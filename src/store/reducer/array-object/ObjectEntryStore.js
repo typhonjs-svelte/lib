@@ -1,6 +1,6 @@
-import {
-   isObject,
-   uuidv4 }    from '#svelte-lib/util';
+import { uuidv4 }    from '#svelte-lib/util';
+
+import { isObject }  from '#runtime/util/object';
 
 /**
  * Provides a base implementation for store entries in {@link ArrayObjectStore}.

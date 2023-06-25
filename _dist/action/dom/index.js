@@ -1,5 +1,6 @@
 import { isUpdatableStore, isWritableStore } from '@typhonjs-svelte/lib/store';
-import { styleParsePixels, isObject, debounce } from '@typhonjs-svelte/lib/util';
+import { styleParsePixels, debounce } from '@typhonjs-svelte/lib/util';
+import { isObject } from '@typhonjs-svelte/runtime-base/util/object';
 
 /**
  * Provides an action to always blur the element when any pointer up event occurs on the element.

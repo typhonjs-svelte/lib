@@ -1,6 +1,6 @@
 import {
    isIterable,
-   isObject } from '@typhonjs-utils/object';
+   isObject } from '#runtime/util/object';
 
 /**
  * Provides several helpful utility methods for accessibility and keyboard navigation.

@@ -2,7 +2,7 @@ import { cubicOut }  from '#svelte/easing';
 
 import {
    isIterable,
-   isObject }        from '#svelte-lib/util';
+   isObject }        from '#runtime/util/object';
 
 /**
  * Provides an action to enable pointer dragging of an HTMLElement and invoke `position.set` on a given

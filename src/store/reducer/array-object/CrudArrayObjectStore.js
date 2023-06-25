@@ -1,6 +1,6 @@
-import {
-   isObject,
-   uuidv4 }                   from '#svelte-lib/util';
+import { uuidv4 }             from '#svelte-lib/util';
+
+import { isObject }           from '#runtime/util/object';
 
 import { ArrayObjectStore }   from './ArrayObjectStore.js';
 

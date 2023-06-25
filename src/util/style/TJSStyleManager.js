@@ -1,6 +1,6 @@
 import {
    isIterable,
-   isObject }  from '@typhonjs-utils/object';
+   isObject }  from '#runtime/util/object';
 
 /**
  * Provides a managed dynamic style sheet / element useful in configuring global CSS variables. When creating an

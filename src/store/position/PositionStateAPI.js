@@ -1,8 +1,7 @@
 import { linear }       from '#svelte/easing';
 
-import { isIterable }   from '#svelte-lib/util';
-
 import { lerp }         from '#runtime/math/interpolate';
+import { isIterable }   from '#runtime/util/object';
 
 export class PositionStateAPI
 {

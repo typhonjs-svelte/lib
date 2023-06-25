@@ -1,4 +1,4 @@
-import { isObject }     from '#svelte-lib/util';
+import { isObject }  from '#runtime/util/object';
 
 /**
  * Provides the storage and sequencing of managed position validators. Each validator added may be a bespoke function or

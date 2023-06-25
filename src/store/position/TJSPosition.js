@@ -5,7 +5,7 @@ import {
 import {
    isIterable,
    isObject,
-   isPlainObject }               from '#svelte-lib/util';
+   isPlainObject }               from '#runtime/util/object';
 
 import { AnimationAPI }          from './animation/AnimationAPI.js';
 import { AnimationGroupAPI }     from './animation/AnimationGroupAPI.js';

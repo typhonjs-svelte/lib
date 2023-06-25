@@ -1,4 +1,4 @@
-import { hasSetter } from '#svelte-lib/util';
+import { hasSetter } from '#runtime/util/object';
 
 /**
  * Provides an action to apply a TJSPosition instance to a HTMLElement and invoke `position.parent`

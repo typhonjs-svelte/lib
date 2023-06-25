@@ -1,4 +1,4 @@
-import { isObject }          from '@typhonjs-utils/object';
+import { isObject }          from '#runtime/util/object';
 
 import { isSvelteComponent } from './isSvelteComponent.js';
 

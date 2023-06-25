@@ -2,9 +2,11 @@ import { DynArrayReducer }    from '@typhonjs-svelte/dynamic-reducer';
 
 import {
    debounce,
-   isObject,
-   klona,
    uuidv4 }                   from '#svelte-lib/util';
+
+import {
+   isObject,
+   klona }                    from '#runtime/util/object';
 
 import {
    isWritableStore,

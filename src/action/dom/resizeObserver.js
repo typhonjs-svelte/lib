@@ -1,8 +1,8 @@
 import { isUpdatableStore }   from '#svelte-lib/store';
 
-import {
-   isObject,
-   styleParsePixels }         from '#svelte-lib/util';
+import { styleParsePixels }   from '#svelte-lib/util';
+
+import { isObject }           from '#runtime/util/object';
 
 /**
  * Provides an action to monitor the given HTMLElement node with `ResizeObserver` posting width / height changes
