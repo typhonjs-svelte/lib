@@ -1,3 +1,5 @@
+import { clamp } from '#runtime/math/util';
+
 export class BasicBounds
 {
    /**
@@ -164,7 +166,7 @@ export class BasicBounds
       if (typeof valData.position.width === 'number')
       {
          const maxW = valData.maxWidth ?? (this.#constrain ? boundsWidth : Number.MAX_SAFE_INTEGER);
-         valData.position.width = valData.width = Math.clamped(valData.position.width, valData.minWidth, maxW);
+         valData.position.width = valData.width = clamp(valData.position.width, valData.minWidth, maxW);
 
          if ((valData.width + valData.position.left + valData.marginLeft) > boundsWidth)
          {
@@ -175,7 +177,7 @@ export class BasicBounds
       if (typeof valData.position.height === 'number')
       {
          const maxH = valData.maxHeight ?? (this.#constrain ? boundsHeight : Number.MAX_SAFE_INTEGER);
-         valData.position.height = valData.height = Math.clamped(valData.position.height, valData.minHeight, maxH);
+         valData.position.height = valData.height = clamp(valData.position.height, valData.minHeight, maxH);
 
          if ((valData.height + valData.position.top + valData.marginTop) > boundsHeight)
          {
@@ -184,10 +186,10 @@ export class BasicBounds
       }
 
       const maxL = Math.max(boundsWidth - valData.width - valData.marginLeft, 0);
-      valData.position.left = Math.round(Math.clamped(valData.position.left, 0, maxL));
+      valData.position.left = Math.round(clamp(valData.position.left, 0, maxL));
 
       const maxT = Math.max(boundsHeight - valData.height - valData.marginTop, 0);
-      valData.position.top = Math.round(Math.clamped(valData.position.top, 0, maxT));
+      valData.position.top = Math.round(clamp(valData.position.top, 0, maxT));
 
       return valData.position;
    }

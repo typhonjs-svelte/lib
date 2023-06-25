@@ -1,3 +1,5 @@
+import { clamp }              from '#runtime/math/util';
+
 import { TJSTransformData }   from '../transform/TJSTransformData.js';
 
 const s_TRANSFORM_DATA = new TJSTransformData();
@@ -170,7 +172,7 @@ export class TransformBounds
       if (typeof valData.position.width === 'number')
       {
          const maxW = valData.maxWidth ?? (this.#constrain ? boundsWidth : Number.MAX_SAFE_INTEGER);
-         valData.position.width = Math.clamped(valData.width, valData.minWidth, maxW);
+         valData.position.width = clamp(valData.width, valData.minWidth, maxW);
       }
 
       // Ensure min / max height constraints when position height is a number; not 'auto' or 'inherit'. If constrain
@@ -178,7 +180,7 @@ export class TransformBounds
       if (typeof valData.position.height === 'number')
       {
          const maxH = valData.maxHeight ?? (this.#constrain ? boundsHeight : Number.MAX_SAFE_INTEGER);
-         valData.position.height = Math.clamped(valData.height, valData.minHeight, maxH);
+         valData.position.height = clamp(valData.height, valData.minHeight, maxH);
       }
 
       // Get transform data. First set constraints including any margin top / left as offsets and width / height. Used
