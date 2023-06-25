@@ -35,7 +35,7 @@ function deepMerge(target = {}, ...sourceObj) {
  * @returns {boolean} Whether value is async iterable.
  */
 function isAsyncIterable(value) {
-    if (value === null || value === void 0 || typeof value !== 'object') {
+    if (typeof value !== 'object' || value === null || value === void 0) {
         return false;
     }
     return Symbol.asyncIterator in value;
