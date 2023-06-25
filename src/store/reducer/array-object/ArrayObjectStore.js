@@ -1,4 +1,4 @@
-import { DynArrayReducer }    from '@typhonjs-svelte/dynamic-reducer';
+import { DynArrayReducer }    from '#runtime/data/struct/store/reducer';
 
 import {
    debounce,
