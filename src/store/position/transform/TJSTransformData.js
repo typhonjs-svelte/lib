@@ -1,4 +1,4 @@
-import { Mat4, Vec3 }   from '#svelte-lib/math/gl-matrix';
+import { Mat4, Vec3 }   from '#runtime/math/gl-matrix';
 
 /**
  * Provides the output data for {@link TJSTransforms.getData}.
@@ -21,21 +21,21 @@ export class TJSTransformData
     * Stores the individual transformed corner points of the window in screen space clockwise from:
     * top left -> top right -> bottom right -> bottom left.
     *
-    * @type {import('#svelte-lib/math/gl-matrix').Vec3[]}
+    * @type {import('#runtime/math/gl-matrix').Vec3[]}
     */
    #corners = [Vec3.create(), Vec3.create(), Vec3.create(), Vec3.create()];
 
    /**
     * Stores the current gl-matrix Mat4 data.
     *
-    * @type {import('#svelte-lib/math/gl-matrix').Mat4}
+    * @type {import('#runtime/math/gl-matrix').Mat4}
     */
    #mat4 = Mat4.create();
 
    /**
     * Stores the pre & post origin translations to apply to matrix transforms.
     *
-    * @type {import('#svelte-lib/math/gl-matrix').Mat4[]}
+    * @type {import('#runtime/math/gl-matrix').Mat4[]}
     */
    #originTranslations = [Mat4.create(), Mat4.create()];
 
@@ -45,7 +45,7 @@ export class TJSTransformData
    get boundingRect() { return this.#boundingRect; }
 
    /**
-    * @returns {import('#svelte-lib/math/gl-matrix').Vec3[]} The transformed corner points as Vec3 in screen space.
+    * @returns {import('#runtime/math/gl-matrix').Vec3[]} The transformed corner points as Vec3 in screen space.
     */
    get corners() { return this.#corners; }
 
@@ -55,12 +55,12 @@ export class TJSTransformData
    get css() { return `matrix3d(${this.mat4.join(',')})`; }
 
    /**
-    * @returns {import('#svelte-lib/math/gl-matrix').Mat4} The transform matrix.
+    * @returns {import('#runtime/math/gl-matrix').Mat4} The transform matrix.
     */
    get mat4() { return this.#mat4; }
 
    /**
-    * @returns {import('#svelte-lib/math/gl-matrix').Mat4[]} The pre / post translation matrices for origin translation.
+    * @returns {import('#runtime/math/gl-matrix').Mat4[]} The pre / post translation matrices for origin translation.
     */
    get originTranslations() { return this.#originTranslations; }
 }

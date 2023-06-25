@@ -1,5 +1,5 @@
-import { degToRad }           from '#svelte-lib/math';
-import { Mat4, Vec3 }         from '#svelte-lib/math/gl-matrix';
+import { degToRad }           from '#runtime/math/util';
+import { Mat4, Vec3 }         from '#runtime/math/gl-matrix';
 
 import * as constants         from '../constants.js';
 
@@ -11,13 +11,13 @@ const s_SCALE_VECTOR = [1, 1, 1];
 /** @type {number[]} */
 const s_TRANSLATE_VECTOR = [0, 0, 0];
 
-/** @type {import('#svelte-lib/math/gl-matrix').Mat4} */
+/** @type {import('#runtime/math/gl-matrix').Mat4} */
 const s_MAT4_RESULT = Mat4.create();
 
-/** @type {import('#svelte-lib/math/gl-matrix').Mat4} */
+/** @type {import('#runtime/math/gl-matrix').Mat4} */
 const s_MAT4_TEMP = Mat4.create();
 
-/** @type {import('#svelte-lib/math/gl-matrix').Vec3} */
+/** @type {import('#runtime/math/gl-matrix').Vec3} */
 const s_VEC3_TEMP = Vec3.create();
 
 export class TJSTransforms
@@ -403,9 +403,9 @@ export class TJSTransforms
     *
     * @param {object}   [data] - TJSPositionData instance or local transform data.
     *
-    * @param {import('#svelte-lib/math/gl-matrix').Mat4}  [output] - The output mat4 instance.
+    * @param {import('#runtime/math/gl-matrix').Mat4}  [output] - The output mat4 instance.
     *
-    * @returns {import('#svelte-lib/math/gl-matrix').Mat4} Transform matrix.
+    * @returns {import('#runtime/math/gl-matrix').Mat4} Transform matrix.
     */
    getMat4(data = this._data, output = Mat4.create())
    {
@@ -538,9 +538,9 @@ export class TJSTransforms
     *
     * @param {object}   [data] - TJSPositionData instance or local transform data.
     *
-    * @param {import('#svelte-lib/math/gl-matrix').Mat4}  [output] - The output mat4 instance.
+    * @param {import('#runtime/math/gl-matrix').Mat4}  [output] - The output mat4 instance.
     *
-    * @returns {import('#svelte-lib/math/gl-matrix').Mat4} Transform matrix.
+    * @returns {import('#runtime/math/gl-matrix').Mat4} Transform matrix.
     */
    getMat4Ortho(data = this._data, output = Mat4.create())
    {
@@ -683,9 +683,9 @@ export class TJSTransforms
  *
  * @param {number}   height - The TJSPositionData height or validation data height when 'auto'.
  *
- * @param {import('#svelte-lib/math/gl-matrix').Mat4[]}   output - Output Mat4 array.
+ * @param {import('#runtime/math/gl-matrix').Mat4[]}   output - Output Mat4 array.
  *
- * @returns {import('#svelte-lib/math/gl-matrix').Mat4[]} Output Mat4 array.
+ * @returns {import('#runtime/math/gl-matrix').Mat4[]} Output Mat4 array.
  */
 function s_GET_ORIGIN_TRANSLATION(transformOrigin, width, height, output)
 {
