@@ -1,7 +1,7 @@
 import { fade }   from '#svelte/transition';
 import { linear } from '#svelte/easing';
 
-import { lerp }   from '#svelte-lib/math';
+import { lerp }   from '#runtime/math/interpolate';
 
 /**
  * Combines rotate & fade transitions into a single transition. For options `easing` this is applied to both transitions,

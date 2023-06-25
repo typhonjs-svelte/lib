@@ -1,4 +1,4 @@
-import { lerp }   from '../interpolate/index.js';
+import { lerp }   from '#runtime/math/interpolate';
 
 /**
  * Provides a way to calculate velocity via effectively creating a "complementary filter".

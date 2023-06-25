@@ -1,7 +1,7 @@
 import { propertyStore, subscribeIgnoreFirst } from '@typhonjs-svelte/lib/store';
 import { isObject, isIterable, styleParsePixels, isPlainObject, hasSetter } from '@typhonjs-svelte/lib/util';
 import { cubicOut, linear } from 'svelte/easing';
-import { lerp } from '@typhonjs-svelte/lib/math';
+import { lerp } from '@typhonjs-svelte/runtime-base/math/interpolate';
 import { writable } from 'svelte/store';
 import { Vec3, Mat4 } from '@typhonjs-svelte/runtime-base/math/gl-matrix';
 import { nextAnimationFrame } from '@typhonjs-svelte/lib/animate';

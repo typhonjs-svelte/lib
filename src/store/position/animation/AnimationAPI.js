@@ -1,9 +1,10 @@
 import { cubicOut }           from '#svelte/easing';
 
-import { lerp }               from '#svelte-lib/math';
 import {
    isIterable,
    isObject }                 from '#svelte-lib/util';
+
+import { lerp }               from '#runtime/math/interpolate';
 
 import { AnimationControl }   from './AnimationControl.js';
 import { AnimationManager }   from './AnimationManager.js';
