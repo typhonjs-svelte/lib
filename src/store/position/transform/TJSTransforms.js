@@ -278,8 +278,8 @@ export class TJSTransforms
    }
 
    /**
-    * Collects all data including a bounding rect, transform matrix, and points array of the given {@link TJSPositionData}
-    * instance with the applied local transform data.
+    * Collects all data including a bounding rect, transform matrix, and points array of the given
+    * {@link TJSPositionData} instance with the applied local transform data.
     *
     * @param {import('../').TJSPositionData} position - The position data to process.
     *

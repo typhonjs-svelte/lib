@@ -2,6 +2,7 @@ import * as _runtime_math_gl_matrix from '@typhonjs-svelte/runtime-base/math/gl-
 import { Vec3, Mat4 } from '@typhonjs-svelte/runtime-base/math/gl-matrix';
 import * as _svelte_store from 'svelte/store';
 import * as _svelte_lib_animate from '@typhonjs-svelte/lib/animate';
+import * as _svelte_action from 'svelte/action';
 
 /**
  * Defines stored positional data.
@@ -224,8 +225,8 @@ declare class TJSTransforms {
      */
     getCSSOrtho(data?: object): string;
     /**
-     * Collects all data including a bounding rect, transform matrix, and points array of the given {@link TJSPositionData}
-     * instance with the applied local transform data.
+     * Collects all data including a bounding rect, transform matrix, and points array of the given
+     * {@link TJSPositionData} instance with the applied local transform data.
      *
      * @param {import('../').TJSPositionData} position - The position data to process.
      *
@@ -1253,7 +1254,7 @@ declare function applyPosition(node: HTMLElement, position: TJSPosition): {
  * @param {Iterable<string>}  [params.ignoreTargetClassList] - When defined any event targets that have a class in this
  *        list are ignored.
  *
- * @returns {{update: Function, destroy: Function}} The action lifecycle methods.
+ * @returns {import('#svelte/action').ActionReturn} The action lifecycle methods.
  */
 declare function draggable(node: HTMLElement, { position, active, button, storeDragging, ease, easeOptions, hasTargetClassList, ignoreTargetClassList }: {
     position: TJSPosition;
@@ -1264,10 +1265,7 @@ declare function draggable(node: HTMLElement, { position, active, button, storeD
     easeOptions?: object;
     hasTargetClassList?: Iterable<string>;
     ignoreTargetClassList?: Iterable<string>;
-}): {
-    update: Function;
-    destroy: Function;
-};
+}): _svelte_action.ActionReturn;
 declare namespace draggable {
     /**
      * Define a function to get a DraggableOptions instance.
