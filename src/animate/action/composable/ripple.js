@@ -1,4 +1,4 @@
-import { debounce as debounceFn } from '#svelte-lib/util';
+import { Timing } from '#runtime/util';
 
 /**
  * Defines the classic Material Design ripple effect as an action. `ripple` is a wrapper around the returned action.
@@ -90,8 +90,11 @@ export function ripple({ duration = 600, background = 'rgba(255, 255, 255, 0.7)'
          if (event?.code === keyCode) { createRipple(event); }
       }
 
-      const eventFn = Number.isInteger(debounce) && debounce > 0 ? debounceFn(createRipple, debounce) : createRipple;
-      const keyEventFn = Number.isInteger(debounce) && debounce > 0 ? debounceFn(keyHandler, debounce) : keyHandler;
+      const eventFn = Number.isInteger(debounce) && debounce > 0 ? Timing.debounce(createRipple, debounce) :
+       createRipple;
+
+      const keyEventFn = Number.isInteger(debounce) && debounce > 0 ? Timing.debounce(keyHandler, debounce) :
+       keyHandler;
 
       for (const event of events)
       {

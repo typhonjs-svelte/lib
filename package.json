@@ -31,14 +31,6 @@
       "types": "./_dist/animate/action/index.d.ts",
       "import": "./_dist/animate/action/index.js"
     },
-    "./handler": {
-      "types": "./_dist/handler/index.d.ts",
-      "import": "./_dist/handler/index.js"
-    },
-    "./helper": {
-      "types": "./_dist/helper/index.d.ts",
-      "import": "./_dist/helper/index.js"
-    },
     "./store": {
       "types": "./_dist/store/index.d.ts",
       "import": "./_dist/store/index.js"
@@ -89,7 +81,6 @@
     "@typhonjs-svelte/runtime-base": "github:typhonjs-svelte/runtime-base",
     "eslint": "^8",
     "rollup": "^3",
-    "striptags": "github:typhonjs-svelte/striptags",
     "svelte-persistent-store": "github:typhonjs-svelte/svelte-persistent-store",
     "svelte-writable-derived": "^3.1.0",
     "upath": "^2.0.1"

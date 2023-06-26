@@ -1,4 +1,4 @@
-import { debounce as debounceFn } from '#svelte-lib/util';
+import { Timing } from '#runtime/util';
 
 /**
  * Defines an `Element.animate` animation from provided keyframes and options.
@@ -34,7 +34,7 @@ export function animate({ duration = 600, keyframes = [], options, event = 'clic
          element.animate(keyframes, typeof options === 'object' && options !== null ? options : duration);
       }
 
-      const eventFn = Number.isInteger(debounce) && debounce > 0 ? debounceFn(createAnimation, debounce) :
+      const eventFn = Number.isInteger(debounce) && debounce > 0 ? Timing.debounce(createAnimation, debounce) :
        createAnimation;
 
       element.addEventListener(event, eventFn);

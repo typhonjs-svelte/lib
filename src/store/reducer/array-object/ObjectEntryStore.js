@@ -1,4 +1,4 @@
-import { uuidv4 }    from '#svelte-lib/util';
+import { Hashing }   from '#runtime/util';
 
 import { isObject }  from '#runtime/util/object';
 
@@ -31,9 +31,9 @@ export class ObjectEntryStore
       this.#data = data;
 
       // If an id is missing then add it.
-      if (typeof data.id !== 'string') { this.#data.id = uuidv4(); }
+      if (typeof data.id !== 'string') { this.#data.id = Hashing.uuidv4(); }
 
-      if (!uuidv4.isValid(data.id)) { throw new Error(`'data.id' (${data.id}) is not a valid UUIDv4 string.`); }
+      if (!Hashing.isUuidv4(data.id)) { throw new Error(`'data.id' (${data.id}) is not a valid UUIDv4 string.`); }
    }
 
    /**

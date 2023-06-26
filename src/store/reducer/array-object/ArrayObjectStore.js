@@ -1,8 +1,8 @@
 import { DynArrayReducer }    from '#runtime/data/struct/store/reducer';
 
 import {
-   debounce,
-   uuidv4 }                   from '#svelte-lib/util';
+   Hashing,
+   Timing }                   from '#runtime/util';
 
 import {
    isObject,
@@ -104,7 +104,7 @@ export class ArrayObjectStore
 
       // Prepare a debounced callback that is used for all child store entry subscriptions.
       this.#updateSubscribersBound = childDebounce === 0 ? this.updateSubscribers.bind(this) :
-       debounce((data) => this.updateSubscribers(data), childDebounce);
+       Timing.debounce((data) => this.updateSubscribers(data), childDebounce);
    }
 
    /**
@@ -168,7 +168,7 @@ export class ArrayObjectStore
    {
       if (!isObject(entryData)) { throw new TypeError(`'entryData' is not an object.`); }
 
-      if (typeof entryData.id !== 'string') { entryData.id = uuidv4(); }
+      if (typeof entryData.id !== 'string') { entryData.id = Hashing.uuidv4(); }
 
       if (this.#data.findIndex((entry) => entry.id === entryData.id) >= 0)
       {
@@ -193,7 +193,7 @@ export class ArrayObjectStore
    {
       const store = new this.#StoreClass(entryData, this);
 
-      if (!uuidv4.isValid(store.id))
+      if (!Hashing.isUuidv4(store.id))
       {
          throw new Error(`'store.id' (${store.id}) is not a UUIDv4 compliant string.`);
       }
@@ -258,7 +258,7 @@ export class ArrayObjectStore
       if (storeEntryData)
       {
          const data = klona(storeEntryData.store.toJSON());
-         data.id = uuidv4();
+         data.id = Hashing.uuidv4();
 
          // Allow StoreClass to statically perform any specialized duplication.
          this.#StoreClass?.duplicate?.(data, this);

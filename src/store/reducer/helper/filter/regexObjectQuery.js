@@ -1,6 +1,6 @@
 import { get, writable }   from '#svelte/store';
 
-import { normalizeString } from '#svelte-lib/util';
+import { Strings }         from '#runtime/util';
 
 import { isIterable }      from '#runtime/util/object';
 
@@ -42,7 +42,7 @@ export function regexObjectQuery(properties, { caseSensitive = false, store } = 
 
       if (typeof current === 'string')
       {
-         keyword = normalizeString(current);
+         keyword = Strings.normalize(current);
          regex = new RegExp(RegExp.escape(keyword), caseSensitive ? '' : 'i');
       }
       else
@@ -67,14 +67,14 @@ export function regexObjectQuery(properties, { caseSensitive = false, store } = 
       {
          for (const property of properties)
          {
-            if (regex.test(normalizeString(data?.[property]))) { return true; }
+            if (regex.test(Strings.normalize(data?.[property]))) { return true; }
          }
 
          return false;
       }
       else
       {
-         return regex.test(normalizeString(data?.[properties]));
+         return regex.test(Strings.normalize(data?.[properties]));
       }
    }
 
@@ -99,7 +99,7 @@ export function regexObjectQuery(properties, { caseSensitive = false, store } = 
    {
       if (typeof value === 'string')
       {
-         keyword = normalizeString(value);
+         keyword = Strings.normalize(value);
          regex = new RegExp(RegExp.escape(keyword), caseSensitive ? '' : 'i');
          storeKeyword.set(keyword);
       }

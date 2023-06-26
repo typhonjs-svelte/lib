@@ -1,4 +1,4 @@
-import { uuidv4 }             from '#svelte-lib/util';
+import { Hashing }            from '#runtime/util';
 
 import { isObject }           from '#runtime/util/object';
 
@@ -112,7 +112,7 @@ export class CrudArrayObjectStore extends ArrayObjectStore
     */
    updateSubscribers(update)
    {
-      if (this.#crudDispatch && isObject(update) && uuidv4.isValid(update.id))
+      if (this.#crudDispatch && isObject(update) && Hashing.isUuidv4(update.id))
       {
          const result = this.#crudDispatch({
             action: 'update',
