@@ -1,7 +1,9 @@
 import { writable }           from '#svelte/store';
 
 import { propertyStore }      from '#svelte-lib/store';
-import { styleParsePixels }   from '#svelte-lib/util';
+
+import { StyleParse }         from '#runtime/util/browser';
+
 export class StyleCache
 {
    constructor()
@@ -144,14 +146,14 @@ export class StyleCache
 
       this.computed = globalThis.getComputedStyle(el);
 
-      this.marginLeft = styleParsePixels(el.style.marginLeft) ?? styleParsePixels(this.computed.marginLeft);
-      this.marginTop = styleParsePixels(el.style.marginTop) ?? styleParsePixels(this.computed.marginTop);
-      this.maxHeight = styleParsePixels(el.style.maxHeight) ?? styleParsePixels(this.computed.maxHeight);
-      this.maxWidth = styleParsePixels(el.style.maxWidth) ?? styleParsePixels(this.computed.maxWidth);
+      this.marginLeft = StyleParse.pixels(el.style.marginLeft) ?? StyleParse.pixels(this.computed.marginLeft);
+      this.marginTop = StyleParse.pixels(el.style.marginTop) ?? StyleParse.pixels(this.computed.marginTop);
+      this.maxHeight = StyleParse.pixels(el.style.maxHeight) ?? StyleParse.pixels(this.computed.maxHeight);
+      this.maxWidth = StyleParse.pixels(el.style.maxWidth) ?? StyleParse.pixels(this.computed.maxWidth);
 
       // Note that the computed styles for below will always be 0px / 0 when no style is active.
-      this.minHeight = styleParsePixels(el.style.minHeight) ?? styleParsePixels(this.computed.minHeight);
-      this.minWidth = styleParsePixels(el.style.minWidth) ?? styleParsePixels(this.computed.minWidth);
+      this.minHeight = StyleParse.pixels(el.style.minHeight) ?? StyleParse.pixels(this.computed.minHeight);
+      this.minWidth = StyleParse.pixels(el.style.minWidth) ?? StyleParse.pixels(this.computed.minWidth);
 
       // Tracks if there already is a will-change property on the inline or computed styles.
       const willChange = el.style.willChange !== '' ? el.style.willChange : void 0 ?? this.computed.willChange;
