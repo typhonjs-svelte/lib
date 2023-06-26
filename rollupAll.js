@@ -58,7 +58,7 @@ const rollupConfigs = [
    },
    {
       input: {
-         input: 'src/store/index.js',
+         input: 'src/store/derived/index.js',
          plugins: [
             importsExternal(),
             resolve(),
@@ -66,7 +66,7 @@ const rollupConfigs = [
          ]
       },
       output: {
-         file: '_dist/store/index.js',
+         file: '_dist/store/derived/index.js',
          format: 'es',
          generatedCode: { constBindings: true },
          sourcemap

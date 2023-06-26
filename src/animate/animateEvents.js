@@ -1,4 +1,4 @@
-import { isWritableStore } from '#svelte-lib/store';
+import { isWritableStore } from '#runtime/util/store';
 
 /**
  * Svelte doesn't provide any events for the animate directive.

@@ -10,7 +10,7 @@ import {
 
 import {
    isWritableStore,
-   subscribeIgnoreFirst }     from '../../functions.js';
+   subscribeIgnoreFirst }     from '#runtime/util/store';
 
 import { ObjectEntryStore }   from './ObjectEntryStore.js';
 

@@ -1,4 +1,4 @@
-import { isWritableStore } from '@typhonjs-svelte/lib/store';
+import { isWritableStore } from '@typhonjs-svelte/runtime-base/util/store';
 
 /**
  * Svelte doesn't provide any events for the animate directive.

@@ -1,10 +1,8 @@
 import { get, writable }   from '#svelte/store';
 
 import { Strings }         from '#runtime/util';
-
 import { isIterable }      from '#runtime/util/object';
-
-import { isWritableStore } from '../../../functions.js';
+import { isWritableStore } from '#runtime/util/store';
 
 /**
  * Creates a filter function to compare objects by a give property key against a regex test. The returned function

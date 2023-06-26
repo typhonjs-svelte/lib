@@ -27,9 +27,9 @@
       "types": "./_dist/animate/action/index.d.ts",
       "import": "./_dist/animate/action/index.js"
     },
-    "./store": {
-      "types": "./_dist/store/index.d.ts",
-      "import": "./_dist/store/index.js"
+    "./store/derived": {
+      "types": "./_dist/store/derived/index.d.ts",
+      "import": "./_dist/store/derived/index.js"
     },
     "./store/dom": {
       "types": "./_dist/store/dom/index.d.ts",
@@ -58,14 +58,6 @@
     "./util": {
       "types": "./_dist/util/index.d.ts",
       "import": "./_dist/util/index.js"
-    },
-    "./plugin/data": {
-      "types": "./_dist/plugin/data/index.d.ts",
-      "import": "./_dist/plugin/data/index.js"
-    },
-    "./plugin/system": {
-      "types": "./_dist/plugin/system/index.d.ts",
-      "import": "./_dist/plugin/system/index.js"
     },
     "./package.json": "./package.json"
   },

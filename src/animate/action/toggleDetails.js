@@ -1,6 +1,6 @@
 import { tick }               from '#svelte';
 
-import { subscribeFirstRest } from '#svelte-lib/store';
+import { subscribeFirstRest } from '#runtime/util/store';
 
 /**
  * Provides a toggle action for `details` HTML elements. The boolean store provided controls animation.

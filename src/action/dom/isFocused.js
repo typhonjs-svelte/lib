@@ -1,4 +1,4 @@
-import { isWritableStore } from '#svelte-lib/store';
+import { isWritableStore } from '#runtime/util/store';
 
 /**
  * Provides an action to monitor focus state of a given element and set an associated store with current focus state.

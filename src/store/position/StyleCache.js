@@ -1,6 +1,6 @@
 import { writable }           from '#svelte/store';
 
-import { propertyStore }      from '#svelte-lib/store';
+import { propertyStore }      from '#svelte-lib/store/derived';
 
 import { StyleParse }         from '#runtime/util/browser';
 

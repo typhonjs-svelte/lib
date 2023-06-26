@@ -1,11 +1,11 @@
-import {
-   propertyStore,
-   subscribeIgnoreFirst }        from '#svelte-lib/store';
+import { propertyStore }         from '#svelte-lib/store/derived';
 
 import {
    isIterable,
    isObject,
    isPlainObject }               from '#runtime/util/object';
+
+import { subscribeIgnoreFirst }  from '#runtime/util/store';
 
 import { AnimationAPI }          from './animation/AnimationAPI.js';
 import { AnimationGroupAPI }     from './animation/AnimationGroupAPI.js';

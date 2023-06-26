@@ -1,5 +1,6 @@
-import { propertyStore, subscribeIgnoreFirst } from '@typhonjs-svelte/lib/store';
+import { propertyStore } from '@typhonjs-svelte/lib/store/derived';
 import { isObject, isIterable, isPlainObject, hasSetter } from '@typhonjs-svelte/runtime-base/util/object';
+import { subscribeIgnoreFirst } from '@typhonjs-svelte/runtime-base/util/store';
 import { cubicOut, linear } from 'svelte/easing';
 import { lerp } from '@typhonjs-svelte/runtime-base/math/interpolate';
 import { writable } from 'svelte/store';

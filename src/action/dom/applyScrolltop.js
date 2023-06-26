@@ -1,5 +1,5 @@
-import { isWritableStore } from '#svelte-lib/store';
 import { Timing }          from '#runtime/util';
+import { isWritableStore } from '#runtime/util/store';
 
 import { resizeObserver }  from './resizeObserver.js';
 
