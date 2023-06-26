@@ -10,21 +10,7 @@ const dtsPluginOptions = { bundlePackageExports: true };
 
 // -------------------------------------------------------------------------------------------------------------------
 
-const rollupConfigs = [{
-      input: {
-         input: 'src/action/index.js',
-         plugins: [
-            importsExternal(),
-            generateDTS.plugin(dtsPluginOptions)
-         ]
-      },
-      output: {
-         file: '_dist/action/index.js',
-         format: 'es',
-         generatedCode: { constBindings: true },
-         sourcemap
-      }
-   },
+const rollupConfigs = [
    {
       input: {
          input: 'src/action/dom/index.js',
