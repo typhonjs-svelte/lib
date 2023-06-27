@@ -19,7 +19,7 @@ import { linear }       from '#svelte/easing';
  *
  * @param {Function}    [options.easingSlide=linear] - The easing function to apply to the slide transition.
  *
- * @returns {{duration: number, css: (function(*=): string), delay: number, easing: (x: number) => number}}
+ * @returns {{duration: number, css: (function(*): string), delay: number, easing: (x: number) => number}}
  *  Transition object.
  */
 export function slideFade(node, options)

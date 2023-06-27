@@ -7,7 +7,7 @@ import { hasSetter } from '#runtime/util/object';
  *
  * @param {import('..').TJSPosition}   position - A position instance.
  *
- * @returns {{update: Function, destroy: Function}} The action lifecycle methods.
+ * @returns {import('svelte/action').ActionReturn<import('..').TJSPosition>} The action lifecycle methods.
  */
 export function applyPosition(node, position)
 {
@@ -19,7 +19,7 @@ export function applyPosition(node, position)
          // Sanity case to short circuit update if positions are the same instance.
          if (newPosition === position && newPosition.parent === position.parent) { return; }
 
-         if (hasSetter(position)) { position.parent = void 0; }
+         if (hasSetter(position, 'parent')) { position.parent = void 0; }
 
          position = newPosition;
 

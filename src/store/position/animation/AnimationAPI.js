@@ -31,10 +31,9 @@ export class AnimationAPI
    #instanceCount = 0;
 
    /**
-    * Provides a bound function to pass as data to AnimationManager to invoke
+    * Provides a bound function to pass as data to AnimationManager to invoke `AnimationAPI.#cleanupInstance`.
     *
     * @type {Function}
-    * @see {AnimationAPI.#cleanupInstance}
     */
    #cleanup;
 

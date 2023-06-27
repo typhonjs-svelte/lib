@@ -23,7 +23,7 @@ import { lerp }   from '#runtime/math/interpolate';
  *
  * @param {number}      [options.initial=0] - Initial rotation in degrees.
  *
- * @returns {{duration: number, css: (function(*=): string), delay: number, easing: (x: number) => number}}
+ * @returns {{duration: number, css: (function(*): string), delay: number, easing: (x: number) => number}}
  *  Transition object.
  */
 export function rotate(node, options)
