@@ -2,7 +2,7 @@ import * as _runtime_math_gl_matrix from '@typhonjs-svelte/runtime-base/math/gl-
 import { Vec3, Mat4 } from '@typhonjs-svelte/runtime-base/math/gl-matrix';
 import * as _svelte_store from 'svelte/store';
 import * as _svelte_lib_animate from '@typhonjs-svelte/lib/animate';
-import * as _svelte_action from 'svelte/action';
+import * as svelte_action from 'svelte/action';
 
 /**
  * Defines stored positional data.
@@ -1219,12 +1219,9 @@ declare class TJSPosition {
  *
  * @param {import('..').TJSPosition}   position - A position instance.
  *
- * @returns {{update: Function, destroy: Function}} The action lifecycle methods.
+ * @returns {import('svelte/action').ActionReturn<import('..').TJSPosition>} The action lifecycle methods.
  */
-declare function applyPosition(node: HTMLElement, position: TJSPosition): {
-    update: Function;
-    destroy: Function;
-};
+declare function applyPosition(node: HTMLElement, position: TJSPosition): svelte_action.ActionReturn<TJSPosition>;
 
 /**
  * Provides an action to enable pointer dragging of an HTMLElement and invoke `position.set` on a given
@@ -1265,7 +1262,7 @@ declare function draggable(node: HTMLElement, { position, active, button, storeD
     easeOptions?: object;
     hasTargetClassList?: Iterable<string>;
     ignoreTargetClassList?: Iterable<string>;
-}): _svelte_action.ActionReturn;
+}): svelte_action.ActionReturn;
 declare namespace draggable {
     /**
      * Define a function to get a DraggableOptions instance.

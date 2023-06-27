@@ -493,10 +493,9 @@ class AnimationAPI
    #instanceCount = 0;
 
    /**
-    * Provides a bound function to pass as data to AnimationManager to invoke
+    * Provides a bound function to pass as data to AnimationManager to invoke `AnimationAPI.#cleanupInstance`.
     *
     * @type {Function}
-    * @see {AnimationAPI.#cleanupInstance}
     */
    #cleanup;
 
@@ -6122,7 +6121,7 @@ Object.seal(s_VALIDATION_DATA);
  *
  * @param {import('..').TJSPosition}   position - A position instance.
  *
- * @returns {{update: Function, destroy: Function}} The action lifecycle methods.
+ * @returns {import('svelte/action').ActionReturn<import('..').TJSPosition>} The action lifecycle methods.
  */
 function applyPosition(node, position)
 {
@@ -6134,7 +6133,7 @@ function applyPosition(node, position)
          // Sanity case to short circuit update if positions are the same instance.
          if (newPosition === position && newPosition.parent === position.parent) { return; }
 
-         if (hasSetter(position)) { position.parent = void 0; }
+         if (hasSetter(position, 'parent')) { position.parent = void 0; }
 
          position = newPosition;
 
