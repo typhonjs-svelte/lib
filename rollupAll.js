@@ -106,22 +106,6 @@ const rollupConfigs = [
    },
    {
       input: {
-         input: 'src/store/reducer/index.js',
-         plugins: [
-            importsExternal(),
-            resolve(),
-            generateDTS.plugin(dtsPluginOptions)
-         ]
-      },
-      output: {
-         file: '_dist/store/reducer/index.js',
-         format: 'es',
-         generatedCode: { constBindings: true },
-         sourcemap
-      }
-   },
-   {
-      input: {
          input: 'src/store/storage/web/index.js',
          plugins: [
             importsExternal(),
