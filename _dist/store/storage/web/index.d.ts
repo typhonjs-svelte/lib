@@ -1,5 +1,3 @@
-import * as _svelte_store from 'svelte/store';
-
 declare class TJSLocalStorage {
     /**
      * Get value from the localStorage.
@@ -21,7 +19,7 @@ declare class TJSLocalStorage {
      *
      * @returns {import('#svelte/store').Writable} The Svelte store for this key.
      */
-    getStore(key: string, defaultValue?: any): _svelte_store.Writable<any>;
+    getStore(key: string, defaultValue?: any): any;
     /**
      * Sets the value for the given key in localStorage.
      *
@@ -64,7 +62,7 @@ declare class TJSSessionStorage {
      *
      * @returns {import('#svelte/store').Writable} The Svelte store for this key.
      */
-    getStore(key: string, defaultValue?: any): _svelte_store.Writable<any>;
+    getStore(key: string, defaultValue?: any): any;
     /**
      * Sets the value for the given key in sessionStorage.
      *

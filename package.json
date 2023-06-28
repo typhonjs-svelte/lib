@@ -63,14 +63,14 @@
     "@typhonjs-build-test/rollup-plugin-pkg-imports": "^0.0.2",
     "@typhonjs-config/eslint-config": "^0.6.3",
     "@typhonjs-svelte/runtime-base": "github:typhonjs-svelte/runtime-base",
+    "@typhonjs-svelte/simple-web-storage": "^0.1.0",
     "eslint": "^8",
     "rollup": "^3",
-    "svelte-persistent-store": "github:typhonjs-svelte/svelte-persistent-store",
     "svelte-writable-derived": "^3.1.0",
     "upath": "^2.0.1"
   },
   "peerDependencies": {
-    "svelte": "3.59.2"
+    "svelte": ">=4.x.x"
   },
   "engines": {
     "node": ">=14.18"

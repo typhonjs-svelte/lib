@@ -1,4 +1,4 @@
-import { writable }  from 'svelte-persistent-store/session';
+import { writable }  from '@typhonjs-svelte/simple-web-storage/session';
 
 export class TJSSessionStorage
 {

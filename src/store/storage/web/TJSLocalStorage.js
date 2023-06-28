@@ -1,4 +1,4 @@
-import { writable }  from 'svelte-persistent-store/local';
+import { writable }  from '@typhonjs-svelte/simple-web-storage/local';
 
 export class TJSLocalStorage
 {
