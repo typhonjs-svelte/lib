@@ -1,4 +1,4 @@
-import { TJSLocalStorage } from '#svelte-lib/store/storage/web';
+import { TJSLocalStorage } from '#runtime/svelte/store/web-storage';
 
 export class TJSPLocalStorage
 {

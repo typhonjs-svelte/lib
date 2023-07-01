@@ -1,4 +1,4 @@
-import { TJSSessionStorage }  from '#svelte-lib/store/storage/web';
+import { TJSSessionStorage }  from '#runtime/svelte/store/web-storage';
 
 export class TJSPSessionStorage
 {
