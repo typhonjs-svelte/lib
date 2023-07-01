@@ -48,7 +48,7 @@ export class StyleCache
       /**
        * Provides a writable store to track offset & content width / height from an associated `resizeObserver` action.
        *
-       * @type {import('#svelte/store').Writable<import('./').ResizeObserverData>}
+       * @type {import('svelte/store').Writable<import('./').ResizeObserverData>}
        */
       const storeResizeObserved = writable(this.resizeObserved);
 

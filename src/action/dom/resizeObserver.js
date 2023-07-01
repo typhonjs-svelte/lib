@@ -371,7 +371,7 @@ function s_UPDATE_SUBSCRIBER(subscriber, contentWidth, contentHeight)
 /**
  * @typedef {object} ResizeObserverObjectExtended Provides extended attributes supported for observed resize updates.
  *
- * @property {import('#svelte/store').Writable<ResizeObserverObject> | ResizeObserverFunction} [resizedObserver] Either
+ * @property {import('svelte/store').Writable<ResizeObserverObject> | ResizeObserverFunction} [resizedObserver] Either
  *           a function or a writable store.
  *
  * @property {(contentWidth: number, contentHeight: number) => void} [setContentBounds] - A function that is invoked
@@ -380,6 +380,6 @@ function s_UPDATE_SUBSCRIBER(subscriber, contentWidth, contentHeight)
  * @property {(offsetWidth: number, offsetHeight: number) => void} [setDimension] - A function that is invoked with
  *           offset width & height changes.
  *
- * @property {{resizedObserver: import('#svelte/store').Writable<ResizeObserverObject>}} [stores] - An object with a
+ * @property {{resizedObserver: import('svelte/store').Writable<ResizeObserverObject>}} [stores] - An object with a
  *           `stores` attribute and subsequent `resizedObserver` writable store.
  */

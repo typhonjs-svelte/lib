@@ -7,9 +7,9 @@ import { isWritableStore } from '#runtime/util/store';
  *
  * @param {HTMLElement} node - Target element.
  *
- * @param {import('#svelte/store').Writable<boolean>}  storeFocused - Update store for focus changes.
+ * @param {import('svelte/store').Writable<boolean>}  storeFocused - Update store for focus changes.
  *
- * @returns {{update: (function(import('#svelte/store').Writable<boolean>): void), destroy: Function}} Action lifecycle
+ * @returns {{update: (function(import('svelte/store').Writable<boolean>): void), destroy: Function}} Action lifecycle
  *          methods.
  */
 export function isFocused(node, storeFocused)
