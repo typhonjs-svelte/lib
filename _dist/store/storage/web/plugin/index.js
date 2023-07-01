@@ -1,4 +1,4 @@
-import { TJSLocalStorage, TJSSessionStorage } from '@typhonjs-svelte/lib/store/storage/web';
+import { TJSLocalStorage, TJSSessionStorage } from '@typhonjs-svelte/runtime-base/svelte/store/web-storage';
 
 class TJSPLocalStorage
 {

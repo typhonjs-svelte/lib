@@ -39,10 +39,6 @@
       "types": "./_dist/store/position/index.d.ts",
       "import": "./_dist/store/position/index.js"
     },
-    "./store/storage/web": {
-      "types": "./_dist/store/storage/web/index.d.ts",
-      "import": "./_dist/store/storage/web/index.js"
-    },
     "./store/storage/web/plugin": {
       "types": "./_dist/store/storage/web/plugin/index.d.ts",
       "import": "./_dist/store/storage/web/plugin/index.js"
