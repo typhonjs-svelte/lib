@@ -8,7 +8,7 @@ const sourcemap = true; // Defines whether source maps are generated.
 // Bundle all top level external package exports.
 const dtsPluginOptions = {
    bundlePackageExports: true,
-   dtsReplace: { '\/\\/\\/ <reference.*\\/>': '' } // Svelte v4 types currently add triple slash references.
+   dtsReplace: { '/\\/\\/ <reference.*\\/>': '' } // Svelte v4 types currently add triple slash references.
 };
 
 // -------------------------------------------------------------------------------------------------------------------
