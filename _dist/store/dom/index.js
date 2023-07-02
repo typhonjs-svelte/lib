@@ -286,11 +286,11 @@ class KeyStore
 /**
  * @typedef {object} KeyStoreOptions
  *
- * @property {boolean}  [preventDefault=true] - Invoke `preventDefault` on key events.
+ * @property {boolean}  [preventDefault=true] Invoke `preventDefault` on key events.
  *
- * @property {boolean}  [useCode=true] - When true use `event.code` otherwise use `event.key` to get active key.
+ * @property {boolean}  [useCode=true] When true use `event.code` otherwise use `event.key` to get active key.
  *
- * @property {boolean}  [stopPropagation=true] - Invoke `stopPropagation` on key events.
+ * @property {boolean}  [stopPropagation=true] Invoke `stopPropagation` on key events.
  */
 
 /**

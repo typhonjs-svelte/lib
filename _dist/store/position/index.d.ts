@@ -1330,46 +1330,46 @@ declare class DraggableOptions {
 type quickToCallback = (...args: (number | object)[]) => any;
 type TJSPositionInitialHelper = {
     /**
-     * - Returns the left position given the width of the browser window.
+     * Returns the left position given the width of the browser window.
      */
     getLeft: (width: number) => number;
     /**
-     * - Returns the top position given the height of the browser window.
+     * Returns the top position given the height of the browser window.
      */
     getTop: (height: number) => number;
 };
 type TJSPositionGetOptions = {
     /**
-     * - When provided only these keys are copied.
+     * When provided only these keys are copied.
      */
     keys: Iterable<string>;
     /**
-     * - When provided these keys are excluded.
+     * When provided these keys are excluded.
      */
     exclude: Iterable<string>;
     /**
-     * - When true any `null` values are converted into defaults.
+     * When true any `null` values are converted into defaults.
      */
     numeric: boolean;
 };
 /**
- * - Options set in constructor.
+ * Options set in constructor.
  */
 type TJSPositionOptions = {
     /**
-     * - When true always calculate transform data.
+     * When true always calculate transform data.
      */
     calculateTransform: boolean;
     /**
-     * - Provides a helper for setting initial position data.
+     * Provides a helper for setting initial position data.
      */
     initialHelper: TJSPositionInitialHelper;
     /**
-     * - Sets TJSPosition to orthographic mode using just transform / matrix3d for positioning.
+     * Sets TJSPosition to orthographic mode using just transform / matrix3d for positioning.
      */
     ortho: boolean;
     /**
-     * - Set to true when there are subscribers to the readable transform store.
+     * Set to true when there are subscribers to the readable transform store.
      */
     transformSubscribed: boolean;
 };
@@ -1377,7 +1377,7 @@ type TJSPositionOptionsAll = TJSPositionOptions & TJSPositionData;
 type TJSPositionParent = HTMLElement | object;
 type TJSPositionable = {
     /**
-     * - An instance of TJSPosition that manages application positional
+     * An instance of TJSPosition that manages application positional
      * state.
      */
     position: TJSPosition;
@@ -1401,116 +1401,117 @@ type ResizeObserverData = {
     offsetWidth: number | undefined;
 };
 /**
- * - Provides individual writable stores for {@link import ('./').TJSPosition}.
+ * Provides individual writable stores for {@link import ('./').TJSPosition}.
  */
 type StorePosition = {
     /**
-     * - Readable store for dimension
-     *   data.
+     * Readable store for dimension
+     * data.
      */
     dimension: svelte_store.Readable<{
         width: number;
         height: number;
     }>;
     /**
-     * - Readable store for current element.
+     * Readable store for current element.
      */
     element: svelte_store.Readable<HTMLElement>;
     /**
-     * - Derived store for `left` updates.
+     * Derived store for `left` updates.
      */
     left: svelte_store.Writable<number | null>;
     /**
-     * - Derived store for `top` updates.
+     * Derived store for `top` updates.
      */
     top: svelte_store.Writable<number | null>;
     /**
-     * - Derived store for `width` updates.
+     * Derived store for `width` updates.
      */
     width: svelte_store.Writable<number | 'auto' | null>;
     /**
-     * - Derived store for `height` updates.
+     * Derived store for `height` updates.
      */
     height: svelte_store.Writable<number | 'auto' | null>;
     /**
-     * - Derived store for `maxHeight` updates.
+     * Derived store for `maxHeight` updates.
      */
     maxHeight: svelte_store.Writable<number | null>;
     /**
-     * - Derived store for `maxWidth` updates.
+     * Derived store for `maxWidth` updates.
      */
     maxWidth: svelte_store.Writable<number | null>;
     /**
-     * - Derived store for `minHeight` updates.
+     * Derived store for `minHeight` updates.
      */
     minHeight: svelte_store.Writable<number | null>;
     /**
-     * - Derived store for `minWidth` updates.
+     * Derived store for `minWidth` updates.
      */
     minWidth: svelte_store.Writable<number | null>;
     /**
-     * - Readable store for `contentHeight`.
+     * Readable store for `contentHeight`.
      */
     resizeContentHeight: svelte_store.Readable<number | undefined>;
     /**
-     * - Readable store for `contentWidth`.
+     * Readable store for `contentWidth`.
      */
     resizeContentWidth: svelte_store.Readable<number | undefined>;
     /**
-     * - Protected store for resize observer updates.
+     * Protected store for resize observer
+     * updates.
      */
     resizeObserved: svelte_store.Writable<ResizeObserverData>;
     /**
-     * - Readable store for `offsetHeight`.
+     * Readable store for `offsetHeight`.
      */
     resizeOffsetHeight: svelte_store.Readable<number | undefined>;
     /**
-     * - Readable store for `offsetWidth`.
+     * Readable store for `offsetWidth`.
      */
     resizeOffsetWidth: svelte_store.Readable<number | undefined>;
     /**
-     * - Derived store for `rotate` updates.
+     * Derived store for `rotate` updates.
      */
     rotate: svelte_store.Writable<number | null>;
     /**
-     * - Derived store for `rotateX` updates.
+     * Derived store for `rotateX` updates.
      */
     rotateX: svelte_store.Writable<number | null>;
     /**
-     * - Derived store for `rotateY` updates.
+     * Derived store for `rotateY` updates.
      */
     rotateY: svelte_store.Writable<number | null>;
     /**
-     * - Derived store for `rotateZ` updates.
+     * Derived store for `rotateZ` updates.
      */
     rotateZ: svelte_store.Writable<number | null>;
     /**
-     * - Derived store for `scale` updates.
+     * Derived store for `scale` updates.
      */
     scale: svelte_store.Writable<number | null>;
     /**
-     * - Readable store for
+     * Readable store for
      * transform data.
      */
     transform: svelte_store.Readable<TJSTransformData>;
     /**
-     * - Derived store for `transformOrigin`.
+     * Derived store for `transformOrigin`.
      */
     transformOrigin: svelte_store.Writable<string>;
     /**
-     * - Derived store for `translateX` updates.
+     * Derived store for `translateX` updates.
      */
     translateX: svelte_store.Writable<number | null>;
     /**
-     * - Derived store for `translateY` updates.
+     * Derived store for `translateY` updates.
      */
     translateY: svelte_store.Writable<number | null>;
     /**
-     * - Derived store for `translateZ` updates.
+     * Derived store for `translateZ` updates.
      */
     translateZ: svelte_store.Writable<number | null>;
     /**
-     * - Derived store for `zIndex` updates.
+     * Derived store for `zIndex` updates.
      */
     zIndex: svelte_store.Writable<number | null>;
 };
@@ -1586,18 +1587,18 @@ type TJSPositionDataExtended = {
      */
     zIndex?: number | string | null;
     /**
-     * - When true any associated element is updated immediately.
+     * When true any associated element is updated immediately.
      */
     immediateElementUpdate?: boolean;
     /**
-     * - Alias for `rotateZ`.
+     * Alias for `rotateZ`.
      */
     rotation?: number | null;
 };
 /**
- * - The supported transform origin strings.
+ * The supported transform origin strings.
  */
-type TJSTransformOrigin = 'top left' | 'top center' | 'top right' | 'center left' | 'center' | 'center right' | 'bottom left' | 'bottom center' | 'bottom right';
+type TJSTransformOrigin = ('top left' | 'top center' | 'top right' | 'center left' | 'center' | 'center right' | 'bottom left' | 'bottom center' | 'bottom right');
 type ValidationData = {
     /**
      * -

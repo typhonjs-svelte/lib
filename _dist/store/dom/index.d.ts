@@ -97,15 +97,15 @@ declare class KeyStore {
 }
 type KeyStoreOptions = {
     /**
-     * - Invoke `preventDefault` on key events.
+     * Invoke `preventDefault` on key events.
      */
     preventDefault?: boolean;
     /**
-     * - When true use `event.code` otherwise use `event.key` to get active key.
+     * When true use `event.code` otherwise use `event.key` to get active key.
      */
     useCode?: boolean;
     /**
-     * - Invoke `stopPropagation` on key events.
+     * Invoke `stopPropagation` on key events.
      */
     stopPropagation?: boolean;
 };

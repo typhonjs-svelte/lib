@@ -2,13 +2,13 @@ export * from './animateEvents.js';
 export * from './nextAnimationFrame.js';
 
 /**
- * @typedef {object} TJSBasicAnimation - Defines a type for basic animation control.
+ * @typedef {object} TJSBasicAnimation Defines a type for basic animation control.
  *
- * @property {boolean} isActive - True if animation is active; note: delayed animations are not active until start.
+ * @property {boolean} isActive True if animation is active; note: delayed animations are not active until start.
  *
- * @property {boolean} isFinished - True if animation is completely finished.
+ * @property {boolean} isFinished True if animation is completely finished.
  *
- * @property {Promise<void>} finished - A Promise that is resolved when animation is finished.
+ * @property {Promise<void>} finished A Promise that is resolved when animation is finished.
  *
- * @property {Function} cancel - A function that cancels animation.
+ * @property {Function} cancel A function that cancels animation.
  */

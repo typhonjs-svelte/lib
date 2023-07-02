@@ -21,31 +21,31 @@ export * from './transform/index.js';
 /**
  * @typedef {object} TJSPositionInitialHelper
  *
- * @property {(width: number) => number} getLeft - Returns the left position given the width of the browser window.
+ * @property {(width: number) => number} getLeft Returns the left position given the width of the browser window.
  *
- * @property {(height: number) => number} getTop - Returns the top position given the height of the browser window.
+ * @property {(height: number) => number} getTop Returns the top position given the height of the browser window.
  */
 
 /**
  * @typedef {object} TJSPositionGetOptions
  *
- * @property {Iterable<string>} keys - When provided only these keys are copied.
+ * @property {Iterable<string>} keys When provided only these keys are copied.
  *
- * @property {Iterable<string>} exclude - When provided these keys are excluded.
+ * @property {Iterable<string>} exclude When provided these keys are excluded.
  *
- * @property {boolean} numeric - When true any `null` values are converted into defaults.
+ * @property {boolean} numeric When true any `null` values are converted into defaults.
  */
 
 /**
- * @typedef {object} TJSPositionOptions - Options set in constructor.
+ * @typedef {object} TJSPositionOptions Options set in constructor.
  *
- * @property {boolean} calculateTransform - When true always calculate transform data.
+ * @property {boolean} calculateTransform When true always calculate transform data.
  *
- * @property {TJSPositionInitialHelper} initialHelper - Provides a helper for setting initial position data.
+ * @property {TJSPositionInitialHelper} initialHelper Provides a helper for setting initial position data.
  *
- * @property {boolean} ortho - Sets TJSPosition to orthographic mode using just transform / matrix3d for positioning.
+ * @property {boolean} ortho Sets TJSPosition to orthographic mode using just transform / matrix3d for positioning.
  *
- * @property {boolean} transformSubscribed - Set to true when there are subscribers to the readable transform store.
+ * @property {boolean} transformSubscribed Set to true when there are subscribers to the readable transform store.
  */
 
 /**
@@ -55,13 +55,13 @@ export * from './transform/index.js';
 /**
  * @typedef {HTMLElement | object} TJSPositionParent
  *
- * @property {Function} [elementTarget] - Potentially returns any parent object.
+ * @property {Function} [elementTarget] Potentially returns any parent object.
  */
 
 /**
  * @typedef {object} TJSPositionable
  *
- * @property {import('./').TJSPosition}   position - An instance of TJSPosition that manages application positional
+ * @property {import('./').TJSPosition}   position An instance of TJSPosition that manages application positional
  *           state.
  */
 
@@ -78,61 +78,62 @@ export * from './transform/index.js';
  */
 
 /**
- * @typedef {object} StorePosition - Provides individual writable stores for {@link import('./').TJSPosition}.
+ * @typedef {object} StorePosition Provides individual writable stores for {@link import('./').TJSPosition}.
  *
- * @property {import('svelte/store').Readable<{width: number, height: number}>} dimension - Readable store for dimension
- *                                                                                          data.
+ * @property {import('svelte/store').Readable<{width: number, height: number}>} dimension Readable store for dimension
+ *           data.
  *
- * @property {import('svelte/store').Readable<HTMLElement>} element - Readable store for current element.
+ * @property {import('svelte/store').Readable<HTMLElement>} element Readable store for current element.
  *
- * @property {import('svelte/store').Writable<number|null>} left - Derived store for `left` updates.
+ * @property {import('svelte/store').Writable<number|null>} left Derived store for `left` updates.
  *
- * @property {import('svelte/store').Writable<number|null>} top - Derived store for `top` updates.
+ * @property {import('svelte/store').Writable<number|null>} top Derived store for `top` updates.
  *
- * @property {import('svelte/store').Writable<number|'auto'|null>} width - Derived store for `width` updates.
+ * @property {import('svelte/store').Writable<number|'auto'|null>} width Derived store for `width` updates.
  *
- * @property {import('svelte/store').Writable<number|'auto'|null>} height - Derived store for `height` updates.
+ * @property {import('svelte/store').Writable<number|'auto'|null>} height Derived store for `height` updates.
  *
- * @property {import('svelte/store').Writable<number|null>} maxHeight - Derived store for `maxHeight` updates.
+ * @property {import('svelte/store').Writable<number|null>} maxHeight Derived store for `maxHeight` updates.
  *
- * @property {import('svelte/store').Writable<number|null>} maxWidth - Derived store for `maxWidth` updates.
+ * @property {import('svelte/store').Writable<number|null>} maxWidth Derived store for `maxWidth` updates.
  *
- * @property {import('svelte/store').Writable<number|null>} minHeight - Derived store for `minHeight` updates.
+ * @property {import('svelte/store').Writable<number|null>} minHeight Derived store for `minHeight` updates.
  *
- * @property {import('svelte/store').Writable<number|null>} minWidth - Derived store for `minWidth` updates.
+ * @property {import('svelte/store').Writable<number|null>} minWidth Derived store for `minWidth` updates.
  *
- * @property {import('svelte/store').Readable<number|undefined>} resizeContentHeight - Readable store for `contentHeight`.
+ * @property {import('svelte/store').Readable<number|undefined>} resizeContentHeight Readable store for `contentHeight`.
  *
- * @property {import('svelte/store').Readable<number|undefined>} resizeContentWidth - Readable store for `contentWidth`.
+ * @property {import('svelte/store').Readable<number|undefined>} resizeContentWidth Readable store for `contentWidth`.
  *
- * @property {import('svelte/store').Writable<ResizeObserverData>} resizeObserved - Protected store for resize observer updates.
+ * @property {import('svelte/store').Writable<ResizeObserverData>} resizeObserved Protected store for resize observer
+ *           updates.
  *
- * @property {import('svelte/store').Readable<number|undefined>} resizeOffsetHeight - Readable store for `offsetHeight`.
+ * @property {import('svelte/store').Readable<number|undefined>} resizeOffsetHeight Readable store for `offsetHeight`.
  *
- * @property {import('svelte/store').Readable<number|undefined>} resizeOffsetWidth - Readable store for `offsetWidth`.
+ * @property {import('svelte/store').Readable<number|undefined>} resizeOffsetWidth Readable store for `offsetWidth`.
  *
- * @property {import('svelte/store').Writable<number|null>} rotate - Derived store for `rotate` updates.
+ * @property {import('svelte/store').Writable<number|null>} rotate Derived store for `rotate` updates.
  *
- * @property {import('svelte/store').Writable<number|null>} rotateX - Derived store for `rotateX` updates.
+ * @property {import('svelte/store').Writable<number|null>} rotateX Derived store for `rotateX` updates.
  *
- * @property {import('svelte/store').Writable<number|null>} rotateY - Derived store for `rotateY` updates.
+ * @property {import('svelte/store').Writable<number|null>} rotateY Derived store for `rotateY` updates.
  *
- * @property {import('svelte/store').Writable<number|null>} rotateZ - Derived store for `rotateZ` updates.
+ * @property {import('svelte/store').Writable<number|null>} rotateZ Derived store for `rotateZ` updates.
  *
- * @property {import('svelte/store').Writable<number|null>} scale - Derived store for `scale` updates.
+ * @property {import('svelte/store').Writable<number|null>} scale Derived store for `scale` updates.
  *
- * @property {import('svelte/store').Readable<import('./transform').TJSTransformData>} transform - Readable store for
+ * @property {import('svelte/store').Readable<import('./transform').TJSTransformData>} transform Readable store for
  *           transform data.
  *
- * @property {import('svelte/store').Writable<string>} transformOrigin - Derived store for `transformOrigin`.
+ * @property {import('svelte/store').Writable<string>} transformOrigin Derived store for `transformOrigin`.
  *
- * @property {import('svelte/store').Writable<number|null>} translateX - Derived store for `translateX` updates.
+ * @property {import('svelte/store').Writable<number|null>} translateX Derived store for `translateX` updates.
  *
- * @property {import('svelte/store').Writable<number|null>} translateY - Derived store for `translateY` updates.
+ * @property {import('svelte/store').Writable<number|null>} translateY Derived store for `translateY` updates.
  *
- * @property {import('svelte/store').Writable<number|null>} translateZ - Derived store for `translateZ` updates.
+ * @property {import('svelte/store').Writable<number|null>} translateZ Derived store for `translateZ` updates.
  *
- * @property {import('svelte/store').Writable<number|null>} zIndex - Derived store for `zIndex` updates.
+ * @property {import('svelte/store').Writable<number|null>} zIndex Derived store for `zIndex` updates.
  */
 
 /**
@@ -174,15 +175,25 @@ export * from './transform/index.js';
  *
  * Extended properties -----------------------------------------------------------------------------------------------
  *
- * @property {boolean} [immediateElementUpdate] - When true any associated element is updated immediately.
+ * @property {boolean} [immediateElementUpdate] When true any associated element is updated immediately.
  *
- * @property {number|null} [rotation] - Alias for `rotateZ`.
+ * @property {number|null} [rotation] Alias for `rotateZ`.
  */
 
 // From: position/transform/TJSTransformData.js -------------------------------------------------------------------------
 
 /**
- * @typedef {'top left' | 'top center' | 'top right' | 'center left' | 'center' | 'center right' | 'bottom left' | 'bottom center' | 'bottom right' } TJSTransformOrigin - The supported transform origin strings.
+ * @typedef {(
+ *    'top left' |
+ *    'top center' |
+ *    'top right' |
+ *    'center left' |
+ *    'center' |
+ *    'center right' |
+ *    'bottom left' |
+ *    'bottom center' |
+ *    'bottom right'
+ * )} TJSTransformOrigin The supported transform origin strings.
  */
 
 // From: position/validators/AdapterValidators.js --------------------------------------------------------------------
