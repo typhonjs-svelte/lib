@@ -29,8 +29,8 @@ Object.freeze(transformKeys);
 const relativeRegex = /^([-+*])=(-?[\d]*\.?[\d]+)$/;
 
 /**
- * Provides numeric defaults for all parameters. This is used by {@link TJSPosition.get} to optionally provide
- * numeric defaults.
+ * Provides numeric defaults for all parameters. This is used by {@link import('./').TJSPosition.get} to optionally
+ * provide numeric defaults.
  *
  * @type {{rotation: number, scale: number, minWidth: null, minHeight: null, translateZ: number, top: number, left: number, maxHeight: null, translateY: number, translateX: number, width: number, transformOrigin: null, rotateX: number, rotateY: number, height: number, maxWidth: null, zIndex: null, rotateZ: number}}
  */
@@ -61,7 +61,7 @@ const numericDefaults = {
 Object.freeze(numericDefaults);
 
 /**
- * Sets numeric defaults for a {@link TJSPositionData} like object.
+ * Sets numeric defaults for a {@link import('./').TJSPositionData} like object.
  *
  * @param {object}   data - A TJSPositionData like object.
  */
@@ -81,7 +81,7 @@ function setNumericDefaults(data)
 }
 
 /**
- * Defines bitwise keys for transforms used in {@link TJSTransforms.getMat4}.
+ * Defines bitwise keys for transforms used in {@link import('./').TJSTransforms.getMat4}.
  *
  * @type {object}
  */

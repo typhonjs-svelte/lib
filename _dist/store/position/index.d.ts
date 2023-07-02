@@ -106,7 +106,7 @@ declare class TJSPositionData {
 }
 
 /**
- * Provides the output data for {@link TJSTransforms.getData}.
+ * Provides the output data for {@link import('./').TJSTransforms.getData}.
  */
 declare class TJSTransformData {
     /**
@@ -226,7 +226,7 @@ declare class TJSTransforms {
     getCSSOrtho(data?: object): string;
     /**
      * Collects all data including a bounding rect, transform matrix, and points array of the given
-     * {@link TJSPositionData} instance with the applied local transform data.
+     * {@link import('../').TJSPositionData} instance with the applied local transform data.
      *
      * @param {import('../').TJSPositionData} position - The position data to process.
      *
@@ -296,7 +296,7 @@ declare class AnimationControl {
      */
     static get voidControl(): AnimationControl;
     /**
-     * @param {object|null} [animationData] - Animation data from {@link AnimationAPI}.
+     * @param {object|null} [animationData] - Animation data from {@link import('./AnimationAPI').AnimationAPI}.
      *
      * @param {boolean}     [willFinish] - Promise that tracks animation finished state.
      */
@@ -496,8 +496,8 @@ declare class PositionStateAPI {
     /**
      * Restores a saved positional state returning the data. Several optional parameters are available
      * to control whether the restore action occurs silently (no store / inline styles updates), animates
-     * to the stored data, or simply sets the stored data. Restoring via {@link AnimationAPI.to} allows
-     * specification of the duration, easing, and interpolate functions along with configuring a Promise to be
+ -   * to the stored data, or simply sets the stored data. Restoring via {@link import('./animation').AnimationAPI.to}
+     * allows specification of the duration, easing, and interpolate functions along with configuring a Promise to be
      * returned if awaiting the end of the animation.
      *
      * @param {object}            params - Parameters
@@ -567,8 +567,8 @@ declare class PositionStateAPI {
 
 /**
  * Provides the storage and sequencing of managed position validators. Each validator added may be a bespoke function or
- * a {@link ValidatorData} object containing an `id`, `validator`, and `weight` attributes; `validator` is the only
- * required attribute.
+ * a {@link import('..').ValidatorData} object containing an `id`, `validator`, and `weight` attributes; `validator` is
+ * the only required attribute.
  *
  * The `id` attribute can be anything that creates a unique ID for the validator; recommended strings or numbers. This
  * allows validators to be removed by ID easily.
@@ -627,20 +627,20 @@ declare class AdapterValidators {
      */
     [Symbol.iterator](): Generator<{
         /**
-         * - An ID associated with this validator. Can be used to remove the validator.
+         * An ID associated with this validator. Can be used to remove the validator.
          */
         id?: any;
         /**
-         * - TJSPosition validator function that takes a {@link TJSPositionData } instance
-         * potentially modifying it or returning null if invalid.
+         * TJSPosition validator function that takes a {@link import ('../').TJSPositionData}
+         * instance potentially modifying it or returning null if invalid.
          */
         validator: ValidatorFn;
         /**
-         * - A number between 0 and 1 inclusive to position this validator against others.
+         * A number between 0 and 1 inclusive to position this validator against others.
          */
         weight?: number;
         /**
-         * - Optional subscribe function following the Svelte store / subscribe pattern.
+         * Optional subscribe function following the Svelte store / subscribe pattern.
          */
         subscribe?: Function;
     }, void, unknown>;
@@ -781,7 +781,8 @@ declare class Centered {
 }
 
 /**
- * Provides a public API for grouping multiple {@link TJSPosition} animations together with the AnimationManager.
+ * Provides a public API for grouping multiple {@link import('..').TJSPosition} animations together with the
+ * AnimationManager.
  *
  * Note: To remove cyclic dependencies as this class provides the TJSPosition static / group Animation API `instanceof`
  * checks are not done against TJSPosition. Instead, a check for the animate property being an instanceof
@@ -983,13 +984,13 @@ declare class TJSPosition {
      */
     get elementUpdated(): Promise<number>;
     /**
-     * Sets the associated {@link TJSPositionParent} instance. Resets the style cache and default data.
+     * Sets the associated {@link import('./').TJSPositionParent} instance. Resets the style cache and default data.
      *
      * @param {import('./').TJSPositionParent | void} parent - A TJSPositionParent instance.
      */
     set parent(arg: any);
     /**
-     * Returns the associated {@link TJSPositionParent} instance.
+     * Returns the associated {@link import('./').TJSPositionParent} instance.
      *
      * @returns {import('./').TJSPositionParent} The TJSPositionParent instance.
      */
@@ -1182,9 +1183,9 @@ declare class TJSPosition {
      * reactive and in control of updating inline styles for the application.
      *
      * Note: the logic for updating position is improved and changes a few aspects from the default
-     * {@link Application.setPosition}. The gate on `popOut` is removed, so to ensure no positional application occurs
-     * popOut applications can set `this.options.positionable` to false ensuring no positional inline styles are
-     * applied.
+     * {@link globalThis.Application.setPosition}. The gate on `popOut` is removed, so to ensure no positional
+     * application occurs popOut applications can set `this.options.positionable` to false ensuring no positional inline
+     * styles are applied.
      *
      * The initial set call on an application with a target element will always set width / height as this is
      * necessary for correct calculations.
@@ -1225,8 +1226,8 @@ declare function applyPosition(node: HTMLElement, position: TJSPosition): svelte
 
 /**
  * Provides an action to enable pointer dragging of an HTMLElement and invoke `position.set` on a given
- * {@link TJSPosition} instance provided. When the attached boolean store state changes the draggable action is enabled
- * or disabled.
+ * {@link import('..').TJSPosition} instance provided. When the attached boolean store state changes the draggable
+ * action is enabled or disabled.
  *
  * @param {HTMLElement}       node - The node associated with the action.
  *
@@ -1400,7 +1401,7 @@ type ResizeObserverData = {
     offsetWidth: number | undefined;
 };
 /**
- * - Provides individual writable stores for {@link TJSPosition }.
+ * - Provides individual writable stores for {@link import ('./').TJSPosition}.
  */
 type StorePosition = {
     /**
@@ -1651,31 +1652,31 @@ type ValidationData = {
      */
     minWidth: number | undefined;
     /**
-     * - The rest of any data submitted to {@link TJSPosition.set }
+     * The rest of any data submitted to {@link import ('./').TJSPosition.set}
      */
     rest: object;
 };
 /**
- * - TJSPosition validator function that takes a {@link TJSPositionData } instance potentially
- *                             modifying it or returning null if invalid.
+ * TJSPosition validator function that takes a {@link import ('./').TJSPositionData} instance
+ *           potentially modifying it or returning null if invalid.
  */
 type ValidatorFn = (valData: ValidationData) => TJSPositionData | null;
 type ValidatorData = {
     /**
-     * - An ID associated with this validator. Can be used to remove the validator.
+     * An ID associated with this validator. Can be used to remove the validator.
      */
     id?: any;
     /**
-     * - TJSPosition validator function that takes a {@link TJSPositionData } instance
-     * potentially modifying it or returning null if invalid.
+     * TJSPosition validator function that takes a {@link import ('../').TJSPositionData}
+     * instance potentially modifying it or returning null if invalid.
      */
     validator: ValidatorFn;
     /**
-     * - A number between 0 and 1 inclusive to position this validator against others.
+     * A number between 0 and 1 inclusive to position this validator against others.
      */
     weight?: number;
     /**
-     * - Optional subscribe function following the Svelte store / subscribe pattern.
+     * Optional subscribe function following the Svelte store / subscribe pattern.
      */
     subscribe?: Function;
 };

@@ -1,10 +1,11 @@
 import { nextAnimationFrame }    from '#svelte-lib/animate';
 
 /**
- * Decouples updates to any parent target HTMLElement inline styles. Invoke {@link TJSPosition.elementUpdated} to await
- * on the returned promise that is resolved with the current render time via `nextAnimationFrame` /
- * `requestAnimationFrame`. This allows the underlying data model to be updated immediately while updates to the
- * element are in sync with the browser and potentially in the future be further throttled.
+ * Decouples updates to any parent target HTMLElement inline styles. Invoke
+ * {@link import('..').TJSPosition.elementUpdated} to await on the returned promise that is resolved with the current
+ * render time via `nextAnimationFrame` / `requestAnimationFrame`. This allows the underlying data model to be updated
+ * immediately while updates to the element are in sync with the browser and potentially in the future be further
+ * throttled.
  *
  * @param {HTMLElement} el - The target HTMLElement.
  */
@@ -167,10 +168,11 @@ export class UpdateElementManager
 }
 
 /**
- * Decouples updates to any parent target HTMLElement inline styles. Invoke {@link TJSPosition.elementUpdated} to await
- * on the returned promise that is resolved with the current render time via `nextAnimationFrame` /
- * `requestAnimationFrame`. This allows the underlying data model to be updated immediately while updates to the
- * element are in sync with the browser and potentially in the future be further throttled.
+ * Decouples updates to any parent target HTMLElement inline styles. Invoke
+ * {@link import('..').TJSPosition.elementUpdated} to await on the returned promise that is resolved with the current
+ * render time via `nextAnimationFrame` / `requestAnimationFrame`. This allows the underlying data model to be updated
+ * immediately while updates to the element are in sync with the browser and potentially in the future be further
+ * throttled.
  *
  * @param {HTMLElement} el - The target HTMLElement.
  *
@@ -220,10 +222,11 @@ function s_UPDATE_ELEMENT(el, updateData)
 }
 
 /**
- * Decouples updates to any parent target HTMLElement inline styles. Invoke {@link TJSPosition.elementUpdated} to await
- * on the returned promise that is resolved with the current render time via `nextAnimationFrame` /
- * `requestAnimationFrame`. This allows the underlying data model to be updated immediately while updates to the
- * element are in sync with the browser and potentially in the future be further throttled.
+ * Decouples updates to any parent target HTMLElement inline styles. Invoke
+ * {@link import('..').TJSPosition.elementUpdated} to await on the returned promise that is resolved with the current
+ * render time via `nextAnimationFrame` / `requestAnimationFrame`. This allows the underlying data model to be updated
+ * immediately while updates to the element are in sync with the browser and potentially in the future be further
+ * throttled.
  *
  * @param {HTMLElement} el - The target HTMLElement.
  *

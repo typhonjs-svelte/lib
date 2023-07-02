@@ -464,7 +464,7 @@ export class TJSPosition
    }
 
    /**
-    * Returns the associated {@link TJSPositionParent} instance.
+    * Returns the associated {@link import('./').TJSPositionParent} instance.
     *
     * @returns {import('./').TJSPositionParent} The TJSPositionParent instance.
     */
@@ -517,7 +517,7 @@ export class TJSPosition
    }
 
    /**
-    * Sets the associated {@link TJSPositionParent} instance. Resets the style cache and default data.
+    * Sets the associated {@link import('./').TJSPositionParent} instance. Resets the style cache and default data.
     *
     * @param {import('./').TJSPositionParent | void} parent - A TJSPositionParent instance.
     */
@@ -840,9 +840,9 @@ export class TJSPosition
     * reactive and in control of updating inline styles for the application.
     *
     * Note: the logic for updating position is improved and changes a few aspects from the default
-    * {@link Application.setPosition}. The gate on `popOut` is removed, so to ensure no positional application occurs
-    * popOut applications can set `this.options.positionable` to false ensuring no positional inline styles are
-    * applied.
+    * {@link globalThis.Application.setPosition}. The gate on `popOut` is removed, so to ensure no positional
+    * application occurs popOut applications can set `this.options.positionable` to false ensuring no positional inline
+    * styles are applied.
     *
     * The initial set call on an application with a target element will always set width / height as this is
     * necessary for correct calculations.

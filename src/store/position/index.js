@@ -78,7 +78,7 @@ export * from './transform/index.js';
  */
 
 /**
- * @typedef {object} StorePosition - Provides individual writable stores for {@link TJSPosition}.
+ * @typedef {object} StorePosition - Provides individual writable stores for {@link import('./').TJSPosition}.
  *
  * @property {import('svelte/store').Readable<{width: number, height: number}>} dimension - Readable store for dimension
  *                                                                                          data.
@@ -216,14 +216,14 @@ export * from './transform/index.js';
  *
  * @property {number|undefined} minWidth -
  *
- * @property {object} rest - The rest of any data submitted to {@link TJSPosition.set}
+ * @property {object} rest The rest of any data submitted to {@link import('./').TJSPosition.set}
  */
 
 /**
- * @callback ValidatorFn - TJSPosition validator function that takes a {@link TJSPositionData} instance potentially
- *                             modifying it or returning null if invalid.
+ * @callback ValidatorFn TJSPosition validator function that takes a {@link import('./').TJSPositionData} instance
+ *           potentially modifying it or returning null if invalid.
  *
- * @param {ValidationData} valData - Validation data.
+ * @param {ValidationData} valData Validation data.
  *
  * @returns {import('./TJSPositionData').TJSPositionData | null} The validated position data or null to cancel position
  *          update.
@@ -232,14 +232,14 @@ export * from './transform/index.js';
 /**
  * @typedef {object} ValidatorData
  *
- * @property {*}           [id=undefined] - An ID associated with this validator. Can be used to remove the validator.
+ * @property {*}           [id=undefined] An ID associated with this validator. Can be used to remove the validator.
  *
- * @property {ValidatorFn} validator - TJSPosition validator function that takes a {@link TJSPositionData} instance
- *           potentially modifying it or returning null if invalid.
+ * @property {ValidatorFn} validator TJSPosition validator function that takes a {@link import('../').TJSPositionData}
+ *           instance potentially modifying it or returning null if invalid.
  *
- * @property {number}      [weight=1] - A number between 0 and 1 inclusive to position this validator against others.
+ * @property {number}      [weight=1] A number between 0 and 1 inclusive to position this validator against others.
  *
- * @property {Function}    [subscribe] - Optional subscribe function following the Svelte store / subscribe pattern.
+ * @property {Function}    [subscribe] Optional subscribe function following the Svelte store / subscribe pattern.
  */
 
 /**

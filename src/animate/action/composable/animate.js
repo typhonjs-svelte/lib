@@ -24,7 +24,7 @@ import { Timing } from '#runtime/util';
  */
 export function animate({ duration = 600, keyframes = [], options, event = 'click', debounce } = {})
 {
-   return /** @returns {import('svelte/action').ActionReturn} */ (element) =>
+   return (element) =>
    {
       /**
        * Creates WAAPI animation.

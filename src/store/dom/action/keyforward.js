@@ -1,6 +1,6 @@
 /**
  * Provides an action to forward on key down & up events. This can be any object that has associated `keydown` and
- * `keyup` methods. See {@link KeyStore} for a store implementation.
+ * `keyup` methods. See {@link import('..').KeyStore} for a store implementation.
  *
  * @param {HTMLElement} node - Target element.
  *

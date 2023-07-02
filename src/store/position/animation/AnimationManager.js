@@ -176,7 +176,7 @@ export class AnimationManager
    }
 
    /**
-    * Gets all {@link AnimationControl} instances for a given TJSPosition instance.
+    * Gets all {@link import('./AnimationControl').AnimationControl} instances for a given TJSPosition instance.
     *
     * @param {import('../').TJSPosition} position - TJSPosition instance.
     *

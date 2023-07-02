@@ -2,8 +2,8 @@ import { isObject }  from '#runtime/util/object';
 
 /**
  * Provides the storage and sequencing of managed position validators. Each validator added may be a bespoke function or
- * a {@link ValidatorData} object containing an `id`, `validator`, and `weight` attributes; `validator` is the only
- * required attribute.
+ * a {@link import('..').ValidatorData} object containing an `id`, `validator`, and `weight` attributes; `validator` is
+ * the only required attribute.
  *
  * The `id` attribute can be anything that creates a unique ID for the validator; recommended strings or numbers. This
  * allows validators to be removed by ID easily.

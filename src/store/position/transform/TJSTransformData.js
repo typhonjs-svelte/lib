@@ -1,7 +1,7 @@
 import { Mat4, Vec3 }   from '#runtime/math/gl-matrix';
 
 /**
- * Provides the output data for {@link TJSTransforms.getData}.
+ * Provides the output data for {@link import('./').TJSTransforms.getData}.
  */
 export class TJSTransformData
 {
