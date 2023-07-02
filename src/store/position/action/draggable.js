@@ -310,7 +310,7 @@ class DraggableOptions
    /**
     * Stores the subscribers.
     *
-    * @type {(function(DraggableOptions): void)[]}
+    * @type {import('svelte/store').Subscriber<DraggableOptions>[]}
     */
    #subscriptions = [];
 
@@ -442,10 +442,10 @@ class DraggableOptions
 
    /**
     *
-    * @param {function(DraggableOptions): void} handler - Callback function that is invoked on update / changes.
-    *                                                 Receives the DraggableOptions object / instance.
+    * @param {import('svelte/store').Subscriber<DraggableOptions>} handler - Callback function that is invoked on
+    *        update / changes. Receives the DraggableOptions object / instance.
     *
-    * @returns {(function(): void)} Unsubscribe function.
+    * @returns {import('svelte/store').Unsubscriber} Unsubscribe function.
     */
    subscribe(handler)
    {

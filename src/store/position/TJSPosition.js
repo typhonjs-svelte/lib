@@ -110,7 +110,7 @@ export class TJSPosition
    /**
     * Stores the subscribers.
     *
-    * @type {(function(TJSPositionData): void)[]}
+    * @type {import('svelte/store').Subscriber<TJSPositionData>[]}
     */
    #subscriptions = [];
 
@@ -1094,11 +1094,10 @@ export class TJSPosition
    }
 
    /**
+    * @param {import('svelte/store').Subscriber<TJSPositionData>} handler - Callback function that is invoked on
+    *        update / changes. Receives a copy of the TJSPositionData.
     *
-    * @param {function(TJSPositionData): void} handler - Callback function that is invoked on update / changes. Receives
-    *                                                 a copy of the TJSPositionData.
-    *
-    * @returns {(function(): void)} Unsubscribe function.
+    * @returns {import('svelte/store').Unsubscriber} Unsubscribe function.
     */
    subscribe(handler)
    {
