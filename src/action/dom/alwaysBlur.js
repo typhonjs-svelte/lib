@@ -3,7 +3,7 @@
  *
  * @param {HTMLElement}   node - The node to handle always blur on pointer up.
  *
- * @returns {{destroy: Function}} Lifecycle functions.
+ * @returns {import('svelte/action').ActionReturn} Lifecycle functions.
  */
 export function alwaysBlur(node)
 {

@@ -4,7 +4,7 @@
  *
  * @param {HTMLElement}   node - The node to handle automatic blur on focus loss.
  *
- * @returns {{destroy: Function}} Lifecycle functions.
+ * @returns {import('svelte/action').ActionReturn} Lifecycle functions.
  */
 export function autoBlur(node)
 {

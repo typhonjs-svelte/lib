@@ -20,11 +20,11 @@ import { Timing } from '#runtime/util';
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/animate
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Keyframe_Formats
  *
- * @returns {Function} Actual action.
+ * @returns {import('svelte/action').Action} Actual action.
  */
 export function animate({ duration = 600, keyframes = [], options, event = 'click', debounce } = {})
 {
-   return (element) =>
+   return /** @returns {import('svelte/action').ActionReturn} */ (element) =>
    {
       /**
        * Creates WAAPI animation.

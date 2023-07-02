@@ -22,7 +22,7 @@ import { Timing } from '#runtime/util';
  *
  * @param {number}   [opts.debounce=undefined] - Add a debounce to incoming events in milliseconds.
  *
- * @returns {Function} Actual action.
+ * @returns {import('svelte/action').Action} Actual action.
  */
 export function ripple({ duration = 600, background = 'rgba(255, 255, 255, 0.7)', events = ['click', 'keyup'],
  keyCode = 'Enter', debounce } = {})

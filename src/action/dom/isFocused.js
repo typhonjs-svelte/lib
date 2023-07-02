@@ -9,8 +9,7 @@ import { isWritableStore } from '#runtime/util/store';
  *
  * @param {import('svelte/store').Writable<boolean>}  storeFocused - Update store for focus changes.
  *
- * @returns {{update: (function(import('svelte/store').Writable<boolean>): void), destroy: Function}} Action lifecycle
- *          methods.
+ * @returns {import('svelte/action').ActionReturn<import('svelte/store').Writable<boolean>>} Lifecycle functions.
  */
 export function isFocused(node, storeFocused)
 {
@@ -65,7 +64,10 @@ export function isFocused(node, storeFocused)
    activateListeners();
 
    return {
-      update: (newStoreFocused) =>  // eslint-disable-line no-shadow
+      /**
+       * @param {import('svelte/store').Writable<boolean>}  newStoreFocused - Update store for focus changes.
+       */
+      update: (newStoreFocused) =>
       {
          storeFocused = newStoreFocused;
          setFocused(localFocused);

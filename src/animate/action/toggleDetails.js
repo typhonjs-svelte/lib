@@ -18,7 +18,7 @@ import { subscribeFirstRest } from '#runtime/util/store';
  *
  * @param {boolean} [opts.clickActive] - When false click events are not handled.
  *
- * @returns {object} Destroy callback.
+ * @returns {import('svelte/action').ActionReturn} Lifecycle functions.
  */
 export function toggleDetails(details, { store, clickActive = true } = {})
 {

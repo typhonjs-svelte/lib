@@ -5,7 +5,7 @@
  *
  * @param {Record<string, string>}  properties - Key / value object of properties to set.
  *
- * @returns {{update: (function(Record<string, string>): void) }} Update function.
+ * @returns {import('svelte/action').ActionReturn<Record<string, string>>} Lifecycle functions.
  */
 export function applyStyles(node, properties)
 {
@@ -23,7 +23,10 @@ export function applyStyles(node, properties)
    setProperties();
 
    return {
-      update(newProperties)
+      /**
+       * @param {Record<string, string>}  newProperties - Key / value object of properties to set.
+       */
+      update: (newProperties) =>
       {
          properties = newProperties;
          setProperties();

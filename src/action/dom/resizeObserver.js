@@ -26,7 +26,7 @@ import { isUpdatableStore }   from '#runtime/util/store';
  *
  * @param {ResizeObserverTarget} target - An object or function to update with observed width & height changes.
  *
- * @returns {{update: (function(ResizeObserverTarget): void), destroy: Function}} The action lifecycle methods.
+ * @returns {import('svelte/action').ActionReturn<ResizeObserverTarget>} The action lifecycle methods.
  * @see {@link https://github.com/sveltejs/svelte/issues/4233}
  */
 function resizeObserver(node, target)
@@ -34,6 +34,9 @@ function resizeObserver(node, target)
    ResizeObserverManager.add(node, target);
 
    return {
+      /**
+       * @param {ResizeObserverTarget} newTarget - An object or function to update with observed width & height changes.
+       */
       update: (newTarget) =>
       {
          ResizeObserverManager.remove(node, target);

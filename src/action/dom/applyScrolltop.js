@@ -13,10 +13,7 @@ import { resizeObserver }  from './resizeObserver.js';
  *
  * @param {import('svelte/store').Writable<number>}   store - A writable store that stores the element scrollTop.
  *
- * @returns {{
- *    update: (function(import('svelte/store').Writable<number>): void),
- *    destroy: (function(): void)
- * }} Lifecycle functions.
+ * @returns {import('svelte/action').ActionReturn<import('svelte/store').Writable<number>>} Lifecycle functions.
  */
 export function applyScrolltop(element, store)
 {
@@ -60,6 +57,9 @@ export function applyScrolltop(element, store)
    element.addEventListener('scroll', debounceFn);
 
    return {
+      /**
+       * @param {import('svelte/store').Writable<number>} newStore - A writable store that stores the element scrollTop.
+       */
       update: (newStore) =>
       {
          unsubscribe();

@@ -19,7 +19,7 @@
  *
  * @param {string}   [opts.selectors] - A valid CSS selectors string.
  *
- * @returns {Function} Actual action.
+ * @returns {import('svelte/action').Action} Actual action.
  */
 export function rippleFocus({ duration = 300, background = 'rgba(255, 255, 255, 0.7)', selectors } = {})
 {

@@ -3,9 +3,9 @@
  *
  * Note: The update function passes the same variable to all update functions of each action.
  *
- * @param {...Function} actions - One or more composable action functions to combine.
+ * @param {...import('svelte/action').Action} actions - One or more composable action functions to combine.
  *
- * @returns {Function} Composed action.
+ * @returns {import('svelte/action').Action<HTMLElement, any>} Composed action.
  */
 export function composable(...actions)
 {
