@@ -27,10 +27,6 @@
       "types": "./_dist/animate/action/index.d.ts",
       "import": "./_dist/animate/action/index.js"
     },
-    "./store/derived": {
-      "types": "./_dist/store/derived/index.d.ts",
-      "import": "./_dist/store/derived/index.js"
-    },
     "./store/dom": {
       "types": "./_dist/store/dom/index.d.ts",
       "import": "./_dist/store/dom/index.js"
@@ -61,7 +57,6 @@
     "@typhonjs-svelte/runtime-base": "github:typhonjs-svelte/runtime-base",
     "eslint": "^8",
     "rollup": "^3",
-    "svelte-writable-derived": "^3.1.0",
     "upath": "^2.0.1"
   },
   "peerDependencies": {

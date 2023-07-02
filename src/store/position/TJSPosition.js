@@ -1,4 +1,4 @@
-import { propertyStore }         from '#svelte-lib/store/derived';
+import { propertyStore }         from '#runtime/svelte/store/writable-derived';
 
 import {
    isIterable,
