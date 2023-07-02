@@ -1,4 +1,4 @@
-import { nextAnimationFrame } from '#runtime/util/browser';
+import { nextAnimationFrame } from '#runtime/util/animate';
 
 /**
  * Decouples updates to any parent target HTMLElement inline styles. Invoke

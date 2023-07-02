@@ -136,7 +136,7 @@ export class AnimationGroupAPI
     *
     * @param {object|Function}   options -
     *
-    * @returns {import('#svelte-lib/animate').TJSBasicAnimation} Basic animation control.
+    * @returns {import('#runtime/util/animate').TJSBasicAnimation} Basic animation control.
     */
    static from(position, fromData, options)
    {
@@ -277,7 +277,7 @@ export class AnimationGroupAPI
     *
     * @param {object|Function}   options -
     *
-    * @returns {import('#svelte-lib/animate').TJSBasicAnimation} Basic animation control.
+    * @returns {import('#runtime/util/animate').TJSBasicAnimation} Basic animation control.
     */
    static fromTo(position, fromData, toData, options)
    {
@@ -448,7 +448,7 @@ export class AnimationGroupAPI
     *
     * @param {object|Function}   options -
     *
-    * @returns {import('#svelte-lib/animate').TJSBasicAnimation} Basic animation control.
+    * @returns {import('#runtime/util/animate').TJSBasicAnimation} Basic animation control.
     */
    static to(position, toData, options)
    {
