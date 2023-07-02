@@ -1,4 +1,4 @@
-import { nextAnimationFrame }    from '#svelte-lib/animate';
+import { nextAnimationFrame } from '#runtime/util/browser';
 
 /**
  * Decouples updates to any parent target HTMLElement inline styles. Invoke

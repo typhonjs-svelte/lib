@@ -1,5 +1,4 @@
 export * from './animateEvents.js';
-export * from './nextAnimationFrame.js';
 
 /**
  * @typedef {object} TJSBasicAnimation Defines a type for basic animation control.
