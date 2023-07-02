@@ -109,22 +109,6 @@ const rollupConfigs = [
    },
    {
       input: {
-         input: 'src/transition/index.js',
-         plugins: [
-            importsExternal(),
-            resolve(),
-            generateDTS.plugin(dtsPluginOptions)
-         ]
-      },
-      output: {
-         file: '_dist/transition/index.js',
-         format: 'es',
-         generatedCode: { constBindings: true },
-         sourcemap
-      }
-   },
-   {
-      input: {
          input: 'src/util/index.js',
          plugins: [
             importsExternal(),
