@@ -14,9 +14,10 @@ const dtsPluginOptions = {
 // -------------------------------------------------------------------------------------------------------------------
 
 const rollupConfigs = [
+   // Just leaving this here to be filled in by future exports...
    // {
    //    input: {
-   //       input: 'src/store/storage/web/plugin/index.js',
+   //       input: 'src/<SOME_PATH>/index.js',
    //       plugins: [
    //          importsExternal(),
    //          resolve(),
@@ -24,7 +25,7 @@ const rollupConfigs = [
    //       ]
    //    },
    //    output: {
-   //       file: '_dist/store/storage/web/plugin/index.js',
+   //       file: '_dist/<SOME_PATH>/index.js',
    //       format: 'es',
    //       generatedCode: { constBindings: true },
    //       sourcemap
